@@ -172,8 +172,23 @@ flowchart TD
 * **상세 제품 기획서 (Master Plan v2.0)**: [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md)
 * **제품 정체성, 시장 조사 및 기술적 해자 (Identity & Strategy)**: [`Career_Radar_Universal_Identity_and_Strategy.md`](./Career_Radar_Universal_Identity_and_Strategy.md)
 * **기능형 프로토타입 구현 계획서 및 DB DDL (Implementation Plan)**: [`Career_Radar_Universal_Prototype_Implementation_Plan.md`](./Career_Radar_Universal_Prototype_Implementation_Plan.md)
+* **시니어 개발자·사용자·투자자·마케터 2차 검증 보고서 (Dual-Cycle Review)**: [`Career_Radar_Universal_Dual_Review_Report.md`](./Career_Radar_Universal_Dual_Review_Report.md)
 * **기준일**: 2026-09-28
 * **기획자/소유자**: [@489156](https://github.com/489156)
+
+---
+
+## 🚀 Prototype Quick Start (프로토타입 실행 가이드)
+
+### 1. 무설치 웹 브라우저 즉시 체험
+* 저장소 루트의 [`index.html`](./index.html)을 더블 클릭하여 크롬/엣지 등 브라우저에서 즉시 실행 (터미널 명령어 불필요).
+
+### 2. Next.js 프로덕션 개발 서버 구동
+```bash
+npm install
+npm run dev
+# 브라우저에서 http://localhost:3000 접속
+```
 
 ---
 

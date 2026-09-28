@@ -1,0 +1,36 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Local env files
+.env*.local
+.env
+
+# Vercel / Cloudflare
+.vercel
+.wrangler
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# User local instructions / private profile
+*\[README\]*
+*USER PROFILE*
+PROJECT_IDENTITY_AND_STRATEGY.md
+wsir_repo/
