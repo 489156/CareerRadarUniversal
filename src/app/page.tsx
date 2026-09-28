@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGapTrack } from "@/lib/types";
+import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGapTrack, HardFilters } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
-import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue } from "@/lib/matcher";
+import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger">("passport");
@@ -31,6 +31,15 @@ export default function Home() {
     homeLocation: "경기도 군포시 (산본동)",
     commuteToleranceMinutes: 60,
     skills: ["인사기획", "평가보상체계설계", "노무관리", "임금피크제", "직무분석", "AX(AI Transformation)"],
+    hardFilters: {
+      onlyPermanent: true,
+      onlyCapitalArea: true,
+      maxCommuteCutoff: true,
+      noHeavyFixedOT: false,
+      noBelowCurrentSalary: false,
+      noRelocationOrg: true,
+      customKeywords: ["교대근무", "파견직", "인턴"],
+    },
     hardPreferences: { employmentType: "정규직", region: "수도권" },
     softPreferences: { wfhPreferred: true, minSalary: 55000000 },
     updatedAt: new Date().toISOString(),
@@ -61,6 +70,11 @@ export default function Home() {
   // Job Detail Modal State
   const [selectedJob, setSelectedJob] = useState<JobPosting | null>(null);
   const [selectedJobMatch, setSelectedJobMatch] = useState<DynamicMatchScore | null>(null);
+  const [selectedJobHf, setSelectedJobHf] = useState<{ isExcluded: boolean; exclusionReasons: string[] } | null>(null);
+
+  // Hard Filter Configuration State
+  const [customKeywordInput, setCustomKeywordInput] = useState("");
+  const [showExcludedJobs, setShowExcludedJobs] = useState(false);
 
   // Radar Search & Filter
   const [radarSearch, setRadarSearch] = useState("");
@@ -75,7 +89,11 @@ export default function Home() {
       const saved = localStorage.getItem("career_passport_universal");
       if (saved) {
         const p = JSON.parse(saved);
-        setPassport((prev) => ({ ...prev, ...p }));
+        setPassport((prev) => ({
+          ...prev,
+          ...p,
+          hardFilters: p.hardFilters || prev.hardFilters,
+        }));
         const totalCash = (parseInt(p.baseSalary) || 5400) + (parseInt(p.fixedAllowance) || 400);
         setCalcInput((prev) => ({ ...prev, cashManwon: totalCash }));
       }
@@ -112,10 +130,77 @@ export default function Home() {
     showToast("✨ 이력서 텍스트에서 직무와 경력 연차를 추출하여 반영했습니다.");
   };
 
+  // Hard Filter Custom Keyword Handlers
+  const addCustomHardFilter = () => {
+    const kw = customKeywordInput.trim();
+    if (!kw) return;
+    if (passport.hardFilters?.customKeywords?.includes(kw)) {
+      showToast(`'${kw}' 키워드는 이미 등록되어 있습니다.`);
+      return;
+    }
+    setPassport((prev) => ({
+      ...prev,
+      hardFilters: {
+        ...(prev.hardFilters || {
+          onlyPermanent: true,
+          onlyCapitalArea: true,
+          maxCommuteCutoff: true,
+          noHeavyFixedOT: false,
+          noBelowCurrentSalary: false,
+          noRelocationOrg: true,
+          customKeywords: [],
+        }),
+        customKeywords: [...(prev.hardFilters?.customKeywords || []), kw],
+      },
+    }));
+    setCustomKeywordInput("");
+    showToast(`🚫 배제 키워드 '${kw}' 추가되었습니다.`);
+  };
+
+  const removeCustomHardFilter = (kw: string) => {
+    setPassport((prev) => ({
+      ...prev,
+      hardFilters: {
+        ...(prev.hardFilters || {
+          onlyPermanent: true,
+          onlyCapitalArea: true,
+          maxCommuteCutoff: true,
+          noHeavyFixedOT: false,
+          noBelowCurrentSalary: false,
+          noRelocationOrg: true,
+          customKeywords: [],
+        }),
+        customKeywords: (prev.hardFilters?.customKeywords || []).filter((k) => k !== kw),
+      },
+    }));
+    showToast(`배제 키워드 '${kw}' 제거되었습니다.`);
+  };
+
+  const resetHardFilters = () => {
+    setPassport((prev) => ({
+      ...prev,
+      hardFilters: {
+        onlyPermanent: true,
+        onlyCapitalArea: true,
+        maxCommuteCutoff: true,
+        noHeavyFixedOT: false,
+        noBelowCurrentSalary: false,
+        noRelocationOrg: true,
+        customKeywords: ["교대근무", "파견직", "인턴"],
+      },
+    }));
+    showToast("🔄 절대 배제 조건이 기본값으로 복원되었습니다.");
+  };
+
   // Open Job Detail Modal
-  const openJobDetail = (job: JobPosting, match: DynamicMatchScore) => {
+  const openJobDetail = (
+    job: JobPosting,
+    match: DynamicMatchScore,
+    hf: { isExcluded: boolean; exclusionReasons: string[] }
+  ) => {
     setSelectedJob(job);
     setSelectedJobMatch(match);
+    setSelectedJobHf(hf);
   };
 
   // Send Job to Scanner
@@ -124,6 +209,7 @@ export default function Home() {
     setScannerText(textToScan);
     setScanResult(diagnoseJobRisks(textToScan));
     setSelectedJob(null);
+    setSelectedJobHf(null);
     setActiveTab("scanner");
     showToast(`⚖️ ${job.company} 공고 원문이 Labor Scanner로 전송되어 정밀 진단되었습니다.`);
   };
@@ -132,13 +218,19 @@ export default function Home() {
   const marketValue = calculateEstimatedMarketValue(passport.totalYears);
   const currentTotalCash = passport.baseSalary + passport.fixedAllowance;
 
-  // Filter Jobs with dynamic matching
+  // Filter Jobs with dynamic matching & Hard Filter evaluation
   const jobsWithScores = MOCK_JOB_DATABASE.map((job) => ({
     job,
     match: calculateDynamicJobMatch(passport, job),
+    hf: evaluateHardFilters(passport, job),
   }));
 
-  const filteredJobs = jobsWithScores.filter(({ job, match }) => {
+  const excludedCount = jobsWithScores.filter(({ hf }) => hf.isExcluded).length;
+
+  const filteredJobs = jobsWithScores.filter(({ job, match, hf }) => {
+    // Hard filter absolute cutoff: unless showExcludedJobs is checked
+    if (!showExcludedJobs && hf.isExcluded) return false;
+
     // Search query filter
     if (radarSearch.trim()) {
       const q = radarSearch.toLowerCase();
@@ -153,7 +245,7 @@ export default function Home() {
     return true;
   });
 
-  const highMatchCount = jobsWithScores.filter(({ match }) => match.totalScore >= 88).length;
+  const highMatchCount = jobsWithScores.filter(({ match, hf }) => match.totalScore >= 88 && (!hf.isExcluded || showExcludedJobs)).length;
 
   const mockLedger: SalaryBenchmark[] = [
     { id: "1", org: "한국전력공사", role: "대졸 사무직/기획 신입", tier: "A", salary: "4,350만 원", note: "기본급 3,600 + 고정수당 750 (ALIO 공시 초임)", date: "2026-06 (공시)" },
@@ -375,6 +467,189 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+
+              {/* Hard Filter Configuration Panel */}
+              <div className="bg-[#0a0e17] p-5 rounded-xl border border-rose-500/20 space-y-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#1b253b] pb-3">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <h3 className="text-sm font-bold text-white flex items-center space-x-1.5">
+                        <span>🛡️ 절대 배제 조건 (Hard Filter 수동 설정)</span>
+                      </h3>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold">
+                        STRICT CUTOFF
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-1">
+                      체크된 절대 배제 기준에 단 하나라도 위배되는 공고는 Opportunity Radar에서 자동 제외(Cutoff)됩니다.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={resetHardFilters}
+                    className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
+                  >
+                    기본값 복원
+                  </button>
+                </div>
+
+                {/* 6 Preset Checkbox Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.onlyPermanent ?? true}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, onlyPermanent: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      🔒 <strong>정규직만 허용</strong> <span className="text-slate-400 text-[11px]">(계약·파견직 배제)</span>
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.onlyCapitalArea ?? true}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, onlyCapitalArea: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      📍 <strong>수도권만 허용</strong> <span className="text-slate-400 text-[11px]">(지방 근무지 배제)</span>
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.maxCommuteCutoff ?? true}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, maxCommuteCutoff: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      🚗 <strong>통근 한도 초과 컷</strong>{" "}
+                      <span className="text-slate-400 text-[11px]">({passport.commuteToleranceMinutes}분 초과 배제)</span>
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.noHeavyFixedOT ?? false}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, noHeavyFixedOT: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      ⏰ <strong>고정OT 20h 초과 배제</strong> <span className="text-slate-400 text-[11px]">(과도한 포괄임금)</span>
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.noBelowCurrentSalary ?? false}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, noBelowCurrentSalary: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      💰 <strong>현재 확정보상 미만 배제</strong>{" "}
+                      <span className="text-slate-400 text-[11px]">({(passport.baseSalary + passport.fixedAllowance).toLocaleString()}만원 미만)</span>
+                    </span>
+                  </label>
+
+                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                    <input
+                      type="checkbox"
+                      checked={passport.hardFilters?.noRelocationOrg ?? true}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, noRelocationOrg: e.target.checked },
+                        })
+                      }
+                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
+                    />
+                    <span className="text-slate-200">
+                      🚫 <strong>지방 이전·순환 기관 배제</strong> <span className="text-slate-400 text-[11px]">(혁신도시 등)</span>
+                    </span>
+                  </label>
+                </div>
+
+                {/* Custom Exclusion Keywords */}
+                <div className="space-y-2 pt-2 border-t border-[#192235]">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-300 font-medium">사용자 직접 등록 배제 키워드 (포함 시 즉시 컷)</span>
+                    <span className="text-slate-500 text-[11px]">Enter 또는 [추가] 클릭</span>
+                  </div>
+                  <div className="flex space-x-2">
+                    <input
+                      type="text"
+                      value={customKeywordInput}
+                      onChange={(e) => setCustomKeywordInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          addCustomHardFilter();
+                        }
+                      }}
+                      placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 인턴, 야간당직)..."
+                      className="flex-1 bg-[#111726] border border-[#1f293d] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={addCustomHardFilter}
+                      className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+                    >
+                      추가
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {(passport.hardFilters?.customKeywords || []).map((kw) => (
+                      <span
+                        key={kw}
+                        className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs"
+                      >
+                        <span>🚫 {kw}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeCustomHardFilter(kw)}
+                          className="hover:text-white font-bold ml-1 text-slate-400"
+                        >
+                          ✕
+                        </button>
+                      </span>
+                    ))}
+                    {(passport.hardFilters?.customKeywords || []).length === 0 && (
+                      <span className="text-[11px] text-slate-500">등록된 직접 배제 키워드가 없습니다.</span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* 3 Interactive Market Intelligence Cards */}
@@ -465,6 +740,27 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Hard Filter Status & Show Excluded Toggle */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 border-t border-[#192235] text-xs">
+                <div className="flex items-center space-x-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 font-semibold text-[11px] flex items-center space-x-1">
+                    <span>🛡️ Hard Filter 가동 중</span>
+                  </span>
+                  <span className="text-slate-400 text-xs">
+                    배제된 공고: <strong className="text-rose-400 font-mono">{excludedCount}</strong>건
+                  </span>
+                </div>
+                <label className="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={showExcludedJobs}
+                    onChange={(e) => setShowExcludedJobs(e.target.checked)}
+                    className="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500"
+                  />
+                  <span className="text-xs">배제된 공고 포함하여 보기</span>
+                </label>
+              </div>
+
               {/* Filter Pills */}
               <div className="flex flex-wrap gap-2 text-xs pt-1 border-t border-[#192235]">
                 {[
@@ -496,12 +792,27 @@ export default function Home() {
                   검색 조건에 부합하는 포지션이 없습니다. 필터를 재조정해보세요.
                 </div>
               ) : (
-                filteredJobs.map(({ job, match }) => (
+                filteredJobs.map(({ job, match, hf }) => (
                   <div
                     key={job.id}
-                    className="bg-[#101625] hover:bg-[#141b2e] border border-[#1d273d] hover:border-indigo-500/40 rounded-2xl p-5 space-y-4 transition flex flex-col justify-between shadow-lg"
+                    className={`bg-[#101625] hover:bg-[#141b2e] border ${
+                      hf.isExcluded
+                        ? "border-rose-900/60 opacity-60 hover:opacity-100"
+                        : "border-[#1d273d] hover:border-indigo-500/40"
+                    } rounded-2xl p-5 space-y-4 transition flex flex-col justify-between shadow-lg`}
                   >
                     <div>
+                      {/* Hard Filter Exclusion Banner if excluded */}
+                      {hf.isExcluded && (
+                        <div className="mb-3 p-2.5 bg-rose-950/40 border border-rose-500/50 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-1.5">
+                          <span className="flex-shrink-0">🚫</span>
+                          <div>
+                            <span className="font-bold text-rose-400">[절대 배제 기준 위반]</span>
+                            <span className="text-[11px] text-rose-200 ml-1">{hf.exclusionReasons.join(" • ")}</span>
+                          </div>
+                        </div>
+                      )}
+
                       {/* Top Header */}
                       <div className="flex justify-between items-start">
                         <div>
@@ -608,7 +919,7 @@ export default function Home() {
                           <span>공고 원문 ↗</span>
                         </a>
                         <button
-                          onClick={() => openJobDetail(job, match)}
+                          onClick={() => openJobDetail(job, match, hf)}
                           className="px-3.5 py-1.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/40 text-xs font-bold transition"
                         >
                           상세 진단 ➔
@@ -1201,8 +1512,22 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-white mt-0.5">{selectedJob.title}</h3>
                 <p className="text-xs text-indigo-400 font-mono mt-0.5">표준 직무: {selectedJob.canonicalRole}</p>
               </div>
-              <button onClick={() => setSelectedJob(null)} className="text-slate-400 hover:text-white text-lg">✕</button>
+              <button onClick={() => { setSelectedJob(null); setSelectedJobHf(null); }} className="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
+
+            {selectedJobHf && selectedJobHf.isExcluded && (
+              <div className="p-3.5 bg-rose-950/40 border border-rose-500/50 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-2.5">
+                <span className="text-base flex-shrink-0">🚫</span>
+                <div>
+                  <span className="font-bold text-rose-400">[절대 배제 기준 위반]</span>
+                  <div className="mt-1 space-y-0.5 text-rose-200">
+                    {selectedJobHf.exclusionReasons.map((r, i) => (
+                      <div key={i}>• {r}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-2 gap-4 text-xs bg-[#0a0e17] p-4 rounded-xl border border-[#182338]">
               <div>
@@ -1243,7 +1568,7 @@ export default function Home() {
               </a>
               <div className="flex space-x-2 w-full sm:w-auto justify-end">
                 <button
-                  onClick={() => setSelectedJob(null)}
+                  onClick={() => { setSelectedJob(null); setSelectedJobHf(null); }}
                   className="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300 hover:bg-slate-700"
                 >
                   닫기

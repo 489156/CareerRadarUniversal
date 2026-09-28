@@ -13,6 +13,7 @@ export interface CareerPassport {
   homeLocation: string;
   commuteToleranceMinutes: number;
   skills: string[];
+  hardFilters: HardFilters;
   hardPreferences: {
     employmentType: string;
     region: string;
@@ -23,6 +24,17 @@ export interface CareerPassport {
   };
   updatedAt: string;
 }
+
+export interface HardFilters {
+  onlyPermanent: boolean;
+  onlyCapitalArea: boolean;
+  maxCommuteCutoff: boolean;
+  noHeavyFixedOT: boolean;
+  noBelowCurrentSalary: boolean;
+  noRelocationOrg: boolean;
+  customKeywords: string[];
+}
+
 
 export type ConfidenceTier = 'A' | 'B' | 'C' | 'D';
 

@@ -382,3 +382,78 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
     gapReasons,
   };
 }
+
+export function evaluateHardFilters(
+  passport: CareerPassport,
+  job: JobPosting
+): { isExcluded: boolean; exclusionReasons: string[] } {
+  const reasons: string[] = [];
+  const filters = passport.hardFilters;
+  if (!filters) return { isExcluded: false, exclusionReasons: [] };
+
+  // 1. Permanent employment only (Exclude contract/temporary)
+  if (filters.onlyPermanent) {
+    const isPermanent = job.tags.some((t) => t.includes("정규직")) || (job.rawText && job.rawText.includes("정규직"));
+    if (!isPermanent) {
+      reasons.push("비정규직/계약직 배제 기준 위반");
+    }
+  }
+
+  // 2. Capital area only (Exclude non-capital)
+  if (filters.onlyCapitalArea) {
+    const loc = (job.location + " " + (job.rawText || "")).toLowerCase();
+    const isCapital = loc.includes("서울") || loc.includes("경기") || loc.includes("인천") || loc.includes("수도권") || loc.includes("강남") || loc.includes("판교") || loc.includes("분당");
+    if (!isCapital) {
+      reasons.push("수도권 외 지역 배제 기준 위반");
+    }
+  }
+
+  // 3. Max Commute cutoff
+  if (filters.maxCommuteCutoff) {
+    const tol = passport.commuteToleranceMinutes || 60;
+    if (job.commuteMinutes > tol) {
+      reasons.push(`편도 통근 시간 초과 (${job.commuteMinutes}분 > 허용 ${tol}분)`);
+    }
+  }
+
+  // 4. Over 20 hours fixed OT cutoff
+  if (filters.noHeavyFixedOT) {
+    if (job.hasFixedOT && job.fixedOTHours > 20) {
+      reasons.push(`과도한 고정OT (${job.fixedOTHours}시간 > 20시간 초과)`);
+    }
+  }
+
+  // 5. Below current cash salary cutoff
+  if (filters.noBelowCurrentSalary) {
+    const currentTotal = passport.baseSalary + passport.fixedAllowance;
+    if (job.salaryMaxManwon < currentTotal) {
+      reasons.push(`현재 확정 보상(${currentTotal.toLocaleString()}만 원) 미만 공고`);
+    }
+  }
+
+  // 6. Relocation public orgs cutoff
+  if (filters.noRelocationOrg) {
+    const full = (job.title + " " + job.company + " " + (job.rawText || "")).toLowerCase();
+    if (full.includes("지방 이전") || full.includes("혁신도시") || full.includes("순환 근무")) {
+      reasons.push("지방 이전 예정/지방 순환 근무 기관 배제");
+    }
+  }
+
+  // 7. Custom exclusion keywords
+  if (filters.customKeywords && filters.customKeywords.length > 0) {
+    const full = (job.title + " " + job.company + " " + job.canonicalRole + " " + job.tags.join(" ") + " " + (job.rawText || "")).toLowerCase();
+    for (const kw of filters.customKeywords) {
+      const clean = kw.trim().toLowerCase();
+      if (clean && full.includes(clean)) {
+        reasons.push(`배제 키워드 '${kw}' 포함`);
+        break;
+      }
+    }
+  }
+
+  return {
+    isExcluded: reasons.length > 0,
+    exclusionReasons: reasons,
+  };
+}
+

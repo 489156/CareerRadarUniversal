@@ -291,18 +291,65 @@
               <textarea id="p_skills" rows="2" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">인사기획, 평가보상체계설계, 노무관리, 임금피크제, 직무분석, 취업규칙개정, AX(AI Transformation)</textarea>
             </div>
 
-            <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">절대 배제 조건 (Hard Filter)</label>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
-                  <span>🔒 정규직만</span>
-                </span>
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
-                  <span>📍 수도권(서울/경기)</span>
-                </span>
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
-                  <span>🚫 지방 이전 기관 배제</span>
-                </span>
+            <!-- Configurable Hard Filter Section -->
+            <div class="space-y-3 pt-3 border-t border-[#1e2a44]">
+              <div class="flex items-center justify-between">
+                <div>
+                  <label class="block text-xs font-bold text-white flex items-center space-x-2">
+                    <span>🛡️ 절대 배제 조건 (Hard Filter 수동 설정)</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold">STRICT FILTER</span>
+                  </label>
+                  <p class="text-[11px] text-slate-400 mt-0.5">체크된 기준에 단 하나라도 위배되는 공고는 Opportunity Radar에서 자동 배제(Cutoff)됩니다.</p>
+                </div>
+                <button type="button" onclick="resetHardFilters()" class="text-[11px] text-slate-400 hover:text-white underline cursor-pointer">기본값 복원</button>
+              </div>
+
+              <!-- 6 Preset Checkbox Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_permanent" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">🔒 <strong>정규직만 허용</strong> <span class="text-slate-500 text-[11px]">(계약·파견직 배제)</span></span>
+                </label>
+
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_capital" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">📍 <strong>수도권만 허용</strong> <span class="text-slate-500 text-[11px]">(지방 근무지 배제)</span></span>
+                </label>
+
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_commute" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">🚗 <strong>통근 허용 초과 즉시 컷</strong> <span class="text-slate-500 text-[11px]" id="hf_commuteHint">(60분 초과 배제)</span></span>
+                </label>
+
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_fixedOT" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">⏰ <strong>고정OT 20h 초과 배제</strong> <span class="text-slate-500 text-[11px]">(과도한 포괄임금)</span></span>
+                </label>
+
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_salary" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">💰 <strong>현재 보상 미만 배제</strong> <span class="text-slate-500 text-[11px]">(역제안 방지)</span></span>
+                </label>
+
+                <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
+                  <input type="checkbox" id="hf_relocation" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <span class="text-slate-200">🚫 <strong>지방 이전·순환 기관 배제</strong> <span class="text-slate-500 text-[11px]">(혁신도시 등)</span></span>
+                </label>
+              </div>
+
+              <!-- Custom Exclusion Keywords -->
+              <div class="space-y-1.5 pt-1">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-300 font-medium">사용자 직접 등록 배제 키워드 (해당 단어 포함 시 즉시 컷)</span>
+                  <span class="text-slate-500">Enter 또는 [추가] 클릭</span>
+                </div>
+                <div class="flex space-x-2">
+                  <input type="text" id="hf_customInput" placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 인턴, 야간당직)..." class="flex-1 bg-[#0b101c] border border-[#233252] rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500" onkeydown="if(event.key==='Enter'){event.preventDefault();addCustomHardFilter();}" />
+                  <button type="button" onclick="addCustomHardFilter()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer transition">추가</button>
+                </div>
+                <div id="hf_keywordTags" class="flex flex-wrap gap-1.5 pt-1 min-h-[26px]">
+                  <!-- dynamically rendered tags -->
+                </div>
               </div>
             </div>
           </div>
@@ -376,6 +423,18 @@
 
         <!-- Filter Pills -->
         <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-[#1b253b] text-xs">
+          <div class="flex items-center justify-between w-full pb-2 mb-1 border-b border-[#182338]">
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 font-semibold text-[11px] flex items-center space-x-1">
+                <span>🛡️ Hard Filter 가동 중</span>
+              </span>
+              <span class="text-slate-400 text-[11px]">배제된 공고: <strong id="excludedCount" class="text-rose-400 font-mono">0</strong>건</span>
+            </div>
+            <label class="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+              <input type="checkbox" id="showExcludedCheckbox" onchange="renderRadarJobs()" class="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500" />
+              <span class="text-[11px]">배제된 공고 포함하여 보기</span>
+            </label>
+          </div>
           <span class="text-slate-400 font-semibold mr-1">필터:</span>
           <button type="button" onclick="setRadarFilterTab('all')" id="rf-all" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold cursor-pointer">전체보기</button>
           <button type="button" onclick="setRadarFilterTab('tierA')" id="rf-tierA" class="px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer">공시/명시(Tier A)만</button>
@@ -973,6 +1032,138 @@
         homeLocation: document.getElementById('p_location').value || '경기도 군포시',
         commuteToleranceMinutes: parseInt(document.getElementById('p_commuteTol').value, 10) || 60,
         skills: (document.getElementById('p_skills').value || '').split(',').map(function(s) { return s.trim(); }),
+        hardFilters: {
+          onlyPermanent: document.getElementById('hf_permanent') ? document.getElementById('hf_permanent').checked : true,
+          onlyCapitalArea: document.getElementById('hf_capital') ? document.getElementById('hf_capital').checked : true,
+          maxCommuteCutoff: document.getElementById('hf_commute') ? document.getElementById('hf_commute').checked : true,
+          noHeavyFixedOT: document.getElementById('hf_fixedOT') ? document.getElementById('hf_fixedOT').checked : false,
+          noBelowCurrentSalary: document.getElementById('hf_salary') ? document.getElementById('hf_salary').checked : false,
+          noRelocationOrg: document.getElementById('hf_relocation') ? document.getElementById('hf_relocation').checked : true,
+          customKeywords: customHardFilterKeywords || []
+        }
+      };
+    }
+
+    
+    // Hard Filter Keyword & Logic Management
+    let customHardFilterKeywords = ['교대근무', '파견직'];
+
+    function renderCustomHardFilterTags() {
+      const container = document.getElementById('hf_keywordTags');
+      if (!container) return;
+      if (customHardFilterKeywords.length === 0) {
+        container.innerHTML = '<span class="text-[10px] text-slate-500 italic">등록된 직접 배제 키워드가 없습니다.</span>';
+        return;
+      }
+      container.innerHTML = customHardFilterKeywords.map(function(kw) {
+        return '<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-lg text-xs bg-rose-950/40 text-rose-300 border border-rose-500/40 font-medium">' +
+               '<span>🚫 ' + kw + '</span>' +
+               '<button type="button" onclick="removeCustomHardFilter(\'' + kw + '\')" class="hover:text-white text-rose-400 ml-1 font-bold cursor-pointer">✕</button>' +
+               '</span>';
+      }).join('');
+    }
+
+    function addCustomHardFilter() {
+      const input = document.getElementById('hf_customInput');
+      if (!input) return;
+      const val = input.value.trim();
+      if (!val) return;
+      if (!customHardFilterKeywords.includes(val)) {
+        customHardFilterKeywords.push(val);
+        renderCustomHardFilterTags();
+        triggerPassportUpdate();
+        showToast('배제 키워드 "' + val + '"이(가) 등록되었습니다.');
+      }
+      input.value = '';
+    }
+
+    function removeCustomHardFilter(kw) {
+      customHardFilterKeywords = customHardFilterKeywords.filter(function(k) { return k !== kw; });
+      renderCustomHardFilterTags();
+      triggerPassportUpdate();
+      showToast('배제 키워드 "' + kw + '"이(가) 삭제되었습니다.');
+    }
+
+    function resetHardFilters() {
+      if (document.getElementById('hf_permanent')) document.getElementById('hf_permanent').checked = true;
+      if (document.getElementById('hf_capital')) document.getElementById('hf_capital').checked = true;
+      if (document.getElementById('hf_commute')) document.getElementById('hf_commute').checked = true;
+      if (document.getElementById('hf_fixedOT')) document.getElementById('hf_fixedOT').checked = false;
+      if (document.getElementById('hf_salary')) document.getElementById('hf_salary').checked = false;
+      if (document.getElementById('hf_relocation')) document.getElementById('hf_relocation').checked = true;
+      customHardFilterKeywords = ['교대근무', '파견직'];
+      renderCustomHardFilterTags();
+      triggerPassportUpdate();
+      showToast('Hard Filter 설정이 기본값으로 초기화되었습니다.');
+    }
+
+    function evaluateHardFilters(passport, job) {
+      const reasons = [];
+      const hf = passport.hardFilters || {};
+
+      // 1. 정규직만 (계약직/파견직 배제)
+      if (hf.onlyPermanent) {
+        const isPerm = job.tags.some(function(t) { return t.includes('정규직'); }) || (job.rawText && job.rawText.includes('정규직'));
+        if (!isPerm) {
+          reasons.push('비정규직/계약직 배제');
+        }
+      }
+
+      // 2. 수도권만
+      if (hf.onlyCapitalArea) {
+        const loc = (job.location + ' ' + (job.rawText || '')).toLowerCase();
+        const isCapital = loc.includes('서울') || loc.includes('경기') || loc.includes('인천') || loc.includes('수도권') || loc.includes('강남') || loc.includes('판교');
+        if (!isCapital) {
+          reasons.push('수도권 외 지역 배제');
+        }
+      }
+
+      // 3. 통근 시간 초과 컷오프
+      if (hf.maxCommuteCutoff) {
+        const tol = passport.commuteToleranceMinutes || 60;
+        if (job.commuteMinutes > tol) {
+          reasons.push('편도 통근 초과 (' + job.commuteMinutes + '분 > 허용 ' + tol + '분)');
+        }
+      }
+
+      // 4. 고정OT 20시간 초과 포괄임금 배제
+      if (hf.noHeavyFixedOT) {
+        if (job.hasFixedOT && job.fixedOTHours > 20) {
+          reasons.push('과도한 고정OT (' + job.fixedOTHours + '시간 > 20시간)');
+        }
+      }
+
+      // 5. 현재 보상 미만 배제
+      if (hf.noBelowCurrentSalary) {
+        const currentCash = passport.baseSalary + passport.fixedAllowance;
+        if (job.salaryMax < currentCash) {
+          reasons.push('현재 보상 미만 (' + job.salaryMax + '만 < 현재 ' + currentCash + '만)');
+        }
+      }
+
+      // 6. 지방 이전 기관 배제
+      if (hf.noRelocationOrg) {
+        const text = (job.title + ' ' + job.company + ' ' + (job.rawText || '')).toLowerCase();
+        if (text.includes('지방 이전') || text.includes('혁신도시') || text.includes('순환 근무')) {
+          reasons.push('지방 이전/순환 근무 기관 배제');
+        }
+      }
+
+      // 7. 커스텀 키워드 배제
+      if (Array.isArray(hf.customKeywords) && hf.customKeywords.length > 0) {
+        const full = (job.title + ' ' + job.company + ' ' + job.canonicalRole + ' ' + job.tags.join(' ') + ' ' + (job.rawText || '')).toLowerCase();
+        for (let i = 0; i < hf.customKeywords.length; i++) {
+          const kw = hf.customKeywords[i].trim().toLowerCase();
+          if (kw && full.includes(kw)) {
+            reasons.push('배제 키워드 [ ' + hf.customKeywords[i] + ' ] 포함');
+            break;
+          }
+        }
+      }
+
+      return {
+        isExcluded: reasons.length > 0,
+        exclusionReasons: reasons
       };
     }
 
@@ -981,6 +1172,8 @@
       const totalCash = p.baseSalary + p.fixedAllowance;
       document.getElementById('guaranteedSummary').innerText = totalCash.toLocaleString() + '만 원';
       document.getElementById('c_cash').value = totalCash;
+      const hint = document.getElementById('hf_commuteHint');
+      if (hint) hint.innerText = '(' + (p.commuteToleranceMinutes || 60) + '분 초과 배제)';
 
       const years = Math.max(1, Math.min(25, p.totalYears || 7));
       const p25 = Math.round(3600 + years * 300);
@@ -1026,6 +1219,18 @@
             document.getElementById('commuteVal').innerText = p.commuteToleranceMinutes + '분 이내';
           }
           if (p.skills) document.getElementById('p_skills').value = Array.isArray(p.skills) ? p.skills.join(', ') : p.skills;
+          if (p.hardFilters) {
+            if (p.hardFilters.onlyPermanent !== undefined && document.getElementById('hf_permanent')) document.getElementById('hf_permanent').checked = p.hardFilters.onlyPermanent;
+            if (p.hardFilters.onlyCapitalArea !== undefined && document.getElementById('hf_capital')) document.getElementById('hf_capital').checked = p.hardFilters.onlyCapitalArea;
+            if (p.hardFilters.maxCommuteCutoff !== undefined && document.getElementById('hf_commute')) document.getElementById('hf_commute').checked = p.hardFilters.maxCommuteCutoff;
+            if (p.hardFilters.noHeavyFixedOT !== undefined && document.getElementById('hf_fixedOT')) document.getElementById('hf_fixedOT').checked = p.hardFilters.noHeavyFixedOT;
+            if (p.hardFilters.noBelowCurrentSalary !== undefined && document.getElementById('hf_salary')) document.getElementById('hf_salary').checked = p.hardFilters.noBelowCurrentSalary;
+            if (p.hardFilters.noRelocationOrg !== undefined && document.getElementById('hf_relocation')) document.getElementById('hf_relocation').checked = p.hardFilters.noRelocationOrg;
+            if (Array.isArray(p.hardFilters.customKeywords)) {
+              customHardFilterKeywords = p.hardFilters.customKeywords;
+              renderCustomHardFilterTags();
+            }
+          }
         }
       } catch (e) {
         console.warn('load error:', e);
@@ -1327,14 +1532,23 @@
       const passport = getPassportData();
       const q = (document.getElementById('radarSearchInput')?.value || '').toLowerCase();
 
-      // Compute dynamic fit score for each job
+      // Compute dynamic fit score and hard filter evaluation
+      const showExcluded = document.getElementById('showExcludedCheckbox') ? document.getElementById('showExcludedCheckbox').checked : false;
+      let totalExcludedCount = 0;
+
       const scoredJobs = ALL_JOBS.map(function(job) {
         const match = computeJobFit(passport, job);
-        return Object.assign({}, job, { match: match });
+        const hfResult = evaluateHardFilters(passport, job);
+        if (hfResult.isExcluded) totalExcludedCount++;
+        return Object.assign({}, job, { match: match, hf: hfResult });
       });
+
+      const excCountElem = document.getElementById('excludedCount');
+      if (excCountElem) excCountElem.innerText = totalExcludedCount;
 
       // Filter
       let filtered = scoredJobs.filter(function(j) {
+        if (!showExcluded && j.hf.isExcluded) return false;
         if (currentRadarFilter === 'tierA' && j.salaryTier !== 'A') return false;
         if (currentRadarFilter === 'highMatch' && j.match.totalScore < 90) return false;
         if (currentRadarFilter === 'commuteFit' && j.commuteMinutes > 45) return false;
@@ -1367,7 +1581,8 @@
       container.innerHTML = filtered.map(function(job) {
         const isHigh = job.match.totalScore >= 90;
         return `
-          <div class="bg-[#101728] border border-[#1e2a44] hover:border-indigo-500/60 transition rounded-xl p-5 space-y-4 shadow-sm">
+          <div class="bg-[#101728] border ${job.hf.isExcluded ? 'border-rose-900/60 opacity-60 hover:opacity-100' : 'border-[#1e2a44] hover:border-indigo-500/60'} transition rounded-xl p-5 space-y-4 shadow-sm">
+            ${job.hf.isExcluded ? '<div class="p-2.5 bg-rose-950/40 border border-rose-500/50 rounded-lg text-rose-300 text-xs font-semibold flex items-start space-x-1.5"><span class="flex-shrink-0">🚫</span><div><span class="font-bold text-rose-400">[절대 배제 기준 위반]</span><span class="text-[11px] text-rose-200 ml-1">' + job.hf.exclusionReasons.join(' • ') + '</span></div></div>' : ''}
             <div class="flex items-start justify-between">
               <div>
                 <span class="text-xs text-slate-400 font-semibold">${job.company}</span>
