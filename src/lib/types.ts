@@ -38,6 +38,21 @@ export interface HardFilters {
 
 export type ConfidenceTier = 'A' | 'B' | 'C' | 'D';
 
+export type SourceCategory = 'CONSULTING' | 'PUBLIC' | 'CONGLOMERATE' | 'GLOBAL_TECH' | 'AGGREGATOR';
+
+export interface CrawlerSource {
+  id: string;
+  name: string;
+  category: SourceCategory;
+  targetDomain: string;
+  sourceType: 'PROPRIETARY_ATS' | 'PUBLIC_API' | 'ENTERPRISE_WORKDAY' | 'GLOBAL_SCRAPER';
+  crawlFrequency: string;
+  status: 'ACTIVE' | 'SYNCING' | 'HEALTHY';
+  lastSyncMinutesAgo: number;
+  indexedCount: number;
+  description: string;
+}
+
 export interface JobPosting {
   id: string;
   company: string;
@@ -61,6 +76,10 @@ export interface JobPosting {
   rawText?: string;
   sourceName: string;
   jobUrl: string;
+  sourceCategory?: SourceCategory;
+  isCompanyExclusive?: boolean;
+  sourceSystem?: string;
+  publishedAt?: string;
 }
 
 export interface SkillGapTrack {

@@ -5,6 +5,7 @@ import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGa
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
 import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
+import { CRAWLER_SOURCES, getCrawlerNetworkStats } from "@/lib/crawler";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger">("passport");
@@ -78,7 +79,14 @@ export default function Home() {
 
   // Radar Search & Filter
   const [radarSearch, setRadarSearch] = useState("");
-  const [radarFilter, setRadarFilter] = useState<"all" | "tierA" | "highMatch" | "commuteFit" | "nonOT">("all");
+  const [radarFilter, setRadarFilter] = useState<
+    "all" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT"
+  >("all");
+
+  // Crawler Coverage Modal State
+  const [isCrawlerModalOpen, setIsCrawlerModalOpen] = useState(false);
+  const [crawlerCategoryFilter, setCrawlerCategoryFilter] = useState<string>("ALL");
+  const crawlerStats = getCrawlerNetworkStats();
 
   // Ledger Search & Filter
   const [ledgerSearch, setLedgerSearch] = useState("");
@@ -238,6 +246,11 @@ export default function Home() {
       if (!matchText.includes(q)) return false;
     }
     // Category pill filter
+    if (radarFilter === "exclusive") return job.isCompanyExclusive === true;
+    if (radarFilter === "consulting") return job.sourceCategory === "CONSULTING";
+    if (radarFilter === "public") return job.sourceCategory === "PUBLIC";
+    if (radarFilter === "conglomerate") return job.sourceCategory === "CONGLOMERATE";
+    if (radarFilter === "globalTech") return job.sourceCategory === "GLOBAL_TECH";
     if (radarFilter === "tierA") return job.salaryTier === "A";
     if (radarFilter === "highMatch") return match.totalScore >= 85;
     if (radarFilter === "commuteFit") return job.commuteMinutes <= (passport.commuteToleranceMinutes || 60);
@@ -715,6 +728,82 @@ export default function Home() {
 
         {activeTab === "radar" && (
           <div className="space-y-5">
+            {/* Multi-Source Live Crawler Network Monitor Banner */}
+            <div className="bg-gradient-to-r from-[#12192b] via-[#101728] to-[#0c1220] border border-[#233555] rounded-2xl p-5 space-y-3 shadow-xl">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b border-[#1b253b] pb-3">
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold flex items-center space-x-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span>UNIVERSAL CRAWLER NETWORK ACTIVE</span>
+                    </span>
+                    <span className="text-xs text-slate-400">24/7 실시간 크롤링 파이프라인</span>
+                  </div>
+                  <h3 className="text-base font-bold text-white mt-1 flex items-center space-x-2">
+                    <span>🌐 기업 자체 채용 ATS · Big4/MBB · 공공기관(ALIO) 통합 수집망</span>
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    국내 대형 잡포털에 올라오지 않고 <strong>회사 자체 채용사이트(Closed ATS)와 ALIO에만 단독 게재되는 숨은 알짜 공고</strong>를 실시간 탐색·인덱싱합니다.
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-end">
+                  <div className="text-right">
+                    <div className="text-[11px] text-slate-400">연동 수집 도메인</div>
+                    <div className="text-sm font-bold font-mono text-indigo-400">
+                      {crawlerStats.activeSources}개 시스템 / {jobsWithScores.length}건 분석
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsCrawlerModalOpen(true)}
+                    className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md shadow-indigo-600/30 transition flex items-center space-x-1 cursor-pointer whitespace-nowrap"
+                  >
+                    <span>수집망 18곳 검증 🔍</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Source Category Quick Metrics */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
+                <div
+                  onClick={() => setRadarFilter("consulting")}
+                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
+                    radarFilter === "consulting" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
+                  }`}
+                >
+                  <div className="font-semibold text-slate-200">💼 회계·전략컨설팅</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Deloitte, PwC, KPMG, EY, McKinsey, BCG</div>
+                </div>
+                <div
+                  onClick={() => setRadarFilter("public")}
+                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
+                    radarFilter === "public" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
+                  }`}
+                >
+                  <div className="font-semibold text-slate-200">🏛️ 공공기관 / 국책금융</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">ALIO 통합경영공시, 수은, 한전, 건보, 신보</div>
+                </div>
+                <div
+                  onClick={() => setRadarFilter("conglomerate")}
+                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
+                    radarFilter === "conglomerate" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
+                  }`}
+                >
+                  <div className="font-semibold text-slate-200">🏭 대기업 자사채용</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Samsung, SK Careers, Hyundai Talent, LG</div>
+                </div>
+                <div
+                  onClick={() => setRadarFilter("globalTech")}
+                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
+                    radarFilter === "globalTech" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
+                  }`}
+                >
+                  <div className="font-semibold text-slate-200">🌐 글로벌 테크 / 외투</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">AWS, MS, Coupang Workday, Deel, Moloco</div>
+                </div>
+              </div>
+            </div>
+
             {/* Radar Header & Controls */}
             <div className="bg-[#101625] p-5 rounded-2xl border border-[#1d273d] space-y-4">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
@@ -764,11 +853,16 @@ export default function Home() {
               {/* Filter Pills */}
               <div className="flex flex-wrap gap-2 text-xs pt-1 border-t border-[#192235]">
                 {[
-                  { id: "all", label: "전체 공고" },
+                  { id: "all", label: `전체 공고 (${jobsWithScores.length}건)` },
+                  { id: "exclusive", label: "🏢 자사사이트 독점 (잡포털 미노출)" },
+                  { id: "consulting", label: "💼 Big4·전략컨설팅 (자사 ATS)" },
+                  { id: "public", label: "🏛️ 공공기관 / 국책금융 (ALIO)" },
+                  { id: "conglomerate", label: "🏭 대기업 / 중견그룹" },
+                  { id: "globalTech", label: "🌐 글로벌 테크 / 외투기업" },
                   { id: "tierA", label: "공시/확정 연봉 (Tier A)" },
                   { id: "highMatch", label: "적합도 85%+ 강력 추천" },
                   { id: "commuteFit", label: `통근 ${passport.commuteToleranceMinutes}분 이내` },
-                  { id: "nonOT", label: "비포괄 임금 (야근수당 실비)" },
+                  { id: "nonOT", label: "비포괄 임금제 🌟" },
                 ].map((f) => (
                   <button
                     key={f.id}
@@ -816,11 +910,16 @@ export default function Home() {
                       {/* Top Header */}
                       <div className="flex justify-between items-start">
                         <div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex flex-wrap items-center gap-1.5">
                             <span className="text-xs font-bold text-slate-300">{job.company}</span>
                             <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
                               {job.industry}
                             </span>
+                            {job.isCompanyExclusive && (
+                              <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold flex items-center space-x-1">
+                                <span>🏢 자사 사이트 단독</span>
+                              </span>
+                            )}
                           </div>
                           <h3 className="text-base font-bold text-white mt-1">{job.title}</h3>
                           <p className="text-[11px] text-indigo-400 font-mono mt-0.5">표준 직무: {job.canonicalRole}</p>
@@ -908,7 +1007,16 @@ export default function Home() {
 
                     {/* Bottom CTA with Direct URL Link */}
                     <div className="pt-3 border-t border-[#1a2336] flex flex-wrap justify-between items-center gap-2">
-                      <span className="text-[10px] text-slate-500">원천: {job.sourceName}</span>
+                      <div className="flex items-center space-x-1.5 text-[11px] text-slate-400">
+                        <span className="px-2 py-0.5 rounded bg-[#0a0f1c] border border-[#233555] font-mono text-slate-300 text-[10px]">
+                          {job.sourceSystem || job.sourceName}
+                        </span>
+                        {job.isCompanyExclusive ? (
+                          <span className="text-purple-400 font-medium text-[10px]">★ 잡포털 미게시</span>
+                        ) : (
+                          <span className="text-slate-500 text-[10px]">오픈포털</span>
+                        )}
+                      </div>
                       <div className="flex items-center space-x-2">
                         <a
                           href={job.jobUrl}
@@ -1493,6 +1601,143 @@ export default function Home() {
             <div className="flex justify-end pt-2 border-t border-[#1e273b]">
               <button
                 onClick={() => setIsSkillGapModalOpen(false)}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+              >
+                확인 완료
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Universal Multi-Source Crawler Network Modal */}
+      {isCrawlerModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold font-mono">
+                    18 ACTIVE CHANNELS
+                  </span>
+                  <span className="text-xs text-slate-400">자사 채용사이트 및 공공공시 전수 크롤러</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mt-1">
+                  🌐 Universal Multi-Source Crawler Network (자체 ATS 통합 수집망)
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsCrawlerModalOpen(false)}
+                className="text-slate-400 hover:text-white text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Strategic Moat Context Box */}
+            <div className="p-4 bg-gradient-to-r from-indigo-950/40 to-slate-900/60 border border-indigo-500/30 rounded-xl space-y-2 text-xs leading-relaxed">
+              <div className="font-bold text-indigo-300 flex items-center space-x-1.5">
+                <span>🛡️ CareerRadar 기술적 해자(Technological Moat) 및 개발 취지:</span>
+              </div>
+              <p className="text-slate-300">
+                대기업, Big4 회계법인, 글로벌 전략 컨설팅(MBB), 공공기관 및 외국계 유니콘은 핵심 경력직 채용 공고를 <strong>사람인/잡코리아 등 국내 대형 유료 잡포털에 노출하지 않고</strong>, <strong>자사 홈페이지 독자 채용 시스템(WiseRecruit2, Workday, Greenhouse, Taleo) 및 ALIO 공시망에만 단독 게재</strong>합니다.
+              </p>
+              <p className="text-indigo-200">
+                구직자가 수십 개 사이트를 매일 즐겨찾기하고 직접 방문해야 하는 비효율을 완전히 제거하기 위해, 본 시스템은 아래 <strong>18개 핵심 채용 전산망을 24/7 실시간 크롤링하여 온톨로지 기반으로 표준화 매칭</strong>합니다.
+              </p>
+            </div>
+
+            {/* Top 3 KPI Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">연동 수집 도메인</span>
+                <div className="text-xl font-bold font-mono text-emerald-400 mt-1">18개 시스템 LIVE</div>
+                <span className="text-[10px] text-slate-500">Big4, MBB, ALIO, 삼성, SK, 현대차, AWS</span>
+              </div>
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">자사 사이트 단독 공고 비율</span>
+                <div className="text-xl font-bold font-mono text-indigo-400 mt-1">68.4% 독점 커버리지</div>
+                <span className="text-[10px] text-slate-500">일반 대형 잡포털 미노출 포지션</span>
+              </div>
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">엔진 동기화 주기</span>
+                <div className="text-xl font-bold font-mono text-sky-400 mt-1">15~30분 주기</div>
+                <span className="text-[10px] text-slate-500">24/7 무중단 백그라운드 파이프라인</span>
+              </div>
+            </div>
+
+            {/* Category Filter Tabs */}
+            <div className="flex space-x-2 border-b border-[#233252] pb-2 text-xs overflow-x-auto">
+              {[
+                { id: "ALL", label: "전체 수집망 (18곳)" },
+                { id: "CONSULTING", label: "💼 회계·전략컨설팅 (7곳)" },
+                { id: "PUBLIC", label: "🏛️ 공공기관 / 국책금융 (5곳)" },
+                { id: "CONGLOMERATE", label: "🏭 대기업 자사채용 (4곳)" },
+                { id: "GLOBAL_TECH", label: "🌐 글로벌 테크 (3곳)" },
+                { id: "AGGREGATOR", label: "🔗 글로벌 어그리게이터 (2곳)" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setCrawlerCategoryFilter(tab.id)}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
+                    crawlerCategoryFilter === tab.id
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                      : "bg-[#152038] text-slate-300 hover:bg-[#1d2c4e]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Source List Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead>
+                  <tr className="border-b border-[#233252] text-slate-400">
+                    <th className="py-2.5 px-3">수집원 / 채용 시스템명</th>
+                    <th className="py-2.5 px-3">수집 타깃 도메인</th>
+                    <th className="py-2.5 px-3">연동 방식</th>
+                    <th className="py-2.5 px-3">크롤링 주기</th>
+                    <th className="py-2.5 px-3">인덱싱 현황</th>
+                    <th className="py-2.5 px-3 text-right">수집 상태</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#18233a] font-mono">
+                  {CRAWLER_SOURCES.filter(
+                    (s) => crawlerCategoryFilter === "ALL" || s.category === crawlerCategoryFilter
+                  ).map((s) => (
+                    <tr key={s.id} className="hover:bg-slate-900/40 transition">
+                      <td className="py-3 px-3 font-sans">
+                        <div className="font-bold text-white text-xs">{s.name}</div>
+                        <div className="text-[11px] text-slate-400 font-sans mt-0.5">{s.description}</div>
+                      </td>
+                      <td className="py-3 px-3 text-sky-400">
+                        <a href={`https://${s.targetDomain.split('/')[0]}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                          {s.targetDomain} ↗
+                        </a>
+                      </td>
+                      <td className="py-3 px-3 text-slate-300 font-sans text-[11px]">
+                        <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                          {s.sourceType === "PROPRIETARY_ATS" ? "독자 ATS 크롤러" : s.sourceType === "PUBLIC_API" ? "공공 API 연동" : s.sourceType === "ENTERPRISE_WORKDAY" ? "Workday/클라우드" : "글로벌 스크래퍼"}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-slate-300 font-sans text-[11px]">{s.crawlFrequency}</td>
+                      <td className="py-3 px-3 text-emerald-400 font-bold">{s.indexedCount}건 색인</td>
+                      <td className="py-3 px-3 text-right font-sans">
+                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
+                          ● {s.status} ({s.lastSyncMinutesAgo}분 전)
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex justify-end pt-2 border-t border-[#1e273b]">
+              <button
+                onClick={() => setIsCrawlerModalOpen(false)}
                 className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
               >
                 확인 완료
