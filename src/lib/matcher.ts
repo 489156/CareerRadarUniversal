@@ -1,10 +1,10 @@
-import { CareerPassport, JobPosting, DynamicMatchScore } from "./types";
+import { CareerPassport, JobPosting, DynamicMatchScore, SkillGapTrack } from "./types";
 
 export const MOCK_JOB_DATABASE: JobPosting[] = [
   {
     id: "job-1",
     company: "현대모비스 계열",
-    title: "HR 전략 및 조직문화 기획 경력직 (5~8년)",
+    title: "HR 전략 및 조직문화 기획 경력직 (5~9년)",
     canonicalRole: "HR Planning & Strategy",
     occupation: "HR",
     industry: "제조 / 모빌리티",
@@ -23,6 +23,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["외국어(영어) 비즈니스 커뮤니케이션 역량 우대", "글로벌 법인 인사 정책 수립 경험 우대"],
     rawText: `[담당업무]\n- 중장기 인사제도 기획 및 조직문화 혁신 프로그램 운영\n- 임금체계 및 직무급 개편 프로젝트 PM\n- 핵심인재 육성 및 평가제도 고도화\n\n[지원자격]\n- 4년제 대졸 이상 (상경/사회과학 계열 우대)\n- 인사기획 또는 제도설계 경력 5년 이상 9년 이하\n\n[근무조건]\n- 고용형태: 정규직\n- 급여수준: 회사 내규 (고정 연장근로 20시간 포함된 포괄임금제, 경영성과급 별도 지급)\n- 근무지: 서울시 강남구 테헤란로 (2호선 선릉/역삼 인근)`,
     sourceName: "사람인 대기업 공채",
+    jobUrl: "https://talent.hyundaimobis.com",
   },
   {
     id: "job-2",
@@ -46,6 +47,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["시니어급보다는 신입/주니어 채용 위주", "경력직 전형 시 개별 호봉 협상 필수"],
     rawText: `[모집부문]\n- 경영지원 / 인사총무 (대졸 신입 및 경력)\n\n[처우조건]\n- 정규직 대졸 신입사원 연봉 5,400만 원 (공고 명시)\n- 고정OT 없음 (초과근로수당 법정 1.5배 정산)\n- 퇴직연금(DC형) 별도 운영, 4대보험, 중식 제공`,
     sourceName: "공식 채용공고 (2026)",
+    jobUrl: "https://dnautomotive.recruiter.co.kr",
   },
   {
     id: "job-3",
@@ -69,6 +71,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["빠른 조직 변경 및 자율성과 압박에 대한 적응력 요구", "People Analytics / 데이터 기반 인사 분석 프로젝트 경험 우대"],
     rawText: `[Role & Responsibilities]\n- 사일로 조직 내 People Partner로서 조직 건강도 진단 및 피플 솔루션 제공\n- 평가, 보상, 조직문화, 온보딩 프로세스 주도\n- 조직 갈등 해결 및 핵심 인재 리텐션 전략 수립\n\n[Conditions]\n- 고용형태: 정규직\n- 비포괄 임금제 운영 (법정 연장근로수당 100% 별도 정산)\n- 주 2일 하이브리드 재택근무`,
     sourceName: "기업 공식 Career Page",
+    jobUrl: "https://toss.im/career/jobs",
   },
   {
     id: "job-4",
@@ -92,6 +95,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["공공기관 기재부 가이드라인에 따른 엄격한 총인건비 인상률 상한(1~2%)", "공무원 수준의 보고서 서식 및 행정 감사 절차"],
     rawText: `[담당직무]\n- 공공기관 노사관계 관리 및 단체협약 개정 실무\n- 직무중심 보수체계 개편 및 성과평가 운영\n\n[보수조건]\n- 공공기관 경영정보시스템(ALIO) 공시 기준 적용\n- 법정 초과근로수당 실비 지급 (고정OT 없음)\n- 공무원연금에 준하는 복지 포인트 및 자녀 학자금 지원`,
     sourceName: "ALIO 공공기관 경영공시 (2026)",
+    jobUrl: "https://koreaexim.recruiter.co.kr",
   },
   {
     id: "job-5",
@@ -115,6 +119,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["분당/이천 사업장 출퇴근 피로도", "SQL 및 데이터 대시보드(BI) 분석 역량 테스트 필수"],
     rawText: `[담당업무]\n- 임직원 피플 데이터 분석 및 인사 대시보드 구축\n- 승진, 평가, 보상 프로세스 운영 자동화\n\n[처우]\n- 업계 최고 수준 기본급 및 실적 연동 경영성과급(PS/PI) 별도\n- 주 40시간 유연근무제 (비포괄 임금)`,
     sourceName: "잡코리아 대기업관",
+    jobUrl: "https://www.skcareers.com",
   },
   {
     id: "job-6",
@@ -138,6 +143,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["정형화된 HR 제도보다는 기민한 조직문제 해결력(Problem Solving) 중점 검증"],
     rawText: `[주요업무]\n- 당근의 미션과 문화에 부합하는 피플 전략 기획 및 실행\n- 임직원 컬처 코드 전파 및 커뮤니케이션 조율\n\n[근무환경]\n- 서초구 교대역 도보 3분\n- 무제한 자율 휴가 및 최신 장비 지원`,
     sourceName: "원티드 (Wanted)",
+    jobUrl: "https://about.daangn.com/jobs",
   },
   {
     id: "job-7",
@@ -161,6 +167,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     gaps: ["공공기관 경영평가(경평) 보고서 대응 시즌 초과근무 발생"],
     rawText: `[주요직무]\n- 중소기업 금융지원 정책 기획 및 조직진단\n- 경영혁신 과제 발굴 및 정부 경영평가 대응`,
     sourceName: "ALIO (2026)",
+    jobUrl: "https://kodit.recruiter.co.kr",
   },
   {
     id: "job-8",
@@ -180,12 +187,115 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     hasFixedOT: true,
     fixedOTHours: 20,
     tags: ["미국 상장사", "RSU 주식 보상", "고연봉", "노무전문"],
-    pros: ["노무사 및 노무관리 실무 7년 전문성 완벽 일치", "글로벌 상장사 RSU(양도제한조건부주식) 보상 수혜"],
-    gaps: ["군포에서 잠실까지 편도 65분으로 통근 피로도 높음 (잠실역 2/8호선)", "24/7 물류 운영 특성에 따른 비정기 이슈 대응"],
+    pros: ["노무관리 및 취업규칙 개정 전문성 완벽 일치", "Coupang, Inc. 주식(RSU) 보상 패키지 수혜", "글로벌 상장사 커리어 가치"],
+    gaps: ["군포에서 편도 65분으로 통근 피로도 높음 (잠실역)", "포괄임금(월 20시간 고정OT) 포함"],
     rawText: `[Job Description]\n- 대규모 현장 및 사무직 임직원 대상 노무 컴플라이언스 총괄\n- 노사협의회 운영 및 노무 분쟁 예방 시스템 고도화\n\n[Compensation]\n- 포괄임금제 적용 (월 고정OT 20시간 산입)\n- Coupang, Inc. (NYSE: CPNG) 주식 보상 패키지 지급`,
-    sourceName: "LinkedIn Jobs (2026)",
-  }
+    sourceName: "Coupang Career 공식",
+    jobUrl: "https://www.coupang.jobs",
+  },
 ];
+
+// 3 Tracks of Skill Gap Bridging totaling 28 Expanded Opportunities
+export const EXPANDED_SKILL_GAP_TRACKS: SkillGapTrack[] = [
+  {
+    id: "track-analytics",
+    name: "People Analytics & HR Data Science",
+    skills: ["SQL (인사 DB 쿼리 및 코호트 집계)", "Tableau / PowerBI 대시보드 구축", "퇴사 예측 및 리텐션 모델링", "eNPS / 조직 건강도 통계 분석"],
+    actionItems: [
+      "SQL 레벨 2 (GROUP BY, Window Function) 인사 데이터셋 실습",
+      "Tableau 기반 '월별 자발적 퇴사율 & 인당 매출액' 대시보드 포트폴리오 제작",
+      "피플 사이언스 통계 개념(선형 회귀, 로지스틱 회귀) 이해",
+    ],
+    expandedCount: 14,
+    expectedSalaryRange: "6,800 ~ 8,500만 원 (+15~25% 프리미엄)",
+    jobs: [
+      { company: "쿠팡 (Coupang)", title: "People Analytics Specialist", location: "서울 송파구 잠실", role: "HR Data Analytics", salary: "7,000 ~ 9,000만 원", url: "https://www.coupang.jobs" },
+      { company: "토스 (비바리퍼블리카)", title: "People Data Partner", location: "서울 강남구 역삼", role: "People Operations", salary: "7,500 ~ 9,500만 원", url: "https://toss.im/career/jobs" },
+      { company: "SK하이닉스", title: "피플오퍼레이션 & 데이터 분석가", location: "경기도 분당/이천", role: "HR Analytics", salary: "6,500 ~ 8,000만 원", url: "https://www.skcareers.com" },
+      { company: "무신사 (Musinsa)", title: "People Analytics 매니저", location: "서울 성동구 성수", role: "HR Data & Comp", salary: "6,500 ~ 8,000만 원", url: "https://musinsa.recruiter.co.kr" },
+      { company: "야놀자 (Yanolja)", title: "People Insights Lead", location: "서울 강남구 대치", role: "People Intelligence", salary: "6,800 ~ 8,200만 원", url: "https://careers.yanolja.co" },
+      { company: "엔씨소프트 (NC)", title: "HR 데이터 분석 & 보상 기획자", location: "경기도 성남시 판교", role: "Total Rewards & Analytics", salary: "7,000 ~ 8,500만 원", url: "https://careers.ncsoft.com" },
+      { company: "라인플러스 (LINE)", title: "Global People Analytics", location: "경기도 성남시 분당", role: "Global HR Data", salary: "7,200 ~ 8,800만 원", url: "https://linepluscorp.com/career" },
+      { company: "우아한형제들 (배민)", title: "피플데이터 기획 담당자", location: "서울 송파구 몽촌토성", role: "People Analytics", salary: "6,800 ~ 8,300만 원", url: "https://career.woowahan.com" },
+      { company: "크래프톤 (KRAFTON)", title: "HR Data Analyst", location: "서울 강남구 역삼", role: "HR Intelligence", salary: "7,500 ~ 9,000만 원", url: "https://krafton.recruiter.co.kr" },
+      { company: "카카오 (Kakao)", title: "피플인사이트 크루", location: "경기도 성남시 판교", role: "People Insights", salary: "6,800 ~ 8,500만 원", url: "https://careers.kakao.com" },
+      { company: "네이버 (NAVER)", title: "HR Analytics & Systems", location: "경기도 성남시 분당", role: "HR System & Data", salary: "7,200 ~ 8,800만 원", url: "https://recruit.navercorp.com" },
+      { company: "CJ올리브영", title: "HR 데이터 분석 & 피플옵스", location: "서울 용산구", role: "HR Data Specialist", salary: "6,200 ~ 7,500만 원", url: "https://oliveyoung.recruiter.co.kr" },
+      { company: "당근 (Daangn)", title: "People System & Data Specialist", location: "서울 서초구 교대", role: "HR Operations & Data", salary: "6,500 ~ 8,000만 원", url: "https://about.daangn.com/jobs" },
+      { company: "뤼이드 (Riiid)", title: "EdTech People Operations Analyst", location: "서울 강남구 삼성", role: "People Ops Analyst", salary: "6,000 ~ 7,800만 원", url: "https://riiid.recruiter.co.kr" },
+    ],
+  },
+  {
+    id: "track-global",
+    name: "Global HR & Cross-Border Mobility",
+    skills: ["비즈니스 영어 능통 (인터뷰/노무 협상)", "해외 법인 노동법 컴플라이언스 & 비자 규정", "글로벌 통합 HRIS (Workday) 운영", "주재원 파견 및 크로스보더 패키지 설계"],
+    actionItems: [
+      "영문 이력서 & LinkedIn 프로필 글로벌 스탠다드 최적화",
+      "글로벌 HR 용어 및 미국/동남아 노동법(FLSA, Statutory Benefits) 케이스 스터디",
+      "외국인 엔지니어 채용 인터뷰 시뮬레이션 및 영어 테크니컬 스크리닝 연습",
+    ],
+    expandedCount: 8,
+    expectedSalaryRange: "7,000 ~ 9,200만 원 (+20~30% 프리미엄)",
+    jobs: [
+      { company: "당근 (Daangn Japan/Global)", title: "Global People & Culture Lead", location: "서울 서초구 (해외 출장 포함)", role: "Global HR", salary: "7,200 ~ 9,000만 원", url: "https://about.daangn.com/jobs" },
+      { company: "하이퍼커넥트 (Match Group)", title: "Global HRBP (English Fluent)", location: "서울 강남구 삼성", role: "Global HRBP", salary: "7,500 ~ 9,500만 원", url: "https://career.hyperconnect.com" },
+      { company: "현대모비스 글로벌인사", title: "해외법인 인사제도 운영 기획자", location: "서울 강남구 테헤란로", role: "Global HR Strategy", salary: "6,800 ~ 8,200만 원", url: "https://talent.hyundaimobis.com" },
+      { company: "넷마블 (Netmarble)", title: "글로벌 인사 및 해외법인 관리", location: "서울 구로구 지밸리", role: "Global HR Ops", salary: "6,500 ~ 8,000만 원", url: "https://netmarble.recruiter.co.kr" },
+      { company: "센드버드코리아 (Sendbird)", title: "People Operations Lead (Korea & APAC)", location: "서울 강남구 테헤란로", role: "APAC People Ops", salary: "8,000 ~ 10,000만 원", url: "https://sendbird.com/careers" },
+      { company: "몰로코 (Moloco Korea)", title: "HR Generalist (Global Tech)", location: "서울 강남구 역삼", role: "Global Tech HR", salary: "7,500 ~ 9,500만 원", url: "https://www.moloco.com/careers" },
+      { company: "딜 (Deel Korea)", title: "EOR HR Compliance Consultant", location: "원격 근무 (Remote Korea)", role: "Cross-border Labor", salary: "7,000 ~ 8,800만 원", url: "https://www.deel.com/careers" },
+      { company: "아마존웹서비스 (AWS Korea)", title: "HR Partner (Tech Organizations)", location: "서울 강남구 테헤란로", role: "HR Business Partner", salary: "8,500 ~ 11,000만 원", url: "https://www.amazon.jobs" },
+    ],
+  },
+  {
+    id: "track-ax",
+    name: "HR AX (AI Transformation) & No-Code Automation",
+    skills: ["생성형 AI(LLM) 기반 직무기술서(JD) 및 평가 초안 파이프라인 기획", "Flex / Lemontree / Zapier 기반 인사 행정 노코드 자동화", "사내 AI 윤리 및 근로기준법 규정 가이드라인 수립", "차세대 HR 테크 툴 벤더 평가 및 마이그레이션 PM"],
+    actionItems: [
+      "사내 채용/평가 업무용 AI 프롬프트 템플릿 라이브러리 구축",
+      "노코드 도구를 활용한 신규 입사자 온보딩 자동화 플로우 제작",
+      "인사노무 질의응답 내부 AI 에이전트 프로토타입 설계",
+    ],
+    expandedCount: 6,
+    expectedSalaryRange: "6,500 ~ 8,200만 원 (신설 조직 리더급)",
+    jobs: [
+      { company: "삼성전자 DX부문", title: "People AX (AI Transformation) 혁신 PM", location: "경기도 수원 디지털시티", role: "HR Tech / AX", salary: "7,000 ~ 8,800만 원", url: "https://www.samsungcareers.com" },
+      { company: "LG CNS", title: "생성형 AI 기반 HR 솔루션 기획자", location: "서울 강서구 마곡", role: "HR DX Consultant", salary: "6,800 ~ 8,300만 원", url: "https://careers.lg.com" },
+      { company: "CJ ENM", title: "HR Digital Transformation & Systems", location: "서울 마포구 상암", role: "HR Tech Lead", salary: "6,500 ~ 7,800만 원", url: "https://recruit.cj.net" },
+      { company: "포스코DX (POSCO DX)", title: "스마트 HR 시스템 및 자동화 기획", location: "경기도 성남시 판교", role: "Smart HR PM", salary: "6,500 ~ 8,000만 원", url: "https://gorecruit.posco.net" },
+      { company: "한화시스템", title: "AI 기반 피플 인텔리전스 시스템 PM", location: "서울 영등포구 여의도", role: "HR AI Architect", salary: "6,800 ~ 8,200만 원", url: "https://www.hanwhain.com" },
+      { company: "두산디지털이노베이션 (DDI)", title: "HR Tech & SaaS Integration PM", location: "서울 중구 동대문", role: "HR SaaS PM", salary: "6,500 ~ 7,900만 원", url: "https://career.doosan.com" },
+    ],
+  },
+];
+
+// Dynamic Market Value Calculator (P10, P25, P50, P75, P90)
+export function calculateEstimatedMarketValue(totalYears: number) {
+  const clampedYears = Math.max(1, Math.min(25, totalYears));
+  const p10 = Math.round(3200 + clampedYears * 280);
+  const p25 = Math.round(3600 + clampedYears * 300);
+  const p50 = Math.round(3900 + clampedYears * 335);
+  const p75 = Math.round(4200 + clampedYears * 370);
+  const p90 = Math.round(4700 + clampedYears * 415);
+
+  return {
+    cohortDescription: `수도권 / 인사기획(HR Planning) / ${clampedYears}년차 대리·과장급 코호트`,
+    sampleSize: 47,
+    confidenceTier: "Tier B (검증 공고 및 실무 오퍼 기반)" as const,
+    p10,
+    p25,
+    p50,
+    p75,
+    p90,
+    rangeDisplay: `${p25.toLocaleString()} ~ ${p75.toLocaleString()}만 원`,
+    methodology: {
+      tierAWeight: "50% (고용노동부 사업체임금근로시간조사 + DART/ALIO 공시 결합)",
+      tierBWeight: "40% (수도권 8개 검증 기업 포함 12개월 내 확정 공고 및 실오퍼 n=47)",
+      tierCWeight: "10% (블라인드/잡플래닛 연봉 표본 상하위 5% IQR 절사 보정)",
+      baseScope: "퇴직금 및 비확정 경영성과급 제외, 100% 확정 현금성 급여(기본급+고정수당) 기준",
+    },
+  };
+}
 
 export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosting): DynamicMatchScore {
   const matchedReasons: string[] = [];
@@ -195,7 +305,6 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
   let roleFit = 60;
   const pRole = (passport.canonicalRole || "").toLowerCase();
   const jRole = (job.canonicalRole || "").toLowerCase();
-  const jTitle = (job.title || "").toLowerCase();
 
   if (pRole.includes("인사") || pRole.includes("hr") || pRole.includes("people")) {
     if (job.occupation === "HR") {
@@ -222,7 +331,7 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
     seniorityFit = Math.max(30, 100 - diff * 25);
     gapReasons.push(`최소 요구 연차(${job.minYears}년) 대비 ${diff}년 부족`);
   } else {
-    seniorityFit = 85; // 오버스펙인 경우 약간의 감점 또는 인정
+    seniorityFit = 85;
     matchedReasons.push(`충분한 경력 연차 보유 (${years}년차)`);
   }
 

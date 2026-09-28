@@ -48,6 +48,17 @@ export interface JobPosting {
   gaps: string[];
   rawText?: string;
   sourceName: string;
+  jobUrl: string;
+}
+
+export interface SkillGapTrack {
+  id: string;
+  name: string;
+  skills: string[];
+  actionItems: string[];
+  expandedCount: number;
+  expectedSalaryRange: string;
+  jobs: { company: string; title: string; location: string; role: string; salary: string; url: string }[];
 }
 
 export interface DynamicMatchScore {
