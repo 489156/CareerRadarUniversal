@@ -1066,16 +1066,42 @@
 
   <!-- JavaScript Logic with Zero-Syntax-Error Guarantee -->
   <script>
-    // Toast Helper
+    // Toast Helper with Timer Cleanup
+    let toastTimerId = null;
     function showToast(msg, icon = '✅') {
       const toast = document.getElementById('toast');
       document.getElementById('toastMsg').innerText = msg;
       document.getElementById('toastIcon').innerText = icon;
       toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
-      setTimeout(() => {
+      if (toastTimerId) clearTimeout(toastTimerId);
+      toastTimerId = setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
       }, 2500);
     }
+
+    // Global ESC Key Listener for All Modals
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        ['resumeModal', 'jobDetailModal', 'marketValueModal', 'skillGapModal', 'crawlerModal'].forEach(function(id) {
+          const m = document.getElementById(id);
+          if (m) m.classList.add('hidden');
+        });
+      }
+    });
+
+    // Modal Backdrop Click Dismissal
+    document.addEventListener('DOMContentLoaded', function() {
+      ['resumeModal', 'jobDetailModal', 'marketValueModal', 'skillGapModal', 'crawlerModal'].forEach(function(id) {
+        const m = document.getElementById(id);
+        if (m) {
+          m.addEventListener('click', function(e) {
+            if (e.target === m) {
+              m.classList.add('hidden');
+            }
+          });
+        }
+      });
+    });
 
     // Tab Switching Logic
     function switchTab(tabId) {
@@ -2842,7 +2868,7 @@
         if (currentRadarFilter === 'noOT' && j.hasFixedOT) return false;
 
         if (q) {
-          const matchStr = (j.company + ' ' + j.title + ' ' + j.canonicalRole + ' ' + j.location + ' ' + (j.sourceSystem || '') + ' ' + j.tags.join(' ')).toLowerCase();
+          const matchStr = (j.company + ' ' + j.title + ' ' + j.canonicalRole + ' ' + (j.industry || '') + ' ' + j.location + ' ' + (j.sourceSystem || '') + ' ' + j.tags.join(' ')).toLowerCase();
           if (!matchStr.includes(q)) return false;
         }
         return true;

@@ -12,12 +12,29 @@ export default function Home() {
 
   // Toast notification state
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const showToast = (msg: string) => {
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
     setToastMessage(msg);
-    setTimeout(() => {
+    toastTimeoutRef.current = setTimeout(() => {
       setToastMessage(null);
     }, 3500);
   };
+
+  // Global ESC Key Listener for Accessibility
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsResumeModalOpen(false);
+        setIsCrawlerModalOpen(false);
+        setIsMarketValueModalOpen(false);
+        setIsSkillGapModalOpen(false);
+        setSelectedJob(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Passport state
   const [passport, setPassport] = useState<CareerPassport>({
@@ -242,7 +259,7 @@ export default function Home() {
     // Search query filter
     if (radarSearch.trim()) {
       const q = radarSearch.toLowerCase();
-      const matchText = `${job.title} ${job.company} ${job.canonicalRole} ${job.tags.join(" ")}`.toLowerCase();
+      const matchText = `${job.title} ${job.company} ${job.canonicalRole} ${job.industry} ${job.location} ${job.sourceSystem || ""} ${job.tags.join(" ")}`.toLowerCase();
       if (!matchText.includes(q)) return false;
     }
     // Category pill filter
@@ -1335,7 +1352,10 @@ export default function Home() {
 
       {/* Resume Modal */}
       {isResumeModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsResumeModalOpen(false); }}
+        >
           <div className="bg-[#111726] border border-[#1e273b] rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
             <div className="flex justify-between items-center border-b border-[#1e273b] pb-3">
               <h3 className="font-bold text-white text-base">📄 이력서 / 경력기술서 빠른 파싱</h3>
@@ -1358,7 +1378,10 @@ export default function Home() {
 
       {/* Market Value Methodology Modal */}
       {isMarketValueModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsMarketValueModalOpen(false); }}
+        >
           <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-2xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start border-b border-[#1e273b] pb-3">
               <div>
@@ -1489,7 +1512,10 @@ export default function Home() {
 
       {/* Skill Gap & 28 Expanded Opportunities Modal */}
       {isSkillGapModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsSkillGapModalOpen(false); }}
+        >
           <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
               <div>
@@ -1612,7 +1638,10 @@ export default function Home() {
 
       {/* Universal Multi-Source Crawler Network Modal */}
       {isCrawlerModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsCrawlerModalOpen(false); }}
+        >
           <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
               <div>
@@ -1749,7 +1778,10 @@ export default function Home() {
 
       {/* Job Detail Modal */}
       {selectedJob && selectedJobMatch && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) { setSelectedJob(null); setSelectedJobHf(null); } }}
+        >
           <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-2xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start border-b border-[#1e273b] pb-4">
               <div>
