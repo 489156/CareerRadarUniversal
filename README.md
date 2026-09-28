@@ -42,27 +42,27 @@
 * **연동 채널 범주**:
   1. **회계 및 글로벌 전략 컨설팅 (7곳)**:
      * 딜로이트 안진/컨설팅 (`join.deloitte.co.kr`, 독자 WiseRecruit2 ATS)
-     * 삼일PwC (`pwc.com/kr/careers`, PwC 글로벌 채용 시스템)
-     * 삼정KPMG (`kpmg.com/kr/careers`, KPMG Korea 커리어)
+     * 삼일PwC (`www.pwc.com/kr/ko/career/experienced.html`, PwC Korea 채용 시스템)
+     * 삼정KPMG (`career.kr.kpmg.com`, KPMG Korea 공식 커리어 포털)
      * EY한영 (`ey.com/ko_kr/careers`, EY Talent 시스템)
-     * 맥킨지 앤 컴퍼니 (`mckinsey.com/careers`, 글로벌 커리어)
-     * 보스턴컨설팅그룹 BCG (`bcg.com/careers`, BCG People 채용망)
-     * 베인앤컴퍼니 Bain (`bain.com/careers`, Bain Talent Portal)
+     * 맥킨지 앤 컴퍼니 (`jobs.mckinsey.com`, 글로벌 커리어 포털)
+     * 보스턴컨설팅그룹 BCG (`careers.bcg.com/global/en/`, BCG People 채용망)
+     * 베인앤컴퍼니 Bain (`www.bain.com/careers/`, Bain Talent Portal)
   2. **공공기관 및 국책금융기관 (5곳)**:
      * 기획재정부 ALIO (`alio.go.kr`, 350+ 공공기관 경영공시/임금 표준 API 전수 연동)
-     * 한국수출입은행 (`koreaexim.recruiter.co.kr`, 국책은행 독자 채용관)
-     * 한국전력공사 (`kepco.co.kr/recruit`, 한전 인재경영 전산)
+     * 한국수출입은행 (`koreaexim.applyin.co.kr`, 국책은행 독자 채용관)
+     * 한국전력공사 (`job.alio.go.kr`, 한전 인재경영 공공망 연동)
      * 국민건강보험공단 (`nhis.or.kr`, 건보 인재개발원 전산)
      * 신용보증기금 (`kodit.recruiter.co.kr`, 신보 채용 시스템)
   3. **국내 4대 대기업 자사 채용 포털 (4곳)**:
      * 삼성 채용 (`samsungcareers.com`, 외부 포털 미노출 그룹 단독 플랫폼)
      * SK Careers (`skcareers.com`, SK텔레콤·하이닉스·이노베이션 통합망)
-     * 현대자동차그룹 인재채용 (`talent.hyundaimobis.com`, 현대차·모비스 단독 플랫폼)
+     * 현대자동차그룹 인재채용 (`careers.mobis.com`, 현대차·모비스 단독 플랫폼)
      * LG 커리어스 (`careers.lg.com`, LG전자·화학·엔솔 인재확보망)
   4. **글로벌 테크 기업 및 클라우드 ATS (3곳)**:
-     * 쿠팡 (`coupang.jobs`, Workday Enterprise ATS)
-     * 아마존 코리아 (`amazon.jobs`, AWS & Amazon 글로벌 커리어)
-     * 마이크로소프트 (`careers.microsoft.com`, MS Korea 채용망)
+     * 쿠팡 (`www.coupang.jobs/kr`, Workday Enterprise ATS)
+     * 아마존 코리아 (`www.amazon.jobs/content/locations/south-korea/seoul`, AWS & Amazon 서울 커리어)
+     * 마이크로소프트 (`careers.microsoft.com/v2/global/en/home.html`, MS Korea 채용망)
   5. **글로벌 인텔리전스 어그리게이터 (2곳)**:
      * 링크드인 잡스 (`linkedin.com/jobs`, 글로벌 다이렉트 소싱 커넥터)
      * 인디드 엔터프라이즈 (`kr.indeed.com`, 교차 검증 인덱서)
