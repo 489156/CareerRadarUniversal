@@ -169,9 +169,11 @@ flowchart TD
 
 ## 📄 Documentation & References
 
-* 상세 제품 기획서 및 명세서: [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md)
-* 기준일: 2026-09-26
-* 기획자/소유자: [@489156](https://github.com/489156)
+* **상세 제품 기획서 (Master Plan v2.0)**: [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md)
+* **제품 정체성, 시장 조사 및 기술적 해자 (Identity & Strategy)**: [`Career_Radar_Universal_Identity_and_Strategy.md`](./Career_Radar_Universal_Identity_and_Strategy.md)
+* **기능형 프로토타입 구현 계획서 및 DB DDL (Implementation Plan)**: [`Career_Radar_Universal_Prototype_Implementation_Plan.md`](./Career_Radar_Universal_Prototype_Implementation_Plan.md)
+* **기준일**: 2026-09-28
+* **기획자/소유자**: [@489156](https://github.com/489156)
 
 ---
 
