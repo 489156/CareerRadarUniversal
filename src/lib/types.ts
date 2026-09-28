@@ -31,17 +31,34 @@ export interface JobPosting {
   company: string;
   title: string;
   canonicalRole: string;
+  occupation: OccupationType;
+  industry: string;
   location: string;
   commuteMinutes: number;
+  salaryMinManwon: number;
+  salaryMaxManwon: number;
   salaryDisplay: string;
   salaryTier: ConfidenceTier;
-  fitScore: number;
+  minYears: number;
+  maxYears: number;
   hasFixedOT: boolean;
   fixedOTHours: number;
   tags: string[];
   pros: string[];
   gaps: string[];
-  sourceUrl?: string;
+  rawText?: string;
+  sourceName: string;
+}
+
+export interface DynamicMatchScore {
+  totalScore: number;
+  roleFit: number;
+  seniorityFit: number;
+  commuteFit: number;
+  salaryFit: number;
+  verdict: 'HIGH' | 'MEDIUM' | 'LOW';
+  matchedReasons: string[];
+  gapReasons: string[];
 }
 
 export interface SalaryBenchmark {

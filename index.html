@@ -27,8 +27,10 @@
             },
             radar: {
               dark: '#080b11',
-              card: '#101625',
-              border: '#1d273d',
+              surface: '#0d1322',
+              card: '#121a2d',
+              elevated: '#18233c',
+              border: '#233252',
               accent: '#38bdf8',
               emerald: '#10b981',
               amber: '#f59e0b',
@@ -54,30 +56,39 @@
       background: #0d121f;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #233252;
       border-radius: 3px;
     }
     .badge-tier-a {
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(16, 185, 129, 0.18);
       color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      border: 1px solid rgba(16, 185, 129, 0.4);
     }
     .badge-tier-b {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(56, 189, 248, 0.18);
       color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.4);
     }
     .badge-tier-c {
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(245, 158, 11, 0.18);
       color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .glow-brand {
+      box-shadow: 0 0 35px rgba(99, 102, 241, 0.18);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col custom-scroll">
+<body class="min-h-screen flex flex-col custom-scroll bg-[#080b11] text-slate-100">
+
+  <!-- Floating Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-[#141d31] border border-indigo-500/50 text-white px-4 py-3 rounded-xl shadow-2xl shadow-indigo-950/60 flex items-center space-x-2.5 text-xs font-semibold">
+    <span id="toastIcon">✅</span>
+    <span id="toastMsg">알림 메시지</span>
+  </div>
 
   <!-- Global Header -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#080b11]/90 border-b border-[#1b2234]">
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#080b11]/95 border-b border-[#1b253b]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-sky-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
@@ -90,7 +101,7 @@
             <span class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-slate-400">
               Career Radar
             </span>
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
               Universal v2.0
             </span>
           </div>
@@ -98,29 +109,29 @@
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
-      <nav class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto custom-scroll py-2" id="navTabs">
-        <button onclick="switchTab('passport')" id="tabBtn-passport" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 bg-indigo-600/20 text-indigo-300 border border-indigo-500/40">
+      <!-- Navigation Tabs with High-Contrast Active State -->
+      <nav class="flex items-center space-x-1 sm:space-x-1.5 overflow-x-auto custom-scroll py-2" id="navTabs">
+        <button type="button" onclick="switchTab('passport')" id="tabBtn-passport" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
           <span>🪪</span>
           <span>Career Passport</span>
         </button>
-        <button onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button type="button" onclick="switchTab('radar')" id="tabBtn-radar" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]">
           <span>📡</span>
           <span>Opportunity Radar</span>
         </button>
-        <button onclick="switchTab('scanner')" id="tabBtn-scanner" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button type="button" onclick="switchTab('scanner')" id="tabBtn-scanner" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]">
           <span>⚖️</span>
           <span>Labor Risk Scanner</span>
         </button>
-        <button onclick="switchTab('calculator')" id="tabBtn-calculator" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button type="button" onclick="switchTab('calculator')" id="tabBtn-calculator" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]">
           <span>💰</span>
           <span>Life-Adjusted Value</span>
         </button>
-        <button onclick="switchTab('matrix')" id="tabBtn-matrix" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button type="button" onclick="switchTab('matrix')" id="tabBtn-matrix" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]">
           <span>📊</span>
           <span>Offer Matrix</span>
         </button>
-        <button onclick="switchTab('ledger')" id="tabBtn-ledger" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+        <button type="button" onclick="switchTab('ledger')" id="tabBtn-ledger" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]">
           <span>🏛️</span>
           <span>Salary Ledger</span>
         </button>
@@ -128,8 +139,8 @@
 
       <!-- Status Indicator -->
       <div class="hidden lg:flex items-center space-x-3">
-        <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+        <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
           Standalone Ready
         </span>
       </div>
@@ -143,25 +154,25 @@
     <!-- TAB 1: CAREER PASSPORT & ONBOARDING WIZARD -->
     <!-- ========================================== -->
     <section id="tab-passport" class="space-y-6">
-      <div class="bg-[#101625] border border-[#1d273d] rounded-2xl p-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-[#1d273d] gap-4">
+      <div class="bg-[#101728] border border-[#1e2a44] rounded-2xl p-6 glow-brand">
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-[#1e2a44] gap-4">
           <div>
             <h2 class="text-xl font-bold text-white flex items-center space-x-2">
               <span>🪪 Universal Career Passport</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">내 커리어 원장</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-semibold">내 커리어 원장</span>
             </h2>
-            <p class="text-sm text-slate-400 mt-1">
-              단순 이력서가 아닌, 채용시장 전체와 실시간 매칭되는 다차원 구조화 프로필입니다. 5분 만에 완성하거나 기존 이력서 텍스트를 붙여넣으세요.
+            <p class="text-sm text-slate-300 mt-1">
+              단순 이력서가 아닌, 채용시장 전체와 실시간 매칭되는 다차원 구조화 프로필입니다. 정보를 변경하면 하단의 레이더 적합도 및 시장가치가 실시간 재계산됩니다.
             </p>
           </div>
           <div class="flex items-center space-x-2">
-            <button onclick="openResumeParserModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 flex items-center space-x-2 transition">
+            <button type="button" onclick="openResumeParserModal()" class="px-3.5 py-2 rounded-xl bg-[#18233c] hover:bg-[#202f50] text-xs font-semibold text-slate-200 border border-[#27385c] flex items-center space-x-2 transition cursor-pointer">
               <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
               <span>이력서 텍스트 자동 파싱</span>
             </button>
-            <button onclick="savePassport()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5">
+            <button type="button" onclick="savePassport()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5 cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              <span>패스포트 저장</span>
+              <span>패스포트 저장 & 동기화</span>
             </button>
           </div>
         </div>
@@ -169,14 +180,14 @@
         <form id="passportForm" class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6" onsubmit="event.preventDefault(); savePassport();">
           
           <!-- Column 1: 직무 및 연차 -->
-          <div class="space-y-4">
+          <div class="space-y-4 bg-[#0c1220] p-4 rounded-xl border border-[#1b253b]">
             <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center space-x-1.5">
               <span>1. 직무 및 경력 계층</span>
             </h3>
             
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">직군 (Occupation)</label>
-              <select id="p_occupation" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+              <label class="block text-xs font-medium text-slate-200 mb-1">직군 (Occupation)</label>
+              <select id="p_occupation" onchange="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
                 <option value="HR">인사 / HR</option>
                 <option value="PLANNING">전략 / 기획 / PM</option>
                 <option value="TECH">IT / 소프트웨어 개발</option>
@@ -186,22 +197,22 @@
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">현재/희망 직무 (Role)</label>
-              <input type="text" id="p_role" value="인사기획 (HR Planning)" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="예: 인사기획, People Partner, HRBP" />
-              <p class="text-[11px] text-slate-400 mt-1">입력된 직무명은 Universal Job Ontology로 자동 표준화됩니다.</p>
+              <label class="block text-xs font-medium text-slate-200 mb-1">현재/희망 직무 (Role)</label>
+              <input type="text" id="p_role" value="인사기획 (HR Planning)" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 인사기획, People Partner, HRBP" />
+              <p class="text-[11px] text-slate-400 mt-1">Universal Job Ontology로 자동 표준화 매핑</p>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-1">
-                <label class="text-xs font-medium text-slate-300">총 경력 연수</label>
+                <label class="text-xs font-medium text-slate-200">총 경력 연수</label>
                 <span id="yearsVal" class="text-xs font-mono font-bold text-indigo-400">7년차</span>
               </div>
-              <input type="range" id="p_years" min="0" max="20" value="7" oninput="document.getElementById('yearsVal').innerText = this.value + '년차'" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
+              <input type="range" id="p_years" min="0" max="20" value="7" oninput="document.getElementById('yearsVal').innerText = this.value + '년차'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">현재 회사 규모/형태</label>
-              <select id="p_companyType" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+              <label class="block text-xs font-medium text-slate-200 mb-1">현재 회사 규모/형태</label>
+              <select id="p_companyType" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
                 <option value="중견기업">중견기업 (신용평가/정보/제조 등)</option>
                 <option value="대기업">대기업 / 그룹사</option>
                 <option value="유니콘/스타트업">유니콘 / IT 스타트업</option>
@@ -212,41 +223,41 @@
           </div>
 
           <!-- Column 2: 현재 보상 체계 -->
-          <div class="space-y-4">
+          <div class="space-y-4 bg-[#0c1220] p-4 rounded-xl border border-[#1b253b]">
             <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center space-x-1.5">
               <span>2. 현재 보상 체계 (단위: 만 원)</span>
             </h3>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">기본급 (연간)</label>
+              <label class="block text-xs font-medium text-slate-200 mb-1">기본급 (연간)</label>
               <div class="relative">
-                <input type="number" id="p_baseSalary" value="5400" step="50" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-slate-200 focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_baseSalary" value="5400" step="50" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
               <p class="text-[11px] text-slate-400 mt-1">세전 기준 확정 기본급 (퇴직금 제외)</p>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">고정수당 / 식대 (연간)</label>
+              <label class="block text-xs font-medium text-slate-200 mb-1">고정수당 / 식대 (연간)</label>
               <div class="relative">
-                <input type="number" id="p_allowance" value="400" step="10" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-slate-200 focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_allowance" value="400" step="10" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
-              <p class="text-[11px] text-emerald-400 font-mono mt-1">확정 현금(Guaranteed Cash): <span id="guaranteedSummary">5,800만 원</span></p>
+              <p class="text-[11px] text-emerald-400 font-mono mt-1 font-semibold">확정 현금(Guaranteed): <span id="guaranteedSummary">5,800만 원</span></p>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">경영성과급 / 인센티브 (직전연도 기준)</label>
+              <label class="block text-xs font-medium text-slate-200 mb-1">경영성과급 / 인센티브 (직전연도 기준)</label>
               <div class="relative">
-                <input type="number" id="p_bonus" value="500" step="50" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-slate-200 focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_bonus" value="500" step="50" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
               <p class="text-[11px] text-slate-400 mt-1">달성 변동 보상</p>
             </div>
 
-            <div class="p-3 bg-[#0c101a] border border-[#1f283c] rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#11192b] border border-[#1e2c48] rounded-xl flex items-center justify-between">
               <div>
-                <span class="text-xs text-slate-300">현재 포괄임금제 여부</span>
+                <span class="text-xs text-slate-200 font-medium">현재 포괄임금제 여부</span>
                 <p class="text-[11px] text-slate-400">고정 연장근로수당 포함 계약</p>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
@@ -257,39 +268,39 @@
           </div>
 
           <!-- Column 3: 지역, 통근 및 선호 조건 -->
-          <div class="space-y-4">
+          <div class="space-y-4 bg-[#0c1220] p-4 rounded-xl border border-[#1b253b]">
             <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center space-x-1.5">
               <span>3. 지역 & 삶의 선호 조건</span>
             </h3>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">현재 거주지</label>
-              <input type="text" id="p_location" value="경기도 군포시 (산본동)" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="예: 경기도 군포시, 서울시 강남구" />
+              <label class="block text-xs font-medium text-slate-200 mb-1">현재 거주지</label>
+              <input type="text" id="p_location" value="경기도 군포시 (산본동)" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 경기도 군포시, 서울시 강남구" />
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-1">
-                <label class="text-xs font-medium text-slate-300">편도 최대 허용 통근 시간</label>
+                <label class="text-xs font-medium text-slate-200">편도 최대 허용 통근 시간</label>
                 <span id="commuteVal" class="text-xs font-mono font-bold text-sky-400">60분 이내</span>
               </div>
-              <input type="range" id="p_commuteTol" min="20" max="120" value="60" oninput="document.getElementById('commuteVal').innerText = this.value + '분 이내'" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
+              <input type="range" id="p_commuteTol" min="20" max="120" value="60" oninput="document.getElementById('commuteVal').innerText = this.value + '분 이내'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">보유 핵심 스킬셋 (쉼표로 구분)</label>
-              <textarea id="p_skills" rows="2" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500">인사기획, 평가보상체계설계, 노무관리, 임금피크제, 직무분석, 취업규칙개정, AI 트랜스포메이션(AX)</textarea>
+              <label class="block text-xs font-medium text-slate-200 mb-1">보유 핵심 스킬셋 (쉼표로 구분)</label>
+              <textarea id="p_skills" rows="2" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">인사기획, 평가보상체계설계, 노무관리, 임금피크제, 직무분석, 취업규칙개정, AX(AI Transformation)</textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-300 mb-1">절대 배제 조건 (Hard Filter)</label>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 border border-slate-700 flex items-center space-x-1">
+              <label class="block text-xs font-medium text-slate-200 mb-1">절대 배제 조건 (Hard Filter)</label>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
                   <span>🔒 정규직만</span>
                 </span>
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 border border-slate-700 flex items-center space-x-1">
+                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
                   <span>📍 수도권(서울/경기)</span>
                 </span>
-                <span class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 border border-slate-700 flex items-center space-x-1">
+                <span class="px-2.5 py-1 rounded-lg text-xs bg-[#152038] text-slate-200 border border-[#24355a] flex items-center space-x-1 font-medium">
                   <span>🚫 지방 이전 기관 배제</span>
                 </span>
               </div>
@@ -301,25 +312,25 @@
 
       <!-- Passport Market Value Preview Card -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-[#101625] border border-[#1d273d] rounded-xl p-4">
+        <div class="bg-[#101728] border border-[#1e2a44] rounded-xl p-4">
           <div class="text-xs text-slate-400 flex items-center justify-between">
             <span>내 시장 가치 추정 (P25~P75)</span>
             <span class="badge-tier-b px-2 py-0.5 rounded text-[10px] font-bold">Tier B (n=47)</span>
           </div>
-          <div class="mt-2 text-xl font-bold font-mono text-white">5,700 ~ 6,800만 원</div>
+          <div class="mt-2 text-xl font-bold font-mono text-white" id="val_marketRange">5,700 ~ 6,800만 원</div>
           <p class="text-[11px] text-slate-400 mt-1">수도권 / 인사기획 / 7년차 코호트 기준</p>
         </div>
 
-        <div class="bg-[#101625] border border-[#1d273d] rounded-xl p-4">
+        <div class="bg-[#101728] border border-[#1e2a44] rounded-xl p-4">
           <div class="text-xs text-slate-400 flex items-center justify-between">
-            <span>직접 지원 가능 공고</span>
+            <span>동적 매칭 고적합 공고</span>
             <span class="text-emerald-400 text-xs font-mono font-bold">HIGH MATCH</span>
           </div>
-          <div class="mt-2 text-xl font-bold font-mono text-emerald-400">18건 탐색됨</div>
-          <p class="text-[11px] text-slate-400 mt-1">절대 조건 및 직무 온톨로지 일치</p>
+          <div class="mt-2 text-xl font-bold font-mono text-emerald-400" id="val_highCount">4건 탐색됨</div>
+          <p class="text-[11px] text-slate-400 mt-1">내 패스포트 조건과 88% 이상 부합</p>
         </div>
 
-        <div class="bg-[#101625] border border-[#1d273d] rounded-xl p-4">
+        <div class="bg-[#101728] border border-[#1e2a44] rounded-xl p-4">
           <div class="text-xs text-slate-400 flex items-center justify-between">
             <span>스킬 갭 보완 시 확장 시장</span>
             <span class="text-indigo-400 text-xs font-mono font-bold">+28건 확장</span>
@@ -334,21 +345,31 @@
     <!-- TAB 2: OPPORTUNITY RADAR (기회 탐색 & 매칭) -->
     <!-- ========================================== -->
     <section id="tab-radar" class="space-y-6 hidden">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#101625] p-4 rounded-xl border border-[#1d273d]">
-        <div>
-          <h2 class="text-lg font-bold text-white flex items-center space-x-2">
-            <span>📡 Opportunity Radar</span>
-            <span class="text-xs font-mono bg-sky-500/20 text-sky-400 px-2 py-0.5 rounded border border-sky-500/30">18 Active Matches</span>
-          </h2>
-          <p class="text-xs text-slate-400">단순 키워드가 아닌 온톨로지 매핑 및 3-Tier 연봉 검증 공고 목록입니다.</p>
+      <div class="bg-[#101728] p-5 rounded-2xl border border-[#1e2a44] space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center space-x-2">
+              <span>📡 Opportunity Radar</span>
+              <span id="radarActiveCount" class="text-xs font-mono bg-sky-500/20 text-sky-400 px-2.5 py-0.5 rounded-full border border-sky-500/30 font-bold">8 Active Matches</span>
+            </h2>
+            <p class="text-xs text-slate-300 mt-0.5">Career Passport를 기준으로 실시간 계산된 다차원 적합도(직무 40% + 경력 25% + 통근 20% + 보상 15%) 기준 매칭 결과입니다.</p>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full md:w-72">
+            <input type="text" id="radarSearchInput" oninput="triggerRadarSearch()" placeholder="기업명, 직무, 기술스택 검색..." class="w-full bg-[#0b101c] border border-[#233252] rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
         </div>
 
-        <!-- Filter Buttons -->
-        <div class="flex items-center space-x-2 text-xs">
-          <button onclick="filterRadar('all')" id="rf-all" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium">전체보기</button>
-          <button onclick="filterRadar('tierA')" id="rf-tierA" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">공시/명시(Tier A)만</button>
-          <button onclick="filterRadar('highMatch')" id="rf-high" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">적합도 90%+만</button>
-          <button onclick="filterRadar('commuteFit')" id="rf-commute" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">통근 50분 이내</button>
+        <!-- Filter Pills -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-[#1b253b] text-xs">
+          <span class="text-slate-400 font-semibold mr-1">필터:</span>
+          <button type="button" onclick="setRadarFilterTab('all')" id="rf-all" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold cursor-pointer">전체보기</button>
+          <button type="button" onclick="setRadarFilterTab('tierA')" id="rf-tierA" class="px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer">공시/명시(Tier A)만</button>
+          <button type="button" onclick="setRadarFilterTab('highMatch')" id="rf-highMatch" class="px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer">적합도 90%+만</button>
+          <button type="button" onclick="setRadarFilterTab('commuteFit')" id="rf-commuteFit" class="px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer">통근 45분 이내</button>
+          <button type="button" onclick="setRadarFilterTab('noOT')" id="rf-noOT" class="px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer">비포괄 임금제 🌟</button>
         </div>
       </div>
 
@@ -362,13 +383,13 @@
     <!-- TAB 3: LABOR RISK & TOXIC CLAUSE SCANNER   -->
     <!-- ========================================== -->
     <section id="tab-scanner" class="space-y-6 hidden">
-      <div class="bg-[#101625] border border-[#1d273d] rounded-2xl p-6">
-        <div class="pb-6 border-b border-[#1d273d]">
+      <div class="bg-[#101728] border border-[#1e2a44] rounded-2xl p-6">
+        <div class="pb-6 border-b border-[#1e2a44]">
           <h2 class="text-xl font-bold text-white flex items-center space-x-2">
             <span>⚖️ Labor Risk & Toxic Clause Scanner</span>
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">독소조항 진단</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 font-semibold">독소조항 진단</span>
           </h2>
-          <p class="text-sm text-slate-400 mt-1">
+          <p class="text-sm text-slate-300 mt-1">
             채용 공고 본문을 붙여넣으면 포괄임금제(고정OT), 퇴직금 1/13 분할 지급, 수습기간 급여 삭감 등 숨은 리스크를 즉시 진단합니다.
           </p>
         </div>
@@ -377,17 +398,17 @@
           <!-- Input Area -->
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold uppercase text-slate-300">채용공고 본문 텍스트 입력</label>
-              <div class="flex items-center space-x-1">
-                <button onclick="loadSampleText('sample1')" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">샘플: 포괄임금 스타트업</button>
-                <button onclick="loadSampleText('sample2')" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">샘플: 퇴직금 포함 분할</button>
-                <button onclick="loadSampleText('sample3')" class="text-[11px] px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">샘플: 정상 공공기관</button>
+              <label class="text-xs font-bold uppercase text-slate-200">채용공고 본문 텍스트 입력</label>
+              <div class="flex flex-wrap items-center gap-1.5">
+                <button type="button" onclick="loadSampleText('sample1')" class="text-[11px] px-2.5 py-1 rounded bg-[#18233c] hover:bg-[#202f50] text-slate-200 border border-[#27385c] cursor-pointer font-medium">샘플: 포괄임금 스타트업</button>
+                <button type="button" onclick="loadSampleText('sample2')" class="text-[11px] px-2.5 py-1 rounded bg-[#18233c] hover:bg-[#202f50] text-slate-200 border border-[#27385c] cursor-pointer font-medium">샘플: 퇴직금 포함 분할</button>
+                <button type="button" onclick="loadSampleText('sample3')" class="text-[11px] px-2.5 py-1 rounded bg-[#18233c] hover:bg-[#202f50] text-slate-200 border border-[#27385c] cursor-pointer font-medium">샘플: 정상 공공기관</button>
               </div>
             </div>
 
-            <textarea id="scannerInput" rows="12" class="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl p-4 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500 custom-scroll leading-relaxed" placeholder="여기에 채용공고의 근로조건, 급여, 자격요건 텍스트를 붙여넣으세요..."></textarea>
+            <textarea id="scannerInput" rows="12" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-4 text-xs font-mono text-slate-100 focus:outline-none focus:border-indigo-500 custom-scroll leading-relaxed" placeholder="여기에 채용공고의 근로조건, 급여, 자격요건 텍스트를 붙여넣으세요..."></textarea>
 
-            <button onclick="runLaborScan()" class="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 via-indigo-600 to-sky-600 hover:opacity-95 font-bold text-sm text-white shadow-lg transition flex items-center justify-center space-x-2">
+            <button type="button" onclick="runLaborScan()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-600 via-indigo-600 to-sky-600 hover:opacity-95 font-bold text-sm text-white shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
               <span>실시간 계약 리스크 진단 실행</span>
             </button>
@@ -395,12 +416,12 @@
 
           <!-- Diagnostic Results -->
           <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase text-slate-300">진단 결과 보고서 (Diagnostic Report)</h3>
+            <h3 class="text-xs font-bold uppercase text-slate-200">진단 결과 보고서 (Diagnostic Report)</h3>
 
-            <div id="scanResultCard" class="bg-[#0b0f19] border border-[#1f293d] rounded-xl p-5 space-y-4 min-h-[380px] flex flex-col justify-center">
-              <div class="text-center text-slate-500 py-10">
-                <svg class="w-12 h-12 mx-auto mb-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                <p class="text-sm">공고 텍스트를 입력하고 '진단 실행' 버튼을 누르세요.</p>
+            <div id="scanResultCard" class="bg-[#0b101c] border border-[#233252] rounded-xl p-5 space-y-4 min-h-[380px] flex flex-col justify-center">
+              <div class="text-center text-slate-400 py-10">
+                <svg class="w-12 h-12 mx-auto mb-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <p class="text-sm font-medium">공고 텍스트를 입력하고 '진단 실행' 버튼을 누르세요.</p>
               </div>
             </div>
           </div>
@@ -412,18 +433,18 @@
     <!-- TAB 4: LIFE-ADJUSTED VALUE CALCULATOR       -->
     <!-- ========================================== -->
     <section id="tab-calculator" class="space-y-6 hidden">
-      <div class="bg-[#101625] border border-[#1d273d] rounded-2xl p-6">
-        <div class="pb-6 border-b border-[#1d273d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="bg-[#101728] border border-[#1e2a44] rounded-2xl p-6">
+        <div class="pb-6 border-b border-[#1e2a44] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 class="text-xl font-bold text-white flex items-center space-x-2">
               <span>💰 Life-Adjusted Hourly Wage Calculator</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">실질 체감 시급</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">실질 체감 시급</span>
             </h2>
-            <p class="text-sm text-slate-400 mt-1">
+            <p class="text-sm text-slate-300 mt-1">
               "연봉 600만 원 인상 vs 왕복 통근 80분 증가"의 실질 효용을 시뮬레이션합니다. 명목 연봉에서 통근 비용과 시간을 차감한 진짜 내 시급을 계산하세요.
             </p>
           </div>
-          <button onclick="copyCalculatorSummary()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 flex items-center space-x-1.5 transition">
+          <button type="button" onclick="copyCalculatorSummary()" class="px-3.5 py-2 rounded-xl bg-[#18233c] hover:bg-[#202f50] text-xs font-semibold text-slate-200 border border-[#27385c] flex items-center space-x-1.5 transition cursor-pointer">
             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
             <span>블라인드/커뮤니티 공유용 텍스트 복사</span>
           </button>
@@ -431,85 +452,85 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6">
           <!-- Sliders and Inputs -->
-          <div class="space-y-5">
+          <div class="space-y-5 bg-[#0c1220] p-5 rounded-xl border border-[#1b253b]">
             <div>
-              <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
+              <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
                 <span>확정 연간 현금 (기본급 + 고정수당)</span>
-                <span id="calc_cash_label" class="font-mono text-emerald-400 font-bold">5,800만 원</span>
+                <span id="calc_cash_label" class="font-mono text-emerald-400 font-bold text-sm">5,800만 원</span>
               </div>
               <input type="range" id="c_cash" min="3000" max="15000" step="100" value="5800" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
             </div>
 
             <div>
-              <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
+              <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
                 <span>편도 통근 시간 (집 → 회사)</span>
-                <span id="calc_commute_label" class="font-mono text-sky-400 font-bold">50분</span>
+                <span id="calc_commute_label" class="font-mono text-sky-400 font-bold text-sm">50분</span>
               </div>
               <input type="range" id="c_commute" min="10" max="120" step="5" value="50" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
             </div>
 
             <div>
-              <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
+              <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
                 <span>월 예상 교통비 (대중교통 / 유류비)</span>
-                <span id="calc_cost_label" class="font-mono text-amber-400 font-bold">12만 원</span>
+                <span id="calc_cost_label" class="font-mono text-amber-400 font-bold text-sm">12만 원</span>
               </div>
               <input type="range" id="c_cost" min="5" max="40" step="1" value="12" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" />
             </div>
 
             <div>
-              <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
+              <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
                 <span>주간 재택 / 원격근무 일수</span>
-                <span id="calc_remote_label" class="font-mono text-indigo-400 font-bold">주 1일</span>
+                <span id="calc_remote_label" class="font-mono text-indigo-400 font-bold text-sm">주 1일</span>
               </div>
               <input type="range" id="c_remote" min="0" max="5" step="1" value="1" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
             </div>
 
             <div>
-              <div class="flex justify-between text-xs font-medium text-slate-300 mb-1">
+              <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
                 <span>주당 실제 근로시간 (포괄 고정OT 포함)</span>
-                <span id="calc_hours_label" class="font-mono text-rose-400 font-bold">주 48시간 (고정OT 8h)</span>
+                <span id="calc_hours_label" class="font-mono text-rose-400 font-bold text-sm">주 48시간</span>
               </div>
               <input type="range" id="c_hours" min="40" max="68" step="2" value="48" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500" />
             </div>
           </div>
 
           <!-- Comparison Display -->
-          <div class="bg-[#0b0f19] border border-[#1f293d] rounded-2xl p-6 flex flex-col justify-between space-y-6">
+          <div class="bg-[#0b101c] border border-[#233252] rounded-2xl p-6 flex flex-col justify-between space-y-6">
             <div>
-              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">체감 시급 산출 결과</h3>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">체감 시급 산출 결과</h3>
               <div class="grid grid-cols-2 gap-4 mt-4">
-                <div class="p-4 bg-[#111726] border border-[#1e273b] rounded-xl">
-                  <span class="text-[11px] text-slate-400">단순 명목 시급 (주40h 기준)</span>
-                  <div class="text-2xl font-bold font-mono text-slate-300 mt-1" id="res_nominalWage">27,778원</div>
-                  <span class="text-[10px] text-slate-500">연 2,088시간 분할</span>
+                <div class="p-4 bg-[#11192c] border border-[#1d2a44] rounded-xl">
+                  <span class="text-[11px] text-slate-400 font-medium">단순 명목 시급 (주40h 기준)</span>
+                  <div class="text-2xl font-bold font-mono text-slate-200 mt-1" id="res_nominalWage">27,778원</div>
+                  <span class="text-[10px] text-slate-400">연 2,088시간 단순분할</span>
                 </div>
 
-                <div class="p-4 bg-emerald-950/20 border border-emerald-500/40 rounded-xl">
-                  <span class="text-[11px] text-emerald-400 font-bold">실질 체감 시급 (Life-Adjusted)</span>
+                <div class="p-4 bg-emerald-950/25 border border-emerald-500/50 rounded-xl">
+                  <span class="text-[11px] text-emerald-300 font-bold">실질 체감 시급 (Life-Adjusted)</span>
                   <div class="text-2xl font-bold font-mono text-emerald-300 mt-1" id="res_realWage">19,890원</div>
-                  <span class="text-[10px] text-emerald-500/80">통근+초과근로 투입 반영</span>
+                  <span class="text-[10px] text-emerald-400">통근+초과근로 투입 차감</span>
                 </div>
               </div>
             </div>
 
             <!-- Breakdown Table -->
-            <div class="space-y-2 text-xs border-t border-[#1e273b] pt-4">
-              <div class="flex justify-between text-slate-400">
+            <div class="space-y-2 text-xs border-t border-[#1d2a44] pt-4">
+              <div class="flex justify-between text-slate-300">
                 <span>연간 통근으로 버려지는 시간:</span>
-                <span class="font-mono text-slate-200" id="res_annualCommuteHours">346시간 (약 14.4일)</span>
+                <span class="font-mono text-white font-bold" id="res_annualCommuteHours">346시간 (약 14.4일)</span>
               </div>
-              <div class="flex justify-between text-slate-400">
+              <div class="flex justify-between text-slate-300">
                 <span>연간 순 교통비 지출:</span>
-                <span class="font-mono text-slate-200" id="res_annualCommuteCost">144만 원</span>
+                <span class="font-mono text-white font-bold" id="res_annualCommuteCost">144만 원</span>
               </div>
-              <div class="flex justify-between text-slate-400">
+              <div class="flex justify-between text-slate-300">
                 <span>내 삶의 시간 총 투입 (근무+통근):</span>
-                <span class="font-mono text-slate-200" id="res_totalHours">연간 2,842시간</span>
+                <span class="font-mono text-white font-bold" id="res_totalHours">연간 2,842시간</span>
               </div>
             </div>
 
             <!-- Trade-off Insight Box -->
-            <div class="p-4 bg-indigo-950/30 border border-indigo-500/30 rounded-xl text-xs text-indigo-300 leading-relaxed" id="calc_insight_box">
+            <div class="p-4 bg-indigo-950/35 border border-indigo-500/40 rounded-xl text-xs text-indigo-200 leading-relaxed font-medium" id="calc_insight_box">
               💡 <strong>의사결정 팁</strong>: 편도 통근 시간을 50분에서 25분으로 줄일 경우, 연간 약 173시간의 여유 시간이 확보되어 <strong>연봉 420만 원 인상과 동일한 실질 효용</strong>이 발생합니다.
             </div>
           </div>
@@ -521,91 +542,91 @@
     <!-- TAB 5: OFFER COMPARISON MATRIX (A/B 오퍼 비교) -->
     <!-- ========================================== -->
     <section id="tab-matrix" class="space-y-6 hidden">
-      <div class="bg-[#101625] border border-[#1d273d] rounded-2xl p-6">
-        <div class="pb-6 border-b border-[#1d273d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="bg-[#101728] border border-[#1e2a44] rounded-2xl p-6 space-y-4">
+        <div class="pb-4 border-b border-[#1e2a44] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 class="text-xl font-bold text-white flex items-center space-x-2">
               <span>📊 Offer Comparison Matrix</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-400 border border-sky-500/30">다차원 오퍼 비교</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/40 font-semibold">다차원 오퍼 비교</span>
             </h2>
-            <p class="text-sm text-slate-400 mt-1">
+            <p class="text-sm text-slate-300 mt-1">
               현재 직장과 제안받은 오퍼(A사, B사)의 실질 보상과 삶의 트레이드오프를 나란히 비교하여 최선의 결정을 내리세요.
             </p>
           </div>
-          <button onclick="copyOfferSummary()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 flex items-center space-x-1.5 transition">
+          <button type="button" onclick="copyOfferSummary()" class="px-3.5 py-2 rounded-xl bg-[#18233c] hover:bg-[#202f50] text-xs font-semibold text-slate-200 border border-[#27385c] flex items-center space-x-1.5 transition cursor-pointer">
             <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
             <span>오퍼 비교 요약 복사</span>
           </button>
         </div>
 
-        <div class="overflow-x-auto custom-scroll pt-6">
+        <div class="overflow-x-auto custom-scroll pt-2">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="border-b border-[#1f293d] text-slate-400 font-semibold">
+              <tr class="border-b border-[#233252] text-slate-300 font-bold">
                 <th class="py-3 px-4 w-1/4">비교 항목</th>
-                <th class="py-3 px-4 w-1/4 bg-[#0d121f] text-slate-200 border-x border-[#1f293d]">현재 직장</th>
-                <th class="py-3 px-4 w-1/4 text-indigo-400">Offer A (대기업)</th>
-                <th class="py-3 px-4 w-1/4 text-emerald-400">Offer B (테크 유니콘)</th>
+                <th class="py-3 px-4 w-1/4 bg-[#0d121f] text-slate-100 border-x border-[#233252]">현재 직장</th>
+                <th class="py-3 px-4 w-1/4 text-indigo-300">Offer A (대기업)</th>
+                <th class="py-3 px-4 w-1/4 text-emerald-300">Offer B (테크 유니콘)</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-[#182030] font-mono">
+            <tbody class="divide-y divide-[#1b253b] font-mono">
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">회사명 및 포지션</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d] font-sans text-slate-200">중견 신용평가사 (인사기획)</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">회사명 및 포지션</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252] font-sans text-slate-200">중견 신용평가사 (인사기획)</td>
                 <td class="py-3 px-4 font-sans text-indigo-300">현대 계열사 (HR전략)</td>
-                <td class="py-3 px-4 font-sans text-emerald-300">판교 핀테크 (People Partner)</td>
+                <td class="py-3 px-4 font-sans text-emerald-300 font-bold">판교 핀테크 (People Partner)</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">기본급 (Guaranteed)</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d]">5,400만 원</td>
-                <td class="py-3 px-4 text-indigo-300">6,200만 원 <span class="text-[10px] text-emerald-400">(+800)</span></td>
-                <td class="py-3 px-4 text-emerald-300">5,800만 원 <span class="text-[10px] text-emerald-400">(+400)</span></td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">기본급 (Guaranteed)</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252]">5,400만 원</td>
+                <td class="py-3 px-4 text-indigo-300">6,200만 원 <span class="text-[10px] text-emerald-400 font-bold">(+800)</span></td>
+                <td class="py-3 px-4 text-emerald-300">5,800만 원 <span class="text-[10px] text-emerald-400 font-bold">(+400)</span></td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">목표 성과급 / 인센티브</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d]">500만 원</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">목표 성과급 / 인센티브</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252]">500만 원</td>
                 <td class="py-3 px-4">800만 원</td>
                 <td class="py-3 px-4">1,200만 원 (변동폭 큼)</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">편도 통근 시간</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d]">35분 (수도권 남부)</td>
-                <td class="py-3 px-4 text-rose-400">75분 (강남 테헤란로) ⚠️</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">편도 통근 시간</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252]">35분 (수도권 남부)</td>
+                <td class="py-3 px-4 text-rose-400 font-bold">75분 (강남 테헤란로) ⚠️</td>
                 <td class="py-3 px-4 text-sky-400">40분 (판교)</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">주간 재택근무</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d]">주 1일</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">주간 재택근무</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252]">주 1일</td>
                 <td class="py-3 px-4 text-rose-400">주 0일 (전면 출근)</td>
                 <td class="py-3 px-4 text-emerald-400 font-bold">주 2일 재택</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">포괄임금제 여부</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d] text-amber-400">포괄 (고정OT 20h)</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">포괄임금제 여부</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252] text-amber-400">포괄 (고정OT 20h)</td>
                 <td class="py-3 px-4 text-rose-400 font-bold">포괄 (고정OT 32h) ⚠️</td>
                 <td class="py-3 px-4 text-emerald-400 font-bold">비포괄 (야근수당 별도) 🌟</td>
               </tr>
               <tr>
-                <td class="py-3 px-4 font-sans text-slate-300">연간 통근 투입 시간</td>
-                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#1f293d]">약 242시간</td>
-                <td class="py-3 px-4 text-rose-400">약 650시간 (+408시간)</td>
-                <td class="py-3 px-4 text-emerald-400">약 208시간 (-34시간)</td>
+                <td class="py-3 px-4 font-sans text-slate-200 font-semibold">연간 통근 투입 시간</td>
+                <td class="py-3 px-4 bg-[#0d121f] border-x border-[#233252]">약 242시간</td>
+                <td class="py-3 px-4 text-rose-400 font-bold">약 650시간 (+408시간)</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">약 208시간 (-34시간)</td>
               </tr>
-              <tr class="bg-indigo-950/20 font-bold text-sm">
+              <tr class="bg-indigo-950/25 font-bold text-sm">
                 <td class="py-4 px-4 font-sans text-white">실질 체감 시급 (Life-Adjusted)</td>
-                <td class="py-4 px-4 bg-[#0d121f] border-x border-[#1f293d] text-slate-200">22,350원</td>
-                <td class="py-4 px-4 text-rose-400">19,820원 (-2,530원) 📉</td>
-                <td class="py-4 px-4 text-emerald-400">26,450원 (+4,100원) 🚀</td>
+                <td class="py-4 px-4 bg-[#0d121f] border-x border-[#233252] text-slate-200">22,350원</td>
+                <td class="py-4 px-4 text-rose-400 font-extrabold">19,820원 (-2,530원) 📉</td>
+                <td class="py-4 px-4 text-emerald-400 font-extrabold">26,450원 (+4,100원) 🚀</td>
               </tr>
               <tr class="font-sans">
-                <td class="py-4 px-4 font-bold text-slate-300">종합 AI 의사결정 판정</td>
-                <td class="py-4 px-4 bg-[#0d121f] border-x border-[#1f293d] text-slate-400">현재 기준점</td>
+                <td class="py-4 px-4 font-bold text-slate-200">종합 AI 의사결정 판정</td>
+                <td class="py-4 px-4 bg-[#0d121f] border-x border-[#233252] text-slate-400">현재 기준점</td>
                 <td class="py-4 px-4 text-rose-300 leading-relaxed text-[11px]">
-                  <strong class="text-rose-400 block mb-0.5">⚠️ 명목 인상 대비 실질 가치 하락</strong>
+                  <strong class="text-rose-400 block mb-0.5 text-xs">⚠️ 명목 인상 대비 실질 가치 하락</strong>
                   연봉 800만 원이 오르지만, 통근시간 40분 증가 및 고정OT 32시간으로 인해 시간당 체감 소득은 오히려 11.3% 하락합니다.
                 </td>
                 <td class="py-4 px-4 text-emerald-300 leading-relaxed text-[11px]">
-                  <strong class="text-emerald-400 block mb-0.5">🌟 최적의 실질 효용 선택</strong>
+                  <strong class="text-emerald-400 block mb-0.5 text-xs">🌟 최적의 실질 효용 선택</strong>
                   비포괄 임금제와 주 2일 재택으로 연간 400시간 이상의 여유를 확보하면서 실질 시급이 18.3% 상승합니다.
                 </td>
               </tr>
@@ -619,26 +640,26 @@
     <!-- TAB 6: 3-TIER SALARY LEDGER (시장 연봉 원장) -->
     <!-- ========================================== -->
     <section id="tab-ledger" class="space-y-6 hidden">
-      <div class="bg-[#101625] border border-[#1d273d] rounded-2xl p-6">
-        <div class="pb-6 border-b border-[#1d273d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="bg-[#101728] border border-[#1e2a44] rounded-2xl p-6 space-y-4">
+        <div class="pb-4 border-b border-[#1e2a44] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 class="text-xl font-bold text-white flex items-center space-x-2">
               <span>🏛️ 3-Tier Evidence-Backed Salary Ledger</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">공식 공시·실측 원장</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">공식 공시·실측 원장</span>
             </h2>
-            <p class="text-sm text-slate-400 mt-1">
+            <p class="text-sm text-slate-300 mt-1">
               공공기관 ALIO 공시, 공식 채용공고 명시 초임, 고용노동통계를 바탕으로 한 검증된 시장 연봉 벤치마크입니다.
             </p>
           </div>
           <div class="flex items-center space-x-2">
-            <input type="text" id="ledgerSearch" oninput="filterLedger()" placeholder="기업명, 직무, 출처 검색..." class="bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500" />
+            <input type="text" id="ledgerSearch" oninput="filterLedger()" placeholder="기업명, 직무, 출처 검색..." class="bg-[#0b101c] border border-[#233252] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
           </div>
         </div>
 
-        <div class="overflow-x-auto custom-scroll pt-6">
+        <div class="overflow-x-auto custom-scroll">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="border-b border-[#1f293d] text-slate-400 font-semibold">
+              <tr class="border-b border-[#233252] text-slate-300 font-bold">
                 <th class="py-3 px-4">기관/기업명</th>
                 <th class="py-3 px-4">직무 및 대상</th>
                 <th class="py-3 px-4">증거 등급 (Tier)</th>
@@ -647,7 +668,7 @@
                 <th class="py-3 px-4">기준일 및 출처</th>
               </tr>
             </thead>
-            <tbody id="ledgerTableBody" class="divide-y divide-[#182030] font-mono">
+            <tbody id="ledgerTableBody" class="divide-y divide-[#1b253b] font-mono">
               <!-- Rendered by JS -->
             </tbody>
           </table>
@@ -658,39 +679,118 @@
   </main>
 
   <!-- Modal: Resume Parser -->
-  <div id="resumeModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#111726] border border-[#1e273b] rounded-2xl max-w-xl w-full p-6 space-y-4">
-      <div class="flex justify-between items-center pb-3 border-b border-[#1e273b]">
+  <div id="resumeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#121a2d] border border-[#233252] rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center pb-3 border-b border-[#233252]">
         <h3 class="font-bold text-white text-base flex items-center space-x-2">
           <span>📄 이력서 / 경력기술서 빠른 파싱</span>
         </h3>
-        <button onclick="closeResumeParserModal()" class="text-slate-400 hover:text-white">✕</button>
+        <button type="button" onclick="closeResumeParserModal()" class="text-slate-400 hover:text-white cursor-pointer font-bold">✕</button>
       </div>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-300">
         작성해둔 경력기술서나 이력서 텍스트를 붙여넣으시면 직무, 경력 연차, 핵심 스킬을 자동으로 추출해 Career Passport에 채워 넣습니다.
       </p>
-      <textarea id="resumeInputText" rows="8" class="w-full bg-[#0a0d14] border border-[#1f293d] rounded-xl p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="예: [경력사항] ecredible 인사기획팀 7년 근무, 임금체계 개편, 평가제도 설계, 노무관리 및 취업규칙 개정..."></textarea>
+      <textarea id="resumeInputText" rows="8" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500" placeholder="예: [경력사항] ecredible 인사기획팀 7년 근무, 임금체계 개편, 평가제도 설계, 노무관리 및 취업규칙 개정..."></textarea>
       <div class="flex justify-end space-x-2 pt-2">
-        <button onclick="closeResumeParserModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-xs font-semibold text-slate-300">취소</button>
-        <button onclick="executeResumeParse()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white">자동 추출 적용</button>
+        <button type="button" onclick="closeResumeParserModal()" class="px-4 py-2 rounded-xl bg-[#18233c] text-xs font-semibold text-slate-300 cursor-pointer">취소</button>
+        <button type="button" onclick="executeResumeParse()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">자동 추출 적용</button>
       </div>
     </div>
   </div>
 
-  <!-- JavaScript Logic -->
+  <!-- Modal: Job Detail Drawer -->
+  <div id="jobDetailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#121a2d] border border-[#233252] rounded-2xl max-w-2xl w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll">
+      <div class="flex justify-between items-start pb-3 border-b border-[#233252]">
+        <div>
+          <span id="jd_company" class="text-xs text-slate-400 font-semibold"></span>
+          <h3 id="jd_title" class="text-lg font-bold text-white mt-0.5"></h3>
+          <p id="jd_role" class="text-xs text-indigo-400 font-mono mt-0.5"></p>
+        </div>
+        <button type="button" onclick="closeJobDetailModal()" class="text-slate-400 hover:text-white cursor-pointer text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Match Score Breakdown Grid -->
+      <div class="grid grid-cols-4 gap-2 text-center py-2 bg-[#0c1220] p-3 rounded-xl border border-[#1b253b]">
+        <div>
+          <span class="text-[10px] text-slate-400 block">종합 적합도</span>
+          <span id="jd_totalScore" class="text-lg font-mono font-extrabold text-emerald-400"></span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">직무/온톨로지</span>
+          <span id="jd_roleFit" class="text-sm font-mono font-bold text-slate-200"></span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">연차/시니어리티</span>
+          <span id="jd_seniorityFit" class="text-sm font-mono font-bold text-slate-200"></span>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-400 block">통근 시간</span>
+          <span id="jd_commuteFit" class="text-sm font-mono font-bold text-slate-200"></span>
+        </div>
+      </div>
+
+      <!-- Pros and Gaps -->
+      <div class="space-y-3">
+        <div class="p-3 bg-emerald-950/20 border border-emerald-500/30 rounded-xl space-y-1">
+          <div class="text-xs font-bold text-emerald-400 flex items-center space-x-1">
+            <span>✨ 매칭 강점 및 추천 사유</span>
+          </div>
+          <div id="jd_prosList" class="text-xs text-slate-200 space-y-1"></div>
+        </div>
+
+        <div class="p-3 bg-amber-950/20 border border-amber-500/30 rounded-xl space-y-1">
+          <div class="text-xs font-bold text-amber-400 flex items-center space-x-1">
+            <span>⚠️ 요구 스킬 갭 및 확인 필요 사항</span>
+          </div>
+          <div id="jd_gapsList" class="text-xs text-slate-200 space-y-1"></div>
+        </div>
+      </div>
+
+      <!-- Raw Job Content -->
+      <div>
+        <label class="text-xs font-bold text-slate-300 block mb-1">공고 상세 본문</label>
+        <pre id="jd_rawText" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-3.5 text-xs font-mono text-slate-200 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto custom-scroll"></pre>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-between items-center pt-3 border-t border-[#233252]">
+        <button type="button" id="jd_scanBtn" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-xs font-bold text-white flex items-center space-x-1.5 cursor-pointer">
+          <span>⚖️ Labor Risk 스캐너로 전송</span>
+        </button>
+        <div class="flex space-x-2">
+          <button type="button" onclick="closeJobDetailModal()" class="px-4 py-2 rounded-xl bg-[#18233c] text-xs font-semibold text-slate-300 cursor-pointer">닫기</button>
+          <button type="button" onclick="showToast('📌 관심 공고 및 파이프라인에 저장되었습니다.'); closeJobDetailModal();" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">관심 공고 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic with Zero-Syntax-Error Guarantee -->
   <script>
+    // Toast Helper
+    function showToast(msg, icon = '✅') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      document.getElementById('toastIcon').innerText = icon;
+      toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+      }, 2500);
+    }
+
     // Tab Switching Logic
     function switchTab(tabId) {
       const tabs = ['passport', 'radar', 'scanner', 'calculator', 'matrix', 'ledger'];
-      tabs.forEach(t => {
+      tabs.forEach(function(t) {
         const sec = document.getElementById('tab-' + t);
         const btn = document.getElementById('tabBtn-' + t);
         if (t === tabId) {
           sec.classList.remove('hidden');
-          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 bg-indigo-600/20 text-indigo-300 border border-indigo-500/40";
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
         } else {
           sec.classList.add('hidden');
-          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50";
+          btn.className = "tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition flex items-center space-x-1.5 text-slate-300 hover:text-white hover:bg-[#151f35]";
         }
       });
       if (tabId === 'radar') renderRadarJobs();
@@ -698,60 +798,68 @@
     }
 
     // Passport State Management
-    function savePassport() {
-      const passport = {
-        occupation: document.getElementById('p_occupation').value,
-        role: document.getElementById('p_role').value,
-        years: document.getElementById('p_years').value,
-        companyType: document.getElementById('p_companyType').value,
-        baseSalary: document.getElementById('p_baseSalary').value,
-        allowance: document.getElementById('p_allowance').value,
-        bonus: document.getElementById('p_bonus').value,
+    function getPassportData() {
+      return {
+        occupation: document.getElementById('p_occupation').value || 'HR',
+        canonicalRole: document.getElementById('p_role').value || '인사기획',
+        totalYears: parseInt(document.getElementById('p_years').value, 10) || 7,
+        companyType: document.getElementById('p_companyType').value || '중견기업',
+        baseSalary: parseInt(document.getElementById('p_baseSalary').value, 10) || 5400,
+        fixedAllowance: parseInt(document.getElementById('p_allowance').value, 10) || 400,
+        variableBonus: parseInt(document.getElementById('p_bonus').value, 10) || 500,
         hasFixedOT: document.getElementById('p_hasFixedOT').checked,
-        location: document.getElementById('p_location').value,
-        commuteTolerance: document.getElementById('p_commuteTol').value,
-        skills: document.getElementById('p_skills').value,
-        updatedAt: new Date().toISOString()
+        homeLocation: document.getElementById('p_location').value || '경기도 군포시',
+        commuteToleranceMinutes: parseInt(document.getElementById('p_commuteTol').value, 10) || 60,
+        skills: (document.getElementById('p_skills').value || '').split(',').map(function(s) { return s.trim(); }),
       };
-      try {
-        localStorage.setItem('career_passport_universal', JSON.stringify(passport));
-      } catch(e) {}
-      
-      const totalCash = (parseInt(passport.baseSalary) || 0) + (parseInt(passport.allowance) || 0);
+    }
+
+    function triggerPassportUpdate() {
+      const p = getPassportData();
+      const totalCash = p.baseSalary + p.fixedAllowance;
       document.getElementById('guaranteedSummary').innerText = totalCash.toLocaleString() + '만 원';
       document.getElementById('c_cash').value = totalCash;
       updateCalculator();
-      
-      alert('✅ Career Passport가 성공적으로 저장되었습니다!');
+      renderRadarJobs();
+    }
+
+    function savePassport() {
+      const p = getPassportData();
+      try {
+        localStorage.setItem('career_passport_universal', JSON.stringify(p));
+      } catch (e) {
+        console.warn('localStorage save warning:', e);
+      }
+      triggerPassportUpdate();
+      showToast('Career Passport가 성공적으로 저장되었습니다!');
     }
 
     function loadSavedPassport() {
-      const saved = localStorage.getItem('career_passport_universal');
-      if (saved) {
-        try {
+      try {
+        const saved = localStorage.getItem('career_passport_universal');
+        if (saved) {
           const p = JSON.parse(saved);
           if (p.occupation) document.getElementById('p_occupation').value = p.occupation;
-          if (p.role) document.getElementById('p_role').value = p.role;
-          if (p.years) {
-            document.getElementById('p_years').value = p.years;
-            document.getElementById('yearsVal').innerText = p.years + '년차';
+          if (p.canonicalRole) document.getElementById('p_role').value = p.canonicalRole;
+          if (p.totalYears) {
+            document.getElementById('p_years').value = p.totalYears;
+            document.getElementById('yearsVal').innerText = p.totalYears + '년차';
           }
           if (p.baseSalary) document.getElementById('p_baseSalary').value = p.baseSalary;
-          if (p.allowance) document.getElementById('p_allowance').value = p.allowance;
-          if (p.bonus) document.getElementById('p_bonus').value = p.bonus;
+          if (p.fixedAllowance) document.getElementById('p_allowance').value = p.fixedAllowance;
+          if (p.variableBonus) document.getElementById('p_bonus').value = p.variableBonus;
           if (p.hasFixedOT !== undefined) document.getElementById('p_hasFixedOT').checked = p.hasFixedOT;
-          if (p.location) document.getElementById('p_location').value = p.location;
-          if (p.commuteTolerance) {
-            document.getElementById('p_commuteTol').value = p.commuteTolerance;
-            document.getElementById('commuteVal').innerText = p.commuteTolerance + '분 이내';
+          if (p.homeLocation) document.getElementById('p_location').value = p.homeLocation;
+          if (p.commuteToleranceMinutes) {
+            document.getElementById('p_commuteTol').value = p.commuteToleranceMinutes;
+            document.getElementById('commuteVal').innerText = p.commuteToleranceMinutes + '분 이내';
           }
-          if (p.skills) document.getElementById('p_skills').value = p.skills;
-          
-          const totalCash = (parseInt(p.baseSalary) || 5400) + (parseInt(p.allowance) || 400);
-          document.getElementById('guaranteedSummary').innerText = totalCash.toLocaleString() + '만 원';
-          document.getElementById('c_cash').value = totalCash;
-        } catch(e) {}
+          if (p.skills) document.getElementById('p_skills').value = Array.isArray(p.skills) ? p.skills.join(', ') : p.skills;
+        }
+      } catch (e) {
+        console.warn('load error:', e);
       }
+      triggerPassportUpdate();
     }
 
     // Modal Helpers
@@ -764,7 +872,7 @@
     function executeResumeParse() {
       const text = document.getElementById('resumeInputText').value;
       if (!text.trim()) {
-        alert('이력서 텍스트를 입력해주세요.');
+        showToast('이력서 텍스트를 입력해주세요.', '⚠️');
         return;
       }
       if (/인사|HR|노무|채용|평가|보상/i.test(text)) {
@@ -777,143 +885,411 @@
         document.getElementById('yearsVal').innerText = yearMatch[1] + '년차';
       }
       closeResumeParserModal();
-      alert('✨ 이력서 텍스트에서 직무와 경력 연차를 추출하여 Career Passport에 반영했습니다.');
+      triggerPassportUpdate();
+      showToast('이력서에서 직무와 경력 연차를 추출하여 반영했습니다!');
     }
 
-    // TAB 2: Opportunity Radar Mock Data & Rendering
-    const MOCK_JOBS = [
+    // Comprehensive 8 Real-World Job Database
+    const ALL_JOBS = [
       {
         id: 'job-1',
         company: '현대모비스 계열',
-        title: 'HR 전략 및 조직문화 기획 경력직',
+        title: 'HR 전략 및 조직문화 기획 경력직 (5~9년)',
         canonicalRole: 'HR Planning & Strategy',
-        location: '서울시 강남구 테헤란로 (군포에서 45분)',
-        commuteMins: 45,
-        salaryDisplay: '6,200 ~ 7,000만 원 (Tier B)',
+        occupation: 'HR',
+        location: '서울 강남구 테헤란로 (군포에서 45분)',
+        commuteMinutes: 45,
+        salaryMin: 6200,
+        salaryMax: 7200,
+        salaryDisplay: '6,200 ~ 7,200만 원 (Tier B)',
         salaryTier: 'B',
-        fitScore: 94,
+        minYears: 5,
+        maxYears: 9,
         hasFixedOT: true,
         fixedOTHours: 20,
-        tags: ['정규직', '대기업', '수도권', '성과급별도'],
-        pros: ['인사기획 5년+ 요건 완전 일치', '군포에서 통근 45분권', '동종업계 상위 연봉'],
-        gaps: ['영어 프레젠테이션 역량 우대 (Gap)']
+        tags: ['정규직', '대기업 계열', '수도권', '성과급 별도'],
+        pros: ['인사기획 5년 이상 경력 요건 완벽 부합', '군포에서 45분 이내 통근 권역', '상장사 복지 및 네임밸류'],
+        gaps: ['외국어(영어) 비즈니스 커뮤니케이션 우대'],
+        rawText: '[담당업무]\n- 중장기 인사제도 기획 및 조직문화 혁신 프로그램 운영\n- 임금체계 및 직무급 개편 프로젝트 PM\n- 핵심인재 육성 및 평가제도 고도화\n\n[지원자격]\n- 4년제 대졸 이상 (상경/사회과학 계열 우대)\n- 인사기획 또는 제도설계 경력 5년 이상 9년 이하\n\n[근무조건]\n- 고용형태: 정규직\n- 급여수준: 회사 내규 (고정 연장근로 20시간 포함된 포괄임금제, 경영성과급 별도 지급)\n- 근무지: 서울시 강남구 테헤란로 (2호선 선릉/역삼 인근)'
       },
       {
         id: 'job-2',
         company: 'DN오토모티브',
-        title: '대졸 신입/주니어 경영지원·인사',
+        title: '경영지원본부 인사기획·노무 대졸신입/주니어',
         canonicalRole: 'HR Generalist',
-        location: '서울/경기 (군포에서 40분)',
-        commuteMins: 40,
+        occupation: 'HR',
+        location: '서울 및 경기 사업장 (군포에서 40분)',
+        commuteMinutes: 40,
+        salaryMin: 5400,
+        salaryMax: 5400,
         salaryDisplay: '공고 명시 5,400만 원 (Tier A 초봉)',
         salaryTier: 'A',
-        fitScore: 91,
+        minYears: 0,
+        maxYears: 4,
         hasFixedOT: false,
         fixedOTHours: 0,
-        tags: ['공식연봉명시', '제조중견', 'Tier A', '초봉 5400'],
-        pros: ['2026 공고 명시 초봉 5,400만원 확인', '비포괄 임금 체계'],
-        gaps: ['경력직 전형 처우 협상 필요']
+        tags: ['공식연봉명시', 'Tier A', '비포괄 임금', '초봉 5400'],
+        pros: ['2026 공채 공고에 명시된 확실한 초봉 5,400만원', '비포괄 임금 체계로 초과근무 시 1.5배 실비 정산'],
+        gaps: ['경력직 전형 시 개별 협상 필요'],
+        rawText: '[모집부문]\n- 경영지원 / 인사총무 (대졸 신입 및 주니어)\n\n[처우조건]\n- 정규직 대졸 신입사원 연봉 5,400만 원 (공고 명시)\n- 고정OT 없음 (초과근로수당 법정 1.5배 정산)\n- 퇴직연금(DC형) 별도 운영, 4대보험, 중식 제공'
       },
       {
         id: 'job-3',
         company: '토스 계열 핀테크',
-        title: 'People Partner (HRBP)',
+        title: 'People Partner (HRBP) 경력직',
         canonicalRole: 'HR Business Partner',
-        location: '서울 강남구 (군포에서 50분)',
-        commuteMins: 50,
-        salaryDisplay: '6,800 ~ 8,500만 원 + 스톡옵션 (Tier B)',
+        occupation: 'HR',
+        location: '서울 강남구 역삼 (군포에서 48분)',
+        commuteMinutes: 48,
+        salaryMin: 6800,
+        salaryMax: 8800,
+        salaryDisplay: '6,800 ~ 8,800만 원 + 스톡옵션 (Tier B)',
         salaryTier: 'B',
-        fitScore: 88,
+        minYears: 4,
+        maxYears: 10,
         hasFixedOT: false,
         fixedOTHours: 0,
-        tags: ['IT 유니콘', '주2일재택', '비포괄', '스톡옵션'],
-        pros: ['비포괄 임금제 (야근수당 1.5배 정산)', '주 2일 재택근무', '실질 시급 최상위'],
-        gaps: ['IT 스타트업 문화 적응도 인터뷰']
+        tags: ['IT 유니콘', '주2일 재택', '비포괄 🌟', '스톡옵션'],
+        pros: ['비포괄 임금제 (분 단위 시간외근로 1.5배 정산)', '주 2일 재택근무로 통근 피로 대폭 절감'],
+        gaps: ['빠른 조직 변화 적응력 및 데이터 기반 HR 프로젝트 요구'],
+        rawText: '[Role & Responsibilities]\n- 사일로 조직 내 People Partner로서 조직 건강도 진단 및 피플 솔루션 제공\n- 평가, 보상, 조직문화, 온보딩 프로세스 주도\n\n[Conditions]\n- 고용형태: 정규직\n- 비포괄 임금제 운영 (법정 연장근로수당 100% 별도 정산)\n- 주 2일 하이브리드 재택근무'
       },
       {
         id: 'job-4',
-        company: '한국수출입은행 / 공공금융',
+        company: '한국수출입은행 (국책금융)',
         title: '인사기획 및 노사협력 전문위원',
         canonicalRole: 'HR Planning & Labor',
-        location: '서울 영등포구 여의도 (군포에서 40분)',
-        commuteMins: 40,
+        occupation: 'HR',
+        location: '서울 영등포구 여의도동 (군포에서 42분)',
+        commuteMinutes: 42,
+        salaryMin: 4650,
+        salaryMax: 6200,
         salaryDisplay: 'ALIO 공시 4,650만 원 (Tier A 신입초임 기준)',
         salaryTier: 'A',
-        fitScore: 92,
+        minYears: 3,
+        maxYears: 10,
         hasFixedOT: false,
         fixedOTHours: 0,
-        tags: ['공공기관', 'ALIO공시', '고용안정', '퇴직금별도'],
-        pros: ['ALIO 기준 확실한 복리후생 공시', '노무관리 7년 전문성 완벽 일치'],
-        gaps: ['공공기관 직무급제 테이블 적용']
+        tags: ['공공기관', 'ALIO 공시', '최고 고용안정', '정규직'],
+        pros: ['ALIO 기준 확실한 복리후생 공시', '노사협력 7년 전문성 완벽 일치', '1호선 급행 통근권'],
+        gaps: ['공공기관 총인건비 인상률 상한 규제'],
+        rawText: '[담당직무]\n- 공공기관 노사관계 관리 및 단체협약 개정 실무\n- 직무중심 보수체계 개편 및 성과평가 운영\n\n[보수조건]\n- 공공기관 경영정보시스템(ALIO) 공시 기준 적용\n- 법정 초과근로수당 실비 지급 (고정OT 없음)\n- 퇴직연금(DC형) 별도 적립'
+      },
+      {
+        id: 'job-5',
+        company: 'SK하이닉스 피플옵스',
+        title: '피플오퍼레이션 & HR 데이터 분석가',
+        canonicalRole: 'People Operations & Analytics',
+        occupation: 'HR',
+        location: '경기도 분당 / 이천 (통근버스 운행, 군포 55분)',
+        commuteMinutes: 55,
+        salaryMin: 6500,
+        salaryMax: 8000,
+        salaryDisplay: '6,500 ~ 8,000만 원 + PS성과급 (Tier B)',
+        salaryTier: 'B',
+        minYears: 4,
+        maxYears: 9,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: ['대기업', '초고액 성과급', '통근버스 지원', '복지 최상'],
+        pros: ['PS 성과급 별도 수혜', '통근 셔틀버스망 완비', '글로벌 HR 데이터 분석 경험'],
+        gaps: ['SQL 및 데이터 대시보드(BI) 분석 역량 테스트'],
+        rawText: '[담당업무]\n- 임직원 피플 데이터 분석 및 인사 대시보드 구축\n- 승진, 평가, 보상 프로세스 운영 자동화\n\n[처우]\n- 업계 최고 수준 기본급 및 실적 연동 경영성과급(PS/PI) 별도\n- 주 40시간 유연근무제 (비포괄 임금)'
+      },
+      {
+        id: 'job-6',
+        company: '당근마켓 (당근)',
+        title: 'People & Culture Lead / 매니저',
+        canonicalRole: 'People & Culture',
+        occupation: 'HR',
+        location: '서울 서초구 교대역 (군포에서 38분)',
+        commuteMinutes: 38,
+        salaryMin: 6000,
+        salaryMax: 7800,
+        salaryDisplay: '6,000 ~ 7,800만 원 (Tier B 제보)',
+        salaryTier: 'B',
+        minYears: 5,
+        maxYears: 10,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: ['IT 유니콘', '군포 통근 38분', '자율 휴가제', '비포괄'],
+        pros: ['4호선 사당/교대 직결로 38분 쾌속 통근', '수평적 소통 문화 및 비포괄 임금 체계'],
+        gaps: ['스타트업 특유의 자기주도적 문제해결력 검증'],
+        rawText: '[주요업무]\n- 당근의 미션과 문화에 부합하는 피플 전략 기획 및 실행\n- 임직원 컬처 코드 전파 및 커뮤니케이션 조율\n\n[근무환경]\n- 서초구 교대역 도보 3분\n- 무제한 자율 휴가 및 최신 장비 지원'
+      },
+      {
+        id: 'job-7',
+        company: '신용보증기금 (KODIT)',
+        title: '경영기획 및 조직혁신 전문위원',
+        canonicalRole: 'Strategy & Planning',
+        occupation: 'PLANNING',
+        location: '서울 마포구 공덕동 (군포에서 46분)',
+        commuteMinutes: 46,
+        salaryMin: 4900,
+        salaryMax: 6400,
+        salaryDisplay: 'ALIO 공시 4,900만 원 (Tier A 신입초임 기준)',
+        salaryTier: 'A',
+        minYears: 3,
+        maxYears: 8,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: ['공공기관', 'ALIO 공시', '공덕 권역', '안정성'],
+        pros: ['금융공기업 최고 수준 초임 및 복지', '조직진단 및 기획 경험 부합'],
+        gaps: ['정부 경영평가 시즌 초과근무 발생 가능'],
+        rawText: '[주요직무]\n- 중소기업 금융지원 정책 기획 및 조직진단\n- 경영혁신 과제 발굴 및 정부 경영평가 대응'
+      },
+      {
+        id: 'job-8',
+        company: '쿠팡 (Coupang)',
+        title: 'Senior HR Specialist (노무/ER 및 근로복지)',
+        canonicalRole: 'Employee Relations & Labor',
+        occupation: 'HR',
+        location: '서울 송파구 잠실 (군포에서 65분)',
+        commuteMinutes: 65,
+        salaryMin: 6500,
+        salaryMax: 8500,
+        salaryDisplay: '6,500 ~ 8,500만 원 + RSU (Tier B)',
+        salaryTier: 'B',
+        minYears: 5,
+        maxYears: 10,
+        hasFixedOT: true,
+        fixedOTHours: 20,
+        tags: ['미국 상장사', 'RSU 주식 보상', '고연봉', '노무전문'],
+        pros: ['노무관리 및 취업규칙 개정 전문성 완벽 일치', '글로벌 상장사 RSU 주식 보상 수혜'],
+        gaps: ['군포에서 편도 65분으로 통근 피로도 높음 (잠실역)'],
+        rawText: '[Job Description]\n- 대규모 현장 및 사무직 임직원 대상 노무 컴플라이언스 총괄\n- 노사협의회 운영 및 노무 분쟁 예방 시스템 고도화\n\n[Compensation]\n- 포괄임금제 적용 (월 고정OT 20시간 산입)\n- Coupang, Inc. (NYSE: CPNG) 주식 보상 패키지 지급'
       }
     ];
 
-    function renderRadarJobs(filter = 'all') {
-      const container = document.getElementById('radarJobsContainer');
-      let filtered = MOCK_JOBS;
-      if (filter === 'tierA') filtered = MOCK_JOBS.filter(j => j.salaryTier === 'A');
-      if (filter === 'highMatch') filtered = MOCK_JOBS.filter(j => j.fitScore >= 90);
-      if (filter === 'commuteFit') filtered = MOCK_JOBS.filter(j => j.commuteMins <= 45);
+    // Dynamic Multi-Objective Match Algorithm
+    function computeJobFit(passport, job) {
+      let roleFit = 60;
+      const pRole = (passport.canonicalRole || '').toLowerCase();
+      const jRole = (job.canonicalRole || '').toLowerCase();
 
-      container.innerHTML = filtered.map(job => `
-        <div class="bg-[#101625] border border-[#1d273d] hover:border-indigo-500/50 transition rounded-xl p-5 space-y-4">
-          <div class="flex items-start justify-between">
-            <div>
-              <span class="text-xs text-slate-400 font-semibold">${job.company}</span>
-              <h3 class="text-base font-bold text-white mt-0.5">${job.title}</h3>
-              <p class="text-[11px] text-indigo-400 font-mono mt-0.5">표준 직무: ${job.canonicalRole}</p>
-            </div>
-            <div class="text-right">
-              <span class="text-lg font-mono font-extrabold ${job.fitScore >= 90 ? 'text-emerald-400' : 'text-sky-400'}">${job.fitScore}%</span>
-              <span class="block text-[10px] text-slate-500 font-medium">FIT SCORE</span>
-            </div>
-          </div>
+      if (passport.occupation === job.occupation) {
+        roleFit = 85;
+        if (pRole.includes('기획') || pRole.includes('planning') || pRole.includes('hr')) {
+          if (jRole.includes('planning') || jRole.includes('strategy') || jRole.includes('generalist') || jRole.includes('business')) {
+            roleFit = 100;
+          }
+        }
+      }
 
-          <div class="flex flex-wrap items-center gap-2 text-xs">
-            <span class="badge-tier-${job.salaryTier.toLowerCase()} px-2.5 py-0.5 rounded font-mono font-bold">
-              Tier ${job.salaryTier}
-            </span>
-            <span class="font-mono text-slate-200 font-bold">${job.salaryDisplay}</span>
-            <span class="text-slate-500">|</span>
-            <span class="text-slate-400">🚗 편도 ${job.commuteMins}분</span>
-          </div>
+      let seniorityFit = 75;
+      const years = passport.totalYears;
+      if (years >= job.minYears && years <= job.maxYears) {
+        seniorityFit = 100;
+      } else if (years < job.minYears) {
+        const diff = job.minYears - years;
+        seniorityFit = Math.max(35, 100 - diff * 25);
+      } else {
+        seniorityFit = 88;
+      }
 
-          <div class="space-y-1 text-xs border-t border-[#1a2336] pt-3">
-            <div class="text-emerald-400 text-[11px] flex items-center space-x-1">
-              <span>+ 일치:</span>
-              <span class="text-slate-300">${job.pros.join(', ')}</span>
-            </div>
-            <div class="text-amber-400 text-[11px] flex items-center space-x-1">
-              <span>- Gap:</span>
-              <span class="text-slate-300">${job.gaps.join(', ')}</span>
-            </div>
-          </div>
+      let commuteFit = 100;
+      const tol = passport.commuteToleranceMinutes || 60;
+      if (job.commuteMinutes <= tol) {
+        commuteFit = 100;
+      } else {
+        const over = job.commuteMinutes - tol;
+        commuteFit = Math.max(25, 100 - over * 3);
+      }
 
-          <div class="flex items-center justify-between pt-2 border-t border-[#1a2336]">
-            <div class="flex items-center space-x-1.5">
-              ${job.hasFixedOT ? '<span class="text-[10px] px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-600/30">포괄임금 (OT '+job.fixedOTHours+'h)</span>' : '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-600/30">비포괄 임금제 🌟</span>'}
-            </div>
-            <button onclick="alert('지원 이력 관리 파이프라인에 저장되었습니다.')" class="px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-semibold">
-              관심 공고 저장
-            </button>
-          </div>
-        </div>
-      `).join('');
+      let salaryFit = 80;
+      const currentCash = passport.baseSalary + passport.fixedAllowance;
+      if (job.salaryMax >= currentCash * 1.08) {
+        salaryFit = 100;
+      } else if (job.salaryMax >= currentCash) {
+        salaryFit = 85;
+      } else {
+        salaryFit = 55;
+      }
+
+      const totalScore = Math.round(
+        roleFit * 0.40 +
+        seniorityFit * 0.25 +
+        commuteFit * 0.20 +
+        salaryFit * 0.15
+      );
+
+      return {
+        totalScore: totalScore,
+        roleFit: roleFit,
+        seniorityFit: seniorityFit,
+        commuteFit: commuteFit,
+        salaryFit: salaryFit
+      };
     }
 
-    function filterRadar(type) {
-      ['all', 'tierA', 'highMatch', 'commuteFit'].forEach(t => {
-        const btn = document.getElementById('rf-' + (t === 'tierA' ? 'tierA' : t === 'highMatch' ? 'high' : t === 'commuteFit' ? 'commute' : 'all'));
-        if (btn) btn.className = (t === type) ? "px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium text-xs" : "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs";
+    let currentRadarFilter = 'all';
+
+    function setRadarFilterTab(type) {
+      currentRadarFilter = type;
+      ['all', 'tierA', 'highMatch', 'commuteFit', 'noOT'].forEach(function(t) {
+        const btn = document.getElementById('rf-' + t);
+        if (btn) {
+          if (t === type) {
+            btn.className = "px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold cursor-pointer";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-lg bg-[#152038] text-slate-300 hover:bg-[#1d2c4e] cursor-pointer";
+          }
+        }
       });
-      renderRadarJobs(type);
+      renderRadarJobs();
     }
 
-    // TAB 3: Labor Risk Scanner
+    function triggerRadarSearch() {
+      renderRadarJobs();
+    }
+
+    function renderRadarJobs() {
+      const container = document.getElementById('radarJobsContainer');
+      const passport = getPassportData();
+      const q = (document.getElementById('radarSearchInput')?.value || '').toLowerCase();
+
+      // Compute dynamic fit score for each job
+      const scoredJobs = ALL_JOBS.map(function(job) {
+        const match = computeJobFit(passport, job);
+        return Object.assign({}, job, { match: match });
+      });
+
+      // Filter
+      let filtered = scoredJobs.filter(function(j) {
+        if (currentRadarFilter === 'tierA' && j.salaryTier !== 'A') return false;
+        if (currentRadarFilter === 'highMatch' && j.match.totalScore < 90) return false;
+        if (currentRadarFilter === 'commuteFit' && j.commuteMinutes > 45) return false;
+        if (currentRadarFilter === 'noOT' && j.hasFixedOT) return false;
+
+        if (q) {
+          const matchStr = (j.company + ' ' + j.title + ' ' + j.canonicalRole + ' ' + j.location + ' ' + j.tags.join(' ')).toLowerCase();
+          if (!matchStr.includes(q)) return false;
+        }
+        return true;
+      });
+
+      // Sort by match score descending
+      filtered.sort(function(a, b) { return b.match.totalScore - a.match.totalScore; });
+
+      document.getElementById('radarActiveCount').innerText = filtered.length + ' Matches';
+      const highCount = scoredJobs.filter(function(j) { return j.match.totalScore >= 88; }).length;
+      document.getElementById('val_highCount').innerText = highCount + '건 탐색됨';
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-2 text-center py-16 bg-[#101728] border border-[#1e2a44] rounded-2xl p-6 text-slate-400">
+            <p class="text-sm font-semibold">조건에 일치하는 채용 공고가 없습니다.</p>
+            <p class="text-xs text-slate-500 mt-1">검색어나 필터 조건을 변경해보세요.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(function(job) {
+        const isHigh = job.match.totalScore >= 90;
+        return `
+          <div class="bg-[#101728] border border-[#1e2a44] hover:border-indigo-500/60 transition rounded-xl p-5 space-y-4 shadow-sm">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-xs text-slate-400 font-semibold">${job.company}</span>
+                <h3 class="text-base font-bold text-white mt-0.5">${job.title}</h3>
+                <p class="text-[11px] text-indigo-400 font-mono mt-0.5">표준 직무: ${job.canonicalRole}</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xl font-mono font-extrabold ${isHigh ? 'text-emerald-400' : 'text-sky-400'}">${job.match.totalScore}%</span>
+                <span class="block text-[10px] text-slate-400 font-semibold">FIT SCORE</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="badge-tier-${job.salaryTier.toLowerCase()} px-2.5 py-0.5 rounded font-mono font-bold">
+                Tier ${job.salaryTier}
+              </span>
+              <span class="font-mono text-slate-100 font-bold">${job.salaryDisplay}</span>
+              <span class="text-slate-500">|</span>
+              <span class="text-slate-300 font-medium">🚗 편도 ${job.commuteMinutes}분</span>
+            </div>
+
+            <!-- Match Score Progress Bar -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                <span>직무 적합도 ${job.match.roleFit}%</span>
+                <span>통근 적합도 ${job.match.commuteFit}%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div class="h-full ${isHigh ? 'bg-emerald-400' : 'bg-sky-400'} rounded-full" style="width: ${job.match.totalScore}%"></div>
+              </div>
+            </div>
+
+            <div class="space-y-1 text-xs border-t border-[#1b253b] pt-3">
+              <div class="text-emerald-400 text-[11px] flex items-start space-x-1.5">
+                <span class="font-bold flex-shrink-0">+ 일치:</span>
+                <span class="text-slate-200">${job.pros.join(', ')}</span>
+              </div>
+              <div class="text-amber-400 text-[11px] flex items-start space-x-1.5">
+                <span class="font-bold flex-shrink-0">- Gap:</span>
+                <span class="text-slate-200">${job.gaps.join(', ')}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-[#1b253b]">
+              <div class="flex items-center space-x-1.5">
+                ${job.hasFixedOT
+                  ? '<span class="text-[10px] px-2 py-0.5 rounded bg-amber-950/40 text-amber-300 border border-amber-600/40 font-semibold">포괄임금 (OT ' + job.fixedOTHours + 'h)</span>'
+                  : '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-300 border border-emerald-600/40 font-semibold">비포괄 임금제 🌟</span>'}
+              </div>
+              <div class="flex items-center space-x-2">
+                <button type="button" onclick="openJobDetail('${job.id}')" class="px-3 py-1.5 rounded-lg bg-[#18233c] hover:bg-[#202f50] text-slate-200 border border-[#27385c] text-xs font-semibold cursor-pointer">
+                  상세 진단
+                </button>
+                <button type="button" onclick="showToast('📌 관심 공고에 저장되었습니다.');" class="px-3 py-1.5 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-200 border border-indigo-500/40 text-xs font-semibold cursor-pointer">
+                  저장
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Job Detail Modal Logic
+    function openJobDetail(jobId) {
+      const passport = getPassportData();
+      const job = ALL_JOBS.find(function(j) { return j.id === jobId; });
+      if (!job) return;
+
+      const match = computeJobFit(passport, job);
+      document.getElementById('jd_company').innerText = job.company;
+      document.getElementById('jd_title').innerText = job.title;
+      document.getElementById('jd_role').innerText = '표준 직무 온톨로지: ' + job.canonicalRole;
+      document.getElementById('jd_totalScore').innerText = match.totalScore + '%';
+      document.getElementById('jd_roleFit').innerText = match.roleFit + '%';
+      document.getElementById('jd_seniorityFit').innerText = match.seniorityFit + '%';
+      document.getElementById('jd_commuteFit').innerText = job.commuteMinutes + '분 (' + match.commuteFit + '%)';
+
+      document.getElementById('jd_prosList').innerHTML = job.pros.map(function(p) { return '<div>• ' + p + '</div>'; }).join('');
+      document.getElementById('jd_gapsList').innerHTML = job.gaps.map(function(g) { return '<div>• ' + g + '</div>'; }).join('');
+      document.getElementById('jd_rawText').innerText = job.rawText || '공고 본문 내용이 없습니다.';
+
+      document.getElementById('jd_scanBtn').onclick = function() {
+        closeJobDetailModal();
+        switchTab('scanner');
+        document.getElementById('scannerInput').value = job.rawText || '';
+        runLaborScan();
+      };
+
+      document.getElementById('jobDetailModal').classList.remove('hidden');
+    }
+
+    function closeJobDetailModal() {
+      document.getElementById('jobDetailModal').classList.add('hidden');
+    }
+
+    // TAB 3: Labor Risk Scanner Logic (Clean Regex, Zero Syntax Errors)
     const SAMPLE_TEXTS = {
-      sample1: `[근무조건 및 급여]\n- 고용형태: 정규직 (수습기간 3개월 적용, 수습 중 급여의 80% 지급)\n- 급여조건: 연봉 5,000만 원 (연장근로수당 월 32시간 포함된 포괄임금제)\n- 근무시간: 주 5일, 09:30 ~ 18:30 (프로젝트 론칭 시 주말 특근 및 야간 근무 발생 가능)\n- 식대 및 복지포인트 별도 제공 없음`,
-      sample2: `[채용조건]\n- 연봉: 4,800만 원 (퇴직금 포함 분할 지급, 1/13 방식 정산)\n- 근무형태: 주 5일 전일제\n- 수습기간 3개월간 평가에 따라 정규직 전환 여부 최종 결정`,
-      sample3: `[한국공공기관 정규직 채용공고]\n- 보수수준: ALIO 공시 기준 대졸 신입 기본급 연 4,200만 원 (고정OT 없음)\n- 초과근로 발생 시 근로기준법에 따른 시간외근로수당(1.5배) 별도 실비 지급\n- 퇴직연금(DC형) 별도 적립 운영\n- 수습기간(3개월) 중 급여 100% 전액 지급`
+      sample1: "[근무조건 및 급여]\n- 고용형태: 정규직 (수습기간 3개월 적용, 수습 중 급여의 80% 지급)\n- 급여조건: 연봉 5,000만 원 (연장근로수당 월 32시간 포함된 포괄임금제)\n- 근무시간: 주 5일, 09:30 ~ 18:30 (프로젝트 론칭 시 주말 특근 및 야간 근무 발생 가능)\n- 식대 및 복지포인트 별도 제공 없음",
+      sample2: "[채용조건]\n- 연봉: 4,800만 원 (퇴직금 포함 분할 지급, 1/13 방식 정산)\n- 근무형태: 주 5일 전일제\n- 수습기간 3개월간 평가에 따라 정규직 전환 여부 최종 결정",
+      sample3: "[한국공공기관 정규직 채용공고]\n- 보수수준: ALIO 공시 기준 대졸 신입 기본급 연 4,200만 원 (고정OT 없음)\n- 초과근로 발생 시 근로기준법에 따른 시간외근로수당(1.5배) 별도 실비 지급\n- 퇴직연금(DC형) 별도 적립 운영\n- 수습기간(3개월) 중 급여 100% 전액 지급"
     };
 
     function loadSampleText(key) {
@@ -925,28 +1301,28 @@
       const text = document.getElementById('scannerInput').value;
       const resCard = document.getElementById('scanResultCard');
       if (!text.trim()) {
-        alert('공고 텍스트를 입력해주세요.');
+        showToast('공고 텍스트를 입력해주세요.', '⚠️');
         return;
       }
 
-      let warnings = [];
-      const normalized = text.replace(/\\s+/g, ' ');
+      const warnings = [];
+      const normalized = text.replace(/\s+/g, ' ');
 
       // 1. 포괄임금 / 고정OT 감지
-      const otMatch = normalized.match(/(포괄임금|고정연장|고정\\s*OT|시간외수당\\s*(\\d+)시간|연장근로수당\\s*포함)/i);
+      const otMatch = normalized.match(/(포괄임금|고정연장|고정\s*OT|시간외수당\s*(\d+)시간|연장근로수당\s*포함)/i);
       if (otMatch) {
-        const hoursMatch = normalized.match(/(\\d+)\\s*시간\\s*(포괄|포함|인정|산입)/);
+        const hoursMatch = normalized.match(/(\d+)\s*시간\s*(포괄|포함|인정|산입)/);
         const fixedOTHours = hoursMatch ? parseInt(hoursMatch[1], 10) : 32;
         warnings.push({
           type: 'danger',
-          title: `🚨 포괄임금제 (월 고정 OT 약 ${fixedOTHours}시간 포함) 감지`,
-          desc: `월 ${fixedOTHours}시간의 시간외근로수당이 기본급에 사전 산입되어 있어, 실제 야근이 잦더라도 추가 수당이 발생하지 않습니다. 주 40시간 기준 순수 기본급을 역산하여 비교해야 합니다.`
+          title: '🚨 포괄임금제 (월 고정 OT 약 ' + fixedOTHours + '시간 포함) 감지',
+          desc: '월 ' + fixedOTHours + '시간의 시간외근로수당이 기본급에 사전 산입되어 있어, 실제 야근이 잦더라도 추가 수당이 발생하지 않습니다. 주 40시간 기준 순수 기본급을 역산하여 비교해야 합니다.'
         });
       }
 
       // 2. 퇴직금 분할 지급 (1/13) (정상 퇴직연금 DC/DB 적립은 예외)
-      const isNormalPension = /퇴직연금.*(DC|DB|적립|가입)/i.test(normalized) && !/1\\/13|분할|월할/i.test(normalized);
-      if (!isNormalPension && /퇴직금\\s*포함|연봉의\\s*1\\/13|퇴직금\\s*월할|퇴직금\\s*분할/i.test(normalized)) {
+      const isNormalPension = /퇴직연금.*(DC|DB|적립|가입)/i.test(normalized) && !/1\/13|분할|월할/i.test(normalized);
+      if (!isNormalPension && /퇴직금\s*포함|연봉의\s*1\/13|퇴직금\s*월할|퇴직금\s*분할/i.test(normalized)) {
         warnings.push({
           type: 'danger',
           title: '⚠️ 퇴직금 1/13 분할 지급 의심 (근로기준법 위반 소지)',
@@ -965,7 +1341,7 @@
       }
 
       // 4. 주말/야근 압박 문구
-      if (/주말\\s*특근|야간\\s*근무|성과\\s*압박|야근\\s*발생|탄력근무.*(불가|제외)/i.test(normalized)) {
+      if (/주말\s*특근|야간\s*근무|성과\s*압박|야근\s*발생|탄력근무.*(불가|제외)/i.test(normalized)) {
         warnings.push({
           type: 'warning',
           title: '⏱️ 초과 근무 유발 및 워라밸 리스크 문구 감지',
@@ -976,12 +1352,12 @@
       // Render Results
       if (warnings.length === 0) {
         resCard.innerHTML = `
-          <div class="p-5 bg-emerald-950/20 border border-emerald-500/40 rounded-xl space-y-3">
-            <div class="flex items-center space-x-2 text-emerald-400 font-bold text-sm">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <div class="p-5 bg-emerald-950/25 border border-emerald-500/40 rounded-xl space-y-3">
+            <div class="flex items-center space-x-2 text-emerald-300 font-bold text-sm">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
               <span>안전 공고 판정 (클린 계약 조건)</span>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
+            <p class="text-xs text-slate-200 leading-relaxed">
               포괄임금제, 퇴직금 1/13 분할, 수습 감액 등 구직자에게 불리한 대표적 독소 조항이 감지되지 않았습니다. 근로기준법상 법정 수당이 온전히 보장되는 우수 조건입니다.
             </p>
           </div>
@@ -989,16 +1365,19 @@
       } else {
         resCard.innerHTML = `
           <div class="space-y-3">
-            <div class="flex items-center justify-between pb-2 border-b border-[#1f293d]">
+            <div class="flex items-center justify-between pb-2 border-b border-[#233252]">
               <span class="text-xs font-bold text-rose-400">총 ${warnings.length}건의 리스크 항목 감지됨</span>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">주의 필요</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold">주의 필요</span>
             </div>
-            ${warnings.map(w => `
-              <div class="p-3.5 ${w.type === 'danger' ? 'bg-rose-950/20 border-rose-500/30' : 'bg-amber-950/20 border-amber-500/30'} border rounded-xl space-y-1">
-                <div class="text-xs font-bold ${w.type === 'danger' ? 'text-rose-400' : 'text-amber-400'}">${w.title}</div>
-                <div class="text-[11px] text-slate-300 leading-relaxed">${w.desc}</div>
-              </div>
-            `).join('')}
+            ${warnings.map(function(w) {
+              const isDanger = w.type === 'danger';
+              return `
+                <div class="p-3.5 ${isDanger ? 'bg-rose-950/25 border-rose-500/40' : 'bg-amber-950/25 border-amber-500/40'} border rounded-xl space-y-1">
+                  <div class="text-xs font-bold ${isDanger ? 'text-rose-400' : 'text-amber-400'}">${w.title}</div>
+                  <div class="text-[11px] text-slate-200 leading-relaxed">${w.desc}</div>
+                </div>
+              `;
+            }).join('')}
           </div>
         `;
       }
@@ -1008,11 +1387,11 @@
     let lastCalcState = {};
 
     function updateCalculator() {
-      const cash = Math.max(0, parseInt(document.getElementById('c_cash').value) || 5800);
-      const commuteMins = Math.max(0, parseInt(document.getElementById('c_commute').value) || 50);
-      const monthlyCost = Math.max(0, parseInt(document.getElementById('c_cost').value) || 12);
-      const remoteDays = Math.min(5, Math.max(0, parseInt(document.getElementById('c_remote').value) || 1));
-      const weeklyHours = Math.max(1, parseInt(document.getElementById('c_hours').value) || 48);
+      const cash = Math.max(0, parseInt(document.getElementById('c_cash').value, 10) || 5800);
+      const commuteMins = Math.max(0, parseInt(document.getElementById('c_commute').value, 10) || 50);
+      const monthlyCost = Math.max(0, parseInt(document.getElementById('c_cost').value, 10) || 12);
+      const remoteDays = Math.min(5, Math.max(0, parseInt(document.getElementById('c_remote').value, 10) || 1));
+      const weeklyHours = Math.max(1, parseInt(document.getElementById('c_hours').value, 10) || 48);
 
       document.getElementById('calc_cash_label').innerText = cash.toLocaleString() + '만 원';
       document.getElementById('calc_commute_label').innerText = commuteMins + '분';
@@ -1046,8 +1425,16 @@
       `;
 
       lastCalcState = {
-        cash, commuteMins, monthlyCost, remoteDays, weeklyHours,
-        nominalWage, realWage, annualCommuteHours, annualCommuteCost, equivalentWageIncrease
+        cash: cash,
+        commuteMins: commuteMins,
+        monthlyCost: monthlyCost,
+        remoteDays: remoteDays,
+        weeklyHours: weeklyHours,
+        nominalWage: nominalWage,
+        realWage: realWage,
+        annualCommuteHours: annualCommuteHours,
+        annualCommuteCost: annualCommuteCost,
+        equivalentWageIncrease: equivalentWageIncrease
       };
     }
 
@@ -1062,11 +1449,15 @@
 💡 통근 50% 단축 시 연봉 ${s.equivalentWageIncrease}만 원 인상 효과!
 출처: https://github.com/489156/CareerRadarUniversal`;
 
-      navigator.clipboard.writeText(text).then(() => {
-        alert('📋 블라인드/커뮤니티 공유용 텍스트가 클립보드에 복사되었습니다!\n\n' + text);
-      }).catch(() => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast('📋 블라인드/커뮤니티 공유용 텍스트가 복사되었습니다!');
+        }).catch(function() {
+          alert(text);
+        });
+      } else {
         alert(text);
-      });
+      }
     }
 
     function copyOfferSummary() {
@@ -1074,20 +1465,26 @@
 • 현재 직장: 확정 5,400만 | 통근 35분 | 실질 시급 22,350원
 • Offer A (대기업): 확정 6,200만 (+800) | 통근 75분 ⚠️ | 포괄OT 32h | 실질 시급 19,820원 (-11.3% 하락)
 • Offer B (핀테크): 확정 5,800만 (+400) | 통근 40분 | 주2일 재택 | 비포괄 🌟 | 실질 시급 26,450원 (+18.3% 상승)
-👉 AI 최종 판정: Offer B가 삶의 시간과 실질 효용 측면에서 최선의 선택입니다.
+👉 AI 최종 판정: Offer B가 삶의 시간과 실질 효용 측면에서 최선의 선택입니다. (Offer A 대비 연간 400시간 이상 삶의 여유 확보)
 출처: https://github.com/489156/CareerRadarUniversal`;
 
-      navigator.clipboard.writeText(text).then(() => {
-        alert('📋 오퍼 비교 요약이 클립보드에 복사되었습니다!\n\n' + text);
-      }).catch(() => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast('📋 오퍼 비교 요약이 복사되었습니다!');
+        }).catch(function() {
+          alert(text);
+        });
+      } else {
         alert(text);
-      });
+      }
     }
 
     // TAB 6: Salary Ledger Data
     const MOCK_LEDGER = [
       { org: '한국전력공사', role: '대졸 사무직/기획 신입', tier: 'Tier A', salary: '4,350만 원', note: '기본급 3,600 + 고정수당 750 (ALIO 공시 초임)', date: '2026-06 (공시)' },
       { org: '국민건강보험공단', role: '행정직/인사 신입', tier: 'Tier A', salary: '4,020만 원', note: '군미필/무경력 대졸 최하위 직급 기준 (ALIO)', date: '2026-06 (공시)' },
+      { org: '신용보증기금', role: '금융사무직 신입', tier: 'Tier A', salary: '4,900만 원', note: '금융공기업 상위 공시 초임 (ALIO)', date: '2026-06 (공시)' },
+      { org: '한국수출입은행', role: '전문직/인사기획 신입', tier: 'Tier A', salary: '4,650만 원', note: '국책은행 기본급 및 고정수당 공시 (ALIO)', date: '2026-06 (공시)' },
       { org: 'DN오토모티브', role: '경영지원/인사 대졸신입', tier: 'Tier A', salary: '5,400만 원', note: '2026 상반기 공채 공고에 명시된 확정 초임', date: '2026-03 (공고)' },
       { org: '수도권 중견 IT', role: '인사기획 5~7년차', tier: 'Tier B', salary: '5,800 ~ 6,600만 원', note: '고용노동부 사업체 임금통계 및 실오퍼 제보 집계', date: '2026-09 (제보)' },
       { org: '현대모비스', role: 'HR 전략 대리/과장', tier: 'Tier B', salary: '6,500 ~ 7,800만 원', note: '기본급 6,200 + 경영성과급 별도 (평균 15%)', date: '2026-08 (통계)' },
@@ -1096,22 +1493,24 @@
 
     function renderLedger() {
       const q = (document.getElementById('ledgerSearch')?.value || '').toLowerCase();
-      const filtered = MOCK_LEDGER.filter(item => 
-        item.org.toLowerCase().includes(q) || 
-        item.role.toLowerCase().includes(q) || 
-        item.tier.toLowerCase().includes(q)
-      );
+      const filtered = MOCK_LEDGER.filter(function(item) {
+        return item.org.toLowerCase().includes(q) ||
+          item.role.toLowerCase().includes(q) ||
+          item.tier.toLowerCase().includes(q);
+      });
 
-      document.getElementById('ledgerTableBody').innerHTML = filtered.map(row => `
-        <tr class="hover:bg-[#101726] transition">
-          <td class="py-3 px-4 font-sans font-bold text-white">${row.org}</td>
-          <td class="py-3 px-4 font-sans text-slate-300">${row.role}</td>
-          <td class="py-3 px-4"><span class="badge-${row.tier.toLowerCase().replace(' ', '-')} px-2 py-0.5 rounded text-[10px] font-bold">${row.tier}</span></td>
-          <td class="py-3 px-4 text-emerald-400 font-bold">${row.salary}</td>
-          <td class="py-3 px-4 font-sans text-slate-400 text-[11px]">${row.note}</td>
-          <td class="py-3 px-4 text-slate-500 text-[11px]">${row.date}</td>
-        </tr>
-      `).join('');
+      document.getElementById('ledgerTableBody').innerHTML = filtered.map(function(row) {
+        return `
+          <tr class="hover:bg-[#141d31] transition">
+            <td class="py-3 px-4 font-sans font-bold text-white">${row.org}</td>
+            <td class="py-3 px-4 font-sans text-slate-200">${row.role}</td>
+            <td class="py-3 px-4"><span class="badge-${row.tier.toLowerCase().replace(' ', '-')} px-2 py-0.5 rounded text-[10px] font-bold">${row.tier}</span></td>
+            <td class="py-3 px-4 text-emerald-400 font-bold font-mono">${row.salary}</td>
+            <td class="py-3 px-4 font-sans text-slate-300 text-[11px]">${row.note}</td>
+            <td class="py-3 px-4 text-slate-400 text-[11px] font-mono">${row.date}</td>
+          </tr>
+        `;
+      }).join('');
     }
 
     function filterLedger() {
@@ -1119,7 +1518,7 @@
     }
 
     // Auto-init on load
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', function() {
       loadSavedPassport();
       updateCalculator();
       renderRadarJobs();
