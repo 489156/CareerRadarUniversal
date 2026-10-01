@@ -8,98 +8,110 @@ const __dirname = path.dirname(__filename);
 
 async function crawlPwC() {
   console.log("Crawling PwC...");
-  const url = 'https://www.pwc.com/kr/ko/career/experienced.html';
-  const response = await fetch(url);
-  const html = await response.text();
-  const $ = cheerio.load(html);
-  
-  const jobs = [];
-  $('a[href*="experienced/r"]').each((i, el) => {
-    const title = $(el).text().trim();
-    let href = $(el).attr('href');
-    if (title && href) {
-      if (!href.startsWith('http')) {
-        href = `https://www.pwc.com${href.startsWith('/') ? href : '/' + href}`;
+  try {
+    const url = 'https://www.pwc.com/kr/ko/career/experienced.html';
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    
+    const jobs = [];
+    $('a[href*="experienced/r"]').each((i, el) => {
+      const title = $(el).text().trim();
+      let href = $(el).attr('href');
+      if (title && href) {
+        if (!href.startsWith('http')) {
+          href = `https://www.pwc.com${href.startsWith('/') ? href : '/' + href}`;
+        }
+        jobs.push({
+          id: `pwc-${href.match(/r\d+(-\d+)?/)?.[0] || i}`,
+          company: "삼일PwC",
+          title: title,
+          canonicalRole: title.includes('HR') || title.includes('인사') ? 'HR' : title.includes('개발') || title.includes('Engineer') ? 'Engineering' : 'Consulting',
+          occupation: "PLANNING",
+          industry: "전문서비스 / 회계컨설팅",
+          location: "서울 용산구 (삼일PwC 본사)",
+          commuteMinutes: 45,
+          salaryMinManwon: 6000,
+          salaryMaxManwon: 8000,
+          salaryDisplay: "회사 내규에 따름",
+          salaryTier: "B",
+          minYears: 3,
+          maxYears: 10,
+          hasFixedOT: false,
+          fixedOTHours: 0,
+          tags: ["Big4 회계법인", "정규직", "수시채용"],
+          pros: ["국내 1위 회계법인 삼일PwC의 전문성과 네트워크", "다양한 프로젝트 경험"],
+          gaps: ["요구 스킬셋 부합 여부 확인 필요"],
+          rawText: `[삼일PwC 수시채용]\n${title}\n자세한 내용은 해당 링크를 통해 확인하세요.`,
+          sourceName: "삼일PwC 공식 채용관",
+          jobUrl: href,
+          sourceCategory: "CONSULTING",
+          isCompanyExclusive: true,
+          sourceSystem: "PwC Global ATS",
+          publishedAt: new Date().toISOString().split('T')[0]
+        });
       }
-      jobs.push({
-        id: `pwc-${href.match(/r\d+(-\d+)?/)?.[0] || i}`,
-        company: "삼일PwC",
-        title: title,
-        canonicalRole: title.includes('HR') || title.includes('인사') ? 'HR' : title.includes('개발') || title.includes('Engineer') ? 'Engineering' : 'Consulting',
-        occupation: "PLANNING",
-        industry: "전문서비스 / 회계컨설팅",
-        location: "서울 용산구 (삼일PwC 본사)",
-        commuteMinutes: 45,
-        salaryMinManwon: 6000,
-        salaryMaxManwon: 8000,
-        salaryDisplay: "회사 내규에 따름",
-        salaryTier: "B",
-        minYears: 3,
-        maxYears: 10,
-        hasFixedOT: false,
-        fixedOTHours: 0,
-        tags: ["Big4 회계법인", "정규직", "수시채용"],
-        pros: ["국내 1위 회계법인 삼일PwC의 전문성과 네트워크", "다양한 프로젝트 경험"],
-        gaps: ["요구 스킬셋 부합 여부 확인 필요"],
-        rawText: `[삼일PwC 수시채용]\n${title}\n자세한 내용은 해당 링크를 통해 확인하세요.`,
-        sourceName: "삼일PwC 공식 채용관",
-        jobUrl: href,
-        sourceCategory: "CONSULTING",
-        isCompanyExclusive: true,
-        sourceSystem: "PwC Global ATS",
-        publishedAt: new Date().toISOString().split('T')[0]
-      });
-    }
-  });
-  return jobs.slice(0, 10);
+    });
+    return jobs.slice(0, 10);
+  } catch (err) {
+    console.warn("PwC crawler warning:", err.message);
+    return [];
+  }
 }
 
 async function crawlDeloitte() {
   console.log("Crawling Deloitte...");
-  const url = 'https://join.deloitte.co.kr/WiseRecruit2/User/RecruitList.aspx';
-  const response = await fetch(url);
-  const html = await response.text();
-  const $ = cheerio.load(html);
-  
-  const jobs = [];
-  $('a.subject').each((i, el) => {
-    const title = $(el).text().trim();
-    const href = $(el).attr('href');
-    if (title && href && href.includes('ridx=')) {
-      jobs.push({
-        id: `deloitte-${href.match(/ridx=(\d+)/)?.[1] || i}`,
-        company: "딜로이트 안진",
-        title: title,
-        canonicalRole: 'Consulting',
-        occupation: "PLANNING",
-        industry: "전문서비스 / 회계컨설팅",
-        location: "서울 영등포구 여의도동",
-        commuteMinutes: 48,
-        salaryMinManwon: 6000,
-        salaryMaxManwon: 8000,
-        salaryDisplay: "회사 내규에 따름",
-        salaryTier: "B",
-        minYears: 3,
-        maxYears: 10,
-        hasFixedOT: false,
-        fixedOTHours: 0,
-        tags: ["Big4 회계법인", "정규직", "여의도"],
-        pros: ["글로벌 빅4 회계법인 커리어", "체계적인 교육 프로그램"],
-        gaps: ["직무별 상세 요건 확인 필요"],
-        rawText: `[딜로이트 안진 채용]\n${title}\n상세 직무 내용 및 우대사항은 공고 참조.`,
-        sourceName: "딜로이트 공식 채용 (WiseRecruit2)",
-        jobUrl: `https://join.deloitte.co.kr/WiseRecruit2/User/${href}`,
-        sourceCategory: "CONSULTING",
-        isCompanyExclusive: true,
-        sourceSystem: "WiseRecruit2 ATS",
-        publishedAt: new Date().toISOString().split('T')[0]
-      });
-    }
-  });
-  return jobs.slice(0, 10);
+  try {
+    const url = 'https://join.deloitte.co.kr/WiseRecruit2/User/RecruitList.aspx';
+    const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    
+    const jobs = [];
+    $('a.subject').each((i, el) => {
+      const title = $(el).text().trim();
+      const href = $(el).attr('href');
+      if (title && href && href.includes('ridx=')) {
+        jobs.push({
+          id: `deloitte-${href.match(/ridx=(\d+)/)?.[1] || i}`,
+          company: "딜로이트 안진",
+          title: title,
+          canonicalRole: 'Consulting',
+          occupation: "PLANNING",
+          industry: "전문서비스 / 회계컨설팅",
+          location: "서울 영등포구 여의도동",
+          commuteMinutes: 48,
+          salaryMinManwon: 6000,
+          salaryMaxManwon: 8000,
+          salaryDisplay: "회사 내규에 따름",
+          salaryTier: "B",
+          minYears: 3,
+          maxYears: 10,
+          hasFixedOT: false,
+          fixedOTHours: 0,
+          tags: ["Big4 회계법인", "정규직", "여의도"],
+          pros: ["글로벌 빅4 회계법인 커리어", "체계적인 교육 프로그램"],
+          gaps: ["직무별 상세 요건 확인 필요"],
+          rawText: `[딜로이트 안진 채용]\n${title}\n상세 직무 내용 및 우대사항은 공고 참조.`,
+          sourceName: "딜로이트 공식 채용 (WiseRecruit2)",
+          jobUrl: `https://join.deloitte.co.kr/WiseRecruit2/User/${href}`,
+          sourceCategory: "CONSULTING",
+          isCompanyExclusive: true,
+          sourceSystem: "WiseRecruit2 ATS",
+          publishedAt: new Date().toISOString().split('T')[0]
+        });
+      }
+    });
+    return jobs.slice(0, 10);
+  } catch (err) {
+    console.warn("Deloitte crawler warning:", err.message);
+    return [];
+  }
 }
 
-// Generate some fallback mock jobs for variety if needed
+// Generate fallback mock jobs for variety if needed
 function generateMockJobs() {
   return [
     {
@@ -190,40 +202,64 @@ function generateMockJobs() {
 }
 
 async function injectIntoSource(jobs) {
-  // Inject jobs into matcher.ts
+  // 1. Inject jobs into matcher.ts
   const matcherPath = path.join(__dirname, '..', 'src', 'lib', 'matcher.ts');
-  let matcherContent = fs.readFileSync(matcherPath, 'utf-8');
+  if (fs.existsSync(matcherPath)) {
+    let matcherContent = fs.readFileSync(matcherPath, 'utf-8');
+    const regex = /(export const MOCK_JOB_DATABASE:\s*JobPosting\[\]\s*=\s*)\[[\s\S]*?\];/;
+    const newContent = `$1${JSON.stringify(jobs, null, 2)};`;
+    matcherContent = matcherContent.replace(regex, newContent);
+    fs.writeFileSync(matcherPath, matcherContent, 'utf-8');
+  }
   
-  // Replace everything between 'export const MOCK_JOB_DATABASE: JobPosting[] = [' and '];\n\nexport const EXPANDED_SKILL_GAP_TRACKS: SkillGapTrack[]'
-  // Or just find the export and replace the array contents.
-  const regex = /(export const MOCK_JOB_DATABASE:\s*JobPosting\[\]\s*=\s*)\[[\s\S]*?\];/;
-  const newContent = `$1${JSON.stringify(jobs, null, 2)};`;
-  matcherContent = matcherContent.replace(regex, newContent);
-  fs.writeFileSync(matcherPath, matcherContent, 'utf-8');
-  
-  // Inject jobs into index.html
+  // 2. Inject jobs into index.html
   const indexPath = path.join(__dirname, '..', 'index.html');
-  let indexContent = fs.readFileSync(indexPath, 'utf-8');
-  const indexRegex = /(const ALL_JOBS\s*=\s*)\[[\s\S]*?\];/;
-  indexContent = indexContent.replace(indexRegex, `$1${JSON.stringify(jobs, null, 2)};`);
-  fs.writeFileSync(indexPath, indexContent, 'utf-8');
+  if (fs.existsSync(indexPath)) {
+    let indexContent = fs.readFileSync(indexPath, 'utf-8');
+    const indexRegex = /(const ALL_JOBS\s*=\s*)\[[\s\S]*?\];/;
+    indexContent = indexContent.replace(indexRegex, `$1${JSON.stringify(jobs, null, 2)};`);
+    fs.writeFileSync(indexPath, indexContent, 'utf-8');
+  }
+
+  // 3. Inject jobs into mobile/assets/data/jobs.json (Flutter Mobile)
+  const mobileDataPath = path.join(__dirname, '..', 'mobile', 'assets', 'data');
+  if (fs.existsSync(mobileDataPath)) {
+    fs.writeFileSync(path.join(mobileDataPath, 'jobs.json'), JSON.stringify(jobs, null, 2), 'utf-8');
+  }
   
-  console.log("Successfully injected real scraped data into matcher.ts and index.html!");
+  console.log("Successfully injected real scraped data into matcher.ts, index.html, and mobile assets!");
 }
 
 async function main() {
-  const pwcJobs = await crawlPwC();
-  const deloitteJobs = await crawlDeloitte();
+  const dataPath = path.join(__dirname, '..', 'public', 'data');
+  const cachePath = path.join(dataPath, 'jobs.json');
+  let existingJobs = [];
+  if (fs.existsSync(cachePath)) {
+    try {
+      existingJobs = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+    } catch (_) {}
+  }
+
+  let pwcJobs = await crawlPwC();
+  let deloitteJobs = await crawlDeloitte();
+
+  // If network crawl failed, retain existing cached jobs for that provider
+  if (pwcJobs.length === 0 && existingJobs.length > 0) {
+    pwcJobs = existingJobs.filter(j => j.company === "삼일PwC");
+    console.log(`Reused ${pwcJobs.length} cached PwC jobs`);
+  }
+  if (deloitteJobs.length === 0 && existingJobs.length > 0) {
+    deloitteJobs = existingJobs.filter(j => j.company === "딜로이트 안진");
+    console.log(`Reused ${deloitteJobs.length} cached Deloitte jobs`);
+  }
+
   const mockJobs = generateMockJobs();
-  
   const allJobs = [...pwcJobs, ...deloitteJobs, ...mockJobs];
   
-  // Create data dir just in case someone wants to fetch it later
-  const dataPath = path.join(__dirname, '..', 'public', 'data');
   if (!fs.existsSync(dataPath)) {
     fs.mkdirSync(dataPath, { recursive: true });
   }
-  fs.writeFileSync(path.join(dataPath, 'jobs.json'), JSON.stringify(allJobs, null, 2), 'utf-8');
+  fs.writeFileSync(cachePath, JSON.stringify(allJobs, null, 2), 'utf-8');
   console.log(`Saved ${allJobs.length} jobs to public/data/jobs.json`);
   
   await injectIntoSource(allJobs);

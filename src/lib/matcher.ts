@@ -36,7 +36,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260918-1",
@@ -73,7 +73,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260918",
@@ -110,7 +110,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-3",
@@ -147,7 +147,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-2",
@@ -184,7 +184,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-1",
@@ -221,7 +221,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260914",
@@ -258,7 +258,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260911",
@@ -295,7 +295,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260909",
@@ -332,7 +332,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260909-2",
@@ -369,7 +369,81 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
+  },
+  {
+    "id": "deloitte-5206",
+    "company": "딜로이트 안진",
+    "title": "경영자문부문 I&G 그룹 인프라 정규직(Consultant~Manager)",
+    "canonicalRole": "Consulting",
+    "occupation": "PLANNING",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6000,
+    "salaryMaxManwon": 8000,
+    "salaryDisplay": "회사 내규에 따름",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 채용]\n경영자문부문 I&G 그룹 인프라 정규직(Consultant~Manager)\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5206",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "publishedAt": "2026-09-30"
+  },
+  {
+    "id": "deloitte-5204",
+    "company": "딜로이트 안진",
+    "title": "세무자문부문 Business Tax 1본부 경력직 회계사",
+    "canonicalRole": "Consulting",
+    "occupation": "PLANNING",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6000,
+    "salaryMaxManwon": 8000,
+    "salaryDisplay": "회사 내규에 따름",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 채용]\n세무자문부문 Business Tax 1본부 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5204",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5200",
@@ -406,7 +480,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5199",
@@ -443,7 +517,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5198",
@@ -480,7 +554,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5196",
@@ -517,7 +591,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5195",
@@ -554,7 +628,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5194",
@@ -591,7 +665,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5193",
@@ -628,7 +702,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5192",
@@ -665,81 +739,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
-  },
-  {
-    "id": "deloitte-5191",
-    "company": "딜로이트 안진",
-    "title": "경영자문부문 M&A2 그룹 생명과학 및 헬스케어팀 정규직",
-    "canonicalRole": "Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6000,
-    "salaryMaxManwon": 8000,
-    "salaryDisplay": "회사 내규에 따름",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n경영자문부문 M&A2 그룹 생명과학 및 헬스케어팀 정규직\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5191",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
-  },
-  {
-    "id": "deloitte-5189",
-    "company": "딜로이트 안진",
-    "title": "Digital Assurance IT Specialist 경력/신입 계약직(정규직 전환형)",
-    "canonicalRole": "Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6000,
-    "salaryMaxManwon": 8000,
-    "salaryDisplay": "회사 내규에 따름",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\nDigital Assurance IT Specialist 경력/신입 계약직(정규직 전환형)\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5189",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-kpmg-comp",
@@ -774,7 +774,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "KPMG Careers",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-ey-ax",
@@ -809,7 +809,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "EY Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-samsung-dx",
@@ -845,7 +845,7 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
     "sourceCategory": "CONGLOMERATE",
     "isCompanyExclusive": true,
     "sourceSystem": "삼성 채용시스템",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   }
 ];
 

@@ -362,7 +362,7 @@
         <!-- Card 1: Estimated Market Value -->
         <div onclick="openMarketValueModal()" class="bg-[#101728] border border-[#1e2a44] hover:border-indigo-500/70 transition rounded-xl p-4 cursor-pointer group shadow-sm">
           <div class="text-xs text-slate-400 flex items-center justify-between">
-            <span class="group-hover:text-indigo-300 transition font-medium">내 시장 가치 추정 (P25~P75)</span>
+            <span class="group-hover:text-indigo-300 transition font-medium flex items-center space-x-1"><span>내 시장 가치 추정 (P25~P75)</span><span class="px-1.5 py-0.5 bg-indigo-500/20 text-indigo-300 rounded text-[10px]">산정 근거 보기</span></span>
             <span class="badge-tier-b px-2 py-0.5 rounded text-[10px] font-bold">Tier B (n=47)</span>
           </div>
           <div class="mt-2 text-xl font-bold font-mono text-white flex items-center justify-between">
@@ -498,6 +498,9 @@
             <span class="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 font-semibold text-[11px] flex items-center space-x-1">
               <span>🛡️ Hard Filter 가동 중</span>
             </span>
+            <button type="button" onclick="openDetailedSearchModal()" class="px-2.5 py-1 rounded bg-[#18233c] hover:bg-[#202f50] text-slate-200 border border-[#27385c] cursor-pointer font-medium flex items-center space-x-1 ml-2">
+              <span>⚙️ 상세 검색 (조건 변경)</span>
+            </button>
             <span class="text-slate-400 text-[11px]">배제된 공고: <strong id="excludedCount" class="text-rose-400 font-mono">0</strong>건</span>
           </div>
           <label class="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
@@ -1021,6 +1024,88 @@
   </div>
 
   <!-- Modal: Skill Gap & 28 Expanded Opportunities -->
+  
+  <!-- Detailed Search (Hard Filter) Modal -->
+  <div id="detailedSearchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#121a2d] border border-[#233252] rounded-2xl max-w-5xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll">
+      <div class="flex justify-between items-start pb-3 border-b border-[#233252]">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+            <span>⚙️ 채용공고 상세검색 (Hard Filter)</span>
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">절대 배제할 조건이나 필수 조건을 설정합니다. 이 조건에 맞지 않는 공고는 매칭에서 완전 배제됩니다.</p>
+        </div>
+        <button type="button" onclick="closeDetailedSearchModal()" class="text-slate-400 hover:text-white cursor-pointer text-lg font-bold">×</button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 border border-[#1e2a44] rounded-lg p-4 bg-[#0c1220]">
+        
+        <!-- 고용형태 -->
+        <div class="space-y-2">
+          <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">고용형태</div>
+          <div class="space-y-1 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_emp_perm" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>정규직</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_emp_cont" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>계약직</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_emp_int" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>인턴</span></label>
+          </div>
+        </div>
+
+        <!-- 근무지역 -->
+        <div class="space-y-2">
+          <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">근무지역</div>
+          <div class="space-y-1 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_loc_seoul" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>서울특별시</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_loc_gyeonggi" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>경기도</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_loc_incheon" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>인천광역시</span></label>
+          </div>
+        </div>
+
+        <!-- 기업형태 -->
+        <div class="space-y-2">
+          <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">기업형태</div>
+          <div class="space-y-1 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_corp_large" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>대기업/30대그룹사</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_corp_mid" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>중견기업</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_corp_foreign" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>외국계기업</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_corp_startup" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>유니콘/스타트업</span></label>
+          </div>
+        </div>
+
+        <!-- 경력 -->
+        <div class="space-y-2">
+          <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">경력 요건</div>
+          <div class="space-y-1 text-xs text-slate-400">
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_exp_new" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>신입</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_exp_1_3" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>1~3년</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_exp_4_6" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>4~6년</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_exp_7_9" class="rounded accent-indigo-500 bg-slate-900 border-slate-700" checked><span>7~9년</span></label>
+            <label class="flex items-center space-x-2 cursor-pointer hover:text-white"><input type="checkbox" id="ds_exp_10" class="rounded accent-indigo-500 bg-slate-900 border-slate-700"><span>10년 이상</span></label>
+          </div>
+        </div>
+        
+        <!-- 급여 및 조건 -->
+        <div class="space-y-2 col-span-2">
+          <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">기타 절대 조건</div>
+          <div class="space-y-3 mt-2">
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">최소 희망 연봉 (만원)</label>
+              <input type="number" id="ds_min_salary" placeholder="예: 6000" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
+            </div>
+            <div>
+              <label class="text-xs text-slate-400 block mb-1">최대 출퇴근 허용 시간 (분)</label>
+              <input type="number" id="ds_max_commute" placeholder="예: 60" value="60" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-3 pt-3 border-t border-[#233252]">
+        <button type="button" onclick="closeDetailedSearchModal()" class="px-4 py-2 rounded-xl bg-[#18233c] text-xs font-semibold text-slate-300 cursor-pointer">취소</button>
+        <button type="button" onclick="applyDetailedSearch()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">검색 조건 적용</button>
+      </div>
+    </div>
+  </div>
+
   <div id="skillGapModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-[#121a2d] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll">
       <div class="flex justify-between items-start pb-3 border-b border-[#233252]">
@@ -1200,28 +1285,43 @@
       showToast('Hard Filter 설정이 기본값으로 초기화되었습니다.');
     }
 
-    function evaluateHardFilters(passport, job) {
-      const reasons = [];
-      const hf = passport.hardFilters || {};
-
-      // 1. 정규직만 (계약직/파견직 배제)
-      if (hf.onlyPermanent) {
-        const isPerm = job.tags.some(function(t) { return t.includes('정규직'); }) || (job.rawText && job.rawText.includes('정규직'));
-        if (!isPerm) {
-          reasons.push('비정규직/계약직 배제');
+    
+      function evaluateHardFilters(passport, job) {
+        const reasons = [];
+        const hf = passport.hardFilters || {};
+  
+        // 1. 정규직만
+        if (hf.onlyPermanent) {
+          const isPerm = job.tags.some(function(t) { return t.includes('정규직'); }) || (job.rawText && job.rawText.includes('정규직'));
+          if (!isPerm) {
+            reasons.push('비정규직/계약직 배제');
+          }
         }
-      }
-
-      // 2. 수도권만
-      if (hf.onlyCapitalArea) {
-        const loc = (job.location + ' ' + (job.rawText || '')).toLowerCase();
-        const isCapital = loc.includes('서울') || loc.includes('경기') || loc.includes('인천') || loc.includes('수도권') || loc.includes('강남') || loc.includes('판교');
-        if (!isCapital) {
-          reasons.push('수도권 외 지역 배제');
+  
+        // 2. 수도권만
+        if (hf.onlyCapitalArea) {
+          const loc = (job.location + ' ' + (job.rawText || '')).toLowerCase();
+          const isCapital = loc.includes('서울') || loc.includes('경기') || loc.includes('인천') || loc.includes('수도권') || loc.includes('강남') || loc.includes('판교') || loc.includes('수원') || loc.includes('영등포') || loc.includes('용산');
+          if (!isCapital) {
+            reasons.push('수도권 외 지역 배제');
+          }
         }
-      }
 
-      // 3. 통근 시간 초과 컷오프
+        // 3. 최소 연봉
+        if (hf.minSalary && job.salaryMinManwon) {
+           if (job.salaryMaxManwon < hf.minSalary) {
+              reasons.push('최소 희망 연봉 미달');
+           }
+        }
+
+        // 4. 최대 출퇴근 시간
+        if (hf.maxCommute && job.commuteMinutes) {
+           if (job.commuteMinutes > hf.maxCommute) {
+              reasons.push('출퇴근 시간 초과 (' + job.commuteMinutes + '분)');
+           }
+        }
+
+        // 3. 통근 시간 초과 컷오프
       if (hf.maxCommuteCutoff) {
         const tol = passport.commuteToleranceMinutes || 60;
         if (job.commuteMinutes > tol) {
@@ -1239,8 +1339,9 @@
       // 5. 현재 보상 미만 배제
       if (hf.noBelowCurrentSalary) {
         const currentCash = passport.baseSalary + passport.fixedAllowance;
-        if (job.salaryMax < currentCash) {
-          reasons.push('현재 보상 미만 (' + job.salaryMax + '만 < 현재 ' + currentCash + '만)');
+        const maxSal = job.salaryMaxManwon || job.salaryMax || 0;
+        if (maxSal < currentCash) {
+          reasons.push('현재 보상 미만 (' + maxSal + '만 < 현재 ' + currentCash + '만)');
         }
       }
 
@@ -1405,7 +1506,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260918-1",
@@ -1442,7 +1543,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260918",
@@ -1479,7 +1580,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-3",
@@ -1516,7 +1617,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-2",
@@ -1553,7 +1654,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260917-1",
@@ -1590,7 +1691,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260914",
@@ -1627,7 +1728,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260911",
@@ -1664,7 +1765,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260909",
@@ -1701,7 +1802,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "pwc-r260909-2",
@@ -1738,7 +1839,81 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "PwC Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
+  },
+  {
+    "id": "deloitte-5206",
+    "company": "딜로이트 안진",
+    "title": "경영자문부문 I&G 그룹 인프라 정규직(Consultant~Manager)",
+    "canonicalRole": "Consulting",
+    "occupation": "PLANNING",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6000,
+    "salaryMaxManwon": 8000,
+    "salaryDisplay": "회사 내규에 따름",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 채용]\n경영자문부문 I&G 그룹 인프라 정규직(Consultant~Manager)\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5206",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "publishedAt": "2026-09-30"
+  },
+  {
+    "id": "deloitte-5204",
+    "company": "딜로이트 안진",
+    "title": "세무자문부문 Business Tax 1본부 경력직 회계사",
+    "canonicalRole": "Consulting",
+    "occupation": "PLANNING",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6000,
+    "salaryMaxManwon": 8000,
+    "salaryDisplay": "회사 내규에 따름",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 채용]\n세무자문부문 Business Tax 1본부 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5204",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5200",
@@ -1775,7 +1950,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5199",
@@ -1812,7 +1987,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5198",
@@ -1849,7 +2024,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5196",
@@ -1886,7 +2061,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5195",
@@ -1923,7 +2098,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5194",
@@ -1960,7 +2135,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5193",
@@ -1997,7 +2172,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "deloitte-5192",
@@ -2034,81 +2209,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
-  },
-  {
-    "id": "deloitte-5191",
-    "company": "딜로이트 안진",
-    "title": "경영자문부문 M&A2 그룹 생명과학 및 헬스케어팀 정규직",
-    "canonicalRole": "Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6000,
-    "salaryMaxManwon": 8000,
-    "salaryDisplay": "회사 내규에 따름",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n경영자문부문 M&A2 그룹 생명과학 및 헬스케어팀 정규직\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5191",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
-  },
-  {
-    "id": "deloitte-5189",
-    "company": "딜로이트 안진",
-    "title": "Digital Assurance IT Specialist 경력/신입 계약직(정규직 전환형)",
-    "canonicalRole": "Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6000,
-    "salaryMaxManwon": 8000,
-    "salaryDisplay": "회사 내규에 따름",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\nDigital Assurance IT Specialist 경력/신입 계약직(정규직 전환형)\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5189",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-kpmg-comp",
@@ -2143,7 +2244,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "KPMG Careers",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-ey-ax",
@@ -2178,7 +2279,7 @@
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "EY Global ATS",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   },
   {
     "id": "job-samsung-dx",
@@ -2214,7 +2315,7 @@
     "sourceCategory": "CONGLOMERATE",
     "isCompanyExclusive": true,
     "sourceSystem": "삼성 채용시스템",
-    "publishedAt": "2026-09-28"
+    "publishedAt": "2026-09-30"
   }
 ];
 
@@ -2255,9 +2356,10 @@
 
       let salaryFit = 80;
       const currentCash = passport.baseSalary + passport.fixedAllowance;
-      if (job.salaryMax >= currentCash * 1.08) {
+      const maxSal = job.salaryMaxManwon || job.salaryMax || 0;
+      if (maxSal >= currentCash * 1.08) {
         salaryFit = 100;
-      } else if (job.salaryMax >= currentCash) {
+      } else if (maxSal >= currentCash) {
         salaryFit = 85;
       } else {
         salaryFit = 55;
@@ -3159,7 +3261,36 @@
       }
     };
 
-    function openSkillGapModal() {
+    
+      function openDetailedSearchModal() {
+        document.getElementById('detailedSearchModal').classList.remove('hidden');
+      }
+      function closeDetailedSearchModal() {
+        document.getElementById('detailedSearchModal').classList.add('hidden');
+      }
+      function applyDetailedSearch() {
+        // Here we could update passport.hardFilters and re-evaluate
+        // For now, just close and trigger search (mocking the effect)
+        const passport = getPassportData();
+        passport.hardFilters = passport.hardFilters || {};
+        
+        passport.hardFilters.onlyPermanent = document.getElementById('ds_emp_perm').checked && !document.getElementById('ds_emp_cont').checked;
+        passport.hardFilters.onlyCapitalArea = document.getElementById('ds_loc_seoul').checked;
+        
+        const minSal = document.getElementById('ds_min_salary').value;
+        if(minSal) passport.hardFilters.minSalary = parseInt(minSal);
+        
+        const maxCommute = document.getElementById('ds_max_commute').value;
+        if(maxCommute) passport.hardFilters.maxCommute = parseInt(maxCommute);
+
+        localStorage.setItem('careerPassport', JSON.stringify(passport));
+        
+        closeDetailedSearchModal();
+        showToast('상세 검색 조건이 적용되었습니다.');
+        renderRadarJobs();
+      }
+
+      function openSkillGapModal() {
       switchSkillTrack('analytics');
       document.getElementById('skillGapModal').classList.remove('hidden');
     }

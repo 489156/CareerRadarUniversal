@@ -118,7 +118,9 @@ flowchart TD
 
 ## 🔑 Key Features (핵심 기능)
 
-### 1. 🛡️ User-Configurable Hard Filter (절대 배제 기준)
+### 1. ⚙️ User-Configurable Hard Filter (상세 조건 검색 UI 탑재)
+채용 플랫폼 수준의 **상세 조건 검색(근무지역, 고용형태, 기업형태, 경력, 최소연봉, 통근시간 등)** UI를 통해 사용자가 직접 강력한 배제(Hard Filter) 기준을 설정할 수 있습니다.
+
 구직자가 원치 않는 공고를 사전 차단하여 인지 과부하를 원천 차단합니다.
 * **6대 원클릭 프리셋**:
   1. 비정규직/계약직 배제 (정규직만)
@@ -193,6 +195,26 @@ npm run dev
 # 3. 브라우저에서 접속
 http://localhost:3000
 ```
+
+### 방법 3: Flutter 크로스플랫폼 모바일 앱 (iOS / Android)
+`flutter-apply-architecture-best-practices` 지침을 준수한 계층형 클린 아키텍처(UI - Domain - Data) 기반 모바일 앱:
+```bash
+# 1. 모바일 프로젝트 디렉터리 이동
+cd mobile
+
+# 2. 패키지 의존성 설치
+flutter pub get
+
+# 3. 도메인 유닛 테스트 및 위젯 검증 실행 (100% 통과)
+flutter test
+
+# 4. 모바일 에뮬레이터 또는 실기기 실행
+flutter run
+```
+* **모바일 핵심 아키텍처**:
+  * `lib/domain/`: `CareerPassport`, `JobPosting`, `MatchJobFitUseCase`, `EvaluateHardFiltersUseCase`, `CalculateMarketValueUseCase`, `ScanLaborRiskUseCase`
+  * `lib/data/`: `JobRepository`, `PassportRepository`, `JobApiService` (실제 수집 데이터 및 다이렉트 URL 탑재), `LocalStorageService`
+  * `lib/ui/`: MVVM 기반 `PassportViewModel`, `RadarViewModel`, `ScannerViewModel`, 바텀시트 상세 검색(Hard Filter), 직행 URL 딥링크
 
 ---
 
