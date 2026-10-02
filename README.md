@@ -4,10 +4,16 @@
 > *대기업·Big4/MBB·공공기관(ALIO) 자사 사이트 독점 공고 전수 수집 및 증거 기반 커리어 인텔리전스*
 
 [![Build Status](https://img.shields.io/badge/Build-Passing%20(Next.js%2014)-emerald.svg)](https://github.com/489156/CareerRadarUniversal)
+[![Live Prototype Demo](https://img.shields.io/badge/🚀%20Live%20Prototype-즉시%20실행%20(Launch)-success?style=for-the-badge&logo=googlechrome&logoColor=white)](https://htmlpreview.github.io/?https://github.com/489156/CareerRadarUniversal/blob/main/index.html)
+[![GitHub Pages](https://img.shields.io/badge/🌐%20GitHub%20Pages-공식%20호스팅-blue?style=for-the-badge&logo=github)](https://489156.github.io/CareerRadarUniversal/)
 [![Crawler Network](https://img.shields.io/badge/Crawler%20Network-18%20Channels%20Active-indigo.svg)](https://github.com/489156/CareerRadarUniversal)
 [![Data Exclusivity](https://img.shields.io/badge/Closed%20ATS%20Exclusivity-68.4%25-purple.svg)](https://github.com/489156/CareerRadarUniversal)
 [![Dual Platform](https://img.shields.io/badge/Dual%20Mode-Next.js%20%2B%20Zero--Dependency%20HTML-blue.svg)](https://github.com/489156/CareerRadarUniversal)
 [![License](https://img.shields.io/badge/License-Proprietary-slate.svg)](https://github.com/489156/CareerRadarUniversal)
+
+> 💡 **웹 브라우저 즉시 체험 (설치/다운로드 없이 1초 실행)**:  
+> [👉 **Career Radar Universal 라이브 프로토타입 실행하기 (클릭 시 브라우저에서 바로 동작)**](https://htmlpreview.github.io/?https://github.com/489156/CareerRadarUniversal/blob/main/index.html)  
+> *(GitHub Pages 공식 주소: [https://489156.github.io/CareerRadarUniversal/](https://489156.github.io/CareerRadarUniversal/))*
 
 ---
 
@@ -177,12 +183,16 @@ flowchart TD
 
 ## 🚀 Quick Start Guide (실행 가이드)
 
-### 방법 1: 무설치 웹 브라우저 즉시 실행 (가장 추천)
-별도의 개발 환경이나 명령어 실행 없이 즉시 모든 기능을 체험할 수 있습니다:
-1. 저장소 루트의 [`index.html`](./index.html) 파일을 크롬(Chrome) 또는 엣지(Edge) 브라우저로 **더블 클릭**하여 엽니다.
-2. 상단 네비게이션에서 **"📡 Opportunity Radar"** 탭을 클릭합니다.
-3. **"수집망 18곳 검증 🔍"** 버튼으로 딜로이트, 삼일PwC, 삼성, ALIO 등 18대 수집 전산망 현황을 확인합니다.
-4. **"🏢 자사사이트 독점 (잡포털 미노출)"** 필터로 17건의 독점 공고를 확인하고, **"공고 원문 ↗"** 버튼으로 실제 채용관으로 직행합니다.
+### 방법 1: 무설치 웹 브라우저 즉시 실행 (가장 추천 ⚡)
+별도의 개발 환경이나 명령어 실행, 파일 다운로드 없이 깃허브에서 즉시 모든 기능을 체험할 수 있습니다:
+* **[🚀 원클릭 라이브 프로토타입 바로가기 (HTMLPreview 즉시 실행)](https://htmlpreview.github.io/?https://github.com/489156/CareerRadarUniversal/blob/main/index.html)**
+* **[🌐 GitHub Pages 공식 호스팅 링크](https://489156.github.io/CareerRadarUniversal/)**
+* *(로컬 실행 시)* 저장소 루트의 [`index.html`](./index.html) 파일을 크롬(Chrome) 또는 엣지(Edge) 브라우저로 **더블 클릭**하여 엽니다.
+
+1. 상단 네비게이션에서 **"📡 Opportunity Radar"** 탭을 클릭합니다.
+2. **"수집망 18곳 검증 🔍"** 버튼으로 딜로이트, 삼일PwC, 삼성, ALIO 등 18대 수집 전산망 현황을 확인합니다.
+3. **"🏢 자사사이트 독점 (잡포털 미노출)"** 필터로 17건의 독점 공고를 확인하고, **"공고 원문 ↗"** 버튼으로 실제 채용관으로 직행합니다.
+
 
 ### 방법 2: Next.js 로컬 프로덕션 개발 서버 구동
 ```bash
@@ -218,12 +228,14 @@ flutter run
 
 ---
 
-## 📄 Documentation Directory (관련 핵심 문서)
+## 📄 Documentation Directory (관련 핵심 문서 및 프로토타입)
 
+* **🌐 라이브 인터랙티브 프로토타입 (Live Prototype)**: **[🚀 웹 브라우저 즉시 실행 링크 (HTMLPreview)](https://htmlpreview.github.io/?https://github.com/489156/CareerRadarUniversal/blob/main/index.html)** | **[GitHub Pages 공식 주소](https://489156.github.io/CareerRadarUniversal/)**
 * **상세 제품 기획서 (Master Plan v2.0)**: [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md)
 * **제품 정체성, 시장 조사 및 기술적 해자 (Identity & Strategy)**: [`Career_Radar_Universal_Identity_and_Strategy.md`](./Career_Radar_Universal_Identity_and_Strategy.md)
 * **프로토타입 구현 계획서 및 DB DDL (Implementation Plan)**: [`Career_Radar_Universal_Prototype_Implementation_Plan.md`](./Career_Radar_Universal_Prototype_Implementation_Plan.md)
 * **시니어 개발자·사용자·투자자·마케터 2차 검증 보고서 (Dual-Cycle Review)**: [`Career_Radar_Universal_Dual_Review_Report.md`](./Career_Radar_Universal_Dual_Review_Report.md)
+
 
 ---
 
