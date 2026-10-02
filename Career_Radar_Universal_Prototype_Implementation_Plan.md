@@ -4,7 +4,7 @@
 **프로젝트**: Career Radar Universal  
 **저장소**: [489156/CareerRadarUniversal](https://github.com/489156/CareerRadarUniversal)  
 **기획/작성**: versova ([@489156](https://github.com/489156))  
-**🚀 라이브 프로토타입 즉시 실행**: [브라우저 즉시 체험 (HTMLPreview)](https://htmlpreview.github.io/?https://github.com/489156/CareerRadarUniversal/blob/main/index.html) | [GitHub Pages 공식 호스팅](https://489156.github.io/CareerRadarUniversal/)
+**🚀 라이브 프로토타입 즉시 실행**: [공식 GitHub Pages 바로가기 (Click to Launch)](https://489156.github.io/CareerRadarUniversal/)
 
 ---
 
