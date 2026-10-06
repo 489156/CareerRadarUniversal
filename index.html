@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
   <title>Career Radar Universal — 차세대 커리어 인텔리전스 플랫폼</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,8 +208,8 @@
             </h3>
             
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">직군 (Occupation)</label>
-              <select id="p_occupation" onchange="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+              <label for="p_occupation" class="block text-xs font-medium text-slate-200 mb-1">직군 (Occupation)</label>
+              <select id="p_occupation" aria-label="직군 (Occupation)" onchange="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
                 <option value="HR">인사 / HR</option>
                 <option value="PLANNING">전략 / 기획 / PM</option>
                 <option value="TECH">IT / 소프트웨어 개발</option>
@@ -218,22 +219,22 @@
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">현재/희망 직무 (Role)</label>
-              <input type="text" id="p_role" value="인사기획 (HR Planning)" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 인사기획, People Partner, HRBP" />
+              <label for="p_role" class="block text-xs font-medium text-slate-200 mb-1">현재/희망 직무 (Role)</label>
+              <input type="text" id="p_role" aria-label="현재 및 희망 직무 (Role)" value="인사기획 (HR Planning)" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 인사기획, People Partner, HRBP" />
               <p class="text-[11px] text-slate-400 mt-1">Universal Job Ontology로 자동 표준화 매핑</p>
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-1">
-                <label class="text-xs font-medium text-slate-200">총 경력 연수</label>
+                <label for="p_years" class="text-xs font-medium text-slate-200">총 경력 연수</label>
                 <span id="yearsVal" class="text-xs font-mono font-bold text-indigo-400">7년차</span>
               </div>
-              <input type="range" id="p_years" min="0" max="20" value="7" oninput="document.getElementById('yearsVal').innerText = this.value + '년차'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
+              <input type="range" id="p_years" aria-label="총 경력 연수" min="0" max="20" value="7" oninput="document.getElementById('yearsVal').innerText = this.value + '년차'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">현재 회사 규모/형태</label>
-              <select id="p_companyType" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+              <label for="p_companyType" class="block text-xs font-medium text-slate-200 mb-1">현재 회사 규모/형태</label>
+              <select id="p_companyType" aria-label="현재 회사 규모 및 형태" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
                 <option value="중견기업">중견기업 (신용평가/정보/제조 등)</option>
                 <option value="대기업">대기업 / 그룹사</option>
                 <option value="유니콘/스타트업">유니콘 / IT 스타트업</option>
@@ -250,27 +251,27 @@
             </h3>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">기본급 (연간)</label>
+              <label for="p_baseSalary" class="block text-xs font-medium text-slate-200 mb-1">기본급 (연간)</label>
               <div class="relative">
-                <input type="number" id="p_baseSalary" value="5400" step="50" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_baseSalary" aria-label="기본급 연간" value="5400" step="50" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
               <p class="text-[11px] text-slate-400 mt-1">세전 기준 확정 기본급 (퇴직금 제외)</p>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">고정수당 / 식대 (연간)</label>
+              <label for="p_allowance" class="block text-xs font-medium text-slate-200 mb-1">고정수당 / 식대 (연간)</label>
               <div class="relative">
-                <input type="number" id="p_allowance" value="400" step="10" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_allowance" aria-label="고정수당 및 식대 연간" value="400" step="10" oninput="triggerPassportUpdate()" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
               <p class="text-[11px] text-emerald-400 font-mono mt-1 font-semibold">확정 현금(Guaranteed): <span id="guaranteedSummary">5,800만 원</span></p>
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">경영성과급 / 인센티브 (직전연도 기준)</label>
+              <label for="p_bonus" class="block text-xs font-medium text-slate-200 mb-1">경영성과급 / 인센티브 (직전연도 기준)</label>
               <div class="relative">
-                <input type="number" id="p_bonus" value="500" step="50" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
+                <input type="number" id="p_bonus" aria-label="경영성과급 및 인센티브" value="500" step="50" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl pl-3.5 pr-12 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-indigo-500" />
                 <span class="absolute right-3 top-2.5 text-xs text-slate-400">만원</span>
               </div>
               <p class="text-[11px] text-slate-400 mt-1">달성 변동 보상</p>
@@ -282,7 +283,7 @@
                 <p class="text-[11px] text-slate-400">고정 연장근로수당 포함 계약</p>
               </div>
               <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="p_hasFixedOT" checked class="sr-only peer">
+                <input type="checkbox" id="p_hasFixedOT" aria-label="고정 연장근로수당 포함 계약 여부" checked class="sr-only peer">
                 <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
               </label>
             </div>
@@ -295,21 +296,21 @@
             </h3>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">현재 거주지</label>
-              <input type="text" id="p_location" value="경기도 군포시 (산본동)" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 경기도 군포시, 서울시 강남구" />
+              <label for="p_location" class="block text-xs font-medium text-slate-200 mb-1">현재 거주지</label>
+              <input type="text" id="p_location" aria-label="현재 거주지" value="경기도 군포시 (산본동)" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" placeholder="예: 경기도 군포시, 서울시 강남구" />
             </div>
 
             <div>
               <div class="flex justify-between items-center mb-1">
-                <label class="text-xs font-medium text-slate-200">편도 최대 허용 통근 시간</label>
+                <label for="p_commuteTol" class="text-xs font-medium text-slate-200">편도 최대 허용 통근 시간</label>
                 <span id="commuteVal" class="text-xs font-mono font-bold text-sky-400">60분 이내</span>
               </div>
-              <input type="range" id="p_commuteTol" min="20" max="120" value="60" oninput="document.getElementById('commuteVal').innerText = this.value + '분 이내'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
+              <input type="range" id="p_commuteTol" aria-label="편도 최대 허용 통근 시간" min="20" max="120" value="60" oninput="document.getElementById('commuteVal').innerText = this.value + '분 이내'; triggerPassportUpdate();" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
             </div>
 
             <div>
-              <label class="block text-xs font-medium text-slate-200 mb-1">보유 핵심 스킬셋 (쉼표로 구분)</label>
-              <textarea id="p_skills" rows="2" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">인사기획, 평가보상체계설계, 노무관리, 임금피크제, 직무분석, 취업규칙개정, AX(AI Transformation)</textarea>
+              <label for="p_skills" class="block text-xs font-medium text-slate-200 mb-1">보유 핵심 스킬셋 (쉼표로 구분)</label>
+              <textarea id="p_skills" aria-label="보유 핵심 스킬셋" rows="2" class="w-full bg-[#121a2d] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">인사기획, 평가보상체계설계, 노무관리, 임금피크제, 직무분석, 취업규칙개정, AX(AI Transformation)</textarea>
             </div>
 
             <!-- Configurable Hard Filter Section -->
@@ -328,32 +329,32 @@
               <!-- 6 Preset Checkbox Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_permanent" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_permanent" aria-label="정규직만 허용 체크박스" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">🔒 <strong>정규직만 허용</strong> <span class="text-slate-500 text-[11px]">(계약·파견직 배제)</span></span>
                 </label>
 
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_capital" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_capital" aria-label="수도권만 허용 체크박스" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">📍 <strong>수도권만 허용</strong> <span class="text-slate-500 text-[11px]">(지방 근무지 배제)</span></span>
                 </label>
 
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_commute" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_commute" aria-label="통근 허용 초과 배제 체크박스" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">🚗 <strong>통근 허용 초과 즉시 컷</strong> <span class="text-slate-500 text-[11px]" id="hf_commuteHint">(60분 초과 배제)</span></span>
                 </label>
 
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_fixedOT" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_fixedOT" aria-label="고정OT 20h 초과 배제 체크박스" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">⏰ <strong>고정OT 20h 초과 배제</strong> <span class="text-slate-500 text-[11px]">(과도한 포괄임금)</span></span>
                 </label>
 
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_salary" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_salary" aria-label="현재 보상 미만 배제 체크박스" onchange="triggerPassportUpdate()" class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">💰 <strong>현재 보상 미만 배제</strong> <span class="text-slate-500 text-[11px]">(역제안 방지)</span></span>
                 </label>
 
                 <label class="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-2.5 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                  <input type="checkbox" id="hf_relocation" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
+                  <input type="checkbox" id="hf_relocation" aria-label="지방 이전 순환 기관 배제 체크박스" onchange="triggerPassportUpdate()" checked class="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500" />
                   <span class="text-slate-200">🚫 <strong>지방 이전·순환 기관 배제</strong> <span class="text-slate-500 text-[11px]">(혁신도시 등)</span></span>
                 </label>
               </div>
@@ -365,7 +366,7 @@
                   <span class="text-slate-500">Enter 또는 [추가] 클릭</span>
                 </div>
                 <div class="flex space-x-2">
-                  <input type="text" id="hf_customInput" placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 인턴, 야간당직)..." class="flex-1 bg-[#0b101c] border border-[#233252] rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500" onkeydown="if(event.key==='Enter'){event.preventDefault();addCustomHardFilter();}" />
+                  <input type="text" id="hf_customInput" aria-label="배제할 단어 입력" placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 인턴, 야간당직)..." class="flex-1 bg-[#0b101c] border border-[#233252] rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500" onkeydown="if(event.key==='Enter'){event.preventDefault();addCustomHardFilter();}" />
                   <button type="button" onclick="addCustomHardFilter()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer transition">추가</button>
                 </div>
                 <div id="hf_keywordTags" class="flex flex-wrap gap-1.5 pt-1 min-h-[26px]">
@@ -526,7 +527,7 @@
 
           <!-- Search Input -->
           <div class="relative w-full md:w-72">
-            <input type="text" id="radarSearchInput" oninput="triggerRadarSearch()" placeholder="기업명, 직무, 기술스택 검색..." class="w-full bg-[#0b101c] border border-[#233252] rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
+            <input type="text" id="radarSearchInput" aria-label="기업명, 직무, 기술스택 검색" oninput="triggerRadarSearch()" placeholder="기업명, 직무, 기술스택 검색..." class="w-full bg-[#0b101c] border border-[#233252] rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
             <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
         </div>
@@ -543,7 +544,7 @@
             <span class="text-slate-400 text-[11px]">배제된 공고: <strong id="excludedCount" class="text-rose-400 font-mono">0</strong>건</span>
           </div>
           <label class="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
-            <input type="checkbox" id="showExcludedCheckbox" onchange="renderRadarJobs()" class="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500" />
+            <input type="checkbox" id="showExcludedCheckbox" aria-label="배제된 공고 포함하여 보기 토글" onchange="renderRadarJobs()" class="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500" />
             <span class="text-[11px]">배제된 공고 포함하여 보기</span>
           </label>
         </div>
@@ -596,7 +597,7 @@
               </div>
             </div>
 
-            <textarea id="scannerInput" rows="12" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-4 text-xs font-mono text-slate-100 focus:outline-none focus:border-indigo-500 custom-scroll leading-relaxed" placeholder="여기에 채용공고의 근로조건, 급여, 자격요건 텍스트를 붙여넣으세요..."></textarea>
+            <textarea id="scannerInput" aria-label="채용공고 본문 텍스트 입력" rows="12" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-4 text-xs font-mono text-slate-100 focus:outline-none focus:border-indigo-500 custom-scroll leading-relaxed" placeholder="여기에 채용공고의 근로조건, 급여, 자격요건 텍스트를 붙여넣으세요..."></textarea>
 
             <button type="button" onclick="runLaborScan()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-600 via-indigo-600 to-sky-600 hover:opacity-95 font-bold text-sm text-white shadow-lg transition flex items-center justify-center space-x-2 cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
@@ -645,42 +646,42 @@
           <div class="space-y-5 bg-[#0c1220] p-5 rounded-xl border border-[#1b253b]">
             <div>
               <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
-                <span>확정 연간 현금 (기본급 + 고정수당)</span>
+                <label for="c_cash">확정 연간 현금 (기본급 + 고정수당)</label>
                 <span id="calc_cash_label" class="font-mono text-emerald-400 font-bold text-sm">5,800만 원</span>
               </div>
-              <input type="range" id="c_cash" min="3000" max="15000" step="100" value="5800" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
+              <input type="range" id="c_cash" aria-label="확정 연간 현금" min="3000" max="15000" step="100" value="5800" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" />
             </div>
 
             <div>
               <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
-                <span>편도 통근 시간 (집 → 회사)</span>
+                <label for="c_commute">편도 통근 시간 (집 → 회사)</label>
                 <span id="calc_commute_label" class="font-mono text-sky-400 font-bold text-sm">50분</span>
               </div>
-              <input type="range" id="c_commute" min="10" max="120" step="5" value="50" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
+              <input type="range" id="c_commute" aria-label="편도 통근 시간" min="10" max="120" step="5" value="50" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-500" />
             </div>
 
             <div>
               <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
-                <span>월 예상 교통비 (대중교통 / 유류비)</span>
+                <label for="c_cost">월 예상 교통비 (대중교통 / 유류비)</label>
                 <span id="calc_cost_label" class="font-mono text-amber-400 font-bold text-sm">12만 원</span>
               </div>
-              <input type="range" id="c_cost" min="5" max="40" step="1" value="12" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" />
+              <input type="range" id="c_cost" aria-label="월 예상 교통비" min="5" max="40" step="1" value="12" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" />
             </div>
 
             <div>
               <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
-                <span>주간 재택 / 원격근무 일수</span>
+                <label for="c_remote">주간 재택 / 원격근무 일수</label>
                 <span id="calc_remote_label" class="font-mono text-indigo-400 font-bold text-sm">주 1일</span>
               </div>
-              <input type="range" id="c_remote" min="0" max="5" step="1" value="1" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
+              <input type="range" id="c_remote" aria-label="주간 재택 원격근무 일수" min="0" max="5" step="1" value="1" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500" />
             </div>
 
             <div>
               <div class="flex justify-between text-xs font-medium text-slate-200 mb-1">
-                <span>주당 실제 근로시간 (포괄 고정OT 포함)</span>
+                <label for="c_hours">주당 실제 근로시간 (포괄 고정OT 포함)</label>
                 <span id="calc_hours_label" class="font-mono text-rose-400 font-bold text-sm">주 48시간</span>
               </div>
-              <input type="range" id="c_hours" min="40" max="68" step="2" value="48" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500" />
+              <input type="range" id="c_hours" aria-label="주당 실제 근로시간" min="40" max="68" step="2" value="48" oninput="updateCalculator()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500" />
             </div>
           </div>
 
@@ -842,7 +843,7 @@
             </p>
           </div>
           <div class="flex items-center space-x-2">
-            <input type="text" id="ledgerSearch" oninput="filterLedger()" placeholder="기업명, 직무, 출처 검색..." class="bg-[#0b101c] border border-[#233252] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
+            <input type="text" id="ledgerSearch" oninput="filterLedger()" placeholder="기업명, 직무, 출처 검색..." aria-label="공식 공시 실측 원장 기업명, 직무, 출처 검색" class="bg-[#0b101c] border border-[#233252] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500" />
           </div>
         </div>
 
@@ -880,7 +881,7 @@
       <p class="text-xs text-slate-300">
         작성해둔 경력기술서나 이력서 텍스트를 붙여넣으시면 직무, 경력 연차, 핵심 스킬을 자동으로 추출해 Career Passport에 채워 넣습니다.
       </p>
-      <textarea id="resumeInputText" rows="8" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500" placeholder="예: [경력사항] ecredible 인사기획팀 7년 근무, 임금체계 개편, 평가제도 설계, 노무관리 및 취업규칙 개정..."></textarea>
+      <textarea id="resumeInputText" aria-label="이력서 또는 경력기술서 원문 텍스트" rows="8" class="w-full bg-[#0b101c] border border-[#233252] rounded-xl p-3 text-xs font-mono text-white focus:outline-none focus:border-indigo-500" placeholder="예: [경력사항] ecredible 인사기획팀 7년 근무, 임금체계 개편, 평가제도 설계, 노무관리 및 취업규칙 개정..."></textarea>
       <div class="flex justify-end space-x-2 pt-2">
         <button type="button" onclick="closeResumeParserModal()" class="px-4 py-2 rounded-xl bg-[#18233c] text-xs font-semibold text-slate-300 cursor-pointer">취소</button>
         <button type="button" onclick="executeResumeParse()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white cursor-pointer">자동 추출 적용</button>
@@ -1127,12 +1128,12 @@
           <div class="font-bold text-sm text-slate-200 pb-2 border-b border-[#1e2a44]">기타 절대 조건</div>
           <div class="space-y-3 mt-2">
             <div>
-              <label class="text-xs text-slate-400 block mb-1">최소 희망 연봉 (만원)</label>
-              <input type="number" id="ds_min_salary" placeholder="예: 6000" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
+              <label for="ds_min_salary" class="text-xs text-slate-400 block mb-1">최소 희망 연봉 (만원)</label>
+              <input type="number" id="ds_min_salary" placeholder="예: 6000" aria-label="최소 희망 연봉 (만원)" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
             </div>
             <div>
-              <label class="text-xs text-slate-400 block mb-1">최대 출퇴근 허용 시간 (분)</label>
-              <input type="number" id="ds_max_commute" placeholder="예: 60" value="60" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
+              <label for="ds_max_commute" class="text-xs text-slate-400 block mb-1">최대 출퇴근 허용 시간 (분)</label>
+              <input type="number" id="ds_max_commute" placeholder="예: 60" value="60" aria-label="최대 출퇴근 허용 시간 (분)" class="w-full bg-[#121a2d] border border-[#233252] rounded pl-2 py-1 text-xs text-white" />
             </div>
           </div>
         </div>
