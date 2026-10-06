@@ -338,6 +338,18 @@ async function main() {
   } else {
     console.log('\n[SUCCESS] Local index.html passed all Hard-Tests cleanly!');
   }
+
+  // Also verify live GitHub Pages URL
+  try {
+    const liveResults = await runAudit(liveUrl, 'LIVE PRODUCTION (GitHub Pages)');
+    if (liveResults.failed.length > 0) {
+      console.log(`\n[ALERT] Live audit found ${liveResults.failed.length} failures.`);
+    } else {
+      console.log('\n[SUCCESS] Live GitHub Pages passed all Hard-Tests cleanly!');
+    }
+  } catch (err) {
+    console.warn(`\n[WARNING] Live audit skipped or timed out: ${err.message}`);
+  }
 }
 
 main().catch(err => {
