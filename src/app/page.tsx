@@ -381,7 +381,7 @@ export default function Home() {
   const selectedTrack = EXPANDED_SKILL_GAP_TRACKS.find((t) => t.id === activeSkillTrackId) || EXPANDED_SKILL_GAP_TRACKS[0];
 
   return (
-    <div className="min-h-screen bg-[#080b11] text-slate-100 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#162035] border border-indigo-500/60 text-indigo-200 px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 animate-bounce">
@@ -391,7 +391,7 @@ export default function Home() {
       )}
 
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#080b11]/90 border-b border-[#1b2234]">
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0b0f19]/90 border-b border-[#1b2234]">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
@@ -846,158 +846,140 @@ export default function Home() {
 
         {activeTab === "radar" && (
           <div className="space-y-5">
-            {/* Multi-Source Live Crawler Network Monitor Banner */}
-            <div className="bg-gradient-to-r from-[#12192b] via-[#101728] to-[#0c1220] border border-[#233555] rounded-2xl p-5 space-y-3 shadow-xl">
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b border-[#1b253b] pb-3">
+            {/* Guide & Live Crawler Status Banner */}
+            <div className="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-9 h-9 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold text-lg">🎯</div>
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold flex items-center space-x-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <span>UNIVERSAL CRAWLER NETWORK ACTIVE</span>
+                    <h3 className="font-bold text-white text-sm">2단계: AI 맞춤 추천 공고 탐색</h3>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold flex items-center space-x-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span>18개 자체 수집망 실시간 가동 중</span>
                     </span>
-                    <span className="text-xs text-slate-400">24/7 실시간 크롤링 파이프라인</span>
                   </div>
-                  <h3 className="text-base font-bold text-white mt-1 flex items-center space-x-2">
-                    <span>🌐 기업 자체 채용 ATS · Big4/MBB · 공공기관(ALIO) 통합 수집망</span>
-                  </h3>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    국내 대형 잡포털에 올라오지 않고 <strong>회사 자체 채용사이트(Closed ATS)와 ALIO에만 단독 게재되는 숨은 알짜 공고</strong>를 실시간 탐색·인덱싱합니다.
-                  </p>
-                </div>
-                <div className="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-end">
-                  <div className="text-right">
-                    <div className="text-[11px] text-slate-400">연동 수집 도메인</div>
-                    <div className="text-sm font-bold font-mono text-indigo-400">
-                      {crawlerStats.activeSources}개 시스템 / {jobsWithScores.length}건 분석
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setIsCrawlerModalOpen(true)}
-                    className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md shadow-indigo-600/30 transition flex items-center space-x-1 cursor-pointer whitespace-nowrap"
-                  >
-                    <span>수집망 18곳 검증 🔍</span>
-                  </button>
+                  <p className="text-slate-400 text-xs mt-0.5">대형 잡포털에 올라오지 않는 대기업 자사 채용 사이트 및 공공기관(ALIO) 공고를 내 프로필과 실시간 매칭합니다.</p>
                 </div>
               </div>
-
-              {/* Source Category Quick Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
-                <div
-                  onClick={() => setRadarFilter("consulting")}
-                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
-                    radarFilter === "consulting" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
-                  }`}
-                >
-                  <div className="font-semibold text-slate-200">💼 회계·전략컨설팅</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Deloitte, PwC, KPMG, EY, McKinsey, BCG</div>
-                </div>
-                <div
-                  onClick={() => setRadarFilter("public")}
-                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
-                    radarFilter === "public" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
-                  }`}
-                >
-                  <div className="font-semibold text-slate-200">🏛️ 공공기관 / 국책금융</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">ALIO 통합경영공시, 수은, 한전, 건보, 신보</div>
-                </div>
-                <div
-                  onClick={() => setRadarFilter("conglomerate")}
-                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
-                    radarFilter === "conglomerate" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
-                  }`}
-                >
-                  <div className="font-semibold text-slate-200">🏭 대기업 자사채용</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Samsung, SK Careers, Hyundai Talent, LG</div>
-                </div>
-                <div
-                  onClick={() => setRadarFilter("globalTech")}
-                  className={`p-2.5 rounded-xl border transition cursor-pointer ${
-                    radarFilter === "globalTech" ? "bg-indigo-950/60 border-indigo-500 text-indigo-300" : "bg-[#0a0e18] border-[#18233a] hover:border-slate-700 text-slate-300"
-                  }`}
-                >
-                  <div className="font-semibold text-slate-200">🌐 글로벌 테크 / 외투</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">AWS, MS, Coupang Workday, Deel, Moloco</div>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsCrawlerModalOpen(true)}
+                className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition whitespace-nowrap shadow-sm"
+              >
+                수집망 18곳 보기 🔍
+              </button>
             </div>
 
-            {/* Radar Header & Controls */}
-            <div className="bg-[#101625] p-5 rounded-2xl border border-[#1d273d] space-y-4">
+            {/* Structured Search & Filters */}
+            <div className="bg-[#0f172a] p-5 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                 <div>
-                  <h2 className="text-lg font-bold text-white flex items-center space-x-2">
-                    <span>📡 Opportunity Radar</span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                      실시간 온톨로지 매칭 가동 중
+                  <h2 className="text-base font-bold text-white flex items-center space-x-2">
+                    <span>📡 공고 조건 검색 및 필터</span>
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-normal">
+                      총 {filteredJobs.length}건 추천됨
                     </span>
                   </h2>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    내 Passport(경력 {passport.totalYears}년차, 통근 허용 {passport.commuteToleranceMinutes}분)에 맞춰 실시간으로 재계산됩니다.
-                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5">내 희망 통근({passport.commuteToleranceMinutes}분) 및 경력({passport.totalYears}년차) 기준이 반영되어 있습니다.</p>
                 </div>
-                <div className="w-full md:w-72">
+                <div className="w-full md:w-80">
                   <input
                     type="text"
-                    placeholder="기업명, 공고명, 직무 검색..."
+                    placeholder="🔍 기업명, 공고명, 직무 키워드 검색..."
                     value={radarSearch}
                     onChange={(e) => setRadarSearch(e.target.value)}
-                    className="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
                   />
                 </div>
               </div>
 
-              {/* Hard Filter Status & Show Excluded Toggle */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 border-t border-[#192235] text-xs">
-                <div className="flex items-center space-x-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 font-semibold text-[11px] flex items-center space-x-1">
-                    <span>🛡️ Hard Filter 가동 중</span>
-                  </span>
-                  <span className="text-slate-400 text-xs">
-                    배제된 공고: <strong className="text-rose-400 font-mono">{excludedCount}</strong>건
-                  </span>
+              {/* 3-Group Filter Controller */}
+              <div className="space-y-3 pt-3 border-t border-slate-800/80 text-xs">
+                {/* Group 1: 직군 분류 */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-slate-400 font-semibold text-[11px] w-16">직군 분야:</span>
+                  {[
+                    { id: "all", label: "전체 직군" },
+                    { id: "tech", label: "💻 IT·개발·데이터" },
+                    { id: "finance", label: "💰 금융·재무·회계" },
+                    { id: "marketing", label: "📢 마케팅·그로스" },
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setRadarFilter(f.id as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
+                        radarFilter === f.id
+                          ? "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30"
+                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
                 </div>
-                <label className="flex items-center space-x-1.5 text-xs text-slate-300 hover:text-white cursor-pointer select-none">
+
+                {/* Group 2: 기업 유형 */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-slate-400 font-semibold text-[11px] w-16">기업 유형:</span>
+                  {[
+                    { id: "exclusive", label: "🏢 자사사이트 단독 (잡포털 미노출)" },
+                    { id: "conglomerate", label: "🏭 대기업 / 중견그룹" },
+                    { id: "public", label: "🏛️ 공공기관 / 국책금융 (ALIO)" },
+                    { id: "consulting", label: "💼 Big4·전략컨설팅" },
+                    { id: "globalTech", label: "🌐 글로벌 테크 / 외투" },
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setRadarFilter(f.id as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
+                        radarFilter === f.id
+                          ? "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30"
+                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Group 3: 핵심 혜택 및 조건 */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-slate-400 font-semibold text-[11px] w-16">핵심 조건:</span>
+                  {[
+                    { id: "entry", label: "🎓 신입 / 인턴 우선" },
+                    { id: "highMatch", label: "🎯 적합도 85%+ 강력 추천" },
+                    { id: "commuteFit", label: `🚗 통근 ${passport.commuteToleranceMinutes}분 이내` },
+                    { id: "nonOT", label: "🌟 비포괄 임금제 (야근수당 별도)" },
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setRadarFilter(f.id as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
+                        radarFilter === f.id
+                          ? "bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/30"
+                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                      }`}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Hard Filter Toggle */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
+                <span className="text-slate-400">
+                  🛡️ 절대 배제 조건(지방 근무, 계약직 등)에 걸려 <strong className="text-rose-400 font-mono">{excludedCount}건</strong>이 자동 제외되었습니다.
+                </span>
+                <label className="flex items-center space-x-1.5 text-slate-300 hover:text-white cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={showExcludedJobs}
                     onChange={(e) => setShowExcludedJobs(e.target.checked)}
                     className="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500"
                   />
-                  <span className="text-xs">배제된 공고 포함하여 보기</span>
+                  <span>배제된 공고도 함께 보기</span>
                 </label>
-              </div>
-
-              {/* Filter Pills */}
-              <div className="flex flex-wrap gap-2 text-xs pt-1 border-t border-[#192235]">
-                {[
-                  { id: "all", label: `전체 공고 (${jobsWithScores.length}건)` },
-                  { id: "entry", label: "🎓 신입/인턴 공고" },
-                  { id: "tech", label: "💻 IT·개발·데이터" },
-                  { id: "finance", label: "💰 금융·재무·회계" },
-                  { id: "marketing", label: "📢 마케팅·그로스" },
-                  { id: "exclusive", label: "🏢 자사사이트 독점 (잡포털 미노출)" },
-                  { id: "consulting", label: "💼 Big4·전략컨설팅 (자사 ATS)" },
-                  { id: "public", label: "🏛️ 공공기관 / 국책금융 (ALIO)" },
-                  { id: "conglomerate", label: "🏭 대기업 / 중견그룹" },
-                  { id: "globalTech", label: "🌐 글로벌 테크 / 외투기업" },
-                  { id: "tierA", label: "공시/확정 연봉 (Tier A)" },
-                  { id: "highMatch", label: "적합도 85%+ 강력 추천" },
-                  { id: "commuteFit", label: `통근 ${passport.commuteToleranceMinutes}분 이내` },
-                  { id: "nonOT", label: "비포괄 임금제 🌟" },
-                ].map((f) => (
-                  <button
-                    key={f.id}
-                    onClick={() => setRadarFilter(f.id as any)}
-                    className={`px-3 py-1.5 rounded-xl transition ${
-                      radarFilter === f.id
-                        ? "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30"
-                        : "bg-[#0c101a] text-slate-300 hover:bg-[#18233a] border border-[#1d273d]"
-                    }`}
-                  >
-                    {f.label}
-                  </button>
-                ))}
               </div>
             </div>
 
@@ -1011,154 +993,157 @@ export default function Home() {
                 filteredJobs.map(({ job, match, hf }) => (
                   <div
                     key={job.id}
-                    className={`bg-[#101625] hover:bg-[#141b2e] border ${
+                    className={`group bg-[#0f172a] hover:bg-[#131d35] border ${
                       hf.isExcluded
                         ? "border-rose-900/60 opacity-60 hover:opacity-100"
-                        : "border-[#1d273d] hover:border-indigo-500/40"
-                    } rounded-2xl p-5 space-y-4 transition flex flex-col justify-between shadow-lg`}
+                        : "border-slate-800 hover:border-indigo-500/50"
+                    } rounded-2xl p-5 space-y-4 transition-all duration-200 flex flex-col justify-between shadow-lg shadow-black/20`}
                   >
                     <div>
-                      {/* Hard Filter Exclusion Banner if excluded */}
+                      {/* Hard Filter Exclusion Banner */}
                       {hf.isExcluded && (
-                        <div className="mb-3 p-2.5 bg-rose-950/40 border border-rose-500/50 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-1.5">
-                          <span className="flex-shrink-0">🚫</span>
+                        <div className="mb-3 p-3 bg-rose-950/40 border border-rose-500/40 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-2">
+                          <span className="text-base leading-none">🚫</span>
                           <div>
-                            <span className="font-bold text-rose-400">[절대 배제 기준 위반]</span>
-                            <span className="text-[11px] text-rose-200 ml-1">{hf.exclusionReasons.join(" • ")}</span>
+                            <span className="font-bold text-rose-400">[내 절대 배제 조건 위반]</span>
+                            <span className="text-[11px] text-rose-200 ml-1.5">{hf.exclusionReasons.join(" • ")}</span>
                           </div>
                         </div>
                       )}
 
-                      {/* Top Header */}
-                      <div className="flex justify-between items-start">
-                        <div>
+                      {/* Header: Company & Title & Fit Score */}
+                      <div className="flex justify-between items-start gap-3">
+                        <div className="space-y-1">
                           <div className="flex flex-wrap items-center gap-1.5">
-                            <span className="text-xs font-bold text-slate-300">{job.company}</span>
-                            <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                            <span className="text-sm font-bold text-slate-200">{job.company}</span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 font-medium">
                               {job.industry}
                             </span>
                             {job.isCompanyExclusive && (
-                              <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold flex items-center space-x-1">
-                                <span>🏢 자사 사이트 단독</span>
+                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold">
+                                🏢 자사 사이트 단독
+                              </span>
+                            )}
+                            {job.isEntryLevel && (
+                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">
+                                🎓 신입·인턴
                               </span>
                             )}
                           </div>
-                          <h3 className="text-base font-bold text-white mt-1">{job.title}</h3>
-                          <p className="text-[11px] text-indigo-400 font-mono mt-0.5">표준 직무: {job.canonicalRole}</p>
+                          <h3 className="text-base font-extrabold text-white group-hover:text-indigo-200 transition">
+                            {job.title}
+                          </h3>
+                          <p className="text-xs text-indigo-400 font-medium">직무 카테고리: {job.canonicalRole}</p>
                         </div>
-                        <div className="text-right">
+
+                        {/* Fit Score Badge */}
+                        <div className="flex-shrink-0 text-center bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-xl">
                           <span
-                            className={`text-xl font-mono font-extrabold ${
+                            className={`text-2xl font-mono font-black block leading-none ${
                               match.totalScore >= 88 ? "text-emerald-400" : match.totalScore >= 75 ? "text-sky-400" : "text-amber-400"
                             }`}
                           >
                             {match.totalScore}%
                           </span>
-                          <span className="block text-[10px] font-bold text-slate-400">FIT SCORE</span>
+                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">AI 적합도</span>
                         </div>
                       </div>
 
-                      {/* Score Breakdown Bars */}
-                      <div className="grid grid-cols-4 gap-2 pt-2 pb-1 text-[10px]">
-                        <div>
-                          <span className="text-slate-400">직무 적합</span>
-                          <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
-                            <div className="bg-indigo-500 h-full" style={{ width: `${match.roleFit}%` }}></div>
-                          </div>
+                      {/* Clean 4-Metric Grid */}
+                      <div className="grid grid-cols-4 gap-2 py-3 border-y border-slate-800/80 my-3 text-[11px]">
+                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
+                          <span className="text-slate-400 text-[10px] block">직무 일치</span>
+                          <span className="font-bold text-indigo-400 font-mono text-xs">{match.roleFit}%</span>
                         </div>
-                        <div>
-                          <span className="text-slate-400">연차 적합</span>
-                          <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
-                            <div className="bg-sky-500 h-full" style={{ width: `${match.seniorityFit}%` }}></div>
-                          </div>
+                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
+                          <span className="text-slate-400 text-[10px] block">연차 충족</span>
+                          <span className="font-bold text-sky-400 font-mono text-xs">{match.seniorityFit}%</span>
                         </div>
-                        <div>
-                          <span className="text-slate-400">통근 거리</span>
-                          <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
-                            <div className="bg-emerald-500 h-full" style={{ width: `${match.commuteFit}%` }}></div>
-                          </div>
+                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
+                          <span className="text-slate-400 text-[10px] block">통근 여건</span>
+                          <span className="font-bold text-emerald-400 font-mono text-xs">{match.commuteFit}%</span>
                         </div>
-                        <div>
-                          <span className="text-slate-400">보상 상승</span>
-                          <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1">
-                            <div className="bg-purple-500 h-full" style={{ width: `${match.salaryFit}%` }}></div>
-                          </div>
+                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
+                          <span className="text-slate-400 text-[10px] block">보상 수준</span>
+                          <span className="font-bold text-purple-400 font-mono text-xs">{match.salaryFit}%</span>
                         </div>
                       </div>
 
-                      {/* Meta Info */}
-                      <div className="flex flex-wrap items-center gap-2 text-xs pt-2">
-                        <span
-                          className={`px-2 py-0.5 rounded font-bold font-mono text-[11px] ${
-                            job.salaryTier === "A"
-                              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                              : job.salaryTier === "B"
-                              ? "bg-sky-500/20 text-sky-400 border border-sky-500/30"
-                              : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                          }`}
-                        >
-                          Tier {job.salaryTier}
-                        </span>
-                        <span className="font-mono text-slate-100 font-bold text-xs">{job.salaryDisplay}</span>
-                        <span className="text-slate-400 text-xs">
-                          | 🚗 편도 {job.commuteMinutes}분
+                      {/* Salary & Commute Highlight Bar */}
+                      <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-900/80 border border-slate-800/90 p-2.5 rounded-xl text-xs">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-semibold text-slate-300">💰 예상 연봉:</span>
+                          <span className="font-mono text-slate-100 font-bold">{job.salaryDisplay}</span>
+                          <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold ${
+                            job.salaryTier === "A" ? "bg-emerald-500/20 text-emerald-400" : "bg-sky-500/20 text-sky-400"
+                          }`}>
+                            Tier {job.salaryTier}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-1.5 text-slate-300">
+                          <span>🚗 편도 {job.commuteMinutes}분</span>
                           {job.commuteMinutes <= (passport.commuteToleranceMinutes || 60) ? (
-                            <span className="text-emerald-400 ml-1">✓ 안심</span>
+                            <span className="text-emerald-400 font-semibold text-[11px]">(통근 안심)</span>
                           ) : (
-                            <span className="text-amber-400 ml-1">⚠️ 주의</span>
+                            <span className="text-amber-400 font-semibold text-[11px]">(장거리 통근)</span>
                           )}
-                        </span>
+                        </div>
                       </div>
 
-                      {/* Matched Points & Gaps */}
-                      <div className="space-y-1 text-xs border-t border-[#1a2336] pt-3 mt-3">
+                      {/* Key Reasons Checklist */}
+                      <div className="space-y-1 text-xs pt-3">
                         {match.matchedReasons.slice(0, 2).map((reason, idx) => (
                           <div key={idx} className="text-emerald-400 text-[11px] flex items-center space-x-1.5">
-                            <span>✓</span>
+                            <span className="font-bold">✓</span>
                             <span>{reason}</span>
                           </div>
                         ))}
                         {match.gapReasons.slice(0, 1).map((gap, idx) => (
                           <div key={idx} className="text-amber-400 text-[11px] flex items-center space-x-1.5">
-                            <span>▲</span>
+                            <span className="font-bold">▲</span>
                             <span>{gap}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Bottom CTA with Direct URL Link */}
-                    <div className="pt-3 border-t border-[#1a2336] flex flex-wrap justify-between items-center gap-2">
+                    {/* Bottom Action Footer */}
+                    <div className="pt-3 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
                       <div className="flex items-center space-x-1.5 text-[11px] text-slate-400">
-                        <span className="px-2 py-0.5 rounded bg-[#0a0f1c] border border-[#233555] font-mono text-slate-300 text-[10px]">
+                        <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 font-mono text-slate-300 text-[10px]">
                           {job.sourceSystem || job.sourceName}
                         </span>
-                        {job.isCompanyExclusive ? (
-                          <span className="text-purple-400 font-medium text-[10px]">★ 잡포털 미게시</span>
-                        ) : (
-                          <span className="text-slate-500 text-[10px]">오픈포털</span>
+                        {!job.hasFixedOT && (
+                          <span className="text-emerald-400 font-bold text-[10px]">★ 비포괄(수당별도)</span>
                         )}
                       </div>
                       <div className="flex items-center space-x-2">
+                        <button
+                          type="button"
+                          onClick={() => openJobDetail(job, match, hf)}
+                          className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition"
+                        >
+                          상세 분석 🔍
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => sendJobToScanner(job)}
+                          className="px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-semibold transition"
+                        >
+                          노동법 진단 ⚖️
+                        </button>
                         <a
                           href={job.jobUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-xl bg-sky-600/20 hover:bg-sky-600/40 text-sky-300 border border-sky-500/30 text-xs font-semibold flex items-center space-x-1 transition"
+                          className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white text-xs font-bold transition shadow-sm"
                         >
-                          <span>공고 원문 ↗</span>
+                          지원 원문 ↗
                         </a>
-                        <button
-                          onClick={() => openJobDetail(job, match, hf)}
-                          className="px-3.5 py-1.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/40 text-xs font-bold transition"
-                        >
-                          상세 진단 ➔
-                        </button>
                       </div>
                     </div>
                   </div>
-                ))
-              )}
+                )))}
             </div>
           </div>
         )}
