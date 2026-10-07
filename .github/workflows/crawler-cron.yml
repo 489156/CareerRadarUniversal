@@ -1,0 +1,36 @@
+name: Daily Data Crawler & Sync
+
+on:
+  schedule:
+    - cron: '0 15 * * *' # 매일 한국 시간 자정 (UTC 15:00)
+  workflow_dispatch: # 수동 실행 가능
+
+jobs:
+  crawl-and-sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run Crawler & Supabase Sync
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node scripts/crawl.mjs
+        
+      - name: Commit and push static fallback (if changes exist)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/jobs.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): auto-update daily jobs [skip ci]" && git push)

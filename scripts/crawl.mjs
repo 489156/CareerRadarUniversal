@@ -540,33 +540,36 @@ function generateDiverseVerifiedSeedJobs() {
   ];
 }
 
-async function injectIntoSource(jobs) {
-  // 1. Inject jobs into matcher.ts
-  const matcherPath = path.join(__dirname, '..', 'src', 'lib', 'matcher.ts');
-  if (fs.existsSync(matcherPath)) {
-    let matcherContent = fs.readFileSync(matcherPath, 'utf-8');
-    const regex = /(export const MOCK_JOB_DATABASE:\s*JobPosting\[\]\s*=\s*)\[[\s\S]*?\];/;
-    const newContent = `$1${JSON.stringify(jobs, null, 2)};`;
-    matcherContent = matcherContent.replace(regex, newContent);
-    fs.writeFileSync(matcherPath, matcherContent, 'utf-8');
+async function syncToSupabase(jobs) {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    console.log("No Supabase credentials found. Skipping DB sync. (Using local JSON only)");
+    return;
   }
   
-  // 2. Inject jobs into index.html
-  const indexPath = path.join(__dirname, '..', 'index.html');
-  if (fs.existsSync(indexPath)) {
-    let indexContent = fs.readFileSync(indexPath, 'utf-8');
-    const indexRegex = /(const ALL_JOBS\s*=\s*)\[[\s\S]*?\];/;
-    indexContent = indexContent.replace(indexRegex, `$1${JSON.stringify(jobs, null, 2)};`);
-    fs.writeFileSync(indexPath, indexContent, 'utf-8');
+  try {
+    // Dynamically import supabase-js if needed, or just use fetch REST API for zero-dependency
+    console.log(`Syncing ${jobs.length} jobs to Supabase...`);
+    const res = await fetch(`${supabaseUrl}/rest/v1/jobs?on_conflict=id`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify(jobs)
+    });
+    
+    if (!res.ok) {
+      throw new Error(`Supabase Sync Failed: ${res.status} ${await res.text()}`);
+    }
+    console.log("Successfully synced all jobs to Supabase!");
+  } catch (err) {
+    console.error("Supabase sync error:", err.message);
   }
-
-  // 3. Inject jobs into mobile/assets/data/jobs.json
-  const mobileDataPath = path.join(__dirname, '..', 'mobile', 'assets', 'data');
-  if (fs.existsSync(mobileDataPath)) {
-    fs.writeFileSync(path.join(mobileDataPath, 'jobs.json'), JSON.stringify(jobs, null, 2), 'utf-8');
-  }
-  
-  console.log("Successfully injected sanitized multi-track jobs into matcher.ts, index.html, and mobile assets!");
 }
 
 async function main() {
@@ -586,7 +589,7 @@ async function main() {
   fs.writeFileSync(cachePath, JSON.stringify(allJobs, null, 2), 'utf-8');
   console.log(`Saved total ${allJobs.length} sanitized jobs to public/data/jobs.json`);
   
-  await injectIntoSource(allJobs);
+  await syncToSupabase(allJobs);
 }
 
 main().catch(console.error);

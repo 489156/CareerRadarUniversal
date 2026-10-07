@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:chrome": "node scripts/chrome-hard-test.mjs",
-    "self-heal": "node scripts/self-heal.mjs"
+    "test:chrome": "node scripts/chrome-hard-test.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

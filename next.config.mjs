@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Cloudflare Pages / Static Hosting friendly
-  output: process.env.NEXT_EXPORT ? 'export' : undefined,
+  output: 'export',
+  images: { unoptimized: true },
   experimental: {
     cpus: 1,
   },

@@ -1,5 +1,6 @@
-export type OccupationType = 'HR' | 'PLANNING' | 'TECH' | 'MARKETING' | 'FINANCE';
-
+export type OccupationType = 'HR' | 'PLANNING' | 'TECH' | 'MARKETING' | 'FINANCE' | 'SALES' | 'DESIGN';
+export type CompanyTier = 'TIER_1_BIGTECH' | 'TIER_2_CONGLOMERATE' | 'TIER_3_FINANCE_PUBLIC' | 'TIER_4_SME_STARTUP';
+export type Industry = 'IT' | 'FINANCE' | 'MANUFACTURING' | 'SERVICE' | 'PUBLIC';
 export interface CareerPassport {
   id?: string;
   track?: 'ENTRY' | 'EXPERIENCED';

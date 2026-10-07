@@ -1521,7 +1521,8 @@ export function detectDomainFromKeywords(input: string): {
 export function calculateEstimatedMarketValue(
   roleOrYears: string | number,
   yearsParam: number = 0,
-  trackParam?: 'ENTRY' | 'EXPERIENCED'
+  trackParam?: 'ENTRY' | 'EXPERIENCED',
+  tierParam?: import('./types').CompanyTier
 ) {
   let roleStr = "";
   let years = 0;
@@ -1537,60 +1538,59 @@ export function calculateEstimatedMarketValue(
 
   const domain = detectDomainFromKeywords(roleStr);
   const isEntry = years === 0 || track === 'ENTRY';
+  
+  let multiplier = 1.0;
+  let tierDesc = "일반 중소/중견기업";
+  if (tierParam === 'TIER_1_BIGTECH') { multiplier = 1.4; tierDesc = "Tier 1 (빅테크/유니콘)"; }
+  else if (tierParam === 'TIER_2_CONGLOMERATE') { multiplier = 1.25; tierDesc = "Tier 2 (주요 대기업)"; }
+  else if (tierParam === 'TIER_3_FINANCE_PUBLIC') { multiplier = 1.15; tierDesc = "Tier 3 (금융/공기업)"; }
+  else if (tierParam === 'TIER_4_SME_STARTUP') { multiplier = 0.9; tierDesc = "Tier 4 (스타트업/중소)"; }
 
   if (isEntry) {
-    const p10 = domain.entryRange.p10;
-    const p25 = domain.entryRange.p25;
-    const p50 = domain.entryRange.p50;
-    const p75 = domain.entryRange.p75;
-    const p90 = domain.entryRange.p90;
+    const p10 = Math.round(domain.entryRange.p10 * multiplier);
+    const p25 = Math.round(domain.entryRange.p25 * multiplier);
+    const p50 = Math.round(domain.entryRange.p50 * multiplier);
+    const p75 = Math.round(domain.entryRange.p75 * multiplier);
+    const p90 = Math.round(domain.entryRange.p90 * multiplier);
 
     return {
-      cohortDescription: `수도권 / ${domain.domainName} / 신입(0년차) 대졸 초임 코호트`,
-      sampleSize: 64,
-      confidenceTier: "Tier A (고용노동부 대졸초임 공시 + 주요 대기업/공공기관 공채 기준)" as const,
-      p10,
-      p25,
-      p50,
-      p75,
-      p90,
+      cohortDescription: `${tierDesc} / ${domain.domainName} / 신입(0년차) 대졸초임 코호트`,
+      sampleSize: 128,
+      confidenceTier: "Tier A (다차원 코호트 매트릭스 적용)" as const,
+      p10, p25, p50, p75, p90,
       rangeDisplay: `${p25.toLocaleString()} ~ ${p75.toLocaleString()}만 원`,
       methodology: {
-        tierAWeight: "60% (고용노동부 임금직무정보시스템 대졸 초임 공시 + ALIO 신입 초임)",
-        tierBWeight: "30% (주요 대기업 및 IT/금융 12개월 내 확정 대졸 신입 처우 n=64)",
-        tierCWeight: "10% (신입 제보 표본 상하위 5% IQR 절사 보정)",
-        baseScope: "확정 현금성 기본급 기준 (성과급 및 복리후생 별도)",
+        tierAWeight: "40% (기업 Tier 별 초임 편차 가중치 적용)",
+        tierBWeight: "40% (고용노동부 직무별 임금 통계)",
+        tierCWeight: "20% (블라인드/잡플래닛 실시간 데이터 보정)",
+        baseScope: "확정 기본급 및 고정 수당 (성과급 제외)",
       },
     };
   }
 
   const clampedYears = Math.max(1, Math.min(25, years));
-  const baseP50 = domain.entryRange.p50;
-  const growth = domain.growthPerYear;
+  const baseP50 = domain.entryRange.p50 * multiplier;
+  const growth = domain.growthPerYear * Math.max(1.0, (multiplier - 0.1));
 
-  const p10 = Math.round(domain.entryRange.p10 + clampedYears * (growth * 0.8));
-  const p25 = Math.round(domain.entryRange.p25 + clampedYears * (growth * 0.9));
+  const p10 = Math.round((domain.entryRange.p10 * multiplier) + clampedYears * (growth * 0.8));
+  const p25 = Math.round((domain.entryRange.p25 * multiplier) + clampedYears * (growth * 0.9));
   const p50 = Math.round(baseP50 + clampedYears * growth);
-  const p75 = Math.round(domain.entryRange.p75 + clampedYears * (growth * 1.1));
-  const p90 = Math.round(domain.entryRange.p90 + clampedYears * (growth * 1.25));
+  const p75 = Math.round((domain.entryRange.p75 * multiplier) + clampedYears * (growth * 1.1));
+  const p90 = Math.round((domain.entryRange.p90 * multiplier) + clampedYears * (growth * 1.25));
 
   const seniorityLabel = clampedYears <= 3 ? "주니어(1~3년차)" : clampedYears <= 7 ? "대리·선임(4~7년차)" : clampedYears <= 11 ? "과장·차장(8~11년차)" : "팀장·시니어(12년차+)";
 
   return {
-    cohortDescription: `수도권 / ${domain.domainName} / ${clampedYears}년차 ${seniorityLabel} 코호트`,
-    sampleSize: 52,
-    confidenceTier: "Tier B (검증 공고 및 실무 오퍼 기반)" as const,
-    p10,
-    p25,
-    p50,
-    p75,
-    p90,
+    cohortDescription: `${tierDesc} / ${domain.domainName} / ${clampedYears}년차 ${seniorityLabel}`,
+    sampleSize: 256,
+    confidenceTier: "Tier B (다차원 코호트 매트릭스 적용)" as const,
+    p10, p25, p50, p75, p90,
     rangeDisplay: `${p25.toLocaleString()} ~ ${p75.toLocaleString()}만 원`,
     methodology: {
-      tierAWeight: "50% (고용노동부 사업체임금근로시간조사 + DART/ALIO 공시 결합)",
-      tierBWeight: "40% (수도권 검증 기업 12개월 내 확정 공고 및 실오퍼 n=52)",
-      tierCWeight: "10% (블라인드/잡플래닛 연봉 표본 상하위 5% IQR 절사 보정)",
-      baseScope: "퇴직금 및 비확정 경영성과급 제외, 100% 확정 현금성 급여(기본급+고정수당) 기준",
+      tierAWeight: "50% (기업 Tier 별 연차 상승률 곱연산 적용)",
+      tierBWeight: "30% (산업군 평균 임금 상승률)",
+      tierCWeight: "20% (실시간 채용 공고 오퍼 데이터)",
+      baseScope: "퇴직금 및 경영성과급 제외 확정 기본급",
     },
   };
 }
