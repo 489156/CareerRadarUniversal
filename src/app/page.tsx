@@ -38,6 +38,7 @@ export default function Home() {
 
   // Passport state
   const [passport, setPassport] = useState<CareerPassport>({
+    track: "EXPERIENCED",
     occupation: "HR",
     canonicalRole: "인사기획 (HR Planning)",
     totalYears: 7,
@@ -97,7 +98,7 @@ export default function Home() {
   // Radar Search & Filter
   const [radarSearch, setRadarSearch] = useState("");
   const [radarFilter, setRadarFilter] = useState<
-    "all" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT"
+    "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT"
   >("all");
 
   // Crawler Coverage Modal State
@@ -136,6 +137,38 @@ export default function Home() {
     } catch (e) {
       showToast("✅ Career Passport 세션 저장 완료");
     }
+  };
+
+  const setTrackPreset = (track: "ENTRY" | "EXPERIENCED") => {
+    if (track === "ENTRY") {
+      setPassport((prev) => ({
+        ...prev,
+        track: "ENTRY",
+        totalYears: 0,
+        baseSalary: 0,
+        fixedAllowance: 0,
+        variableBonus: 0,
+        canonicalRole: prev.canonicalRole.includes("인사기획") ? "소프트웨어 개발 / 신입" : prev.canonicalRole,
+      }));
+      setCalcInput((prev) => ({ ...prev, cashManwon: 4500 }));
+      showToast("🎓 신입/인턴(0년차) 지원 모드로 전환되었습니다. 인턴 및 대졸공채 공고를 우선 매칭합니다!");
+    } else {
+      setPassport((prev) => ({
+        ...prev,
+        track: "EXPERIENCED",
+        totalYears: prev.totalYears === 0 ? 7 : prev.totalYears,
+        baseSalary: prev.baseSalary === 0 ? 5400 : prev.baseSalary,
+        fixedAllowance: prev.fixedAllowance === 0 ? 400 : prev.fixedAllowance,
+      }));
+      setCalcInput((prev) => ({ ...prev, cashManwon: 5800 }));
+      showToast("💼 경력직 이직 모드로 전환되었습니다.");
+    }
+  };
+
+  const executePassportSearch = () => {
+    handleSavePassport();
+    setActiveTab("radar");
+    showToast("🎯 입력하신 직무·경력 조건으로 맞춤 공고 탐색을 완료했습니다! (Opportunity Radar 이동)");
   };
 
   const handleResumeExtract = () => {
@@ -240,7 +273,7 @@ export default function Home() {
   };
 
   // Market Value Calculations
-  const marketValue = calculateEstimatedMarketValue(passport.totalYears);
+  const marketValue = calculateEstimatedMarketValue(passport.canonicalRole, passport.totalYears, passport.track);
   const currentTotalCash = passport.baseSalary + passport.fixedAllowance;
 
   // Filter Jobs with dynamic matching & Hard Filter evaluation
@@ -263,6 +296,12 @@ export default function Home() {
       if (!matchText.includes(q)) return false;
     }
     // Category pill filter
+    if (radarFilter === "entry") {
+      return job.minYears === 0 || job.isEntryLevel || (job.tags || []).some((t) => t.includes("신입") || t.includes("인턴")) || job.title.includes("인턴") || job.title.includes("신입");
+    }
+    if (radarFilter === "tech") return job.occupation === "TECH" || job.title.includes("SW") || job.title.includes("개발") || job.title.includes("Cloud");
+    if (radarFilter === "finance") return job.occupation === "FINANCE" || job.title.includes("회계") || job.title.includes("재무");
+    if (radarFilter === "marketing") return job.occupation === "MARKETING" || job.title.includes("마케팅");
     if (radarFilter === "exclusive") return job.isCompanyExclusive === true;
     if (radarFilter === "consulting") return job.sourceCategory === "CONSULTING";
     if (radarFilter === "public") return job.sourceCategory === "PUBLIC";
@@ -405,34 +444,87 @@ export default function Home() {
                     onClick={() => setIsResumeModalOpen(true)}
                     className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition"
                   >
-                    📄 이력서 자동 파싱
+                    📄 이력서 파싱
                   </button>
                   <button
                     onClick={handleSavePassport}
-                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition"
+                    className="px-3 py-2 rounded-xl bg-[#18233c] hover:bg-[#202f50] text-xs font-semibold text-slate-300 border border-[#27385c] transition"
                   >
-                    💾 패스포트 저장
+                    💾 저장
+                  </button>
+                  <button
+                    onClick={executePassportSearch}
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5 cursor-pointer"
+                  >
+                    <span>맞춤 공고 탐색 실행 ➔</span>
                   </button>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                 <div className="space-y-4 bg-[#0a0e17] p-4 rounded-xl border border-[#192235]">
-                  <h3 className="text-xs font-bold uppercase text-indigo-400 tracking-wider">1. 직무 및 경력</h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-bold uppercase text-indigo-400 tracking-wider">1. 직무 및 경력 계층</h3>
+                    <span className="text-[10px] text-slate-400 font-mono">
+                      {passport.track === "ENTRY" ? "🎓 신입/인턴 트랙" : "💼 경력 트랙"}
+                    </span>
+                  </div>
+
+                  {/* Track Toggle */}
+                  <div className="flex items-center space-x-1.5 p-1 bg-[#121a2d] rounded-xl border border-[#233252]">
+                    <button
+                      type="button"
+                      onClick={() => setTrackPreset("ENTRY")}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 cursor-pointer ${
+                        passport.track === "ENTRY" ? "bg-emerald-600 text-white shadow-md" : "text-slate-300 hover:text-white"
+                      }`}
+                    >
+                      <span>🎓 신입/인턴 (0년차)</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTrackPreset("EXPERIENCED")}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 cursor-pointer ${
+                        passport.track !== "ENTRY" ? "bg-indigo-600 text-white shadow-md" : "text-slate-300 hover:text-white"
+                      }`}
+                    >
+                      <span>💼 경력직 이직</span>
+                    </button>
+                  </div>
+
                   <div>
-                    <label className="text-xs text-slate-300 font-medium">표준 직무 (Role)</label>
+                    <label className="text-xs text-slate-300 font-medium">직군 분야 (Job Family)</label>
+                    <select
+                      value={passport.occupation}
+                      onChange={(e) => setPassport({ ...passport, occupation: e.target.value as any })}
+                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-indigo-500"
+                    >
+                      <option value="HR">인사 / HR / 피플앤컬처</option>
+                      <option value="PLANNING">전략 / 기획 / 컨설팅 / PM</option>
+                      <option value="TECH">IT / 소프트웨어 개발 / 데이터·AI</option>
+                      <option value="MARKETING">마케팅 / 그로스 / 브랜딩</option>
+                      <option value="FINANCE">재무 / 회계 / 투자 / 금융</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-300 font-medium">자유 직무명 및 핵심 키워드 (Role & Keywords)</label>
                     <input
                       type="text"
                       value={passport.canonicalRole}
                       onChange={(e) => setPassport({ ...passport, canonicalRole: e.target.value })}
+                      placeholder="예: 프론트엔드 React, 회계사, 퍼포먼스 마케팅, 인사기획, 컨설팅"
                       className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-indigo-500"
                     />
-                    <p className="text-[10px] text-slate-500 mt-1">Universal Job Ontology로 자동 정규화됩니다.</p>
+                    <p className="text-[10px] text-slate-500 mt-1">자유 키워드와 연차를 분석하여 온톨로지 매칭 및 코호트 시장가치를 동적 산출합니다.</p>
                   </div>
+
                   <div>
                     <div className="flex justify-between items-center text-xs">
                       <label className="text-slate-300 font-medium">경력 연차</label>
-                      <span className="font-bold text-indigo-400 font-mono">{passport.totalYears}년차</span>
+                      <span className="font-bold text-indigo-400 font-mono">
+                        {passport.totalYears === 0 ? "0년차 (신입/인턴)" : `${passport.totalYears}년차`}
+                      </span>
                     </div>
                     <input
                       type="range"
@@ -871,6 +963,10 @@ export default function Home() {
               <div className="flex flex-wrap gap-2 text-xs pt-1 border-t border-[#192235]">
                 {[
                   { id: "all", label: `전체 공고 (${jobsWithScores.length}건)` },
+                  { id: "entry", label: "🎓 신입/인턴 공고" },
+                  { id: "tech", label: "💻 IT·개발·데이터" },
+                  { id: "finance", label: "💰 금융·재무·회계" },
+                  { id: "marketing", label: "📢 마케팅·그로스" },
                   { id: "exclusive", label: "🏢 자사사이트 독점 (잡포털 미노출)" },
                   { id: "consulting", label: "💼 Big4·전략컨설팅 (자사 ATS)" },
                   { id: "public", label: "🏛️ 공공기관 / 국책금융 (ALIO)" },

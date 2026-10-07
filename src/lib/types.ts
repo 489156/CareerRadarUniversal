@@ -2,8 +2,10 @@ export type OccupationType = 'HR' | 'PLANNING' | 'TECH' | 'MARKETING' | 'FINANCE
 
 export interface CareerPassport {
   id?: string;
+  track?: 'ENTRY' | 'EXPERIENCED';
   occupation: OccupationType;
   canonicalRole: string;
+  keywords?: string[];
   totalYears: number;
   companyType: string;
   baseSalary: number; // 단위: 만 원
@@ -80,6 +82,8 @@ export interface JobPosting {
   isCompanyExclusive?: boolean;
   sourceSystem?: string;
   publishedAt?: string;
+  isEntryLevel?: boolean;
+  jobCategory?: string;
 }
 
 export interface SkillGapTrack {
