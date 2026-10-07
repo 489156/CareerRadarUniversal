@@ -6,8 +6,17 @@ import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
 import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
 import { CRAWLER_SOURCES, getCrawlerNetworkStats } from "@/lib/crawler";
+import { fetchJobsWithCache } from "@/lib/supabase";
 
 export default function Home() {
+  const [jobsDatabase, setJobsDatabase] = useState<JobPosting[]>(MOCK_JOB_DATABASE);
+
+  useEffect(() => {
+    fetchJobsWithCache(MOCK_JOB_DATABASE).then(data => {
+      setJobsDatabase(data);
+    });
+  }, []);
+
   const [activeTab, setActiveTab] = useState<"passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger">("passport");
 
   // Toast notification state
@@ -277,7 +286,7 @@ export default function Home() {
   const currentTotalCash = passport.baseSalary + passport.fixedAllowance;
 
   // Filter Jobs with dynamic matching & Hard Filter evaluation
-  const jobsWithScores = MOCK_JOB_DATABASE.map((job) => ({
+  const jobsWithScores = jobsDatabase.map((job) => ({
     job,
     match: calculateDynamicJobMatch(passport, job),
     hf: evaluateHardFilters(passport, job),
