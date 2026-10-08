@@ -1,14 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+const fs = require('fs');
+let code = fs.readFileSync('src/lib/supabase.ts', 'utf-8');
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const startStr = 'export async function fetchJobsWithCache';
+const startIndex = code.indexOf(startStr);
 
-export const supabase = supabaseUrl && supabaseAnonKey
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
-
-// Client-side fetching wrapper with localStorage caching to save Free Tier quota
-export async function fetchJobsWithCache(fallbackData: any[] = []) {
+if (startIndex !== -1) {
+  const prefix = code.slice(0, startIndex);
+  
+  const newFetchFn = `export async function fetchJobsWithCache(fallbackData: any[] = []) {
   let baseData = fallbackData;
   try {
     const res = await fetch('/data/jobs.json');
@@ -35,8 +34,8 @@ export async function fetchJobsWithCache(fallbackData: any[] = []) {
         console.log("Using cached jobs from localStorage");
         const sbData = cached.data || [];
         const merged = [...sbData];
-        const existingIds = new Set(sbData.map((j: any) => j.id));
-        baseData.forEach((j: any) => { if (!existingIds.has(j.id)) merged.push(j); });
+        const existingIds = new Set(sbData.map((j) => j.id));
+        baseData.forEach((j) => { if (!existingIds.has(j.id)) merged.push(j); });
         return merged;
       }
     }
@@ -57,8 +56,8 @@ export async function fetchJobsWithCache(fallbackData: any[] = []) {
       }
       
       const merged = [...data];
-      const existingIds = new Set(data.map((j: any) => j.id));
-      baseData.forEach((j: any) => { if (!existingIds.has(j.id)) merged.push(j); });
+      const existingIds = new Set(data.map((j) => j.id));
+      baseData.forEach((j) => { if (!existingIds.has(j.id)) merged.push(j); });
       return merged;
     }
 
@@ -67,4 +66,10 @@ export async function fetchJobsWithCache(fallbackData: any[] = []) {
     console.error("Unexpected error fetching jobs:", err);
     return baseData;
   }
+}
+`;
+
+  code = prefix + newFetchFn;
+  fs.writeFileSync('src/lib/supabase.ts', code, 'utf-8');
+  console.log('Fixed fetchJobsWithCache robustly');
 }

@@ -1351,78 +1351,133 @@ export const MOCK_JOB_DATABASE: JobPosting[] = [
 ];
 
 // 3 Tracks of Skill Gap Bridging totaling 28 Expanded Opportunities
-export const EXPANDED_SKILL_GAP_TRACKS: SkillGapTrack[] = [
-  {
-    id: "track-analytics",
-    name: "People Analytics & HR Data Science",
-    skills: ["SQL (인사 DB 쿼리 및 코호트 집계)", "Tableau / PowerBI 대시보드 구축", "퇴사 예측 및 리텐션 모델링", "eNPS / 조직 건강도 통계 분석"],
-    actionItems: [
-      "SQL 레벨 2 (GROUP BY, Window Function) 인사 데이터셋 실습",
-      "Tableau 기반 '월별 자발적 퇴사율 & 인당 매출액' 대시보드 포트폴리오 제작",
-      "피플 사이언스 통계 개념(선형 회귀, 로지스틱 회귀) 이해",
-    ],
-    expandedCount: 14,
-    expectedSalaryRange: "6,800 ~ 8,500만 원 (+15~25% 프리미엄)",
-    jobs: [
-      { company: "쿠팡 (Coupang)", title: "People Analytics Specialist", location: "서울 송파구 잠실", role: "HR Data Analytics", salary: "7,000 ~ 9,000만 원", url: "https://www.coupang.jobs/kr/" },
-      { company: "토스 (비바리퍼블리카)", title: "People Data Partner", location: "서울 강남구 역삼", role: "People Operations", salary: "7,500 ~ 9,500만 원", url: "https://toss.im/career/jobs" },
-      { company: "SK하이닉스", title: "피플오퍼레이션 & 데이터 분석가", location: "경기도 분당/이천", role: "HR Analytics", salary: "6,500 ~ 8,000만 원", url: "https://www.skcareers.com" },
-      { company: "무신사 (Musinsa)", title: "People Analytics 매니저", location: "서울 성동구 성수", role: "HR Data & Comp", salary: "6,500 ~ 8,000만 원", url: "https://musinsa.recruiter.co.kr" },
-      { company: "야놀자 (Yanolja)", title: "People Insights Lead", location: "서울 강남구 대치", role: "People Intelligence", salary: "6,800 ~ 8,200만 원", url: "https://careers.yanolja.co" },
-      { company: "엔씨소프트 (NC)", title: "HR 데이터 분석 & 보상 기획자", location: "경기도 성남시 판교", role: "Total Rewards & Analytics", salary: "7,000 ~ 8,500만 원", url: "https://careers.ncsoft.com" },
-      { company: "라인플러스 (LINE)", title: "Global People Analytics", location: "경기도 성남시 분당", role: "Global HR Data", salary: "7,200 ~ 8,800만 원", url: "https://linepluscorp.com/career" },
-      { company: "우아한형제들 (배민)", title: "피플데이터 기획 담당자", location: "서울 송파구 몽촌토성", role: "People Analytics", salary: "6,800 ~ 8,300만 원", url: "https://career.woowahan.com" },
-      { company: "크래프톤 (KRAFTON)", title: "HR Data Analyst", location: "서울 강남구 역삼", role: "HR Intelligence", salary: "7,500 ~ 9,000만 원", url: "https://krafton.recruiter.co.kr" },
-      { company: "카카오 (Kakao)", title: "피플인사이트 크루", location: "경기도 성남시 판교", role: "People Insights", salary: "6,800 ~ 8,500만 원", url: "https://careers.kakao.com" },
-      { company: "네이버 (NAVER)", title: "HR Analytics & Systems", location: "경기도 성남시 분당", role: "HR System & Data", salary: "7,200 ~ 8,800만 원", url: "https://recruit.navercorp.com" },
-      { company: "CJ올리브영", title: "HR 데이터 분석 & 피플옵스", location: "서울 용산구", role: "HR Data Specialist", salary: "6,200 ~ 7,500만 원", url: "https://oliveyoung.recruiter.co.kr" },
-      { company: "당근 (Daangn)", title: "People System & Data Specialist", location: "서울 서초구 교대", role: "HR Operations & Data", salary: "6,500 ~ 8,000만 원", url: "https://careers.daangn.com/jobs/" },
-      { company: "뤼이드 (Riiid)", title: "EdTech People Operations Analyst", location: "서울 강남구 삼성", role: "People Ops Analyst", salary: "6,000 ~ 7,800만 원", url: "https://riiid.recruiter.co.kr" },
-    ],
-  },
-  {
-    id: "track-global",
-    name: "Global HR & Cross-Border Mobility",
-    skills: ["비즈니스 영어 능통 (인터뷰/노무 협상)", "해외 법인 노동법 컴플라이언스 & 비자 규정", "글로벌 통합 HRIS (Workday) 운영", "주재원 파견 및 크로스보더 패키지 설계"],
-    actionItems: [
-      "영문 이력서 & LinkedIn 프로필 글로벌 스탠다드 최적화",
-      "글로벌 HR 용어 및 미국/동남아 노동법(FLSA, Statutory Benefits) 케이스 스터디",
-      "외국인 엔지니어 채용 인터뷰 시뮬레이션 및 영어 테크니컬 스크리닝 연습",
-    ],
-    expandedCount: 8,
-    expectedSalaryRange: "7,000 ~ 9,200만 원 (+20~30% 프리미엄)",
-    jobs: [
-      { company: "당근 (Daangn Japan/Global)", title: "Global People & Culture Lead", location: "서울 서초구 (해외 출장 포함)", role: "Global HR", salary: "7,200 ~ 9,000만 원", url: "https://careers.daangn.com/jobs/" },
-      { company: "하이퍼커넥트 (Match Group)", title: "Global HRBP (English Fluent)", location: "서울 강남구 삼성", role: "Global HRBP", salary: "7,500 ~ 9,500만 원", url: "https://career.hyperconnect.com" },
-      { company: "현대모비스 글로벌인사", title: "해외법인 인사제도 운영 기획자", location: "서울 강남구 테헤란로", role: "Global HR Strategy", salary: "6,800 ~ 8,200만 원", url: "https://careers.mobis.com" },
-      { company: "넷마블 (Netmarble)", title: "글로벌 인사 및 해외법인 관리", location: "서울 구로구 지밸리", role: "Global HR Ops", salary: "6,500 ~ 8,000만 원", url: "https://netmarble.recruiter.co.kr" },
-      { company: "센드버드코리아 (Sendbird)", title: "People Operations Lead (Korea & APAC)", location: "서울 강남구 테헤란로", role: "APAC People Ops", salary: "8,000 ~ 10,000만 원", url: "https://sendbird.com/careers" },
-      { company: "몰로코 (Moloco Korea)", title: "HR Generalist (Global Tech)", location: "서울 강남구 역삼", role: "Global Tech HR", salary: "7,500 ~ 9,500만 원", url: "https://www.moloco.com/company/careers" },
-      { company: "딜 (Deel Korea)", title: "EOR HR Compliance Consultant", location: "원격 근무 (Remote Korea)", role: "Cross-border Labor", salary: "7,000 ~ 8,800만 원", url: "https://www.deel.com/careers" },
-      { company: "아마존웹서비스 (AWS Korea)", title: "HR Partner (Tech Organizations)", location: "서울 강남구 테헤란로", role: "HR Business Partner", salary: "8,500 ~ 11,000만 원", url: "https://www.amazon.jobs/content/locations/south-korea/seoul" },
-    ],
-  },
-  {
-    id: "track-ax",
-    name: "HR AX (AI Transformation) & No-Code Automation",
-    skills: ["생성형 AI(LLM) 기반 직무기술서(JD) 및 평가 초안 파이프라인 기획", "Flex / Lemontree / Zapier 기반 인사 행정 노코드 자동화", "사내 AI 윤리 및 근로기준법 규정 가이드라인 수립", "차세대 HR 테크 툴 벤더 평가 및 마이그레이션 PM"],
-    actionItems: [
-      "사내 채용/평가 업무용 AI 프롬프트 템플릿 라이브러리 구축",
-      "노코드 도구를 활용한 신규 입사자 온보딩 자동화 플로우 제작",
-      "인사노무 질의응답 내부 AI 에이전트 프로토타입 설계",
-    ],
-    expandedCount: 6,
-    expectedSalaryRange: "6,500 ~ 8,200만 원 (신설 조직 리더급)",
-    jobs: [
-      { company: "삼성전자 DX부문", title: "People AX (AI Transformation) 혁신 PM", location: "경기도 수원 디지털시티", role: "HR Tech / AX", salary: "7,000 ~ 8,800만 원", url: "https://www.samsungcareers.com" },
-      { company: "LG CNS", title: "생성형 AI 기반 HR 솔루션 기획자", location: "서울 강서구 마곡", role: "HR DX Consultant", salary: "6,800 ~ 8,300만 원", url: "https://careers.lg.com" },
-      { company: "CJ ENM", title: "HR Digital Transformation & Systems", location: "서울 마포구 상암", role: "HR Tech Lead", salary: "6,500 ~ 7,800만 원", url: "https://recruit.cj.net" },
-      { company: "포스코DX (POSCO DX)", title: "스마트 HR 시스템 및 자동화 기획", location: "경기도 성남시 판교", role: "Smart HR PM", salary: "6,500 ~ 8,000만 원", url: "https://gorecruit.posco.net" },
-      { company: "한화시스템", title: "AI 기반 피플 인텔리전스 시스템 PM", location: "서울 영등포구 여의도", role: "HR AI Architect", salary: "6,800 ~ 8,200만 원", url: "https://www.hanwhain.com" },
-      { company: "두산디지털이노베이션 (DDI)", title: "HR Tech & SaaS Integration PM", location: "서울 중구 동대문", role: "HR SaaS PM", salary: "6,500 ~ 7,900만 원", url: "https://career.doosan.com" },
-    ],
-  },
-];
+
+export function calculateSkillGapTracks(passport: import('./types').CareerPassport): import('./types').SkillGapTrack[] {
+  const currentTotal = passport.baseSalary + passport.fixedAllowance;
+  let baseline = currentTotal;
+  const isEntry = passport.track === 'ENTRY' || passport.totalYears === 0;
+
+  if (baseline === 0 || isEntry) {
+    const est = calculateEstimatedMarketValue(passport.canonicalRole || '일반', passport.totalYears, passport.track);
+    baseline = est.p50 || 4000;
+  }
+
+  // 15% ~ 25% premium
+  const minPremium = Math.round(baseline * 1.15);
+  const maxPremium = Math.round(baseline * 1.25);
+  const expectedSalaryRange = `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원 (+15~25% 프리미엄)`;
+
+  if (isEntry) {
+    return [
+      {
+        id: 'track-analytics',
+        name: 'People Analytics (Junior Data Analyst)',
+        skills: ['SQL (기초)', 'Excel/Google Sheets (고급)', 'HR 데이터 기초'],
+        actionItems: [
+          'SQL 기초 (SELECT, JOIN, GROUP BY) 학습',
+          '데이터 기반의 HR 지표(입퇴사율, 휴가사용율) 대시보드 토이 프로젝트',
+          '데이터 분석가(주니어) 포지션 지원 전략 수립'
+        ],
+        expandedCount: 14,
+        expectedSalaryRange,
+        jobs: [
+          { company: '토스', title: 'People Data Analyst (신입)', location: '서울 강남구', role: 'HR Data Analyst', salary: `${Math.round(minPremium * 1.1).toLocaleString()}만 원~`, url: '#' },
+          { company: '무신사', title: 'HR Data Assistant', location: '서울 성동구', role: 'HR Data', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
+          { company: '당근마켓', title: 'People Ops Data (Junior)', location: '서울 서초구', role: 'People Ops Data', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
+        ]
+      },
+      {
+        id: 'track-global',
+        name: 'Global HR & Bilingual (Junior)',
+        skills: ['비즈니스 영어 (작문/회화)', '글로벌 커뮤니케이션', '이문화 이해'],
+        actionItems: [
+          '비즈니스 영어 이메일/문서 작성 능력 확보',
+          '외국계 기업 주니어 HR / 어드민 포지션 탐색',
+          '영어 면접 대비 및 영문 이력서(Resume) 구축'
+        ],
+        expandedCount: 8,
+        expectedSalaryRange,
+        jobs: [
+          { company: '구글코리아', title: 'HR Coordinator (Contract/Entry)', location: '서울 강남구', role: 'Global HR', salary: `${maxPremium.toLocaleString()}만 원~`, url: '#' },
+          { company: '아마존웹서비시즈', title: 'Recruiting Coordinator', location: '서울 강남구', role: 'Global TA', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
+          { company: '나이키코리아', title: 'HR Assistant', location: '서울 강남구', role: 'Global HR', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
+        ]
+      },
+      {
+        id: 'track-ax',
+        name: 'HR Automation (Junior)',
+        skills: ['Zapier / Make 활용', '노션(Notion) 고급 활용', '업무 자동화 툴 이해'],
+        actionItems: [
+          'Zapier를 활용한 온보딩 메일 자동화 실습',
+          '노션을 활용한 사내 위키/게시판 구축 토이 프로젝트',
+          '스타트업/IT기업의 People Ops (자동화 우대) 포지션 공략'
+        ],
+        expandedCount: 6,
+        expectedSalaryRange,
+        jobs: [
+          { company: '우아한형제들', title: 'People Ops Assistant', location: '서울 송파구', role: 'HR Ops', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
+          { company: '야놀자', title: 'HR Admin & System Assistant', location: '서울 강남구', role: 'HR System', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
+          { company: '크래프톤', title: 'HR Assistant', location: '서울 강남구', role: 'HR System', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
+        ]
+      }
+    ];
+  } else {
+    // Experienced Tracks
+    return [
+      {
+        id: 'track-analytics',
+        name: 'People Analytics & HR Data Science',
+        skills: ['SQL (인사 DB 쿼리 및 코호트 집계)', 'Tableau / PowerBI 대시보드 구축', '퇴사 예측 및 리텐션 모델링', 'eNPS / 조직 건강도 통계 분석'],
+        actionItems: [
+          'SQL 레벨 2 (GROUP BY, Window Function) 인사 데이터셋 실습',
+          'Tableau 기반 대시보드 시각화',
+          '피플 사이언스 통계 개념 이해'
+        ],
+        expandedCount: 14,
+        expectedSalaryRange,
+        jobs: [
+          { company: '쿠팡 (Coupang)', title: 'People Analytics Specialist', location: '서울 송파구 신천', role: 'HR Data Analytics', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.coupang.jobs/kr/' },
+          { company: '토스 (비바리퍼블리카)', title: 'People Data Partner', location: '서울 강남구 역삼', role: 'People Operations', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://toss.im/career/jobs' },
+          { company: 'SK하이닉스', title: '피플사이언스 데이터 분석가', location: '경기도 분당/이천', role: 'HR Analytics', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.skcareers.com' }
+        ]
+      },
+      {
+        id: 'track-global',
+        name: 'Global HRBP & Regional TA Lead',
+        skills: ['비즈니스 영어 능통 (원어민 수준 커뮤니케이션)', 'APAC / Global 리전 법인 설립 및 HR 세팅 경험', 'Cross-border 채용 및 글로벌 평가 보상 구조화', '다국적 조직문화(DE&I) 구축'],
+        actionItems: [
+          '영문 이력서 및 링크드인 프로필 최적화',
+          '글로벌 기업의 APAC 리전 HR 정책 리서치',
+          '외국계 헤드헌터 네트워킹 구축'
+        ],
+        expandedCount: 8,
+        expectedSalaryRange,
+        jobs: [
+          { company: 'Google Korea', title: 'HR Business Partner', location: '서울 강남구 역삼', role: 'Global HR', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://careers.google.com/locations/seoul/' },
+          { company: 'Amazon Web Services (AWS)', title: 'Senior Recruiter (Tech)', location: '서울 강남구 역삼', role: 'Global TA', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.amazon.jobs/content/locations/south-korea/seoul' }
+        ]
+      },
+      {
+        id: 'track-ax',
+        name: 'HR AX (AI Transformation) & No-Code Automation',
+        skills: ['생성형 AI(LLM) 기반 직무기술서(JD) 초안 파이프라인 기획', 'Flex / Zapier 기반 인사 행정 노코드 자동화', '차세대 HR 테크 시스템 마이그레이션 PM'],
+        actionItems: [
+          '사내 채용/평가 업무용 AI 프롬프트 템플릿 구축',
+          '노코드 도구를 활용한 신규 입사자 온보딩 자동화 설계',
+          '인사노무 질의응답 챗봇 도입 프로젝트 기획'
+        ],
+        expandedCount: 6,
+        expectedSalaryRange,
+        jobs: [
+          { company: '삼성전자 DX부문', title: 'People AX (AI Transformation) 혁신 PM', location: '경기도 수원 화성', role: 'HR Tech / AX', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.samsungcareers.com' },
+          { company: 'LG CNS', title: '생성형 AI 기반 HR 솔루션 기획자', location: '서울 강서구 마곡', role: 'HR DX Consultant', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://careers.lg.com' },
+          { company: 'CJ ENM', title: 'HR Digital Transformation & Systems', location: '서울 마포구 상암', role: 'HR Tech Lead', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://recruit.cj.net' }
+        ]
+      }
+    ];
+  }
+}
+
 
 // Dynamic Domain Detector from free-form keywords
 export function detectDomainFromKeywords(input: string): {

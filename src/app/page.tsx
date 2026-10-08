@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGapTrack, HardFilters } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
-import { calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
+import { calculateDynamicJobMatch, calculateSkillGapTracks, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
 import { CRAWLER_SOURCES, getCrawlerNetworkStats } from "@/lib/crawler";
 import { fetchJobsWithCache } from "@/lib/supabase";
 
@@ -373,7 +373,7 @@ export default function Home() {
     });
   };
 
-  const selectedTrack = EXPANDED_SKILL_GAP_TRACKS.find((t) => t.id === activeSkillTrackId) || EXPANDED_SKILL_GAP_TRACKS[0];
+  const selectedTrack = calculateSkillGapTracks(passport).find((t) => t.id === activeSkillTrackId) || calculateSkillGapTracks(passport)[0];
 
   return (
     <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">

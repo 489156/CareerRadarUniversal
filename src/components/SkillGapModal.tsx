@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
-import { EXPANDED_SKILL_GAP_TRACKS } from '@/lib/matcher';
+import { calculateSkillGapTracks } from '@/lib/matcher';
 
 export function SkillGapModal() {
   const isSkillGapModalOpen = useAppStore(state => state.isSkillGapModalOpen);
@@ -8,7 +8,9 @@ export function SkillGapModal() {
   const activeSkillTrackId = useAppStore(state => state.activeSkillTrackId);
   const setActiveSkillTrackId = useAppStore(state => state.setActiveSkillTrackId);
 
-  const selectedTrack = EXPANDED_SKILL_GAP_TRACKS.find((t) => t.id === activeSkillTrackId) || EXPANDED_SKILL_GAP_TRACKS[0];
+  const passport = useAppStore(state => state.passport);
+  const expandedTracks = calculateSkillGapTracks(passport);
+  const selectedTrack = expandedTracks.find((t) => t.id === activeSkillTrackId) || expandedTracks[0];
 
   if (!isSkillGapModalOpen) return null;
 
@@ -38,7 +40,7 @@ export function SkillGapModal() {
 
             {/* 3 Track Selector Tabs */}
             <div className="flex space-x-2 border-b border-[#233252] pb-2 text-xs overflow-x-auto">
-              {EXPANDED_SKILL_GAP_TRACKS.map((track) => (
+              {expandedTracks.map((track) => (
                 <button
                   key={track.id}
                   onClick={() => setActiveSkillTrackId(track.id)}
