@@ -1619,7 +1619,7 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
     job.occupation || '',
     (job.tags || []).join(' '),
     job.company || '',
-    (job.rawText || '').slice(0, 150),
+    
   ].join(' ').toLowerCase();
 
   // 1. Role / Keyword Token Matching (40% weight)
@@ -1649,7 +1649,7 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
       (domain === 'FINANCE' && (job.occupation === 'FINANCE' || jobText.includes('회계') || jobText.includes('finance'))) ||
       (domain === 'HR' && (job.occupation === 'HR' || jobText.includes('인사') || jobText.includes('채용'))) ||
       (domain === 'PLANNING' && (job.occupation === 'PLANNING' || jobText.includes('기획') || jobText.includes('컨설팅'))) ||
-      (domain === 'MARKETING' && (job.occupation === 'MARKETING' || jobText.includes('마케팅')));
+      ((domain === 'MARKETING' && job.occupation === 'MARKETING'));
 
     if (isJobMatch) {
       roleFit = 75;
