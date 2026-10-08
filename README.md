@@ -52,6 +52,8 @@ flowchart TD
     style CF fill:#f38020,stroke:#fff,color:#fff
 ```
 
+🚀 **최신 아키텍처 업데이트**: 단일 파일(Monolithic) 뷰 구조에서 벗어나, **Zustand 전역 상태 관리**를 도입하고 모든 거대 팝업 모달을 독립 컴포넌트(`src/components/`)로 100% 분리하는 대규모 리팩토링을 완료했습니다. 데이터 패칭 로직 또한 하드코딩 Mock 데이터에서 **Supabase 실시간 연동**으로 전환되었습니다.
+
 ### 아키텍처 3대 안정성 안전망
 1. **SSG + Client-side Hydration 하이브리드**: Cloudflare 엣지에서 초고속 정적(SSG) 파일로 즉시 열리고, 브라우저 마운트 직후 Supabase에서 실시간 채용 공고를 땡겨옵니다.
 2. **Supabase 무료 쿼터 방어 (4시간 TTL Caching)**: 매 접속마다 DB를 호출하지 않고 브라우저 `localStorage`에 4시간 단위로 캐싱하여 무료 티어 트래픽 한도를 원천 방어합니다.
@@ -138,6 +140,7 @@ flowchart LR
 | 계층 | 기술 스택 | 설명 |
 |---|---|---|
 | **Frontend Framework** | **Next.js 14 (App Router)** | TypeScript 기반의 모던 웹 아키텍처, `output: 'export'` SSG 모드 |
+| **State Management** | **Zustand** | 단일 전역 스토어(`useAppStore`) 기반의 초경량/고성능 상태 관리 및 UI 컴포넌트 모듈화 |
 | **Styling & Design** | **Tailwind CSS 3.4** | Vercel / Linear 감성의 모던 Slate 다크 테마 |
 | **Edge Hosting** | **Cloudflare Pages / Workers** | 글로벌 엣지 무비용 초고속 정적 배포 (`wrangler.toml` assets 규격) |
 | **Backend & BaaS** | **Supabase (PostgreSQL)** | REST API 통신, RLS 보안 정책, 브라우저 4시간 TTL 로컬 캐싱 |
