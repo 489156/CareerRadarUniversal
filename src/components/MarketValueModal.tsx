@@ -8,7 +8,7 @@ export function MarketValueModal() {
   const setIsMarketValueModalOpen = useAppStore(state => state.setIsMarketValueModalOpen);
   const passport = useAppStore(state => state.passport);
 
-  const marketValue = calculateEstimatedMarketValue(passport.totalYears);
+  const marketValue = calculateEstimatedMarketValue(passport.canonicalRole, passport.totalYears, passport.track);
   const currentTotalCash = passport.baseSalary + passport.fixedAllowance + passport.variableBonus;
 
   return (

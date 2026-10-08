@@ -15,7 +15,8 @@ import { SkillGapModal } from "@/components/SkillGapModal";
 import { CrawlerModal } from "@/components/CrawlerModal";
 import { JobDetailModal } from "@/components/JobDetailModal";
 export default function Home() {
-  const [jobsDatabase, setJobsDatabase] = useState<JobPosting[]>([]);
+  const jobsDatabase = useAppStore(state => state.jobsDatabase);
+  const setJobsDatabase = useAppStore(state => state.setJobsDatabase);
 
   useEffect(() => {
     fetchJobsWithCache([]).then(data => {
@@ -23,10 +24,12 @@ export default function Home() {
     });
   }, []);
 
-  const [activeTab, setActiveTab] = useState<"passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger">("passport");
+  const activeTab = useAppStore(state => state.activeTab);
+  const setActiveTab = useAppStore(state => state.setActiveTab);
 
   // Toast notification state
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastMessage = useAppStore(state => state.toastMessage);
+  const setToastMessage = useAppStore(state => state.setToastMessage);
   const toastTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const showToast = (msg: string) => {
     if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
@@ -52,78 +55,63 @@ export default function Home() {
   }, []);
 
   // Passport state
-  const [passport, setPassport] = useState<CareerPassport>({
-    track: "EXPERIENCED",
-    occupation: "HR",
-    canonicalRole: "인사기획 (HR Planning)",
-    totalYears: 7,
-    companyType: "중견기업",
-    baseSalary: 5400,
-    fixedAllowance: 400,
-    variableBonus: 500,
-    hasFixedOT: true,
-    homeLocation: "경기도 군포시 (산본동)",
-    commuteToleranceMinutes: 60,
-    skills: ["인사기획", "평가보상체계설계", "노무관리", "임금피크제", "직무분석", "AX(AI Transformation)"],
-    hardFilters: {
-      onlyPermanent: true,
-      onlyCapitalArea: true,
-      maxCommuteCutoff: true,
-      noHeavyFixedOT: false,
-      noBelowCurrentSalary: false,
-      noRelocationOrg: true,
-      customKeywords: ["교대근무", "파견직", "인턴"],
-    },
-    hardPreferences: { employmentType: "정규직", region: "수도권" },
-    softPreferences: { wfhPreferred: true, minSalary: 55000000 },
-    updatedAt: new Date().toISOString(),
-  });
+  const passport = useAppStore(state => state.passport);
+  const setPassport = useAppStore(state => state.setPassport);
 
   // Calculator state
-  const [calcInput, setCalcInput] = useState({
-    cashManwon: 5800,
-    commuteMinutesOneway: 50,
-    monthlyTransitCostManwon: 12,
-    weeklyRemoteDays: 1,
-    weeklyWorkHours: 48,
-  });
+  const calcInput = useAppStore(state => state.calcInput);
+  const setCalcInput = useAppStore(state => state.setCalcInput);
 
   // Scanner state
-  const [scannerText, setScannerText] = useState("");
-  const [scanResult, setScanResult] = useState<ReturnType<typeof diagnoseJobRisks> | null>(null);
+  const scannerText = useAppStore(state => state.scannerText);
+  const setScannerText = useAppStore(state => state.setScannerText);
+  const scanResult = useAppStore(state => state.scanResult);
+  const setScanResult = useAppStore(state => state.setScanResult);
 
   // Resume Modal
   const isResumeModalOpen = useAppStore(state => state.isResumeModalOpen);
   const setIsResumeModalOpen = useAppStore(state => state.setIsResumeModalOpen);
-  const [resumeText, setResumeText] = useState("");
+  const resumeText = useAppStore(state => state.resumeText);
+  const setResumeText = useAppStore(state => state.setResumeText);
 
   // Market Value & Skill Gap Modals
-  const [isMarketValueModalOpen, setIsMarketValueModalOpen] = useState(false);
-  const [isSkillGapModalOpen, setIsSkillGapModalOpen] = useState(false);
-  const [activeSkillTrackId, setActiveSkillTrackId] = useState<string>("track-analytics");
+  const isMarketValueModalOpen = useAppStore(state => state.isMarketValueModalOpen);
+  const setIsMarketValueModalOpen = useAppStore(state => state.setIsMarketValueModalOpen);
+  const isSkillGapModalOpen = useAppStore(state => state.isSkillGapModalOpen);
+  const setIsSkillGapModalOpen = useAppStore(state => state.setIsSkillGapModalOpen);
+  const activeSkillTrackId = useAppStore(state => state.activeSkillTrackId);
+  const setActiveSkillTrackId = useAppStore(state => state.setActiveSkillTrackId);
 
   // Job Detail Modal State
-  const [selectedJob, setSelectedJob] = useState<JobPosting | null>(null);
-  const [selectedJobMatch, setSelectedJobMatch] = useState<DynamicMatchScore | null>(null);
-  const [selectedJobHf, setSelectedJobHf] = useState<{ isExcluded: boolean; exclusionReasons: string[] } | null>(null);
+  const selectedJob = useAppStore(state => state.selectedJob);
+  const setSelectedJob = useAppStore(state => state.setSelectedJob);
+  const selectedJobMatch = useAppStore(state => state.selectedJobMatch);
+  const setSelectedJobMatch = useAppStore(state => state.setSelectedJobMatch);
+  const selectedJobHf = useAppStore(state => state.selectedJobHf);
+  const setSelectedJobHf = useAppStore(state => state.setSelectedJobHf);
 
   // Hard Filter Configuration State
-  const [customKeywordInput, setCustomKeywordInput] = useState("");
-  const [showExcludedJobs, setShowExcludedJobs] = useState(false);
+  const customKeywordInput = useAppStore(state => state.customKeywordInput);
+  const setCustomKeywordInput = useAppStore(state => state.setCustomKeywordInput);
+  const showExcludedJobs = useAppStore(state => state.showExcludedJobs);
+  const setShowExcludedJobs = useAppStore(state => state.setShowExcludedJobs);
 
   // Radar Search & Filter
-  const [radarSearch, setRadarSearch] = useState("");
-  const [radarFilter, setRadarFilter] = useState<
-    "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT"
-  >("all");
+  const radarSearch = useAppStore(state => state.radarSearch);
+  const setRadarSearch = useAppStore(state => state.setRadarSearch);
+  const radarFilter = useAppStore(state => state.radarFilter);
+  const setRadarFilter = useAppStore(state => state.setRadarFilter);
 
   // Crawler Coverage Modal State
-  const [isCrawlerModalOpen, setIsCrawlerModalOpen] = useState(false);
-  const [crawlerCategoryFilter, setCrawlerCategoryFilter] = useState<string>("ALL");
+  const isCrawlerModalOpen = useAppStore(state => state.isCrawlerModalOpen);
+  const setIsCrawlerModalOpen = useAppStore(state => state.setIsCrawlerModalOpen);
+  const crawlerCategoryFilter = useAppStore(state => state.crawlerCategoryFilter);
+  const setCrawlerCategoryFilter = useAppStore(state => state.setCrawlerCategoryFilter);
   const crawlerStats = getCrawlerNetworkStats();
 
   // Ledger Search & Filter
-  const [ledgerSearch, setLedgerSearch] = useState("");
+  const ledgerSearch = useAppStore(state => state.ledgerSearch);
+  const setLedgerSearch = useAppStore(state => state.setLedgerSearch);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -131,13 +119,13 @@ export default function Home() {
       const saved = localStorage.getItem("career_passport_universal");
       if (saved) {
         const p = JSON.parse(saved);
-        setPassport((prev) => ({
+        setPassport((prev: any) => ({
           ...prev,
           ...p,
           hardFilters: p.hardFilters || prev.hardFilters,
         }));
         const totalCash = (parseInt(p.baseSalary) || 5400) + (parseInt(p.fixedAllowance) || 400);
-        setCalcInput((prev) => ({ ...prev, cashManwon: totalCash }));
+        setCalcInput((prev: any) => ({ ...prev, cashManwon: totalCash }));
       }
     } catch (e) {
       console.warn("localStorage not available or corrupted:", e);
@@ -148,7 +136,7 @@ export default function Home() {
     try {
       localStorage.setItem("career_passport_universal", JSON.stringify(passport));
       const totalCash = passport.baseSalary + passport.fixedAllowance;
-      setCalcInput((prev) => ({ ...prev, cashManwon: totalCash }));
+      setCalcInput((prev: any) => ({ ...prev, cashManwon: totalCash }));
       showToast("✅ Career Passport가 안전하게 로컬에 저장되었습니다.");
     } catch (e) {
       showToast("✅ Career Passport 세션 저장 완료");
@@ -157,7 +145,7 @@ export default function Home() {
 
   const setTrackPreset = (track: "ENTRY" | "EXPERIENCED") => {
     if (track === "ENTRY") {
-      setPassport((prev) => ({
+      setPassport((prev: any) => ({
         ...prev,
         track: "ENTRY",
         totalYears: 0,
@@ -166,17 +154,17 @@ export default function Home() {
         variableBonus: 0,
         canonicalRole: prev.canonicalRole.includes("인사기획") ? "소프트웨어 개발 / 신입" : prev.canonicalRole,
       }));
-      setCalcInput((prev) => ({ ...prev, cashManwon: 4500 }));
+      setCalcInput((prev: any) => ({ ...prev, cashManwon: 4500 }));
       showToast("🎓 신입/인턴(0년차) 지원 모드로 전환되었습니다. 인턴 및 대졸공채 공고를 우선 매칭합니다!");
     } else {
-      setPassport((prev) => ({
+      setPassport((prev: any) => ({
         ...prev,
         track: "EXPERIENCED",
         totalYears: prev.totalYears === 0 ? 7 : prev.totalYears,
         baseSalary: prev.baseSalary === 0 ? 5400 : prev.baseSalary,
         fixedAllowance: prev.fixedAllowance === 0 ? 400 : prev.fixedAllowance,
       }));
-      setCalcInput((prev) => ({ ...prev, cashManwon: 5800 }));
+      setCalcInput((prev: any) => ({ ...prev, cashManwon: 5800 }));
       showToast("💼 경력직 이직 모드로 전환되었습니다.");
     }
   };
@@ -190,7 +178,7 @@ export default function Home() {
   const handleResumeExtract = () => {
     if (!resumeText.trim()) return;
     if (/인사|HR|노무|채용|평가|보상/i.test(resumeText)) {
-      setPassport((prev) => ({
+      setPassport((prev: any) => ({
         ...prev,
         occupation: "HR",
         canonicalRole: "인사기획 & People Operations",
@@ -198,7 +186,7 @@ export default function Home() {
     }
     const yearMatch = resumeText.match(/(\d+)\s*년/);
     if (yearMatch) {
-      setPassport((prev) => ({ ...prev, totalYears: parseInt(yearMatch[1], 10) }));
+      setPassport((prev: any) => ({ ...prev, totalYears: parseInt(yearMatch[1], 10) }));
     }
     setIsResumeModalOpen(false);
     showToast("✨ 이력서 텍스트에서 직무와 경력 연차를 추출하여 반영했습니다.");
@@ -212,7 +200,7 @@ export default function Home() {
       showToast(`'${kw}' 키워드는 이미 등록되어 있습니다.`);
       return;
     }
-    setPassport((prev) => ({
+    setPassport((prev: any) => ({
       ...prev,
       hardFilters: {
         ...(prev.hardFilters || {
@@ -232,7 +220,7 @@ export default function Home() {
   };
 
   const removeCustomHardFilter = (kw: string) => {
-    setPassport((prev) => ({
+    setPassport((prev: any) => ({
       ...prev,
       hardFilters: {
         ...(prev.hardFilters || {
@@ -244,14 +232,14 @@ export default function Home() {
           noRelocationOrg: true,
           customKeywords: [],
         }),
-        customKeywords: (prev.hardFilters?.customKeywords || []).filter((k) => k !== kw),
+        customKeywords: (prev.hardFilters?.customKeywords || []).filter((k: string) => k !== kw),
       },
     }));
     showToast(`배제 키워드 '${kw}' 제거되었습니다.`);
   };
 
   const resetHardFilters = () => {
-    setPassport((prev) => ({
+    setPassport((prev: any) => ({
       ...prev,
       hardFilters: {
         onlyPermanent: true,

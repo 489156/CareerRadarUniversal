@@ -18,15 +18,7 @@ interface AppState {
   setPassport: (passport: CareerPassport | ((prev: CareerPassport) => CareerPassport)) => void;
 
   // Calculator State
-  calcInput: {
-    baseSalary: number;
-    fixedAllowance: number;
-    variableBonus: number;
-    weeklyHours: number;
-    weeklyOT: number;
-    commuteMinutes: number;
-    monthlyWelfare: number;
-  };
+  calcInput: { cashManwon: number; commuteMinutesOneway: number; monthlyTransitCostManwon: number; weeklyRemoteDays: number; weeklyWorkHours: number; };
   setCalcInput: (input: any) => void;
 
   // Scanner State
@@ -69,8 +61,8 @@ interface AppState {
   setShowExcludedJobs: (show: boolean) => void;
   radarSearch: string;
   setRadarSearch: (search: string) => void;
-  radarFilter: "ALL" | "RECOMMENDED" | "GOOD_COMMUTE" | "NO_OT" | "ENTRY";
-  setRadarFilter: (filter: "ALL" | "RECOMMENDED" | "GOOD_COMMUTE" | "NO_OT" | "ENTRY") => void;
+  radarFilter: "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT";
+  setRadarFilter: (filter: "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT") => void;
   ledgerSearch: string;
   setLedgerSearch: (search: string) => void;
 }
@@ -114,15 +106,7 @@ export const useAppStore = create<AppState>((set) => ({
     passport: typeof updater === 'function' ? updater(state.passport) : updater
   })),
 
-  calcInput: {
-    baseSalary: 6000,
-    fixedAllowance: 0,
-    variableBonus: 500,
-    weeklyHours: 40,
-    weeklyOT: 0,
-    commuteMinutes: 60,
-    monthlyWelfare: 10,
-  },
+  calcInput: { cashManwon: 5800, commuteMinutesOneway: 50, monthlyTransitCostManwon: 15, weeklyRemoteDays: 0, weeklyWorkHours: 40 },
   setCalcInput: (input) => set((state) => ({ calcInput: typeof input === 'function' ? input(state.calcInput) : input })),
 
   scannerText: "",
@@ -161,7 +145,7 @@ export const useAppStore = create<AppState>((set) => ({
   setShowExcludedJobs: (show) => set({ showExcludedJobs: show }),
   radarSearch: "",
   setRadarSearch: (search) => set({ radarSearch: search }),
-  radarFilter: "ALL",
+  radarFilter: "all",
   setRadarFilter: (filter) => set({ radarFilter: filter }),
   ledgerSearch: "",
   setLedgerSearch: (search) => set({ ledgerSearch: search }),
