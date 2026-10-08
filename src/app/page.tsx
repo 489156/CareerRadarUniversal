@@ -4,15 +4,15 @@ import React, { useState, useEffect } from "react";
 import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGapTrack, HardFilters } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
-import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
+import { calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
 import { CRAWLER_SOURCES, getCrawlerNetworkStats } from "@/lib/crawler";
 import { fetchJobsWithCache } from "@/lib/supabase";
 
 export default function Home() {
-  const [jobsDatabase, setJobsDatabase] = useState<JobPosting[]>(MOCK_JOB_DATABASE);
+  const [jobsDatabase, setJobsDatabase] = useState<JobPosting[]>([]);
 
   useEffect(() => {
-    fetchJobsWithCache(MOCK_JOB_DATABASE).then(data => {
+    fetchJobsWithCache([]).then(data => {
       setJobsDatabase(data);
     });
   }, []);
