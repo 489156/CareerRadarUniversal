@@ -1,12 +1,52 @@
 [
   {
-    "id": "alio-305871",
-    "company": "국립공원공단",
-    "title": "[설악산] 설악산국립공원 기간제 직원[탐방해설] 채용 추가접수 공고",
+    "id": "alio-305833",
+    "company": "한국장애인개발원",
+    "title": "[제2026-117호]2026년도 제6차 경상남도장애아동·발달장애인지원센터(장애아동지원팀) 체험형 청년인턴(장애인 제한경쟁)채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경남 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2400,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 1,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국장애인개발원\n공고명: [제2026-117호]2026년도 제6차 경상남도장애아동·발달장애인지원센터(장애아동지원팀) 체험형 청년인턴(장애인 제한경쟁)채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경남",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=305833",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-10-09"
+  },
+  {
+    "id": "alio-305842",
+    "company": "한국도로공사",
+    "title": "한국도로공사 창녕지사 기간제근로자(안전순찰원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "강원 (지방 본사/지사)",
+    "location": "경남 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -29,15 +69,15 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립공원공단\n공고명: [설악산] 설악산국립공원 기간제 직원[탐방해설] 채용 추가접수 공고\n고용형태: 비정규직\n근무지: 강원",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 창녕지사 기간제근로자(안전순찰원) 채용공고\n고용형태: 비정규직\n근무지: 경남",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=305871",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=305842",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305841",
@@ -77,7 +117,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305840",
@@ -117,7 +157,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305839",
@@ -157,7 +197,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305838",
@@ -197,7 +237,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305837",
@@ -237,7 +277,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "alio-305835",
@@ -277,47 +317,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
-  },
-  {
-    "id": "alio-305834",
-    "company": "국립중앙의료원",
-    "title": "의사직 및 계약직 전문의 채용 재공고(내분비대사내과, 중환자전담전문의, 소아청소년과(신생아분과))",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직 \n\t\t\t\t\t\t\t\t\t\t외 1",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 의사직 및 계약직 전문의 채용 재공고(내분비대사내과, 중환자전담전문의, 소아청소년과(신생아분과))\n고용형태: 비정규직 \n\t\t\t\t\t\t\t\t\t\t외 1\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=305834",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5219",
@@ -356,7 +356,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5217",
@@ -395,7 +395,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5215",
@@ -434,7 +434,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5213",
@@ -473,7 +473,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5212",
@@ -512,7 +512,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5211",
@@ -551,7 +551,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5210",
@@ -590,7 +590,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "deloitte-5209",
@@ -629,7 +629,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "tech-toss-frontend",
@@ -670,7 +670,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "tech-naver-cloud",
@@ -711,7 +711,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "tech-woowa-backend",
@@ -752,7 +752,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -792,7 +792,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "fin-shinhan-bank",
@@ -832,7 +832,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "mkt-cj-enm",
@@ -872,7 +872,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "mkt-daangn-growth",
@@ -912,7 +912,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "hr-samsung-dx",
@@ -952,7 +952,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "hr-coupang-er",
@@ -992,7 +992,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1032,6 +1032,6 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-08"
+    "publishedAt": "2026-10-09"
   }
 ]
