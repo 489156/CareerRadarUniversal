@@ -37,87 +37,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
-  },
-  {
-    "id": "alio-306145",
-    "company": "기초과학연구원",
-    "title": "2026-2 Recruitment Announcement for a Postdoctoral Research Associate Position at the CTPU-CGA",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대전 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 기초과학연구원\n공고명: 2026-2 Recruitment Announcement for a Postdoctoral Research Associate Position at the CTPU-CGA\n고용형태: 비정규직\n근무지: 대전",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306145",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
-  },
-  {
-    "id": "alio-306200",
-    "company": "분당서울대학교병원",
-    "title": "분당서울대학교병원 신입(업무지원직_병동) 직원 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 1,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 분당서울대학교병원\n공고명: 분당서울대학교병원 신입(업무지원직_병동) 직원 채용 공고\n고용형태: 정규직\n근무지: 경기",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306200",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "alio-306209",
@@ -157,7 +77,47 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
+  },
+  {
+    "id": "alio-306145",
+    "company": "기초과학연구원",
+    "title": "2026-2 Recruitment Announcement for a Postdoctoral Research Associate Position at the CTPU-CGA",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대전 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 기초과학연구원\n공고명: 2026-2 Recruitment Announcement for a Postdoctoral Research Associate Position at the CTPU-CGA\n고용형태: 비정규직\n근무지: 대전",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306145",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "alio-306222",
@@ -197,7 +157,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "alio-306235",
@@ -237,7 +197,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "alio-306236",
@@ -277,7 +237,47 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
+  },
+  {
+    "id": "alio-306200",
+    "company": "분당서울대학교병원",
+    "title": "분당서울대학교병원 신입(업무지원직_병동) 직원 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 1,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "정규직",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 분당서울대학교병원\n공고명: 분당서울대학교병원 신입(업무지원직_병동) 직원 채용 공고\n고용형태: 정규직\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306200",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "alio-306260",
@@ -317,7 +317,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5233",
@@ -356,7 +356,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5232",
@@ -395,7 +395,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5231",
@@ -434,7 +434,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5230",
@@ -473,7 +473,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5229",
@@ -512,7 +512,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5228",
@@ -551,7 +551,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5227",
@@ -590,7 +590,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "deloitte-5225",
@@ -629,7 +629,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "tech-toss-frontend",
@@ -670,7 +670,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "tech-naver-cloud",
@@ -711,7 +711,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "tech-woowa-backend",
@@ -752,7 +752,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -792,7 +792,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "fin-shinhan-bank",
@@ -832,7 +832,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "mkt-cj-enm",
@@ -872,7 +872,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "mkt-daangn-growth",
@@ -912,7 +912,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "hr-samsung-dx",
@@ -952,7 +952,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "hr-coupang-er",
@@ -992,7 +992,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1032,6 +1032,6 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-23"
+    "publishedAt": "2026-10-24"
   }
 ]
