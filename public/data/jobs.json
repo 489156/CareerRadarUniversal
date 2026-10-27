@@ -1,12 +1,52 @@
 [
   {
-    "id": "alio-306354",
+    "id": "alio-306327",
+    "company": "국립부산과학관",
+    "title": "2026년도 국립부산과학관 하반기 직원 채용공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "부산 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 2",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립부산과학관\n공고명: 2026년도 국립부산과학관 하반기 직원 채용공고\n고용형태: 무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 2\n근무지: 부산",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306327",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-10-27"
+  },
+  {
+    "id": "alio-306384",
     "company": "한국도로공사",
-    "title": "한국도로공사 대전충남본부 관내 지사(천안, 대전, 영동, 당진, 공주, 부여) 제설 기간제근로자(정비원) 채용",
+    "title": "한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(운전원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "대전 \n\t\t\t\t\t\t\t\t\t\t외 2 (지방 본사/지사)",
+    "location": "강원 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -29,24 +69,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 대전충남본부 관내 지사(천안, 대전, 영동, 당진, 공주, 부여) 제설 기간제근로자(정비원) 채용\n고용형태: 비정규직\n근무지: 대전 \n\t\t\t\t\t\t\t\t\t\t외 2",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(운전원) 채용공고\n고용형태: 비정규직\n근무지: 강원",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306354",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306384",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306341",
+    "id": "alio-306386",
     "company": "한국도로공사",
-    "title": "한국도로공사 전북본부 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(도로관리원) 채용",
+    "title": "한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(정비원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충남 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
+    "location": "강원 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -69,24 +109,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 전북본부 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(도로관리원) 채용\n고용형태: 비정규직\n근무지: 충남 \n\t\t\t\t\t\t\t\t\t\t외 1",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(정비원) 채용공고\n고용형태: 비정규직\n근무지: 강원",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306341",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306386",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306342",
-    "company": "전북대학교병원",
-    "title": "2026년 4분기 전북대학교병원 직원 공개채용",
+    "id": "alio-306359",
+    "company": "한국토지주택공사",
+    "title": "한국토지주택공사 대구경북지역본부 기간제근로자(대체채용) 채용 공고(2026-08)",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "전북 (지방 본사/지사)",
+    "location": "대구 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -99,7 +139,7 @@
     "tags": [
       "공공기관",
       "ALIO 경영공시",
-      "무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1",
+      "비정규직",
       "경력"
     ],
     "pros": [
@@ -109,64 +149,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 전북대학교병원\n공고명: 2026년 4분기 전북대학교병원 직원 공개채용\n고용형태: 무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1\n근무지: 전북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국토지주택공사\n공고명: 한국토지주택공사 대구경북지역본부 기간제근로자(대체채용) 채용 공고(2026-08)\n고용형태: 비정규직\n근무지: 대구",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306342",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306359",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306330",
-    "company": "국민연금공단",
-    "title": "[국민연금공단 서울북부지역본부] 공무직(시설직) 공개채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "무기계약직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민연금공단\n공고명: [국민연금공단 서울북부지역본부] 공무직(시설직) 공개채용 공고\n고용형태: 무기계약직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306330",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
-  },
-  {
-    "id": "alio-306344",
+    "id": "alio-306390",
     "company": "한국도로공사",
-    "title": "한국도로공사 전북본부 기계화부 및 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(운전원) 채용",
+    "title": "한국도로공사 부산경남본부 관내 지사(울산, 양산, 창원, 진주, 산청, 경주, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(도로관리원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충남 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
+    "location": "울산 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -189,24 +189,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 전북본부 기계화부 및 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(운전원) 채용\n고용형태: 비정규직\n근무지: 충남 \n\t\t\t\t\t\t\t\t\t\t외 1",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 부산경남본부 관내 지사(울산, 양산, 창원, 진주, 산청, 경주, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(도로관리원) 채용공고\n고용형태: 비정규직\n근무지: 울산 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306344",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306390",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306345",
+    "id": "alio-306391",
     "company": "한국도로공사",
-    "title": "한국도로공사 전북본부 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(정비원) 채용",
+    "title": "한국도로공사 부산경남본부 관내 지사(울산, 양산, 진주, 산청, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(운전원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충남 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
+    "location": "울산 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -229,24 +229,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 전북본부 관내 지사(전주, 부안, 무주, 논산, 진안, 보령) 제설 기간제근로자(정비원) 채용\n고용형태: 비정규직\n근무지: 충남 \n\t\t\t\t\t\t\t\t\t\t외 1",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 부산경남본부 관내 지사(울산, 양산, 진주, 산청, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(운전원) 채용공고\n고용형태: 비정규직\n근무지: 울산 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306345",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306391",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306329",
-    "company": "학교법인한국폴리텍",
-    "title": "2026년 한국폴리텍대학 기간제 대학운영직(육아대체_조리원)",
+    "id": "alio-306393",
+    "company": "한국도로공사",
+    "title": "한국도로공사 부산경남본부 관내 지사(울산, 양산, 창원, 진주, 산청, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(정비원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경북 (지방 본사/지사)",
+    "location": "울산 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -269,24 +269,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 학교법인한국폴리텍\n공고명: 2026년 한국폴리텍대학 기간제 대학운영직(육아대체_조리원)\n고용형태: 비정규직\n근무지: 경북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 부산경남본부 관내 지사(울산, 양산, 창원, 진주, 산청, 창녕, 고성, 서울산, 밀양, 합천) 제설 기간제근로자(정비원) 채용공고\n고용형태: 비정규직\n근무지: 울산 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306329",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306393",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
-    "id": "alio-306348",
-    "company": "전북대학교병원",
-    "title": "2026년 4분기 전북대학교병원 기간제근로자 공개채용",
+    "id": "alio-306383",
+    "company": "한국도로공사",
+    "title": "한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(도로관리원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "전북 (지방 본사/지사)",
+    "location": "강원 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -309,15 +309,15 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 전북대학교병원\n공고명: 2026년 4분기 전북대학교병원 기간제근로자 공개채용\n고용형태: 비정규직\n근무지: 전북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 강원본부 관내 지사(원주, 대관령, 홍천, 춘천, 강릉, 양양) 제설 기간제근로자(도로관리원) 채용공고\n고용형태: 비정규직\n근무지: 강원",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306348",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306383",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5234",
@@ -356,7 +356,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5233",
@@ -395,7 +395,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5232",
@@ -434,7 +434,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5231",
@@ -473,7 +473,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5230",
@@ -512,7 +512,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5229",
@@ -551,7 +551,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5228",
@@ -590,7 +590,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "deloitte-5227",
@@ -629,7 +629,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "tech-toss-frontend",
@@ -670,7 +670,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "tech-naver-cloud",
@@ -711,7 +711,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "tech-woowa-backend",
@@ -752,7 +752,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -792,7 +792,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "fin-shinhan-bank",
@@ -832,7 +832,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "mkt-cj-enm",
@@ -872,7 +872,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "mkt-daangn-growth",
@@ -912,7 +912,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "hr-samsung-dx",
@@ -952,7 +952,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "hr-coupang-er",
@@ -992,7 +992,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1032,6 +1032,6 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-10-26"
+    "publishedAt": "2026-10-27"
   }
 ]
