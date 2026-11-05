@@ -1,12 +1,212 @@
 [
   {
-    "id": "alio-306697",
-    "company": "부산대학교병원",
-    "title": "2026년도 전문의료인력(전임의사) 공개채용(수시) 모집 공고(양산분원)",
+    "id": "alio-306743",
+    "company": "한전KDN",
+    "title": "한전KDN(주) 원전인프라부 프로젝트계약근로자 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경남 (지방 본사/지사)",
+    "location": "대전 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한전KDN\n공고명: 한전KDN(주) 원전인프라부 프로젝트계약근로자 채용공고\n고용형태: 비정규직\n근무지: 대전",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306743",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "alio-306765",
+    "company": "국립중앙의료원",
+    "title": "계약직 행정(PAO)(국제협력추진단) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "HR",
+    "industry": "공공기관 / 공기업",
+    "location": "해외 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 계약직 행정(PAO)(국제협력추진단) 채용 공고\n고용형태: 비정규직\n근무지: 해외",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306765",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "alio-306740",
+    "company": "대한적십자사",
+    "title": "[대한적십자사 충남지사] 비정규직(육아휴직 대체인력) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "충남 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 대한적십자사\n공고명: [대한적십자사 충남지사] 비정규직(육아휴직 대체인력) 채용 공고\n고용형태: 비정규직\n근무지: 충남",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306740",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "alio-306739",
+    "company": "(재)축산환경관리원",
+    "title": "축산환경관리원 2026년 제5회 직원(기간제 근로자) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "세종 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (재)축산환경관리원\n공고명: 축산환경관리원 2026년 제5회 직원(기간제 근로자) 채용 공고\n고용형태: 비정규직\n근무지: 세종",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306739",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "alio-306738",
+    "company": "한전KPS(주)",
+    "title": "한전KPS(주) 월성1사업소 월성2호기 제23-2차 계획예방정비공사 정비보조원 모집",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경북 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "비정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한전KPS(주)\n공고명: 한전KPS(주) 월성1사업소 월성2호기 제23-2차 계획예방정비공사 정비보조원 모집\n고용형태: 비정규직\n근무지: 경북",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306738",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "alio-306737",
+    "company": "충남대학교병원",
+    "title": "[대전,세종] 2027년도 상반기 신규의료진(전임의사) 공개채용 모집공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대전 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -29,24 +229,24 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 부산대학교병원\n공고명: 2026년도 전문의료인력(전임의사) 공개채용(수시) 모집 공고(양산분원)\n고용형태: 정규직\n근무지: 경남",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 충남대학교병원\n공고명: [대전,세종] 2027년도 상반기 신규의료진(전임의사) 공개채용 모집공고\n고용형태: 정규직\n근무지: 대전 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306697",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306737",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
-    "id": "alio-306708",
-    "company": "부산대학교병원",
-    "title": "2026년도 11월 계약직의사(마취통증의학과) 공개채용 모집 공고",
+    "id": "alio-306736",
+    "company": "충남대학교병원",
+    "title": "[대전,세종] 2027년도 상반기 신규의료진(진료교수) 공개채용 모집공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경남 (지방 본사/지사)",
+    "location": "대전 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -69,255 +269,172 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 부산대학교병원\n공고명: 2026년도 11월 계약직의사(마취통증의학과) 공개채용 모집 공고\n고용형태: 비정규직\n근무지: 경남",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 충남대학교병원\n공고명: [대전,세종] 2027년도 상반기 신규의료진(진료교수) 공개채용 모집공고\n고용형태: 비정규직\n근무지: 대전 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306708",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306736",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
-    "id": "alio-306687",
-    "company": "국립중앙의료원",
-    "title": "계약직 연구원(중개연구센터) 채용 공고",
+    "id": "alio-306735",
+    "company": "충남대학교병원",
+    "title": "[대전,세종] 2027년도 상반기 신규의료진(임상교수요원) 공개채용 모집공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 계약직 연구원(중개연구센터) 채용 공고\n고용형태: 비정규직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306687",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "alio-306686",
-    "company": "국립중앙의료원",
-    "title": "계약직 행정-휴직대체(연구기획팀) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "HR",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 계약직 행정-휴직대체(연구기획팀) 채용 공고\n고용형태: 비정규직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306686",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "HR",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "alio-306685",
-    "company": "근로복지공단",
-    "title": "[대전병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대전 (지방 본사/지사)",
+    "location": "대전 \n\t\t\t\t\t\t\t\t\t\t외 1 (지방 본사/지사)",
     "commuteMinutes": 75,
-    "salaryMinManwon": 2400,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 충남대학교병원\n공고명: [대전,세종] 2027년도 상반기 신규의료진(임상교수요원) 공개채용 모집공고\n고용형태: 정규직\n근무지: 대전 \n\t\t\t\t\t\t\t\t\t\t외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306735",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "deloitte-5242",
+    "company": "딜로이트 안진",
+    "title": "세무자문부문 서류 검토 아르바이트",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 8800,
+    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 채용]\n세무자문부문 서류 검토 아르바이트\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5242",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "isEntryLevel": false,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-05"
+  },
+  {
+    "id": "deloitte-5241",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 Audit DC 감사지원업무(조회서 조서화) 인턴 채용",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 230~250만 원 (인턴 처우)",
+    "salaryTier": "B",
     "minYears": 0,
     "maxYears": 1,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
+      "Big4 회계법인",
+      "인턴",
+      "여의도"
     ],
     "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
     ],
     "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+      "논리적 사고 및 프레젠테이션 역량"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [대전병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대전",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306685",
-    "sourceCategory": "PUBLIC",
+    "rawText": "[딜로이트 안진 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 조서화) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5241",
+    "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
+    "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-05"
   },
   {
-    "id": "alio-306684",
-    "company": "국립중앙의료원",
-    "title": "계약직 행정(기부금사무국) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "HR",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 계약직 행정(기부금사무국) 채용 공고\n고용형태: 비정규직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306684",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "HR",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "alio-306683",
-    "company": "근로복지공단",
-    "title": "[대전병원] 2026년도 하반기 청년(체험형)인턴 장애전형 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대전 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 2400,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
+    "id": "deloitte-5240",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 Audit DC 감사지원업무(조회서 수발신) 인턴 채용",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 230~250만 원 (인턴 처우)",
+    "salaryTier": "B",
     "minYears": 0,
     "maxYears": 1,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
+      "Big4 회계법인",
+      "인턴",
+      "여의도"
     ],
     "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
     ],
     "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+      "논리적 사고 및 프레젠테이션 역량"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [대전병원] 2026년도 하반기 청년(체험형)인턴 장애전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대전",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306683",
-    "sourceCategory": "PUBLIC",
+    "rawText": "[딜로이트 안진 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 수발신) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5240",
+    "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
+    "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "alio-306682",
-    "company": "국립중앙의료원",
-    "title": "계약직 간호사-휴직대체(외상센터) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 계약직 간호사-휴직대체(외상센터) 채용 공고\n고용형태: 비정규직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306682",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "deloitte-5239",
@@ -356,7 +473,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "deloitte-5238",
@@ -395,7 +512,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "deloitte-5237",
@@ -434,7 +551,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "deloitte-5236",
@@ -473,7 +590,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "deloitte-5234",
@@ -512,124 +629,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "deloitte-5233",
-    "company": "딜로이트 안진",
-    "title": "세무자문부문 Business Tax 2본부(2-1) 경력직 회계사",
-    "canonicalRole": "Tax & Financial Advisory",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n세무자문부문 Business Tax 2본부(2-1) 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5233",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "deloitte-5232",
-    "company": "딜로이트 안진",
-    "title": "위험관리부문 보안 전문가/개인정보 관리 담당자 경력",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n위험관리부문 보안 전문가/개인정보 관리 담당자 경력\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5232",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
-  },
-  {
-    "id": "deloitte-5231",
-    "company": "딜로이트 안진",
-    "title": "경영지원부문 IT AI 엔지니어 채용",
-    "canonicalRole": "Cloud & AI Advisory",
-    "occupation": "TECH",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n경영지원부문 IT AI 엔지니어 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5231",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "tech-toss-frontend",
@@ -670,7 +670,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "tech-naver-cloud",
@@ -711,7 +711,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "tech-woowa-backend",
@@ -752,7 +752,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -792,7 +792,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "fin-shinhan-bank",
@@ -832,7 +832,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "mkt-cj-enm",
@@ -872,7 +872,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "mkt-daangn-growth",
@@ -912,7 +912,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "hr-samsung-dx",
@@ -952,7 +952,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "hr-coupang-er",
@@ -992,7 +992,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1032,6 +1032,6 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-04"
+    "publishedAt": "2026-11-05"
   }
 ]
