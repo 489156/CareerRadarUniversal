@@ -1,53 +1,13 @@
 [
   {
-    "id": "alio-306816",
-    "company": "한국도로교통공단",
-    "title": "2026년도 4분기 실무직 및 기간제근로자 채용공고",
+    "id": "alio-306866",
+    "company": "한국수력원자력(주)",
+    "title": "2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "서울 \n\t\t\t\t\t\t\t\t\t\t외 13 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로교통공단\n공고명: 2026년도 4분기 실무직 및 기간제근로자 채용공고\n고용형태: 무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1\n근무지: 서울 \n\t\t\t\t\t\t\t\t\t\t외 13",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306816",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
-  },
-  {
-    "id": "alio-306821",
-    "company": "국민건강보험공단 일산병원",
-    "title": "2026년도 의사직(전문계약직) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
+    "location": "경북 (지방 본사/지사)",
+    "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
@@ -69,22 +29,22 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민건강보험공단 일산병원\n공고명: 2026년도 의사직(전문계약직) 채용 공고\n고용형태: 비정규직\n근무지: 경기",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국수력원자력(주)\n공고명: 2026년 제4차 해외원전건설처 기간제근로자(통·번역사) 채용\n고용형태: 비정규직\n근무지: 경북",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306821",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306866",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
-    "id": "alio-306806",
-    "company": "한전KDN",
-    "title": "한전KDN(주) 전북사업처 OA설비유지보수 일용근로자 모집 공고",
-    "canonicalRole": "공공 ICT/전산관리",
-    "occupation": "TECH",
+    "id": "alio-306897",
+    "company": "한국농업기술진흥원",
+    "title": "2026년 한국농업기술진흥원 제1차 전문계약직 채용(제한경쟁) 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
     "location": "전북 (지방 본사/지사)",
     "commuteMinutes": 75,
@@ -109,25 +69,25 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한전KDN\n공고명: 한전KDN(주) 전북사업처 OA설비유지보수 일용근로자 모집 공고\n고용형태: 비정규직\n근무지: 전북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국농업기술진흥원\n공고명: 2026년 한국농업기술진흥원 제1차 전문계약직 채용(제한경쟁) 공고\n고용형태: 비정규직\n근무지: 전북",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306806",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306897",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-10"
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-11"
   },
   {
-    "id": "alio-306823",
-    "company": "국민건강보험공단 일산병원",
-    "title": "2027년도 치과의사 전공의 레지던트 모집공고",
+    "id": "alio-306917",
+    "company": "국악방송",
+    "title": "국악방송 육아휴직 대체자 채용 공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
+    "location": "서울 (수도권)",
+    "commuteMinutes": 42,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
@@ -149,25 +109,25 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민건강보험공단 일산병원\n공고명: 2027년도 치과의사 전공의 레지던트 모집공고\n고용형태: 비정규직\n근무지: 경기",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국악방송\n공고명: 국악방송 육아휴직 대체자 채용 공고\n고용형태: 비정규직\n근무지: 서울",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306823",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306917",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
-    "id": "alio-306824",
-    "company": "국민건강보험공단 일산병원",
-    "title": "2026년도 의사직(임상교수) 채용 공고",
+    "id": "alio-306916",
+    "company": "한국교육개발원",
+    "title": "2026년도 제6차 위촉직 채용 공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
+    "location": "서울 \n\t\t\t\t\t\t\t\t\t\t외 1 (수도권)",
+    "commuteMinutes": 42,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
@@ -189,25 +149,65 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민건강보험공단 일산병원\n공고명: 2026년도 의사직(임상교수) 채용 공고\n고용형태: 비정규직\n근무지: 경기",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국교육개발원\n공고명: 2026년도 제6차 위촉직 채용 공고\n고용형태: 비정규직\n근무지: 서울 \n\t\t\t\t\t\t\t\t\t\t외 1",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306824",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306916",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
-    "id": "alio-306826",
-    "company": "국민건강보험공단 일산병원",
-    "title": "2027년도 치과의사 전공의 인턴 모집 공고",
+    "id": "alio-306915",
+    "company": "국립중앙의료원",
+    "title": "의사직(응급의료정책기획팀) 채용 재공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "서울 (수도권)",
+    "commuteMinutes": 42,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국립중앙의료원\n공고명: 의사직(응급의료정책기획팀) 채용 재공고\n고용형태: 정규직\n근무지: 서울",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306915",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-11"
+  },
+  {
+    "id": "alio-306942",
+    "company": "전남대학교병원",
+    "title": "2027년도 치과의사전공의(인턴) 모집 공고",
     "canonicalRole": "청년인턴/행정지원",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
+    "location": "전남광주 (지방 본사/지사)",
+    "commuteMinutes": 75,
     "salaryMinManwon": 2400,
     "salaryMaxManwon": 2800,
     "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
@@ -219,8 +219,48 @@
     "tags": [
       "공공기관",
       "ALIO 경영공시",
+      "정규직",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 전남대학교병원\n공고명: 2027년도 치과의사전공의(인턴) 모집 공고\n고용형태: 정규직\n근무지: 전남광주",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306942",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-11"
+  },
+  {
+    "id": "alio-306914",
+    "company": "한국환경공단",
+    "title": "한국환경공단 충청권환경본부 환경시설관리처 기간제근로자(촉탁직, 일용직) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "충남 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 5,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
       "비정규직",
-      "신입/인턴"
+      "경력"
     ],
     "pros": [
       "기획재정부 ALIO 100% 실공시 데이터",
@@ -229,38 +269,38 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민건강보험공단 일산병원\n공고명: 2027년도 치과의사 전공의 인턴 모집 공고\n고용형태: 비정규직\n근무지: 경기",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국환경공단\n공고명: 한국환경공단 충청권환경본부 환경시설관리처 기간제근로자(촉탁직, 일용직) 채용 공고\n고용형태: 비정규직\n근무지: 충남",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306826",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306914",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
+    "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
-    "id": "alio-306875",
-    "company": "분당서울대학교병원",
-    "title": "분당서울대학교병원 신입(업무지원직) 직원 채용 공고",
+    "id": "alio-306913",
+    "company": "한국해양과학기술원",
+    "title": "[제27-01-01호 및 제27-02-01호]한국해양과학기술원 2027년 1차 직원(정규직/무기계약직) 채용",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
+    "location": "부산 \n\t\t\t\t\t\t\t\t\t\t외 3 (지방 본사/지사)",
+    "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 1,
+    "minYears": 2,
+    "maxYears": 5,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
       "공공기관",
       "ALIO 경영공시",
-      "정규직",
-      "신입/인턴"
+      "무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1",
+      "경력"
     ],
     "pros": [
       "기획재정부 ALIO 100% 실공시 데이터",
@@ -269,55 +309,15 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 분당서울대학교병원\n공고명: 분당서울대학교병원 신입(업무지원직) 직원 채용 공고\n고용형태: 정규직\n근무지: 경기",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국해양과학기술원\n공고명: [제27-01-01호 및 제27-02-01호]한국해양과학기술원 2027년 1차 직원(정규직/무기계약직) 채용\n고용형태: 무기계약직 \n\t\t\t\t\t\t\t\t\t\t외 1\n근무지: 부산 \n\t\t\t\t\t\t\t\t\t\t외 3",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306875",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306913",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
+    "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
-  },
-  {
-    "id": "alio-306874",
-    "company": "분당서울대학교병원",
-    "title": "분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 1,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 분당서울대학교병원\n공고명: 분당서울대학교병원 신입(업무지원직_미화) 직원 채용 공고\n고용형태: 정규직\n근무지: 경기",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306874",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5245",
@@ -356,7 +356,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5244",
@@ -395,7 +395,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5242",
@@ -434,7 +434,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5241",
@@ -473,7 +473,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5240",
@@ -512,7 +512,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5239",
@@ -551,7 +551,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5238",
@@ -590,7 +590,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "deloitte-5237",
@@ -629,7 +629,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "tech-toss-frontend",
@@ -670,7 +670,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "tech-naver-cloud",
@@ -711,7 +711,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "tech-woowa-backend",
@@ -752,7 +752,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -792,7 +792,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "fin-shinhan-bank",
@@ -832,7 +832,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "mkt-cj-enm",
@@ -872,7 +872,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "mkt-daangn-growth",
@@ -912,7 +912,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "hr-samsung-dx",
@@ -952,7 +952,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "hr-coupang-er",
@@ -992,7 +992,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1032,6 +1032,6 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   }
 ]
