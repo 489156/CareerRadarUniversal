@@ -35,3 +35,5 @@ next-env.d.ts
 *USER PROFILE*
 PROJECT_IDENTITY_AND_STRATEGY.md
 wsir_repo/
+
+.serena/

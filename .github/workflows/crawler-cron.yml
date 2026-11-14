@@ -1,9 +1,10 @@
-name: Daily Data Crawler & Sync
+name: Daily Career Radar Crawler
 
 on:
   schedule:
-    - cron: '0 15 * * *'
-  workflow_dispatch:
+    # Runs at 00:00 UTC every day (09:00 KST)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:
   contents: write
@@ -11,29 +12,29 @@ permissions:
 jobs:
   crawl-and-sync:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          
+
       - name: Install dependencies
         run: npm ci
-        
-      - name: Run Crawler & Supabase Sync
+
+      - name: Run Live Crawler & Sync
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: node scripts/crawl.mjs
-        
-      - name: Commit and push static fallback (if changes exist)
+
+      - name: Commit and Push updated jobs.json cache
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "CareerRadar Bot"
+          git config --global user.email "bot@careerradar.local"
           git add public/data/jobs.json mobile/assets/data/jobs.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(data): auto-update daily jobs [skip ci]" && git push)
+          git diff --staged --quiet || (git commit -m "chore(data): auto-update live crawled job postings" && git push)

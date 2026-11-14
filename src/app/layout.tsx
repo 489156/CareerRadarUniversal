@@ -18,7 +18,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen bg-[#080b11] text-[#f1f5f9]">{children}</body>
+      <body className="min-h-screen bg-[#0b0f19] text-[#f1f5f9]">{children}</body>
     </html>
   );
 }

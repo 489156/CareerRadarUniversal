@@ -1,8 +1,8 @@
 [
   {
-    "id": "alio-307028",
-    "company": "경북대학교병원",
-    "title": "칠곡경북대학교병원 2026년 11월 2차 임시직원 채용공고(약사, 간호사, 청소)",
+    "id": "alio-306980",
+    "company": "학교법인한국폴리텍",
+    "title": "한국폴리텍대학 남대구캠퍼스 업무직(대학운영직_조리사) 채용(3차) 공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
@@ -13,13 +13,13 @@
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
     "minYears": 2,
-    "maxYears": 5,
+    "maxYears": 6,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
       "공공기관",
       "ALIO 경영공시",
-      "비정규직",
+      "무기계약직",
       "경력"
     ],
     "pros": [
@@ -29,37 +29,37 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 경북대학교병원\n공고명: 칠곡경북대학교병원 2026년 11월 2차 임시직원 채용공고(약사, 간호사, 청소)\n고용형태: 비정규직\n근무지: 대구",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 학교법인한국폴리텍\n공고명: 한국폴리텍대학 남대구캠퍼스 업무직(대학운영직_조리사) 채용(3차) 공고\n고용형태: 무기계약직\n근무지: 대구",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307028",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306980",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-307002",
-    "company": "한국도로공사",
-    "title": "한국도로공사 충주지사 기간제근로자(상황관리원) 채용공고",
+    "id": "alio-307023",
+    "company": "한국산업안전보건공단",
+    "title": "[안전보건공단 광주광역본부] 전남동부지사 업무직 보훈제한경쟁(시설관리원) 채용공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충북 (지방 본사/지사)",
+    "location": "전남광주 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
     "minYears": 2,
-    "maxYears": 5,
+    "maxYears": 6,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
       "공공기관",
       "ALIO 경영공시",
-      "비정규직",
+      "무기계약직",
       "경력"
     ],
     "pros": [
@@ -69,31 +69,31 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 충주지사 기간제근로자(상황관리원) 채용공고\n고용형태: 비정규직\n근무지: 충북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국산업안전보건공단\n공고명: [안전보건공단 광주광역본부] 전남동부지사 업무직 보훈제한경쟁(시설관리원) 채용공고\n고용형태: 무기계약직\n근무지: 전남광주",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307002",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307023",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-307001",
-    "company": "한국조세재정연구원",
-    "title": "[한국조세재정연구원] 2026년도 제6차 위촉직 직원모집",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
+    "id": "alio-306949",
+    "company": "한국기술교육대학교",
+    "title": "2026학년도 한국기술교육대학교 기술연구원 신규채용 공고",
+    "canonicalRole": "공공 인사/노무행정",
+    "occupation": "HR",
     "industry": "공공기관 / 공기업",
-    "location": "서울 \n\t\t\t\t\t\t\t\t\t\t외 1 (수도권)",
-    "commuteMinutes": 42,
+    "location": "충남 (지방 본사/지사)",
+    "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
     "minYears": 2,
-    "maxYears": 5,
+    "maxYears": 6,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -109,71 +109,31 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국조세재정연구원\n공고명: [한국조세재정연구원] 2026년도 제6차 위촉직 직원모집\n고용형태: 정규직\n근무지: 서울 \n\t\t\t\t\t\t\t\t\t\t외 1",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국기술교육대학교\n공고명: 2026학년도 한국기술교육대학교 기술연구원 신규채용 공고\n고용형태: 정규직 (정규직)\n근무지: 충남",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307001",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306949",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-307000",
-    "company": "한국도로공사",
-    "title": "한국도로공사 제천영월건설사업단 기간제근로자(청소원) 채용공고",
+    "id": "alio-306848",
+    "company": "(주)강원랜드",
+    "title": "㈜강원랜드 2026년 2차 서비스지원직(보훈) 채용 공고",
     "canonicalRole": "공공행정·경영기획",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충북 (지방 본사/지사)",
+    "location": "강원 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
     "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
     "salaryTier": "A",
     "minYears": 2,
-    "maxYears": 5,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 제천영월건설사업단 기간제근로자(청소원) 채용공고\n고용형태: 비정규직\n근무지: 충북",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307000",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
-  },
-  {
-    "id": "alio-307032",
-    "company": "경북대학교병원",
-    "title": "2026년 의료요원(진료교수, 진료의사) 28차 초빙(긴급) 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대구 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
+    "maxYears": 6,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -189,135 +149,255 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 경북대학교병원\n공고명: 2026년 의료요원(진료교수, 진료의사) 28차 초빙(긴급) 공고\n고용형태: 정규직\n근무지: 대구",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (주)강원랜드\n공고명: ㈜강원랜드 2026년 2차 서비스지원직(보훈) 채용 공고\n고용형태: 정규직 (정규직)\n근무지: 강원",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307032",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306848",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-306999",
-    "company": "한국도로공사",
-    "title": "한국도로공사 제천영월건설사업단 기간제근로자(운전원) 채용공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "충북 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
+    "id": "pwc-r261110-3",
+    "company": "삼일PwC",
+    "title": "AX Node XBRL센터 - 경력직 채용",
+    "canonicalRole": "Corporate Finance & Deals",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 6200,
+    "salaryMaxManwon": 8500,
+    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
+      "Big4 회계법인",
+      "정규직",
+      "경력",
+      "수시채용"
     ],
     "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
     ],
     "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+      "요구 스킬셋 부합 여부 확인 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 제천영월건설사업단 기간제근로자(운전원) 채용공고\n고용형태: 비정규직\n근무지: 충북",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306999",
-    "sourceCategory": "PUBLIC",
+    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node XBRL센터 - 경력직 채용\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110-3.html",
+    "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
+    "sourceSystem": "PwC Global ATS",
     "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-306998",
-    "company": "한국도로공사",
-    "title": "한국도로공사 제천영월건설사업단 기간제근로자(사무원) 채용공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "충북 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
+    "id": "pwc-r261110-2",
+    "company": "삼일PwC",
+    "title": "AX Node XBRL센터 - 신입 채용",
+    "canonicalRole": "Corporate Finance & Deals",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 4600,
+    "salaryMaxManwon": 5400,
+    "salaryDisplay": "4,600 ~ 5,400만 원 (Big4 대졸 초임)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
+      "Big4 회계법인",
+      "정규직",
+      "신입/인턴",
+      "수시채용"
     ],
     "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
     ],
     "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+      "기초 직무 지식 및 영어 커뮤니케이션"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국도로공사\n공고명: 한국도로공사 제천영월건설사업단 기간제근로자(사무원) 채용공고\n고용형태: 비정규직\n근무지: 충북",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306998",
-    "sourceCategory": "PUBLIC",
+    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node XBRL센터 - 신입 채용\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110-2.html",
+    "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "sourceSystem": "PwC Global ATS",
+    "isEntryLevel": true,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
   },
   {
-    "id": "alio-306995",
-    "company": "한국건강증진개발원",
-    "title": "한국건강증진개발원 2026년 개방형직위(전략경영본부장) 공모",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 5,
+    "id": "pwc-r261110",
+    "company": "삼일PwC",
+    "title": "Risk Assurance 본부 Trust팀 경력직 채용 - Cybersecurity (AI Security)",
+    "canonicalRole": "Data/Tech Consultant",
+    "occupation": "TECH",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 6200,
+    "salaryMaxManwon": 8500,
+    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "비정규직",
-      "경력"
+      "Big4 회계법인",
+      "정규직",
+      "경력",
+      "수시채용"
     ],
     "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
     ],
     "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+      "요구 스킬셋 부합 여부 확인 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국건강증진개발원\n공고명: 한국건강증진개발원 2026년 개방형직위(전략경영본부장) 공모\n고용형태: 비정규직\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306995",
-    "sourceCategory": "PUBLIC",
+    "rawText": "[삼일PwC 정규직 수시채용]\nRisk Assurance 본부 Trust팀 경력직 채용 - Cybersecurity (AI Security)\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110.html",
+    "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
+    "sourceSystem": "PwC Global ATS",
     "isEntryLevel": false,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "pwc-r261022",
+    "company": "삼일PwC",
+    "title": "Global Sector PE advisory 경력직 채용",
+    "canonicalRole": "Corporate Finance & Deals",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 6200,
+    "salaryMaxManwon": 8500,
+    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "경력",
+      "수시채용"
+    ],
+    "pros": [
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
+    ],
+    "gaps": [
+      "요구 스킬셋 부합 여부 확인 필요"
+    ],
+    "rawText": "[삼일PwC 정규직 수시채용]\nGlobal Sector PE advisory 경력직 채용\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261022.html",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "PwC Global ATS",
+    "isEntryLevel": false,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "pwc-r261016-1",
+    "company": "삼일PwC",
+    "title": "Global Sector Value-up Business 경력직 채용",
+    "canonicalRole": "Corporate Finance & Deals",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 6200,
+    "salaryMaxManwon": 8500,
+    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "경력",
+      "수시채용"
+    ],
+    "pros": [
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
+    ],
+    "gaps": [
+      "요구 스킬셋 부합 여부 확인 필요"
+    ],
+    "rawText": "[삼일PwC 정규직 수시채용]\nGlobal Sector Value-up Business 경력직 채용\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261016-1.html",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "PwC Global ATS",
+    "isEntryLevel": false,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "pwc-r261103-2",
+    "company": "삼일PwC",
+    "title": "Sustainability team RA(Research Assistant) 모집",
+    "canonicalRole": "Management Consulting",
+    "occupation": "PLANNING",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 용산구 (삼일PwC 본사)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 220~250만 원 (학부/RA 인턴십)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "인턴",
+      "신입/인턴",
+      "수시채용"
+    ],
+    "pros": [
+      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
+      "다양한 글로벌 프로젝트 경험"
+    ],
+    "gaps": [
+      "기초 직무 지식 및 영어 커뮤니케이션"
+    ],
+    "rawText": "[삼일PwC 인턴십]\nSustainability team RA(Research Assistant) 모집\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.",
+    "sourceName": "삼일PwC 공식 채용관",
+    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261103-2.html",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "PwC Global ATS",
+    "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5244",
@@ -348,7 +428,7 @@
     "gaps": [
       "직무별 상세 요건 확인 필요"
     ],
-    "rawText": "[딜로이트 안진 채용]\n세무자문부문 M&A Tax 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 정규직 채용]\n세무자문부문 M&A Tax 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
     "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5244",
     "sourceCategory": "CONSULTING",
@@ -356,46 +436,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
-  },
-  {
-    "id": "deloitte-5242",
-    "company": "딜로이트 안진",
-    "title": "세무자문부문 서류 검토 아르바이트",
-    "canonicalRole": "Tax & Financial Advisory",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n세무자문부문 서류 검토 아르바이트\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5242",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5241",
@@ -411,7 +452,7 @@
     "salaryDisplay": "월 230~250만 원 (인턴 처우)",
     "salaryTier": "B",
     "minYears": 0,
-    "maxYears": 1,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -426,7 +467,7 @@
     "gaps": [
       "논리적 사고 및 프레젠테이션 역량"
     ],
-    "rawText": "[딜로이트 안진 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 조서화) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 조서화) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
     "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5241",
     "sourceCategory": "CONSULTING",
@@ -434,7 +475,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5240",
@@ -450,7 +491,7 @@
     "salaryDisplay": "월 230~250만 원 (인턴 처우)",
     "salaryTier": "B",
     "minYears": 0,
-    "maxYears": 1,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -465,7 +506,7 @@
     "gaps": [
       "논리적 사고 및 프레젠테이션 역량"
     ],
-    "rawText": "[딜로이트 안진 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 수발신) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 Audit DC 감사지원업무(조회서 수발신) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
     "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5240",
     "sourceCategory": "CONSULTING",
@@ -473,14 +514,14 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5239",
     "company": "딜로이트 안진",
     "title": "SAP 모듈 유지보수 (Application Management Service) 전문인력",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
+    "canonicalRole": "Cloud & AI Advisory",
+    "occupation": "TECH",
     "industry": "전문서비스 / 회계컨설팅",
     "location": "서울 영등포구 여의도동",
     "commuteMinutes": 48,
@@ -504,15 +545,15 @@
     "gaps": [
       "직무별 상세 요건 확인 필요"
     ],
-    "rawText": "[딜로이트 안진 채용]\nSAP 모듈 유지보수 (Application Management Service) 전문인력\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 정규직 채용]\nSAP 모듈 유지보수 (Application Management Service) 전문인력\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
     "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5239",
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5238",
@@ -528,7 +569,7 @@
     "salaryDisplay": "월 230~250만 원 (인턴 처우)",
     "salaryTier": "B",
     "minYears": 0,
-    "maxYears": 1,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -543,7 +584,7 @@
     "gaps": [
       "논리적 사고 및 프레젠테이션 역량"
     ],
-    "rawText": "[딜로이트 안진 채용]\n회계감사부문 AIS(계리 전문 조직) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 AIS(계리 전문 조직) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
     "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5238",
     "sourceCategory": "CONSULTING",
@@ -551,7 +592,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "deloitte-5237",
@@ -562,56 +603,18 @@
     "industry": "전문서비스 / 회계컨설팅",
     "location": "서울 영등포구 여의도동",
     "commuteMinutes": 48,
-    "salaryMinManwon": 4600,
-    "salaryMaxManwon": 5300,
-    "salaryDisplay": "4,600 ~ 5,300만 원 (신입 대졸초임)",
-    "salaryTier": "B",
-    "minYears": 0,
-    "maxYears": 1,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "신입",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "논리적 사고 및 프레젠테이션 역량"
-    ],
-    "rawText": "[딜로이트 안진 채용]\n회계감사부문 AIS(계리 전문 조직) 신입 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5237",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": true,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
-  },
-  {
-    "id": "deloitte-5236",
-    "company": "딜로이트 안진",
-    "title": "경영자문부문 F&R Regulatory Compliance 경력직",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
     "salaryMinManwon": 6500,
     "salaryMaxManwon": 8800,
     "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
     "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
+    "minYears": 0,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
       "Big4 회계법인",
       "정규직",
+      "신입",
       "여의도"
     ],
     "pros": [
@@ -621,15 +624,98 @@
     "gaps": [
       "직무별 상세 요건 확인 필요"
     ],
-    "rawText": "[딜로이트 안진 채용]\n경영자문부문 F&R Regulatory Compliance 경력직\n상세 직무 내용 및 우대사항은 공고 참조.",
+    "rawText": "[딜로이트 안진 정규직 채용]\n회계감사부문 AIS(계리 전문 조직) 신입 채용\n상세 직무 내용 및 우대사항은 공고 참조.",
     "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5236",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5237",
     "sourceCategory": "CONSULTING",
     "isCompanyExclusive": true,
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "alio-koreaexim-entry",
+    "company": "한국수출입은행",
+    "title": "2026년도 상·하반기 신입행원(경영·경제·전산) 공개채용",
+    "canonicalRole": "정책금융·경영기획 및 ICT",
+    "occupation": "FINANCE",
+    "industry": "공공기관 / 국책은행",
+    "location": "서울 영등포구 여의도동 (수도권 본점)",
+    "commuteMinutes": 45,
+    "salaryMinManwon": 5200,
+    "salaryMaxManwon": 5800,
+    "salaryDisplay": "5,200 ~ 5,800만 원 (ALIO 금융공기업 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "정규직",
+      "신입공채",
+      "국책은행"
+    ],
+    "pros": [
+      "기획재정부 산하 최고 수준 국책금융기관 처우",
+      "여의도 단일 본점 근무 비중 높음 및 정시퇴근"
+    ],
+    "gaps": [
+      "금융경제 전공 필기시험 및 NCS 직업기초능력평가 대비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 정규직 채용정보]\n기관명: 한국수출입은행\n공고명: 신입행원(경영·경제·전산) 공개채용\n고용형태: 정규직\n근무지: 서울 여의도",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://koreaexim.applyin.co.kr/",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "alio-kodit-hr",
+    "company": "신용보증기금",
+    "title": "인사기획·노사협력 및 경영지원 일반직(정규직/경력·신입) 채용",
+    "canonicalRole": "인사기획 (HR Planning)",
+    "occupation": "HR",
+    "industry": "공공기관 / 금융공기업",
+    "location": "서울 마포구 수도권 영업본부 / 대구 본점",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 5000,
+    "salaryMaxManwon": 6200,
+    "salaryDisplay": "5,000 ~ 6,200만 원 (ALIO 공시 기준)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 7,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "정규직",
+      "신입/경력",
+      "인사기획",
+      "노무관리"
+    ],
+    "pros": [
+      "금융공기업 상위권 보수 및 안정적인 직무 환경",
+      "체계적인 직무급·성과관리 시스템 경험"
+    ],
+    "gaps": [
+      "블라인드 직무수행능력평가 및 노무·법무 지식 검증"
+    ],
+    "rawText": "[ALIO 공공기관 정규직 채용]\n기관명: 신용보증기금\n공고명: 인사기획·노사협력 및 경영지원 정규직 채용\n고용형태: 정규직\n근무지: 서울/수도권",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://kodit.recruiter.co.kr/",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "tech-toss-frontend",
@@ -650,6 +736,7 @@
     "fixedOTHours": 0,
     "tags": [
       "유니콘",
+      "정규직",
       "신입/주니어",
       "Frontend",
       "React",
@@ -662,7 +749,7 @@
     "gaps": [
       "웹 성능 최적화 및 브라우저 렌더링 심층 이해"
     ],
-    "rawText": "토스 프론트엔드 플랫폼 엔지니어 채용. React, TypeScript, 모던 웹 표준 기반 개발.",
+    "rawText": "토스 프론트엔드 플랫폼 엔지니어 정규직 채용. React, TypeScript, 모던 웹 표준 기반 개발.",
     "sourceName": "토스 커리어",
     "jobUrl": "https://toss.im/career",
     "sourceCategory": "GLOBAL_TECH",
@@ -670,7 +757,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "tech-naver-cloud",
@@ -691,6 +778,7 @@
     "fixedOTHours": 0,
     "tags": [
       "대기업",
+      "정규직",
       "신입공채",
       "Cloud",
       "Java",
@@ -703,7 +791,7 @@
     "gaps": [
       "자료구조/알고리즘 및 분산 시스템 이해"
     ],
-    "rawText": "네이버클라우드 신입 공채. 대규모 분산 클라우드 플랫폼 서비스 개발.",
+    "rawText": "네이버클라우드 정규직 신입 공채. 대규모 분산 클라우드 플랫폼 서비스 개발.",
     "sourceName": "네이버 커리어스",
     "jobUrl": "https://recruit.navercorp.com/",
     "sourceCategory": "CONGLOMERATE",
@@ -711,7 +799,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "tech-woowa-backend",
@@ -744,7 +832,7 @@
     "gaps": [
       "대규모 분산 트랜잭션 및 MSA 설계 역량"
     ],
-    "rawText": "배민 주문시스템 백엔드 개발. Java, Spring Boot, Kafka, MySQL 기반 고가용성 설계.",
+    "rawText": "배민 주문시스템 백엔드 정규직 개발. Java, Spring Boot, Kafka, MySQL 기반 고가용성 설계.",
     "sourceName": "우아한형제들 채용",
     "jobUrl": "https://career.woowahan.com/",
     "sourceCategory": "GLOBAL_TECH",
@@ -752,12 +840,12 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "fin-kpmg-cpa",
     "company": "삼정KPMG",
-    "title": "Deal Advisory본부 신입 공인회계사(KICPA) 및 인턴 채용",
+    "title": "Deal Advisory본부 신입 공인회계사(KICPA) 및 재무자문 채용",
     "canonicalRole": "M&A Valuation",
     "occupation": "FINANCE",
     "industry": "전문서비스 / 회계컨설팅",
@@ -765,7 +853,7 @@
     "commuteMinutes": 46,
     "salaryMinManwon": 4800,
     "salaryMaxManwon": 5600,
-    "salaryDisplay": "4,800 ~ 5,600만 원 (CPA 신입 초임)",
+    "salaryDisplay": "4,800 ~ 5,600만 원 (CPA/신입 초임)",
     "salaryTier": "B",
     "minYears": 0,
     "maxYears": 2,
@@ -773,6 +861,7 @@
     "fixedOTHours": 0,
     "tags": [
       "Big4 회계법인",
+      "정규직",
       "KICPA",
       "신입/인턴",
       "재무자문"
@@ -784,7 +873,7 @@
     "gaps": [
       "재무제표 분석 및 재무모델링(DCF) 역량"
     ],
-    "rawText": "삼정KPMG Deal Advisory본부 신입 공인회계사 채용. 기업인수합병 및 실사 자문.",
+    "rawText": "삼정KPMG Deal Advisory본부 신입 공인회계사 및 재무자문 정규직 채용. 기업인수합병 및 실사 자문.",
     "sourceName": "삼정KPMG 공식 채용관",
     "jobUrl": "https://career.kr.kpmg.com",
     "sourceCategory": "CONSULTING",
@@ -792,7 +881,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "fin-shinhan-bank",
@@ -824,7 +913,7 @@
     "gaps": [
       "금융 상식 및 기업분석 리포트 이해"
     ],
-    "rawText": "신한은행 신입 행원 채용. 기업금융 및 디지털 뱅킹 플랫폼 운영.",
+    "rawText": "신한은행 신입 행원 정규직 채용. 기업금융 및 디지털 뱅킹 플랫폼 운영.",
     "sourceName": "신한은행 채용포털",
     "jobUrl": "https://shinhan.recruiter.co.kr",
     "sourceCategory": "CONGLOMERATE",
@@ -832,7 +921,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "mkt-cj-enm",
@@ -853,6 +942,7 @@
     "fixedOTHours": 0,
     "tags": [
       "대기업",
+      "정규직",
       "마케팅",
       "인턴/신입",
       "콘텐츠"
@@ -864,7 +954,7 @@
     "gaps": [
       "GA4, 메타 광고 관리자 및 데이터 분석 기초"
     ],
-    "rawText": "CJ ENM 디지털 마케팅 신입 채용. OTT 및 콘텐츠 미디어 캠페인 그로스 기획.",
+    "rawText": "CJ ENM 디지털 마케팅 신입 정규직 채용. OTT 및 콘텐츠 미디어 캠페인 그로스 기획.",
     "sourceName": "CJ 채용포털",
     "jobUrl": "https://recruit.cj.net",
     "sourceCategory": "CONGLOMERATE",
@@ -872,7 +962,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "mkt-daangn-growth",
@@ -893,6 +983,7 @@
     "fixedOTHours": 0,
     "tags": [
       "유니콘",
+      "정규직",
       "그로스마케팅",
       "데이터분석",
       "SQL"
@@ -904,7 +995,7 @@
     "gaps": [
       "A/B 테스트 설계 및 코호트 리텐션 분석 역량"
     ],
-    "rawText": "당근 로컬 비즈니스 그로스 마케터 채용. 데이터 기반 사용자 전환율 최적화.",
+    "rawText": "당근 로컬 비즈니스 그로스 마케터 정규직 채용. 데이터 기반 사용자 전환율 최적화.",
     "sourceName": "당근 팀 채용",
     "jobUrl": "https://about.daangn.com/jobs",
     "sourceCategory": "GLOBAL_TECH",
@@ -912,13 +1003,55 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "hr-sk-hynix-entry",
+    "company": "SK하이닉스",
+    "title": "HR / People Operations 신입사원 (인사기획·평가보상·채용)",
+    "canonicalRole": "인사기획 (HR Planning)",
+    "occupation": "HR",
+    "industry": "제조 / 반도체",
+    "location": "경기도 성남시 분당구 (정자 캠퍼스)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 5300,
+    "salaryMaxManwon": 6200,
+    "salaryDisplay": "5,300 ~ 6,200만 원 (대졸 신입 초임 + PS 별도)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업",
+      "정규직",
+      "신입공채",
+      "인사기획",
+      "평가보상",
+      "채용"
+    ],
+    "pros": [
+      "글로벌 AI 반도체 1위 기업의 인사 제도 및 보상 체계 경험",
+      "분당 오피스 근무 및 최고 수준 성과급"
+    ],
+    "gaps": [
+      "데이터 기반 HR 사고력 및 비즈니스 영어 역량"
+    ],
+    "rawText": "SK하이닉스 HR 신입 정규직 채용. 인사기획, 평가보상체계 운영 및 글로벌 인재 채용.",
+    "sourceName": "SK Careers",
+    "jobUrl": "https://www.skcareers.com/",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "SK Careers ATS",
+    "isEntryLevel": true,
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "hr-samsung-dx",
     "company": "삼성전자 DX부문",
-    "title": "People Analytics & HR Data Specialist (경력직)",
-    "canonicalRole": "HR Analytics",
+    "title": "인사기획 & People Analytics Specialist (경력직)",
+    "canonicalRole": "인사기획 (HR Planning)",
     "occupation": "HR",
     "industry": "제조 / IT",
     "location": "경기 수원시 영통구 (디지털시티)",
@@ -933,18 +1066,20 @@
     "fixedOTHours": 0,
     "tags": [
       "대기업",
+      "정규직",
       "수원사업장",
       "피플애널리틱스",
-      "인사기획"
+      "인사기획",
+      "평가보상체계설계"
     ],
     "pros": [
       "국내 최고 수준의 확정 연봉 및 성과급(최대 50%)",
       "대규모 글로벌 조직 데이터 분석"
     ],
     "gaps": [
-      "글로벌 HR 지표 설계 및 파이썬/SQL 분석 역량"
+      "글로벌 HR 지표 설계 및 데이터 분석 역량"
     ],
-    "rawText": "삼성전자 DX부문 People Analytics 전문인력 채용. 인재 데이터 기반 예측 모델링.",
+    "rawText": "삼성전자 DX부문 인사기획 및 People Analytics 정규직 전문인력 채용. 평가보상체계설계 및 인재 데이터 기반 AX 혁신.",
     "sourceName": "삼성 커리어스",
     "jobUrl": "https://www.samsungcareers.com/",
     "sourceCategory": "CONGLOMERATE",
@@ -952,13 +1087,13 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "hr-coupang-er",
     "company": "쿠팡 (Coupang)",
-    "title": "Employee Relations (ER) Specialist (노무/조직관리)",
-    "canonicalRole": "Labor Relations & HR Compliance",
+    "title": "Employee Relations (ER) & HR Planning Specialist (노무/인사기획)",
+    "canonicalRole": "Labor Relations & HR Planning",
     "occupation": "HR",
     "industry": "IT / 이커머스",
     "location": "서울 송파구 송파대로 (쿠팡 본사)",
@@ -973,9 +1108,10 @@
     "fixedOTHours": 20,
     "tags": [
       "미국상장사",
+      "정규직",
       "노무관리",
-      "ER",
-      "정규직"
+      "인사기획",
+      "ER"
     ],
     "pros": [
       "뉴욕증시 상장 글로벌 테크 기업의 인사 시스템",
@@ -984,7 +1120,7 @@
     "gaps": [
       "근로기준법 및 복수노조 단체교섭 실무 경험"
     ],
-    "rawText": "쿠팡 ER Specialist 채용. 노사관계 협력 및 사내 인사규정 컴플라이언스 총괄.",
+    "rawText": "쿠팡 ER 및 인사기획 정규직 Specialist 채용. 노무관리, 노사관계 협력 및 사내 인사규정 컴플라이언스 총괄.",
     "sourceName": "쿠팡 커리어스",
     "jobUrl": "https://www.coupang.jobs/kr",
     "sourceCategory": "GLOBAL_TECH",
@@ -992,7 +1128,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
   },
   {
     "id": "plan-hyundai-talent",
@@ -1013,6 +1149,7 @@
     "fixedOTHours": 0,
     "tags": [
       "대기업",
+      "정규직",
       "신입공채",
       "경영기획",
       "양재본사"
@@ -1024,7 +1161,7 @@
     "gaps": [
       "재무제표 이해 및 경영분석 기초"
     ],
-    "rawText": "현대자동차 경영기획 신입 채용. 중장기 모빌리티 사업계획 및 투자 타당성 분석.",
+    "rawText": "현대자동차 경영기획 신입 정규직 채용. 중장기 모빌리티 사업계획 및 투자 타당성 분석.",
     "sourceName": "현대자동차 채용관",
     "jobUrl": "https://talent.hyundai.com",
     "sourceCategory": "CONGLOMERATE",
@@ -1032,6 +1169,47 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-13"
+    "publishedAt": "2026-11-14"
+  },
+  {
+    "id": "plan-lg-cns-strategy",
+    "company": "LG CNS",
+    "title": "클라우드/AI 신사업 전략기획 및 PM 경력직 채용",
+    "canonicalRole": "Corporate Strategy & PM",
+    "occupation": "PLANNING",
+    "industry": "IT / 시스템통합(SI)",
+    "location": "서울 강서구 마곡중앙8로 (본사)",
+    "commuteMinutes": 55,
+    "salaryMinManwon": 6200,
+    "salaryMaxManwon": 8500,
+    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 4~8년차)",
+    "salaryTier": "A",
+    "minYears": 4,
+    "maxYears": 9,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업",
+      "정규직",
+      "전략기획",
+      "PM",
+      "AX"
+    ],
+    "pros": [
+      "LG그룹 DX 및 생성형 AI 엔터프라이즈 사업 주도",
+      "체계적인 직무급 및 기술 역량 보상"
+    ],
+    "gaps": [
+      "IT 서비스 기획 또는 엔터프라이즈 컨설팅 프로젝트 리딩 경험"
+    ],
+    "rawText": "LG CNS 신사업 전략기획 및 PM 정규직 경력 채용. 생성형 AI 및 클라우드 전환 사업 전략 수립.",
+    "sourceName": "LG 커리어스",
+    "jobUrl": "https://careers.lg.com",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "LG Careers ATS",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-14"
   }
 ]

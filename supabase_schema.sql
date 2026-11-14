@@ -1,6 +1,6 @@
--- Supabase SQL Editor에서 실행하세요.
+-- Supabase Schema for Career Radar Universal (public.jobs)
+-- Copy and run this script inside your Supabase SQL Editor
 
--- 1. jobs 테이블 생성
 CREATE TABLE IF NOT EXISTS public.jobs (
     id TEXT PRIMARY KEY,
     company TEXT NOT NULL,
@@ -9,39 +9,42 @@ CREATE TABLE IF NOT EXISTS public.jobs (
     occupation TEXT,
     industry TEXT,
     location TEXT,
-    "commuteMinutes" INTEGER,
-    "salaryMinManwon" INTEGER,
-    "salaryMaxManwon" INTEGER,
+    "commuteMinutes" INTEGER DEFAULT 50,
+    "salaryMinManwon" INTEGER DEFAULT 4000,
+    "salaryMaxManwon" INTEGER DEFAULT 6000,
     "salaryDisplay" TEXT,
-    "salaryTier" TEXT,
-    "minYears" INTEGER,
-    "maxYears" INTEGER,
-    "hasFixedOT" BOOLEAN,
-    "fixedOTHours" INTEGER,
-    tags TEXT[],
-    pros TEXT[],
-    gaps TEXT[],
+    "salaryTier" TEXT DEFAULT 'B',
+    "minYears" INTEGER DEFAULT 0,
+    "maxYears" INTEGER DEFAULT 10,
+    "hasFixedOT" BOOLEAN DEFAULT false,
+    "fixedOTHours" INTEGER DEFAULT 0,
+    tags JSONB DEFAULT '[]'::jsonb,
+    pros JSONB DEFAULT '[]'::jsonb,
+    gaps JSONB DEFAULT '[]'::jsonb,
     "rawText" TEXT,
     "sourceName" TEXT,
     "jobUrl" TEXT,
     "sourceCategory" TEXT,
-    "isCompanyExclusive" BOOLEAN,
+    "isCompanyExclusive" BOOLEAN DEFAULT true,
     "sourceSystem" TEXT,
-    "isEntryLevel" BOOLEAN,
+    "isEntryLevel" BOOLEAN DEFAULT false,
     "jobCategory" TEXT,
-    "publishedAt" TEXT
+    "publishedAt" TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 2. Row Level Security (RLS) 설정 (누구나 읽기 가능, 수정/삭제는 인증된 서비스키(또는 Cron)만 가능)
+-- Enable Row Level Security (RLS)
 ALTER TABLE public.jobs ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Allow public read access" 
-ON public.jobs FOR SELECT 
+-- Drop legacy overly-permissive policy if it exists
+DROP POLICY IF EXISTS "Allow Crawler Upsert Jobs" ON public.jobs;
+DROP POLICY IF EXISTS "Allow Public Read Jobs" ON public.jobs;
+
+-- Allow anonymous read access for the client-side SPA / Mobile App ONLY
+CREATE POLICY "Allow Public Read Jobs"
+ON public.jobs FOR SELECT
+TO anon, authenticated
 USING (true);
 
--- (참고: Insert/Update는 GitHub Actions에서 서비스 롤키/ANON 키를 사용하여 API 통신하므로 별도 정책이 필요할 수 있으나, 
---  테스트 단계에서는 ANON KEY 사용 시 아래 정책을 추가해야 합니다.)
-CREATE POLICY "Allow anon insert/update for crawler" 
-ON public.jobs FOR ALL 
-USING (true)
-WITH CHECK (true);
+-- Note: Automated Crawler (GitHub Actions) should authenticate with SUPABASE_SERVICE_ROLE_KEY,
+-- which safely bypasses RLS for server-side upserts without exposing write permissions to public clients.

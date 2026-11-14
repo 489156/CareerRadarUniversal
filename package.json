@@ -1,35 +1,28 @@
 {
   "name": "career-radar-universal",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Universal Career Intelligence Platform for Job Seekers & Career Switchers",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:chrome": "node scripts/chrome-hard-test.mjs"
+    "crawl": "node scripts/crawl.mjs"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.12.7",
-    "@supabase/supabase-js": "^2.117.3",
-    "cheerio": "^1.2.0",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.441.0",
-    "next": "^14.2.13",
+    "@supabase/supabase-js": "^2.45.0",
+    "cheerio": "^1.0.0",
+    "next": "14.2.35",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.5.2",
-    "zustand": "^5.0.15"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.16.5",
-    "@types/react": "^18.3.8",
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "puppeteer-core": "^25.12.0",
-    "tailwindcss": "^3.4.11",
-    "typescript": "^5.6.2"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.3"
   }
 }

@@ -22,7 +22,7 @@ export function diagnoseJobRisks(text: string): LaborRiskDiagnosis {
 
   // 2. 퇴직금 분할 지급 (1/13 분할) 감지 (단, 정상 퇴직연금 DC/DB 적립은 예외)
   const isNormalPension = /퇴직연금.*(DC|DB|적립|가입)/i.test(normalizedText) && !/1\/13|분할|월할/i.test(normalizedText);
-  if (!isNormalPension && /퇴직금\s*포함|연봉의\s*1\/13|퇴직금\s*월할|퇴직금\s*분할/i.test(normalizedText)) {
+  if (!isNormalPension && /퇴직금[^.!?\n]{0,20}(포함|1\/13|월할|분할)|연봉의\s*1\/13/i.test(normalizedText)) {
     warnings.push({
       type: "danger",
       title: "⚠️ 퇴직금 1/13 분할 지급 의심 (근로기준법 위반 소지)",

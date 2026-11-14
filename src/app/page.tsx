@@ -5,7 +5,7 @@ import { useAppStore } from "@/store/useAppStore";
 import { CareerPassport, JobPosting, SalaryBenchmark, DynamicMatchScore, SkillGapTrack, HardFilters } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
-import { calculateDynamicJobMatch, calculateSkillGapTracks, calculateEstimatedMarketValue, evaluateHardFilters } from "@/lib/matcher";
+import { MOCK_JOB_DATABASE, calculateDynamicJobMatch, EXPANDED_SKILL_GAP_TRACKS, calculateEstimatedMarketValue, evaluateHardFilters, detectDomainFromKeywords, mapCompanyTypeToTier } from "@/lib/matcher";
 import { CRAWLER_SOURCES, getCrawlerNetworkStats } from "@/lib/crawler";
 import { fetchJobsWithCache } from "@/lib/supabase";
 
@@ -55,8 +55,32 @@ export default function Home() {
   }, []);
 
   // Passport state
-  const passport = useAppStore(state => state.passport);
-  const setPassport = useAppStore(state => state.setPassport);
+  const [passport, setPassport] = useState<CareerPassport>({
+    track: "EXPERIENCED",
+    occupation: "HR",
+    canonicalRole: "인사기획 (HR Planning)",
+    totalYears: 7,
+    companyType: "중견기업",
+    baseSalary: 5400,
+    fixedAllowance: 400,
+    variableBonus: 500,
+    hasFixedOT: true,
+    homeLocation: "경기도 군포시 (산본동)",
+    commuteToleranceMinutes: 60,
+    skills: ["인사기획", "평가보상체계설계", "노무관리", "임금피크제", "직무분석", "AX(AI Transformation)"],
+    hardFilters: {
+      onlyPermanent: true,
+      onlyCapitalArea: true,
+      maxCommuteCutoff: true,
+      noHeavyFixedOT: false,
+      noBelowCurrentSalary: false,
+      noRelocationOrg: true,
+      customKeywords: ["교대근무", "파견직", "일용직"],
+    },
+    hardPreferences: { employmentType: "정규직", region: "수도권" },
+    softPreferences: { wfhPreferred: true, minSalary: 55000000 },
+    updatedAt: new Date().toISOString(),
+  });
 
   // Calculator state
   const calcInput = useAppStore(state => state.calcInput);
@@ -153,6 +177,19 @@ export default function Home() {
         fixedAllowance: 0,
         variableBonus: 0,
         canonicalRole: prev.canonicalRole.includes("인사기획") ? "소프트웨어 개발 / 신입" : prev.canonicalRole,
+        hardFilters: {
+          ...(prev.hardFilters || {
+            onlyPermanent: true,
+            onlyCapitalArea: true,
+            maxCommuteCutoff: true,
+            noHeavyFixedOT: false,
+            noBelowCurrentSalary: false,
+            noRelocationOrg: true,
+            customKeywords: ["교대근무", "파견직", "일용직"],
+          }),
+          noBelowCurrentSalary: false,
+          customKeywords: (prev.hardFilters?.customKeywords || []).filter((k) => k !== "인턴"),
+        },
       }));
       setCalcInput((prev: any) => ({ ...prev, cashManwon: 4500 }));
       showToast("🎓 신입/인턴(0년차) 지원 모드로 전환되었습니다. 인턴 및 대졸공채 공고를 우선 매칭합니다!");
@@ -177,19 +214,50 @@ export default function Home() {
 
   const handleResumeExtract = () => {
     if (!resumeText.trim()) return;
-    if (/인사|HR|노무|채용|평가|보상/i.test(resumeText)) {
-      setPassport((prev: any) => ({
-        ...prev,
-        occupation: "HR",
-        canonicalRole: "인사기획 & People Operations",
-      }));
-    }
+    const detected = detectDomainFromKeywords(resumeText);
+    const mappedOccupation: "HR" | "TECH" | "FINANCE" | "MARKETING" | "PLANNING" =
+      detected.domainKey === "GENERAL" ? "PLANNING" : detected.domainKey;
+
+    const defaultRoleByDomain: Record<string, string> = {
+      TECH: "소프트웨어 엔지니어 & 데이터/AI",
+      FINANCE: "재무·회계 & Deal Advisory",
+      MARKETING: "그로스 & 퍼포먼스 마케팅",
+      HR: "인사기획 & People Operations",
+      PLANNING: "경영전략 & 사업/서비스 기획",
+    };
+
+    const skillCandidates = [
+      "React", "TypeScript", "Java", "Spring", "Python", "SQL", "AWS", "Cloud", "AI", "Data",
+      "KICPA", "CPA", "재무제표", "세무", "회계", "가치평가", "M&A", "자금",
+      "퍼포먼스 마케팅", "그로스마케팅", "GA4", "브랜딩", "콘텐츠", "CRM",
+      "인사기획", "평가보상", "노무관리", "채용", "People Analytics", "조직문화",
+      "경영기획", "전략기획", "사업개발", "PM", "서비스기획", "컨설팅"
+    ];
+    const extractedSkills = skillCandidates.filter((sk) =>
+      resumeText.toLowerCase().includes(sk.toLowerCase())
+    );
+
     const yearMatch = resumeText.match(/(\d+)\s*년/);
-    if (yearMatch) {
-      setPassport((prev: any) => ({ ...prev, totalYears: parseInt(yearMatch[1], 10) }));
-    }
+    const isEntryResume = /신입|인턴|0년|학부생|졸업예정/.test(resumeText) && !yearMatch;
+    const parsedYears = yearMatch ? parseInt(yearMatch[1], 10) : isEntryResume ? 0 : undefined;
+
+    setPassport((prev) => ({
+      ...prev,
+      occupation: mappedOccupation,
+      canonicalRole:
+        extractedSkills.length > 0
+          ? `${defaultRoleByDomain[mappedOccupation]} (${extractedSkills.slice(0, 3).join(", ")})`
+          : defaultRoleByDomain[mappedOccupation],
+      skills: extractedSkills.length > 0 ? extractedSkills : prev.skills,
+      ...(parsedYears !== undefined
+        ? {
+            totalYears: parsedYears,
+            track: parsedYears === 0 ? "ENTRY" : "EXPERIENCED",
+          }
+        : {}),
+    }));
     setIsResumeModalOpen(false);
-    showToast("✨ 이력서 텍스트에서 직무와 경력 연차를 추출하여 반영했습니다.");
+    showToast(`✨ 이력서에서 [${detected.domainName}] 직군 및 경력 정보를 추출하여 반영했습니다.`);
   };
 
   // Hard Filter Custom Keyword Handlers
@@ -248,7 +316,7 @@ export default function Home() {
         noHeavyFixedOT: false,
         noBelowCurrentSalary: false,
         noRelocationOrg: true,
-        customKeywords: ["교대근무", "파견직", "인턴"],
+        customKeywords: ["교대근무", "파견직", "일용직"],
       },
     }));
     showToast("🔄 절대 배제 조건이 기본값으로 복원되었습니다.");
@@ -277,7 +345,12 @@ export default function Home() {
   };
 
   // Market Value Calculations
-  const marketValue = calculateEstimatedMarketValue(passport.canonicalRole, passport.totalYears, passport.track);
+  const marketValue = calculateEstimatedMarketValue(
+    `${passport.canonicalRole} ${passport.occupation} ${(passport.skills || []).join(" ")}`,
+    passport.totalYears,
+    passport.track,
+    mapCompanyTypeToTier(passport.companyType)
+  );
   const currentTotalCash = passport.baseSalary + passport.fixedAllowance;
 
   // Filter Jobs with dynamic matching & Hard Filter evaluation
@@ -289,34 +362,36 @@ export default function Home() {
 
   const excludedCount = jobsWithScores.filter(({ hf }) => hf.isExcluded).length;
 
-  const filteredJobs = jobsWithScores.filter(({ job, match, hf }) => {
-    // Hard filter absolute cutoff: unless showExcludedJobs is checked
-    if (!showExcludedJobs && hf.isExcluded) return false;
+  const filteredJobs = jobsWithScores
+    .filter(({ job, match, hf }) => {
+      // Hard filter absolute cutoff: unless showExcludedJobs is checked
+      if (!showExcludedJobs && hf.isExcluded) return false;
 
-    // Search query filter
-    if (radarSearch.trim()) {
-      const q = radarSearch.toLowerCase();
-      const matchText = `${job.title} ${job.company} ${job.canonicalRole} ${job.industry} ${job.location} ${job.sourceSystem || ""} ${job.tags.join(" ")}`.toLowerCase();
-      if (!matchText.includes(q)) return false;
-    }
-    // Category pill filter
-    if (radarFilter === "entry") {
-      return job.minYears === 0 || job.isEntryLevel || (job.tags || []).some((t) => t.includes("신입") || t.includes("인턴")) || job.title.includes("인턴") || job.title.includes("신입");
-    }
-    if (radarFilter === "tech") return job.occupation === "TECH" || job.title.includes("SW") || job.title.includes("개발") || job.title.includes("Cloud");
-    if (radarFilter === "finance") return job.occupation === "FINANCE" || job.title.includes("회계") || job.title.includes("재무");
-    if (radarFilter === "marketing") return job.occupation === "MARKETING" || job.title.includes("마케팅");
-    if (radarFilter === "exclusive") return job.isCompanyExclusive === true;
-    if (radarFilter === "consulting") return job.sourceCategory === "CONSULTING";
-    if (radarFilter === "public") return job.sourceCategory === "PUBLIC";
-    if (radarFilter === "conglomerate") return job.sourceCategory === "CONGLOMERATE";
-    if (radarFilter === "globalTech") return job.sourceCategory === "GLOBAL_TECH";
-    if (radarFilter === "tierA") return job.salaryTier === "A";
-    if (radarFilter === "highMatch") return match.totalScore >= 85;
-    if (radarFilter === "commuteFit") return job.commuteMinutes <= (passport.commuteToleranceMinutes || 60);
-    if (radarFilter === "nonOT") return !job.hasFixedOT;
-    return true;
-  });
+      // Search query filter
+      if (radarSearch.trim()) {
+        const q = radarSearch.toLowerCase();
+        const matchText = `${job.title} ${job.company} ${job.canonicalRole} ${job.industry} ${job.location} ${job.sourceSystem || ""} ${job.tags.join(" ")}`.toLowerCase();
+        if (!matchText.includes(q)) return false;
+      }
+      // Category pill filter
+      if (radarFilter === "entry") {
+        return job.minYears === 0 || job.isEntryLevel || (job.tags || []).some((t) => t.includes("신입") || t.includes("인턴")) || job.title.includes("인턴") || job.title.includes("신입");
+      }
+      if (radarFilter === "tech") return job.occupation === "TECH" || job.title.includes("SW") || job.title.includes("개발") || job.title.includes("Cloud");
+      if (radarFilter === "finance") return job.occupation === "FINANCE" || job.title.includes("회계") || job.title.includes("재무");
+      if (radarFilter === "marketing") return job.occupation === "MARKETING" || job.title.includes("마케팅");
+      if (radarFilter === "exclusive") return job.isCompanyExclusive === true;
+      if (radarFilter === "consulting") return job.sourceCategory === "CONSULTING";
+      if (radarFilter === "public") return job.sourceCategory === "PUBLIC";
+      if (radarFilter === "conglomerate") return job.sourceCategory === "CONGLOMERATE";
+      if (radarFilter === "globalTech") return job.sourceCategory === "GLOBAL_TECH";
+      if (radarFilter === "tierA") return job.salaryTier === "A";
+      if (radarFilter === "highMatch") return match.totalScore >= 85;
+      if (radarFilter === "commuteFit") return job.commuteMinutes <= (passport.commuteToleranceMinutes || 60);
+      if (radarFilter === "nonOT") return !job.hasFixedOT;
+      return true;
+    })
+    .sort((a, b) => b.match.totalScore - a.match.totalScore || a.job.commuteMinutes - b.job.commuteMinutes);
 
   const highMatchCount = jobsWithScores.filter(({ match, hf }) => match.totalScore >= 88 && (!hf.isExcluded || showExcludedJobs)).length;
 
@@ -386,8 +461,8 @@ export default function Home() {
       )}
 
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0b0f19]/90 border-b border-[#1b2234]">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0b0f19]/95 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
               CR
@@ -395,34 +470,37 @@ export default function Home() {
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-extrabold text-lg text-white tracking-tight">Career Radar</span>
-                <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-                  Universal v2.0
+                <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  맞춤 채용 & 연봉 분석
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400">Universal Career Intelligence & Decision Radar</p>
+              <p className="text-xs text-slate-400">내 경력·연봉·통근 조건으로 딱 맞는 채용 공고를 찾고 실질 시급을 비교하세요</p>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex items-center space-x-1.5 overflow-x-auto py-2">
+          <nav className="flex items-center space-x-1.5 overflow-x-auto pb-1 lg:pb-0">
             {[
-              { id: "passport", label: "🪪 Career Passport" },
-              { id: "radar", label: "📡 Opportunity Radar" },
-              { id: "scanner", label: "⚖️ Labor Risk Scanner" },
-              { id: "calculator", label: "💰 Life-Adjusted Value" },
-              { id: "matrix", label: "📊 Offer Matrix" },
-              { id: "ledger", label: "🏛️ Salary Ledger" },
+              { id: "passport", label: "👤 1. 내 조건 설정", desc: "직무·연봉·배제 기준" },
+              { id: "radar", label: "🎯 2. 맞춤 공고 탐색", desc: "적합도순 추천 공고" },
+              { id: "scanner", label: "⚖️ 3. 근로계약 위험 진단", desc: "포괄임금·독소조항 검사" },
+              { id: "calculator", label: "⏱️ 4. 실질 체감 시급", desc: "통근·야근 반영 시급" },
+              { id: "matrix", label: "📊 5. 이직처 비교", desc: "현 직장 vs 오퍼 비교" },
+              { id: "ledger", label: "🏛️ 6. 기업별 연봉 실태", desc: "공시·통계 기반 연봉표" },
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                className={`px-3.5 py-2 rounded-xl text-left transition shrink-0 ${
                   activeTab === tab.id
-                    ? "bg-indigo-600/30 text-indigo-300 border border-indigo-500/50 shadow-sm"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/25 font-bold"
+                    : "bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800"
                 }`}
               >
-                {tab.label}
+                <div className="text-xs">{tab.label}</div>
+                <div className={`text-[10px] mt-0.5 ${activeTab === tab.id ? "text-indigo-200" : "text-slate-500"}`}>
+                  {tab.desc}
+                </div>
               </button>
             ))}
           </nav>
@@ -434,14 +512,27 @@ export default function Home() {
         {/* Dynamic Tab Rendering */}
         {activeTab === "passport" && (
           <div className="space-y-6">
-            <div className="bg-[#101625] border border-[#1d273d] rounded-2xl p-6 space-y-6 shadow-xl">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#1d273d] pb-4">
+            {/* Step 1 Guide Banner */}
+            <div className="bg-gradient-to-r from-indigo-950/60 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-start space-x-3">
+                <span className="text-2xl mt-0.5">💡</span>
+                <div>
+                  <h3 className="text-sm font-bold text-white">처음 오셨나요? 1단계에서 내 희망 조건을 먼저 설정해보세요</h3>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    신입/경력 여부, 직무 키워드, 희망 기업 유형, 허용 통근 시간을 입력하고 우측 상단의 <strong className="text-emerald-400">[맞춤 공고 탐색 실행 ➔]</strong> 버튼을 누르면 조건에 맞는 알짜 공고만 즉시 걸러줍니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center space-x-2">
-                    <span>🪪 Universal Career Passport</span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">내 커리어 원장</span>
+                    <span>👤 1단계: 내 커리어 조건 설정</span>
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">자동 저장 지원</span>
                   </h2>
-                  <p className="text-xs text-slate-400 mt-1">노동시장 전체와 실시간 연동되는 다차원 구조화 커리어 원장</p>
+                  <p className="text-xs text-slate-400 mt-1">입력하신 직무·연차·기업 유형·통근 기준을 바탕으로 모든 채용 공고의 적합도와 예상 시장 연봉을 자동 계산합니다.</p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <button
@@ -466,7 +557,7 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                <div className="space-y-4 bg-[#0a0e17] p-4 rounded-xl border border-[#192235]">
+                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xs font-bold uppercase text-indigo-400 tracking-wider">1. 직무 및 경력 계층</h3>
                     <span className="text-[10px] text-slate-400 font-mono">
@@ -541,8 +632,22 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="space-y-4 bg-[#0a0e17] p-4 rounded-xl border border-[#192235]">
-                  <h3 className="text-xs font-bold uppercase text-emerald-400 tracking-wider">2. 현재 보상 체계 (퇴직금 제외)</h3>
+                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
+                  <h3 className="text-xs font-bold uppercase text-emerald-400 tracking-wider">2. 목표 기업군 및 현재 보상 (퇴직금 제외)</h3>
+                  <div>
+                    <label className="text-xs text-slate-300 font-medium">목표/현재 기업 유형 (시장가치 코호트 기준)</label>
+                    <select
+                      value={passport.companyType}
+                      onChange={(e) => setPassport({ ...passport, companyType: e.target.value })}
+                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-emerald-500"
+                    >
+                      <option value="빅테크/유니콘">Tier 1: 빅테크 / 글로벌 테크 / 유니콘 (1.4x)</option>
+                      <option value="대기업">Tier 2: 주요 대기업 계열사 (1.25x)</option>
+                      <option value="금융/공공기관">Tier 3: 금융권 / 공공기관·공기업 (1.15x)</option>
+                      <option value="중견기업">표준: 일반 중견기업 / 전문법인 (1.0x)</option>
+                      <option value="스타트업/중소기업">Tier 4: 스타트업 / 강소·중소기업 (0.9x)</option>
+                    </select>
+                  </div>
                   <div>
                     <label className="text-xs text-slate-300 font-medium">기본급 (연간, 만 원)</label>
                     <input
@@ -566,7 +671,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="space-y-4 bg-[#0a0e17] p-4 rounded-xl border border-[#192235]">
+                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
                   <h3 className="text-xs font-bold uppercase text-sky-400 tracking-wider">3. 지역 및 통근</h3>
                   <div>
                     <label className="text-xs text-slate-300 font-medium">거주지</label>
@@ -595,7 +700,7 @@ export default function Home() {
               </div>
 
               {/* Hard Filter Configuration Panel */}
-              <div className="bg-[#0a0e17] p-5 rounded-xl border border-rose-500/20 space-y-4">
+              <div className="bg-slate-900/90 p-5 rounded-xl border border-rose-500/20 space-y-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#1b253b] pb-3">
                   <div>
                     <div className="flex items-center space-x-2">
@@ -743,7 +848,7 @@ export default function Home() {
                           addCustomHardFilter();
                         }
                       }}
-                      placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 인턴, 야간당직)..."
+                      placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 일용직, 야간당직)..."
                       className="flex-1 bg-[#111726] border border-[#1f293d] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
                     />
                     <button
@@ -783,12 +888,12 @@ export default function Home() {
               {/* Card 1: Estimated Market Value with Modal Trigger */}
               <div
                 onClick={() => setIsMarketValueModalOpen(true)}
-                className="bg-[#101625] border border-[#1d273d] hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
+                className="bg-[#0f172a] border border-slate-800 hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
               >
                 <div className="text-xs text-slate-400 flex items-center justify-between">
                   <span className="group-hover:text-indigo-300 transition font-medium">내 시장 가치 추정 (P25~P75)</span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
-                    Tier B (n=47)
+                    {marketValue.confidenceTier.split(" ")[0]} {marketValue.confidenceTier.split(" ")[1]} (n={marketValue.sampleSize})
                   </span>
                 </div>
                 <div className="mt-2 text-xl font-bold font-mono text-white flex items-center justify-between">
@@ -798,14 +903,14 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 mt-1">
-                  수도권 / 인사기획 / {passport.totalYears}년차 코호트 기준 (클릭 시 통계 공식 확인)
+                  {marketValue.cohortDescription} (클릭 시 통계 공식 확인)
                 </p>
               </div>
 
               {/* Card 2: High Match Opportunities */}
               <div
                 onClick={() => setActiveTab("radar")}
-                className="bg-[#101625] border border-[#1d273d] hover:border-emerald-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
+                className="bg-[#0f172a] border border-slate-800 hover:border-emerald-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
               >
                 <div className="text-xs text-slate-400 flex items-center justify-between">
                   <span className="group-hover:text-emerald-300 transition font-medium">동적 매칭 고적합 공고</span>
@@ -821,7 +926,7 @@ export default function Home() {
               {/* Card 3: Skill Gap +28 Items with Modal Trigger */}
               <div
                 onClick={() => setIsSkillGapModalOpen(true)}
-                className="bg-[#101625] border border-[#1d273d] hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
+                className="bg-[#0f172a] border border-slate-800 hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
               >
                 <div className="text-xs text-slate-400 flex items-center justify-between">
                   <span className="group-hover:text-indigo-300 transition font-medium">스킬 갭 보완 시 확장 시장</span>
@@ -1144,16 +1249,16 @@ export default function Home() {
         )}
 
         {activeTab === "scanner" && (
-          <div className="bg-[#101625] border border-[#1d273d] rounded-2xl p-6 space-y-6">
-            <div>
+          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
+            <div className="border-b border-slate-800 pb-4">
               <h2 className="text-xl font-bold text-white flex items-center space-x-2">
-                <span>⚖️ Labor Risk & Toxic Clause Scanner</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30">
-                  독소조항 실시간 정밀 스캔
+                <span>⚖️ 3단계: 근로계약 & 채용공고 독소조항 진단기</span>
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                  근로기준법 위반 리스크 자동 감지
                 </span>
               </h2>
-              <p className="text-xs text-slate-400 mt-1">
-                포괄임금 악용, 퇴직금 분할 약정, 수습기간 감액 등 근로기준법상 독소조항을 즉시 감지합니다.
+              <p className="text-xs text-slate-300 mt-1.5">
+                채용 공고 본문이나 근로계약서 문구를 붙여넣으면 <strong className="text-rose-300">포괄임금제 악용, 퇴직금 분할 약정, 수습기간 불법 감액</strong> 등 불리한 조건을 즉시 찾아냅니다.
               </p>
             </div>
 
@@ -1164,7 +1269,7 @@ export default function Home() {
                   value={scannerText}
                   onChange={(e) => setScannerText(e.target.value)}
                   placeholder="공고 텍스트를 붙여넣으세요 (예: 포괄임금 연봉 5,000만 원, 수습 80% 지급 등)..."
-                  className="w-full bg-[#0b0f19] border border-[#1f293d] rounded-xl p-4 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500"
+                  className="w-full bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500"
                 />
                 <button
                   onClick={handleScan}
@@ -1174,10 +1279,10 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="bg-[#0b0f19] border border-[#1f293d] rounded-xl p-5">
+              <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5">
                 {scanResult ? (
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center border-b border-[#1f293d] pb-2">
+                    <div className="flex justify-between items-center border-b border-slate-800 pb-2">
                       <span className="text-xs font-bold text-rose-400">진단 결과 ({scanResult.warnings.length}건 위험 감지)</span>
                       <span className="text-[11px] text-slate-400 font-mono">
                         {scanResult.hasFixedOT ? `고정OT: ${scanResult.fixedOTHours}시간` : "고정OT 없음"}
@@ -1199,8 +1304,8 @@ export default function Home() {
                     )}
                   </div>
                 ) : (
-                  <div className="text-center text-slate-500 py-16 text-xs">
-                    왼쪽에 공고 본문을 입력하거나 Opportunity Radar에서 [공고 상세 & 리스크 분석]을 눌러 전송하세요.
+                  <div className="text-center text-slate-400 py-16 text-xs">
+                    왼쪽에 공고 본문을 입력하거나 [2. 맞춤 공고 탐색]에서 [노동법 진단 ⚖️] 버튼을 눌러 전송하세요.
                   </div>
                 )}
               </div>
@@ -1209,19 +1314,19 @@ export default function Home() {
         )}
 
         {activeTab === "calculator" && (
-          <div className="bg-[#101625] border border-[#1d273d] rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-xl">
+          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-xl">
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-lg font-bold text-white">💰 실질 체감 시급 계산기 (Life-Adjusted Value)</h2>
+              <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h2 className="text-lg font-bold text-white">⏱️ 4단계: 실질 체감 시급 계산기</h2>
                 <button
                   onClick={copyCalculatorText}
                   className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-emerald-400 font-semibold border border-slate-700 transition"
                 >
-                  📋 공유용 텍스트 복사
+                  📋 결과 텍스트 복사
                 </button>
               </div>
-              <p className="text-xs text-slate-400">
-                단순 명목 연봉의 착시를 걷어내고, 통근 시간과 초과 근로를 반영한 진짜 실질 시급을 계산합니다.
+              <p className="text-xs text-slate-300">
+                연봉 숫자만 높고 통근·야근이 긴 회사와, 워라밸이 좋은 회사 중 어디가 진짜 이득일까요? 길 위에서 버리는 통근 시간과 교통비까지 반영한 <strong className="text-emerald-400">진짜 내 시간당 가치</strong>를 계산합니다.
               </p>
 
               <div>
@@ -1289,7 +1394,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-[#0b0f19] border border-[#1f293d] rounded-xl p-6 space-y-5 flex flex-col justify-center">
+            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-6 space-y-5 flex flex-col justify-center">
               <div>
                 <span className="text-xs font-semibold uppercase text-slate-400">실질 체감 시급 (Life-Adjusted Hourly Wage)</span>
                 <div className="text-4xl font-mono font-extrabold text-emerald-400 mt-1">
@@ -1301,7 +1406,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs border-t border-b border-[#1f293d] py-3">
+              <div className="grid grid-cols-2 gap-3 text-xs border-t border-b border-slate-800 py-3">
                 <div>
                   <span className="text-slate-500">연간 소모 통근 시간</span>
                   <div className="font-bold font-mono text-slate-200 mt-0.5">{calcResult.annualCommuteHours}시간 (약 {(calcResult.annualCommuteHours / 24).toFixed(1)}일)</div>
@@ -1320,11 +1425,11 @@ export default function Home() {
         )}
 
         {activeTab === "matrix" && (
-          <div className="bg-[#101625] border border-[#1d273d] rounded-2xl p-6 space-y-5 shadow-xl">
-            <div className="flex justify-between items-center">
+          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-5 shadow-xl">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3">
               <div>
-                <h2 className="text-lg font-bold text-white">📊 Offer Comparison Matrix</h2>
-                <p className="text-xs text-slate-400 mt-0.5">복수 이직 제안의 연봉, 통근, 복리후생, 실질 시급 다차원 시뮬레이션</p>
+                <h2 className="text-lg font-bold text-white">📊 5단계: 이직처(오퍼) 다차원 비교표</h2>
+                <p className="text-xs text-slate-300 mt-1">현재 직장과 이직 제안(Offer A, B)의 연봉·통근 시간·포괄임금 여부를 나란히 놓고 어디가 실질 시급이 높은지 비교합니다.</p>
               </div>
               <button
                 onClick={copyOfferText}
@@ -1336,14 +1441,14 @@ export default function Home() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-[#1f293d] text-slate-400">
+                  <tr className="border-b border-slate-800 text-slate-400">
                     <th className="py-3 px-3">평가 항목</th>
                     <th className="py-3 px-3">현재 직장</th>
                     <th className="py-3 px-3 text-indigo-400">Offer A (대기업)</th>
                     <th className="py-3 px-3 text-emerald-400">Offer B (핀테크)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#182030] font-mono">
+                <tbody className="divide-y divide-slate-800/80 font-mono">
                   <tr>
                     <td className="py-3.5 px-3 font-sans font-medium text-slate-300">확정 기본급</td>
                     <td className="px-3 text-slate-200">5,400만 원</td>
@@ -1372,7 +1477,7 @@ export default function Home() {
               </table>
             </div>
 
-            <div className="p-4 bg-[#0a0e17] rounded-xl border border-[#192235] text-xs space-y-1">
+            <div className="p-4 bg-slate-900/90 rounded-xl border border-slate-800 text-xs space-y-1">
               <span className="font-bold text-sky-400">💡 전문가 제언:</span>
               <p className="text-slate-300">
                 Offer A는 명목 연봉이 800만 원 높지만, 긴 통근 시간과 포괄 32시간 근무로 인해 실질 시급이 오히려 11.3% 하락합니다.
@@ -1383,24 +1488,24 @@ export default function Home() {
         )}
 
         {activeTab === "ledger" && (
-          <div className="bg-[#101625] border border-[#1d273d] rounded-2xl p-6 space-y-4 shadow-xl">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-3">
               <div>
-                <h2 className="text-lg font-bold text-white">🏛️ 3-Tier Evidence-Backed Salary Ledger</h2>
-                <p className="text-xs text-slate-400">검증 등급별(Tier A/B/C) 투명한 보상 기준 원장</p>
+                <h2 className="text-lg font-bold text-white">🏛️ 6단계: 기업별 검증 연봉 실태 원장</h2>
+                <p className="text-xs text-slate-300 mt-1">정부 경영공시(ALIO·DART) 및 실오퍼 통계를 바탕으로 기업별·직무별 실제 확정 연봉을 투명하게 공개합니다.</p>
               </div>
               <input
                 type="text"
                 placeholder="기업명, 직무 검색..."
                 value={ledgerSearch}
                 onChange={(e) => setLedgerSearch(e.target.value)}
-                className="bg-[#0b0f19] border border-[#1f293d] rounded-xl px-3.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 w-full sm:w-64"
+                className="bg-slate-900/90 border border-slate-800 rounded-xl px-3.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 w-full sm:w-64"
               />
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-[#1f293d] text-slate-400">
+                  <tr className="border-b border-slate-800 text-slate-400">
                     <th className="py-2.5 px-3">기관/기업</th>
                     <th className="py-2.5 px-3">직무</th>
                     <th className="py-2.5 px-3">증거 등급</th>
@@ -1408,7 +1513,7 @@ export default function Home() {
                     <th className="py-2.5 px-3">비고 & 출처</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#182030] font-mono">
+                <tbody className="divide-y divide-slate-800/80 font-mono">
                   {filteredLedger.map((row) => (
                     <tr key={row.id}>
                       <td className="py-3 px-3 font-sans font-bold text-white">{row.org}</td>
@@ -1435,11 +1540,522 @@ export default function Home() {
         )}
       </main>
 
-      <ResumeModal />
-      <MarketValueModal />
-      <SkillGapModal />
-      <CrawlerModal />
-      <JobDetailModal />
+      {/* Resume Modal */}
+      {isResumeModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsResumeModalOpen(false); }}
+        >
+          <div className="bg-[#111726] border border-[#1e273b] rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl">
+            <div className="flex justify-between items-center border-b border-[#1e273b] pb-3">
+              <h3 className="font-bold text-white text-base">📄 이력서 / 경력기술서 빠른 파싱</h3>
+              <button onClick={() => setIsResumeModalOpen(false)} className="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <textarea
+              rows={8}
+              value={resumeText}
+              onChange={(e) => setResumeText(e.target.value)}
+              placeholder="이력서나 경력기술서 텍스트를 붙여넣으세요..."
+              className="w-full bg-[#0a0d14] border border-[#1f293d] rounded-xl p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500"
+            />
+            <div className="flex justify-end space-x-2">
+              <button onClick={() => setIsResumeModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-800 text-xs">취소</button>
+              <button onClick={handleResumeExtract} className="px-4 py-2 rounded-xl bg-indigo-600 font-bold text-xs text-white">자동 추출 적용</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Market Value Methodology Modal */}
+      {isMarketValueModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsMarketValueModalOpen(false); }}
+        >
+          <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-2xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start border-b border-[#1e273b] pb-3">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 font-bold">통계 및 산출 공식</span>
+                  <span className="text-xs text-slate-400">3-Tier 합성 추정 엔진</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mt-1">내 시장 가치 추정 (P25 ~ P75) 산출 근거</h3>
+              </div>
+              <button onClick={() => setIsMarketValueModalOpen(false)} className="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+            </div>
+
+            <div className="bg-[#0a0e17] p-4 rounded-xl border border-[#192235] space-y-2 text-xs">
+              <div className="text-indigo-400 font-bold uppercase tracking-wider">1. 타깃 코호트 정의 (Cohort Granularity)</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-slate-300 pt-1">
+                <div><span className="text-slate-500 block">직군</span> {marketValue.domainName}</div>
+                <div><span className="text-slate-500 block">표준 직무</span> {passport.canonicalRole}</div>
+                <div>
+                  <span className="text-slate-500 block">경력 구간</span>{" "}
+                  <span className="text-emerald-400 font-bold">
+                    {passport.track === "ENTRY" || passport.totalYears === 0 ? "0년차 (신입/인턴)" : `${passport.totalYears}년차`}
+                  </span>
+                </div>
+                <div><span className="text-slate-500 block">목표 기업군</span> {marketValue.tierDesc}</div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-white flex items-center space-x-2">
+                <span>2. 3-Tier 증거 기반 합성 가중치</span>
+                <span className="text-[10px] text-slate-400 font-normal">(신뢰도 순차 결합)</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-sans">
+                <div className="p-3 bg-[#0c101c] border border-[#1c2842] rounded-xl space-y-1">
+                  <div className="font-bold text-emerald-400">Tier A ({marketValue.methodology.tierAWeight.split(" ")[0]})</div>
+                  <div className="text-[11px] text-slate-300">{marketValue.methodology.tierAWeight} · 공공기관(ALIO)/상장사(DART) 공시 원장</div>
+                </div>
+                <div className="p-3 bg-[#0c101c] border border-[#1c2842] rounded-xl space-y-1">
+                  <div className="font-bold text-sky-400">Tier B ({marketValue.methodology.tierBWeight.split(" ")[0]})</div>
+                  <div className="text-[11px] text-slate-300">{marketValue.methodology.tierBWeight} (표본 n={marketValue.sampleSize}건 정규화)</div>
+                </div>
+                <div className="p-3 bg-[#0c101c] border border-[#1c2842] rounded-xl space-y-1">
+                  <div className="font-bold text-amber-400">Tier C ({marketValue.methodology.tierCWeight.split(" ")[0]})</div>
+                  <div className="text-[11px] text-slate-300">{marketValue.methodology.tierCWeight} (상·하위 5% IQR 절사 보정)</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-white">3. 코호트 임금 분포표 (퇴직금 및 비확정 성과급 제외 순수 확정 현금 기준)</div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs font-mono">
+                  <thead>
+                    <tr className="border-b border-[#233252] text-slate-400 font-sans">
+                      <th className="py-2 px-2">분위수</th>
+                      <th className="py-2 px-2">추정 연봉</th>
+                      <th className="py-2 px-2 font-sans">시장 포지션 설명</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#18233a]">
+                    <tr>
+                      <td className="py-2.5 px-2 text-slate-400">P10 (하위 10%)</td>
+                      <td className="py-2.5 px-2 text-slate-300">{marketValue.p10.toLocaleString()}만 원</td>
+                      <td className="py-2.5 px-2 text-slate-400 font-sans">지방/전통 소형 제조업 코호트</td>
+                    </tr>
+                    <tr className="bg-indigo-950/20 font-bold">
+                      <td className="py-2.5 px-2 text-indigo-400">P25 (하위 25%)</td>
+                      <td className="py-2.5 px-2 text-indigo-300">{marketValue.p25.toLocaleString()}만 원</td>
+                      <td className="py-2.5 px-2 text-indigo-200 font-sans">중견 제조 및 일반 기업 표준 하한</td>
+                    </tr>
+                    <tr className="font-bold">
+                      <td className="py-2.5 px-2 text-sky-400">P50 (중앙값)</td>
+                      <td className="py-2.5 px-2 text-white">{marketValue.p50.toLocaleString()}만 원</td>
+                      <td className="py-2.5 px-2 text-slate-200 font-sans">수도권 300인 이상 기업 평균값</td>
+                    </tr>
+                    <tr className="bg-emerald-950/20 font-bold">
+                      <td className="py-2.5 px-2 text-emerald-400">P75 (상위 25%)</td>
+                      <td className="py-2.5 px-2 text-emerald-300">{marketValue.p75.toLocaleString()}만 원</td>
+                      <td className="py-2.5 px-2 text-emerald-200 font-sans">상위 IT 유니콘 및 대기업 표준 상한</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2.5 px-2 text-purple-400 font-bold">P90 (상위 10%)</td>
+                      <td className="py-2.5 px-2 text-purple-300 font-bold">{marketValue.p90.toLocaleString()}만 원</td>
+                      <td className="py-2.5 px-2 text-slate-400 font-sans">글로벌 테크 / 초우량 빅테크 상위 처우</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-[#0a0e17] rounded-xl border border-[#1d273d] text-xs space-y-1">
+              {currentTotalCash < marketValue.p25 ? (
+                <>
+                  <div className="text-rose-400 font-bold">
+                    ⚠️ 현재 보상({currentTotalCash.toLocaleString()}만 원)은 코호트 하위 25% 미만(P25 {marketValue.p25.toLocaleString()}만 원)에 위치합니다.
+                  </div>
+                  <div className="text-slate-300">
+                    동종 경력 시장 대비 저평가되어 있으며, 이직 시 최소 +800~1,400만 원 수준의 처우 정상화 협상이 강력히 권고됩니다.
+                  </div>
+                </>
+              ) : currentTotalCash <= marketValue.p75 ? (
+                <>
+                  <div className="text-sky-400 font-bold">
+                    ✓ 현재 보상({currentTotalCash.toLocaleString()}만 원)은 시장 중앙 표준 구간(P25~P75: {marketValue.p25.toLocaleString()}~{marketValue.p75.toLocaleString()}만 원)에 적정 포지셔닝되어 있습니다.
+                  </div>
+                  <div className="text-slate-300">
+                    상위 25% 대기업/유니콘 이직 시 {marketValue.p75.toLocaleString()}만 원 이상의 상한 타깃 협상이 가능합니다.
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-emerald-400 font-bold">
+                    🌟 현재 보상({currentTotalCash.toLocaleString()}만 원)은 코호트 상위 25%(P75 {marketValue.p75.toLocaleString()}만 원 이상)의 우수한 처우를 받고 있습니다.
+                  </div>
+                  <div className="text-slate-300">
+                    단순 급여 상승보다는 비포괄 임금제 여부, 통근 거리, 주 2일 재택근무 등 실질 시급(Life-Adjusted Value)을 중심으로 이직을 검토하십시오.
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex justify-end pt-2 border-t border-[#1e273b]">
+              <button
+                onClick={() => setIsMarketValueModalOpen(false)}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+              >
+                확인 완료
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Skill Gap & 28 Expanded Opportunities Modal */}
+      {isSkillGapModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsSkillGapModalOpen(false); }}
+        >
+          <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 font-bold font-mono">+28 Opportunities</span>
+                  <span className="text-xs text-slate-400">3대 전략 스킬 브릿징 로드맵</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mt-1">스킬 갭 보완 시 확장 시장 (+28건) & 요구 역량 상세</h3>
+              </div>
+              <button onClick={() => setIsSkillGapModalOpen(false)} className="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+            </div>
+
+            <div className="p-3.5 bg-indigo-950/30 border border-indigo-500/30 rounded-xl text-xs text-indigo-200 leading-relaxed">
+              전통적 인사기획(제도·평가·보상 7년차)의 역량에 아래 <strong className="text-white">3대 고부가가치 스킬셋</strong> 중 하나를 추가 확보할 경우, 수도권 채용 시장에서 즉시 지원 가능 풀(Pool)이 <strong className="text-white">+28건</strong> 확장되며, 연봉 밴드는 평균 <strong className="text-emerald-400">+15~30% 프리미엄</strong>이 형성됩니다.
+            </div>
+
+            {/* 3 Track Selector Tabs */}
+            <div className="flex space-x-2 border-b border-[#233252] pb-2 text-xs overflow-x-auto">
+              {EXPANDED_SKILL_GAP_TRACKS.map((track) => (
+                <button
+                  key={track.id}
+                  onClick={() => setActiveSkillTrackId(track.id)}
+                  className={`px-3.5 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
+                    activeSkillTrackId === track.id
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                      : "bg-[#152038] text-slate-300 hover:bg-[#1d2c4e]"
+                  }`}
+                >
+                  {track.id === "track-analytics" ? "📊 1. People Analytics (14건)" : track.id === "track-global" ? "🌐 2. 글로벌 HR & 영어 (8건)" : "🤖 3. HR AX / 테크 혁신 (6건)"}
+                </button>
+              ))}
+            </div>
+
+            {/* Track Content */}
+            <div className="space-y-4">
+              <div className="bg-[#0a0e17] p-4 rounded-xl border border-[#192235] space-y-3 text-xs">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="font-bold text-white text-sm">{selectedTrack.name}</div>
+                  <div className="text-emerald-400 font-mono font-bold">{selectedTrack.expectedSalaryRange}</div>
+                </div>
+
+                <div className="space-y-1 pt-1 border-t border-[#1a2336]">
+                  <span className="text-indigo-400 font-bold block">🎯 극복해야 할 구체적 스킬셋:</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-slate-200">
+                    {selectedTrack.skills.map((s, idx) => (
+                      <div key={idx} className="flex items-center space-x-1.5">
+                        <span>•</span>
+                        <span>{s}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-1 pt-1 border-t border-[#1a2336]">
+                  <span className="text-sky-400 font-bold block">📌 추천 실행 액션 아이템:</span>
+                  <div className="space-y-1 text-slate-300">
+                    {selectedTrack.actionItems.map((a, idx) => (
+                      <div key={idx} className="flex items-start space-x-1.5">
+                        <span>👉</span>
+                        <span>{a}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-xs font-bold text-white mb-2 flex items-center justify-between">
+                  <span>확장되는 타깃 채용 공고 ({selectedTrack.jobs.length}건)</span>
+                  <span className="text-[11px] text-slate-400 font-normal">공식 링크로 원천 공고 확인 가능</span>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="border-b border-[#233252] text-slate-400">
+                        <th className="py-2 px-2.5">기업명</th>
+                        <th className="py-2 px-2.5">채용 포지션</th>
+                        <th className="py-2 px-2.5">근무지</th>
+                        <th className="py-2 px-2.5">예상 연봉</th>
+                        <th className="py-2 px-2.5 text-right">공고 원문</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#18233a] font-mono">
+                      {selectedTrack.jobs.map((j, idx) => (
+                        <tr key={idx}>
+                          <td className="py-2.5 px-2.5 font-sans font-bold text-white">{j.company}</td>
+                          <td className="py-2.5 px-2.5 font-sans text-slate-200">{j.title}</td>
+                          <td className="py-2.5 px-2.5 font-sans text-slate-400 text-[11px]">{j.location}</td>
+                          <td className="py-2.5 px-2.5 text-emerald-400 font-bold">{j.salary}</td>
+                          <td className="py-2.5 px-2.5 text-right font-sans">
+                            <a
+                              href={j.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2.5 py-1 rounded-lg bg-sky-600/30 hover:bg-sky-600/60 text-sky-200 border border-sky-500/40 text-[11px] font-semibold inline-flex items-center space-x-1 transition"
+                            >
+                              <span>원문 ↗</span>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end pt-2 border-t border-[#1e273b]">
+              <button
+                onClick={() => setIsSkillGapModalOpen(false)}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+              >
+                확인 완료
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Universal Multi-Source Crawler Network Modal */}
+      {isCrawlerModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) setIsCrawlerModalOpen(false); }}
+        >
+          <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold font-mono">
+                    18 ACTIVE CHANNELS
+                  </span>
+                  <span className="text-xs text-slate-400">자사 채용사이트 및 공공공시 전수 크롤러</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mt-1">
+                  🌐 Universal Multi-Source Crawler Network (자체 ATS 통합 수집망)
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsCrawlerModalOpen(false)}
+                className="text-slate-400 hover:text-white text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Strategic Moat Context Box */}
+            <div className="p-4 bg-gradient-to-r from-indigo-950/40 to-slate-900/60 border border-indigo-500/30 rounded-xl space-y-2 text-xs leading-relaxed">
+              <div className="font-bold text-indigo-300 flex items-center space-x-1.5">
+                <span>🛡️ CareerRadar 기술적 해자(Technological Moat) 및 개발 취지:</span>
+              </div>
+              <p className="text-slate-300">
+                대기업, Big4 회계법인, 글로벌 전략 컨설팅(MBB), 공공기관 및 외국계 유니콘은 핵심 경력직 채용 공고를 <strong>사람인/잡코리아 등 국내 대형 유료 잡포털에 노출하지 않고</strong>, <strong>자사 홈페이지 독자 채용 시스템(WiseRecruit2, Workday, Greenhouse, Taleo) 및 ALIO 공시망에만 단독 게재</strong>합니다.
+              </p>
+              <p className="text-indigo-200">
+                구직자가 수십 개 사이트를 매일 즐겨찾기하고 직접 방문해야 하는 비효율을 완전히 제거하기 위해, 본 시스템은 아래 <strong>18개 핵심 채용 전산망을 24/7 실시간 크롤링하여 온톨로지 기반으로 표준화 매칭</strong>합니다.
+              </p>
+            </div>
+
+            {/* Top 3 KPI Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">연동 수집 도메인</span>
+                <div className="text-xl font-bold font-mono text-emerald-400 mt-1">18개 시스템 LIVE</div>
+                <span className="text-[10px] text-slate-500">Big4, MBB, ALIO, 삼성, SK, 현대차, AWS</span>
+              </div>
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">자사 사이트 단독 공고 비율</span>
+                <div className="text-xl font-bold font-mono text-indigo-400 mt-1">68.4% 독점 커버리지</div>
+                <span className="text-[10px] text-slate-500">일반 대형 잡포털 미노출 포지션</span>
+              </div>
+              <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
+                <span className="text-[11px] text-slate-400">엔진 동기화 주기</span>
+                <div className="text-xl font-bold font-mono text-sky-400 mt-1">15~30분 주기</div>
+                <span className="text-[10px] text-slate-500">24/7 무중단 백그라운드 파이프라인</span>
+              </div>
+            </div>
+
+            {/* Category Filter Tabs */}
+            <div className="flex space-x-2 border-b border-[#233252] pb-2 text-xs overflow-x-auto">
+              {[
+                { id: "ALL", label: "전체 수집망 (18곳)" },
+                { id: "CONSULTING", label: "💼 회계·전략컨설팅 (7곳)" },
+                { id: "PUBLIC", label: "🏛️ 공공기관 / 국책금융 (5곳)" },
+                { id: "CONGLOMERATE", label: "🏭 대기업 자사채용 (4곳)" },
+                { id: "GLOBAL_TECH", label: "🌐 글로벌 테크 (3곳)" },
+                { id: "AGGREGATOR", label: "🔗 글로벌 어그리게이터 (2곳)" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setCrawlerCategoryFilter(tab.id)}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
+                    crawlerCategoryFilter === tab.id
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                      : "bg-[#152038] text-slate-300 hover:bg-[#1d2c4e]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Source List Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead>
+                  <tr className="border-b border-[#233252] text-slate-400">
+                    <th className="py-2.5 px-3">수집원 / 채용 시스템명</th>
+                    <th className="py-2.5 px-3">수집 타깃 도메인</th>
+                    <th className="py-2.5 px-3">연동 방식</th>
+                    <th className="py-2.5 px-3">크롤링 주기</th>
+                    <th className="py-2.5 px-3">인덱싱 현황</th>
+                    <th className="py-2.5 px-3 text-right">수집 상태</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#18233a] font-mono">
+                  {CRAWLER_SOURCES.filter(
+                    (s) => crawlerCategoryFilter === "ALL" || s.category === crawlerCategoryFilter
+                  ).map((s) => (
+                    <tr key={s.id} className="hover:bg-slate-900/40 transition">
+                      <td className="py-3 px-3 font-sans">
+                        <div className="font-bold text-white text-xs">{s.name}</div>
+                        <div className="text-[11px] text-slate-400 font-sans mt-0.5">{s.description}</div>
+                      </td>
+                      <td className="py-3 px-3 text-sky-400">
+                        <a href={`https://${s.targetDomain.split('/')[0]}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                          {s.targetDomain} ↗
+                        </a>
+                      </td>
+                      <td className="py-3 px-3 text-slate-300 font-sans text-[11px]">
+                        <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                          {s.sourceType === "PROPRIETARY_ATS" ? "독자 ATS 크롤러" : s.sourceType === "PUBLIC_API" ? "공공 API 연동" : s.sourceType === "ENTERPRISE_WORKDAY" ? "Workday/클라우드" : "글로벌 스크래퍼"}
+                        </span>
+                      </td>
+                      <td className="py-3 px-3 text-slate-300 font-sans text-[11px]">{s.crawlFrequency}</td>
+                      <td className="py-3 px-3 text-emerald-400 font-bold">{s.indexedCount}건 색인</td>
+                      <td className="py-3 px-3 text-right font-sans">
+                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
+                          ● {s.status} ({s.lastSyncMinutesAgo}분 전)
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex justify-end pt-2 border-t border-[#1e273b]">
+              <button
+                onClick={() => setIsCrawlerModalOpen(false)}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+              >
+                확인 완료
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Job Detail Modal */}
+      {selectedJob && selectedJobMatch && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={(e) => { if (e.target === e.currentTarget) { setSelectedJob(null); setSelectedJobHf(null); } }}
+        >
+          <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-2xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start border-b border-[#1e273b] pb-4">
+              <div>
+                <span className="text-xs font-bold text-slate-400">{selectedJob.company}</span>
+                <h3 className="text-lg font-bold text-white mt-0.5">{selectedJob.title}</h3>
+                <p className="text-xs text-indigo-400 font-mono mt-0.5">표준 직무: {selectedJob.canonicalRole}</p>
+              </div>
+              <button onClick={() => { setSelectedJob(null); setSelectedJobHf(null); }} className="text-slate-400 hover:text-white text-lg">✕</button>
+            </div>
+
+            {selectedJobHf && selectedJobHf.isExcluded && (
+              <div className="p-3.5 bg-rose-950/40 border border-rose-500/50 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-2.5">
+                <span className="text-base flex-shrink-0">🚫</span>
+                <div>
+                  <span className="font-bold text-rose-400">[절대 배제 기준 위반]</span>
+                  <div className="mt-1 space-y-0.5 text-rose-200">
+                    {selectedJobHf.exclusionReasons.map((r, i) => (
+                      <div key={i}>• {r}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-4 text-xs bg-[#0a0e17] p-4 rounded-xl border border-[#182338]">
+              <div>
+                <span className="text-slate-400">보상 기준</span>
+                <div className="font-bold text-slate-100 font-mono text-sm mt-0.5">{selectedJob.salaryDisplay}</div>
+              </div>
+              <div>
+                <span className="text-slate-400">통근 소요 (거주지 기준)</span>
+                <div className="font-bold text-sky-400 font-mono text-sm mt-0.5">편도 {selectedJob.commuteMinutes}분</div>
+              </div>
+              <div>
+                <span className="text-slate-400">포괄임금 체계</span>
+                <div className="font-bold text-slate-100 mt-0.5">
+                  {selectedJob.hasFixedOT ? `고정OT ${selectedJob.fixedOTHours}시간 포함` : "비포괄 (수당 100% 별도)"}
+                </div>
+              </div>
+              <div>
+                <span className="text-slate-400">적합도 점수</span>
+                <div className="font-bold text-emerald-400 font-mono text-sm mt-0.5">{selectedJobMatch.totalScore}%</div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">공고 원문 (Raw Posting)</h4>
+              <pre className="bg-[#070a10] border border-[#1b253b] rounded-xl p-4 text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed">
+                {selectedJob.rawText || "공고 본문 데이터가 로드되었습니다."}
+              </pre>
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2 border-t border-[#1e273b]">
+              <a
+                href={selectedJob.jobUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 font-bold text-xs text-white shadow-lg transition flex items-center justify-center space-x-1"
+              >
+                <span>🔗 채용공고 원문 바로가기 ↗</span>
+              </a>
+              <div className="flex space-x-2 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => { setSelectedJob(null); setSelectedJobHf(null); }}
+                  className="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300 hover:bg-slate-700"
+                >
+                  닫기
+                </button>
+                <button
+                  onClick={() => sendJobToScanner(selectedJob)}
+                  className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 font-bold text-xs text-white shadow-lg transition"
+                >
+                  ⚖️ Labor Scanner로 분석 전송
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
