@@ -1,5 +1,165 @@
 [
   {
+    "id": "alio-307004",
+    "company": "학교법인한국폴리텍",
+    "title": "한국폴리텍대학 춘천캠퍼스 업무직(대학운영직_영선원) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "강원 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 6,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "무기계약직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 학교법인한국폴리텍\n공고명: 한국폴리텍대학 춘천캠퍼스 업무직(대학운영직_영선원) 채용 공고\n고용형태: 무기계약직\n근무지: 강원",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307004",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-16"
+  },
+  {
+    "id": "alio-307024",
+    "company": "한국광해광업공단",
+    "title": "2026년도 하반기 한국광해광업공단 무기계약직 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "서울 외 1 (수도권)",
+    "commuteMinutes": 42,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 6,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "무기계약직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국광해광업공단\n공고명: 2026년도 하반기 한국광해광업공단 무기계약직 채용 공고\n고용형태: 무기계약직\n근무지: 서울 외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307024",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-16"
+  },
+  {
+    "id": "alio-307056",
+    "company": "한국전력공사",
+    "title": "2026년 제3차 장애인 체험형 인턴 채용공고 [인천본부]",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "인천 외 1 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국전력공사\n공고명: 2026년 제3차 장애인 체험형 인턴 채용공고 [인천본부]\n고용형태: 청년인턴(체험형)\n근무지: 인천 외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307056",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-16"
+  },
+  {
+    "id": "alio-307057",
+    "company": "근로복지공단",
+    "title": "[정선병원] 공무직(영선·조경기사) 채용 공고",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "강원 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 6,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "무기계약직",
+      "경력"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [정선병원] 공무직(영선·조경기사) 채용 공고\n고용형태: 무기계약직\n근무지: 강원",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307057",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-16"
+  },
+  {
     "id": "alio-306980",
     "company": "학교법인한국폴리텍",
     "title": "한국폴리텍대학 남대구캠퍼스 업무직(대학운영직_조리사) 채용(3차) 공고",
@@ -37,127 +197,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
-  },
-  {
-    "id": "alio-307023",
-    "company": "한국산업안전보건공단",
-    "title": "[안전보건공단 광주광역본부] 전남동부지사 업무직 보훈제한경쟁(시설관리원) 채용공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "전남광주 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "무기계약직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국산업안전보건공단\n공고명: [안전보건공단 광주광역본부] 전남동부지사 업무직 보훈제한경쟁(시설관리원) 채용공고\n고용형태: 무기계약직\n근무지: 전남광주",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307023",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
-  },
-  {
-    "id": "alio-306949",
-    "company": "한국기술교육대학교",
-    "title": "2026학년도 한국기술교육대학교 기술연구원 신규채용 공고",
-    "canonicalRole": "공공 인사/노무행정",
-    "occupation": "HR",
-    "industry": "공공기관 / 공기업",
-    "location": "충남 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국기술교육대학교\n공고명: 2026학년도 한국기술교육대학교 기술연구원 신규채용 공고\n고용형태: 정규직 (정규직)\n근무지: 충남",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306949",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
-  },
-  {
-    "id": "alio-306848",
-    "company": "(주)강원랜드",
-    "title": "㈜강원랜드 2026년 2차 서비스지원직(보훈) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "강원 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (주)강원랜드\n공고명: ㈜강원랜드 2026년 2차 서비스지원직(보훈) 채용 공고\n고용형태: 정규직 (정규직)\n근무지: 강원",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306848",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5244",
@@ -196,7 +236,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5241",
@@ -235,7 +275,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5240",
@@ -274,7 +314,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5239",
@@ -313,7 +353,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5238",
@@ -352,7 +392,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "deloitte-5237",
@@ -392,7 +432,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "alio-koreaexim-entry",
@@ -433,7 +473,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "alio-kodit-hr",
@@ -475,7 +515,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "tech-toss-frontend",
@@ -517,7 +557,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "tech-naver-cloud",
@@ -559,7 +599,7 @@
     "sourceSystem": "Naver Careers",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "tech-woowa-backend",
@@ -600,7 +640,7 @@
     "sourceSystem": "배민 커리어",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "fin-kpmg-cpa",
@@ -641,7 +681,7 @@
     "sourceSystem": "KPMG Careers",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "fin-shinhan-bank",
@@ -681,7 +721,7 @@
     "sourceSystem": "Shinhan Recruiter ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "mkt-cj-enm",
@@ -722,7 +762,7 @@
     "sourceSystem": "CJ Careers",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "mkt-daangn-growth",
@@ -763,7 +803,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "hr-sk-hynix-entry",
@@ -805,7 +845,7 @@
     "sourceSystem": "SK Careers ATS",
     "isEntryLevel": true,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "hr-samsung-dx",
@@ -847,7 +887,7 @@
     "sourceSystem": "삼성 채용시스템",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "hr-coupang-er",
@@ -888,7 +928,7 @@
     "sourceSystem": "Coupang Workday ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "plan-hyundai-talent",
@@ -929,7 +969,7 @@
     "sourceSystem": "Hyundai Talent Platform",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   },
   {
     "id": "plan-lg-cns-strategy",
@@ -970,6 +1010,6 @@
     "sourceSystem": "LG Careers ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-16"
   }
 ]
