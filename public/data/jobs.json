@@ -1,5 +1,85 @@
 [
   {
+    "id": "alio-306943",
+    "company": "기초과학연구원",
+    "title": "2026-12회 생명과학 연구클러스터 별정직(체험형 청년인턴) 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대전 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 기초과학연구원\n공고명: 2026-12회 생명과학 연구클러스터 별정직(체험형 청년인턴) 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대전",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306943",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-17"
+  },
+  {
+    "id": "alio-306970",
+    "company": "한국농업기술진흥원",
+    "title": "2027년 한국농업기술진흥원 상반기 체험형 청년인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대구 외 1 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국농업기술진흥원\n공고명: 2027년 한국농업기술진흥원 상반기 체험형 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대구 외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306970",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-17"
+  },
+  {
     "id": "alio-307099",
     "company": "에너지경제연구원",
     "title": "[에너지경제연구원] 공공기관 청년인턴 채용공고(인재개발팀)",
@@ -80,53 +160,13 @@
     "publishedAt": "2026-11-17"
   },
   {
-    "id": "alio-307056",
-    "company": "한국전력공사",
-    "title": "2026년 제3차 장애인 체험형 인턴 채용공고 [인천본부]",
+    "id": "alio-307162",
+    "company": "(재)우체국물류지원단",
+    "title": "2027년도 우체국물류지원단 1분기 정기채용(체험형 청년인턴) 공고",
     "canonicalRole": "청년인턴/행정지원",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "인천 외 1 (수도권)",
-    "commuteMinutes": 50,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국전력공사\n공고명: 2026년 제3차 장애인 체험형 인턴 채용공고 [인천본부]\n고용형태: 청년인턴(체험형)\n근무지: 인천 외 1",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307056",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-307096",
-    "company": "해양환경공단",
-    "title": "2026년 하반기 2차 해양환경공단 체험형 청년인턴(장애인 제한) 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
+    "location": "서울 외 2 (수도권)",
     "commuteMinutes": 42,
     "salaryMinManwon": 2500,
     "salaryMaxManwon": 2800,
@@ -149,9 +189,9 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 해양환경공단\n공고명: 2026년 하반기 2차 해양환경공단 체험형 청년인턴(장애인 제한) 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 서울",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (재)우체국물류지원단\n공고명: 2027년도 우체국물류지원단 1분기 정기채용(체험형 청년인턴) 공고\n고용형태: 청년인턴(체험형)\n근무지: 서울 외 2",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307096",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307162",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
@@ -160,13 +200,53 @@
     "publishedAt": "2026-11-17"
   },
   {
-    "id": "alio-307067",
-    "company": "신용보증재단중앙회",
-    "title": "2026년 제2차 신용보증재단중앙회 신입직원(5급) 공개채용",
-    "canonicalRole": "공공 재무/예산관리",
-    "occupation": "FINANCE",
+    "id": "alio-307161",
+    "company": "(재)우체국물류지원단",
+    "title": "2027년도 우체국물류지원단 1분기 정기채용(채용형 청년인턴) 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "세종 (지방 본사/지사)",
+    "location": "서울 (수도권)",
+    "commuteMinutes": 42,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(채용형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (재)우체국물류지원단\n공고명: 2027년도 우체국물류지원단 1분기 정기채용(채용형 청년인턴) 공고\n고용형태: 청년인턴(채용형)\n근무지: 서울",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307161",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-17"
+  },
+  {
+    "id": "alio-307149",
+    "company": "한국동서발전(주)",
+    "title": "한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발",
+    "canonicalRole": "공공행정·경영기획",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "울산 외 6 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 4200,
     "salaryMaxManwon": 4800,
@@ -189,412 +269,52 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 신용보증재단중앙회\n공고명: 2026년 제2차 신용보증재단중앙회 신입직원(5급) 공개채용\n고용형태: 정규직 (정규직)\n근무지: 세종",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국동서발전(주)\n공고명: 한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발\n고용형태: 정규직 (정규직)\n근무지: 울산 외 6",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307067",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307149",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261116-3",
-    "company": "삼일PwC",
-    "title": "AX Node Product Design Engineer 채용",
-    "canonicalRole": "Data/Tech Consultant",
-    "occupation": "TECH",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node Product Design Engineer 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261116-3.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261116-2",
-    "company": "삼일PwC",
-    "title": "AX Node Backend Engineer (AI-Native Application & Platform) 채용",
-    "canonicalRole": "Data/Tech Consultant",
-    "occupation": "TECH",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node Backend Engineer (AI-Native Application & Platform) 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261116-2.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261116-1",
-    "company": "삼일PwC",
-    "title": "연결시스템 구축 컨설턴트 채용",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\n연결시스템 구축 컨설턴트 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261116-1.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
     "jobCategory": "PLANNING",
     "publishedAt": "2026-11-17"
   },
   {
-    "id": "pwc-r261110-3",
-    "company": "삼일PwC",
-    "title": "AX Node XBRL센터 - 경력직 채용",
-    "canonicalRole": "Corporate Finance & Deals",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node XBRL센터 - 경력직 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110-3.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261110-2",
-    "company": "삼일PwC",
-    "title": "AX Node XBRL센터 - 신입 채용",
-    "canonicalRole": "Corporate Finance & Deals",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 4600,
-    "salaryMaxManwon": 5400,
-    "salaryDisplay": "4,600 ~ 5,400만 원 (Big4 대졸 초임)",
-    "salaryTier": "B",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "신입/인턴",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "기초 직무 지식 및 영어 커뮤니케이션"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node XBRL센터 - 신입 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110-2.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": true,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261110",
-    "company": "삼일PwC",
-    "title": "Risk Assurance 본부 Trust팀 경력직 채용 - Cybersecurity (AI Security)",
-    "canonicalRole": "Data/Tech Consultant",
+    "id": "alio-307141",
+    "company": "한국개발연구원",
+    "title": "2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)",
+    "canonicalRole": "공공 ICT/전산관리",
     "occupation": "TECH",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
+    "industry": "공공기관 / 공기업",
+    "location": "세종 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 4200,
+    "salaryMaxManwon": 4800,
+    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 6,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
-      "Big4 회계법인",
+      "공공기관",
+      "ALIO 경영공시",
       "정규직",
-      "경력",
-      "수시채용"
+      "경력"
     ],
     "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
     ],
     "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nRisk Assurance 본부 Trust팀 경력직 채용 - Cybersecurity (AI Security)\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261110.html",
-    "sourceCategory": "CONSULTING",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국개발연구원\n공고명: 2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)\n고용형태: 정규직 (정규직)\n근무지: 세종",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307141",
+    "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261022",
-    "company": "삼일PwC",
-    "title": "Global Sector PE advisory 경력직 채용",
-    "canonicalRole": "Corporate Finance & Deals",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nGlobal Sector PE advisory 경력직 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261022.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261016-1",
-    "company": "삼일PwC",
-    "title": "Global Sector Value-up Business 경력직 채용",
-    "canonicalRole": "Corporate Finance & Deals",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nGlobal Sector Value-up Business 경력직 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261016-1.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261104",
-    "company": "삼일PwC",
-    "title": "AX Node XBRL센터 - 단기 경력직 채용",
-    "canonicalRole": "Corporate Finance & Deals",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAX Node XBRL센터 - 단기 경력직 채용\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261104.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "pwc-r261103",
-    "company": "삼일PwC",
-    "title": "AI·IT 보안 및 거버넌스 컨설턴트 모집",
-    "canonicalRole": "Data/Tech Consultant",
-    "occupation": "TECH",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 용산구 (삼일PwC 본사)",
-    "commuteMinutes": 45,
-    "salaryMinManwon": 6200,
-    "salaryMaxManwon": 8500,
-    "salaryDisplay": "6,200 ~ 8,500만 원 (경력 처우)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "경력",
-      "수시채용"
-    ],
-    "pros": [
-      "국내 1위 회계법인 삼일PwC의 전문성과 네트워크",
-      "다양한 글로벌 프로젝트 경험"
-    ],
-    "gaps": [
-      "요구 스킬셋 부합 여부 확인 필요"
-    ],
-    "rawText": "[삼일PwC 정규직 수시채용]\nAI·IT 보안 및 거버넌스 컨설턴트 모집\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.",
-    "sourceName": "삼일PwC 공식 채용관",
-    "jobUrl": "https://www.pwc.com/kr/ko/career/experienced/r261103.html",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "PwC Global ATS",
+    "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": false,
     "jobCategory": "TECH",
     "publishedAt": "2026-11-17"
@@ -1551,8 +1271,8 @@
     "publishedAt": "2026-11-15"
   },
   {
-    "id": "toss-7507332003",
-    "company": "토스인슈어런스",
+    "id": "toss-7701589003",
+    "company": "토스뱅크",
     "title": "커뮤니케이션 담당자 (Communications Manager)",
     "canonicalRole": "PR",
     "occupation": "MARKETING",
@@ -1563,8 +1283,8 @@
     "salaryMaxManwon": 11000,
     "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
     "salaryTier": "A",
-    "minYears": 3,
-    "maxYears": 10,
+    "minYears": 7,
+    "maxYears": 12,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -1580,9 +1300,9 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "합류하게 될 팀에 대해 알려드려요 \n\n \n 토스인슈어런스는 2018년 설립된 법인보험대리점(GA)으로 토스(비바리퍼블리카)의 첫 번째 계열사에요. 여러 보험사의 상품을 고객 중심으로 비교·제안하며 기술과 데이터를 통해 보험의 새로운 기준을 만들어가고 있어요.‘보험을 파는 일’이 아니라, 고객이 스스로 합리적인 선택을 할 수 있도록 돕는 것이 토스인슈어런스가 지향하는 방향이에요.\n\n 토스인슈어런스의 Communications Manager는 회사의 Corp Building Tribe 내 Communications Team에 속해 있어요.\n\n Communications Team은 미디어와 이해관계자를 대상으로 회사의 메시지를 명확하게 전달하고, 신뢰 기반의 커뮤니케이션을 통해 브랜드 평판을 관리하고 있어요.\n\n \n 합류하면 함께 할 업무예요 \n\n \n 토스인슈어런스의 대외 커뮤니케이션 전략을 수립하고 실행해요.\n\n 회사의 핵심 메시지가 명확하고 신뢰감 있게 전달되도록 관리하며, 변화와 혁신, 고객 중심 보험 서비스에 대한 이야기를 미디어를 통해 효과적으로 알려요.\n\n 미디어 대응, 보도자료, 기획자료, 인터뷰, 브랜드 캠페인 등 주요 홍보 활동을 기획·운영하고, 현장의 목소리와 고객 경험을 콘텐츠로 발굴해 확산해요.\n\n \n 이런 분과 함께하고 싶어요 \n\n \n 3년 이상 금융(특히 보험) 인하우스 또는 언론사에서 홍보 업무를 수행해본 분을 찾고 있어요.\n\n 보험사, GA, 핀테크 등 보험 산업 전반에 대한 이해가 높고, SNS를 활용한 주도적인 대내외 커뮤니케이션 및 사회 공헌 활동 경험이 있으면 좋아요.\n\n 주요 종합지·경제지·전문지·온라인 매체와 밀접하게 소통이 가능한 분이면 좋아요.\n\n \n 이력서는 이렇게 작성하시면 좋아요 \n\n \n 주도적으로 이니셔티브를 발굴하여 대중의 이해와 신뢰 제고로 이어졌던 경험이 있으면 작성해주세요.\n\n 당면한 PR 이슈를 기존에 시도하지 않았던 새로운 방식으로 접근하여 유의미한 성과를 만들어본 경험이 있으면 작성해주세요.\n\n \n 토스인슈어런스로의 합류여정\n\n \n 서류접수 &gt; 직무인터뷰 &gt; 문화적합성 인터뷰 &gt; 레퍼런스 체크 &gt; 처우협의 &gt; 최종합격 및 입사\n\n \n 꼭 확인해 주세요 \n\n \n 근무지는 서울특별시 구로구 경인로 662 (신도림동, 디큐브시티 타워동) 37층이에요.(온보딩 기간에는 역삼역 인근 오피스에서 근무해요.)\n\n 이력서 및 제출 서류에 허위",
+    "rawText": "합류하게 될 팀에 대해 알려드려요\n\n \n 토스뱅크의 Communications Manager는 미디어를 비롯한 대외 주요 기관 및 이해관계자와의 커뮤니케이션 전략을 수립하고 실행하는 Communications팀에 속해 있어요.\n\n 토스뱅크의 다양한 팀과 협업하며 대응 체계를 구축하고 있어요.\n\n 제품을 만드는 Squad는 물론, 대외 정책을 담당하는 Public Affairs팀, 토스뱅크의 전략을 고민하는 Strategy Division 등 여러 부서와 수시로 소통하며, 각종 이슈에 유기적으로 대응하고 있어요.\n\n 10년차 이상의 경력을 가진 분들로 구성되어 있고, 금융권·언론사 등 다양한 배경의 커뮤니케이션 및 PR 전문가들이 함께하고 있어요.\n\n \n 합류하면 함께할 업무예요\n\n \n 금융 정책·규제 환경과 여론 흐름을 분석해 토스뱅크에 유리한 내러티브를 설계하고, 대내외 커뮤니케이션 전략 및 메시지 가이드라인을 수립해요.\n\n 보도자료, 경영진 메시지, 위기 대응 입장문, 발표 덱 등 다양한 형식의 대외 콘텐츠를 직접 기획하고 완성해요.\n\n 경쟁사와 차별화되는 포맷과 메시지로 기자간담회 등 프레스행사를 기획하고 실행해요.\n\n 주요 매체 및 기자들과 신뢰 기반의 미디어 릴레이션을 주도하고, 위기 상황 발생 시 커뮤니케이션 전략 수립과 실행을 리드해요.\n\n \n 이런 분과 함께하고 싶어요\n\n \n 언론 또는 커뮤니케이션/PR 분야 7년 이상 경력자로, 금융·핀테크에 대한 이해도와 주요 매체 기자들과의 실질적인 네트워크를 보유한 분이 필요해요.\n\n 보도자료부터 발표 덱까지 형식을 가리지 않고 단독으로 완성하고, 차별화된 포맷의 프레스행사를 기획·실행한 경험이 있는 분이 필요해요.\n\n 정책·여론 환경을 읽고 선제적으로 의제를 설계하는 전략적 커뮤니케이션 역량을 갖춘 분이 필요해요.\n\n AI를 업무에 실질적으로 통합하고, 팀의 일하는 방식을 혁신할 의지와 실행력이 있는 분이 필요해요.\n\n 높은 실무 역량을 바탕으로 팀의 리더로 성장하겠다는 열정과 포텐셜을 가진 분이 필요해요.\n\n 팀을 이끌어본 경험이 있는 분이라면 더욱 환영해요.\n\n \n 이력서는 이렇게 작성하시는 걸 추천해요\n\n \n PR 및 리스크 관리 경험에 대한 구체적이고 사실적인 경험을 적어주세요. 실제 미디어에 노출됐던 사례와 이를 해결하기 위해 본인이 주도적으로 했던 노력을 보여주시면 좋아요.\n\n 자신이 하는 일에 대한 열의와 전문성을 보여주세요. 다른 사람들이 ",
     "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=7507332003",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=7701589003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
