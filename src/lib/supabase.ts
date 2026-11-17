@@ -20,7 +20,8 @@ export const supabase = supabaseUrl && supabaseAnonKey
 export async function fetchJobsWithCache(fallbackData: JobPosting[] = []): Promise<JobPosting[]> {
   let baseData = sanitizeJobs(fallbackData);
   try {
-    const res = await fetch('/data/jobs.json');
+    const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/\/$/, '');
+    const res = await fetch(`${basePath}/data/jobs.json`);
     if (res.ok) {
       baseData = sanitizeJobs(await res.json());
     }

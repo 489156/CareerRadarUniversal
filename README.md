@@ -1,162 +1,123 @@
-# 🎯 Career Radar Universal (커리어 레이더 유니버설)
+# Career Radar Universal (커리어 레이더 유니버설)
 
-> **대기업·공공기관(ALIO)·Big4 자체 ATS 독점 채용공고 무인 수집 및 다차원 커리어 인텔리전스 플랫폼**  
-> *Zero-CLI 기반 완전 무인 데이터 파이프라인 & Cloudflare Edge 엣지 배포 아키텍처*
+> **대기업·공공기관(ALIO)·Big4 자체 ATS 채용공고 무인 수집 및 다차원 커리어 인텔리전스 플랫폼**  
+> *Zero-CLI 기반 GitHub Actions 무인 데이터 파이프라인 & GitHub Pages 정적 배포 아키텍처*
 
-[![Build Status](https://img.shields.io/badge/Build-Passing%20(Next.js%2014%20SSG)-emerald.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal)
-[![Hosting](https://img.shields.io/badge/Edge%20Hosting-Cloudflare%20Pages-orange.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal)
+[![Live Demo](https://img.shields.io/badge/Live-GitHub%20Pages-0A0A0B.svg?style=for-the-badge)](https://489156.github.io/CareerRadarUniversal/)
+[![Build](https://img.shields.io/badge/Build-Next.js%2014%20Static%20Export-27272A.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal/actions/workflows/deploy-pages.yml)
 [![Database](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E.svg?style=for-the-badge)](https://supabase.com)
-[![Pipeline](https://img.shields.io/badge/Crawler%20Pipeline-GitHub%20Actions%20Cron-blue.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal/actions)
-[![License](https://img.shields.io/badge/License-Proprietary-slate.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal)
+[![Pipeline](https://img.shields.io/badge/Crawler%20Pipeline-GitHub%20Actions%20Cron-18181B.svg?style=for-the-badge)](https://github.com/489156/CareerRadarUniversal/actions/workflows/crawler-cron.yml)
+
+- **배포 URL**: https://489156.github.io/CareerRadarUniversal/
 
 ---
 
-## 📌 1. Executive Summary & Project Intent (기획 배경)
+## 1. 기획 배경 (Executive Summary)
 
-현대 채용 시장의 가장 큰 정보 비대칭은 **"양질의 알짜 공고일수록 대형 잡포털(사람인, 잡코리아)에 올라오지 않는다"**는 점입니다.  
-- **350+ 공공기관 및 국책금융기관**: 기획재정부 ALIO 경영공시 시스템에만 정규직 채용이 단독 게재됩니다.
-- **주요 대기업(삼성, 현대차, SK, LG)** 및 **회계/전략컨설팅(Big4/MBB)**: 수수료 기반 포털을 배제하고 자사 채용 홈페이지(Closed ATS)만을 통해 수시 채용을 진행합니다.
+채용 시장의 핵심 정보 비대칭은 **"핵심 직무 공고일수록 대형 잡포털(사람인·잡코리아)에 올라오지 않는다"**는 점입니다.
+- **공공기관 및 국책금융기관**: 기획재정부 ALIO 경영공시 시스템에만 정규직 채용이 우선 게재됩니다.
+- **주요 대기업(삼성·현대차·SK·LG)** 및 **회계·컨설팅(Big4/MBB)**, **빅테크**: 자사 채용 홈페이지(Closed ATS)를 통해 수시 채용을 진행합니다.
 
-구직자는 이 알짜 공고들을 확인하기 위해 매일 수십 개의 기업 사이트를 일일이 방문해야 하는 극심한 탐색 피로를 겪고 있습니다.
-
-**Career Radar Universal**은 이 문제를 종결하기 위해 탄생했습니다.  
-사용자의 경력과 거주지 기준을 담은 **Career Passport**를 바탕으로, **18대 독자 채용 전산망을 매일 무인 크롤링**하여 **잡포털 미노출 독점 공고 전수 탐색 ➔ 다차원 AI 적합도 매칭 ➔ 기업 Tier별 코호트 연봉 검증 ➔ 노동법 독소조항 감별 ➔ 실질 체감 시급 계산**까지 원스톱으로 제공하는 차세대 커리어 의사결정 플랫폼입니다.
+**Career Radar Universal**은 사용자의 경력·직무·연봉·거주지 기준을 담은 **Career Passport**를 바탕으로, **21개 공식 채널(실시간 자동 크롤러 3곳 + 공식 채용관 링크 18곳)**의 채용 데이터에 대해 **다차원 적합도 점수화 ➔ 6종 절대 배제 필터링 ➔ 기업 Tier별 시장 연봉(P10~P90) 산출 ➔ 노동법 독소조항 진단 ➔ 통근·OT 반영 실질 시급 계산**까지 단일 워크스페이스에서 제공합니다.
 
 ---
 
-## 🏛️ 2. End-to-End 시스템 아키텍처 & 무인 파이프라인
+## 2. 시스템 아키텍처 & 단일 배포 파이프라인 (GitHub Pages + Actions)
 
-본 서비스는 운영자의 수동 개입이 전혀 필요 없는 **Zero-CLI, Zero-Cost 3각 무인 파이프라인**으로 작동합니다.
+본 서비스는 **GitHub(Actions + Pages)** 를 단일 배포·실행 허브로 사용하여 별도 CLI나 외부 호스팅 분산 없이 완전 자동으로 동작합니다.
 
 ```mermaid
 flowchart TD
-    subgraph Data_Pipeline ["1. 무인 데이터 수집 & 적재 (Backend)"]
-        GHA["GitHub Actions Cron<br/>(매일 한국시각 자정 자동 실행)"] -->|1. Web Scraping| EXT["18대 자체 채용망<br/>(ALIO, PwC, Deloitte 등)"]
-        EXT -->|2. 추출 & 구조화| GHA
-        GHA -->|3. REST API Upsert| SUPA[("Supabase PostgreSQL<br/>public.jobs 테이블")]
-        GHA -.->|Fallback 캐싱| LOCAL_JSON["public/data/jobs.json"]
+    subgraph Data_Pipeline ["1. 무인 데이터 수집 & 적재 (GitHub Actions Cron)"]
+        GHA["GitHub Actions Cron<br/>(매일 한국 시각 자정 00:00 KST / 15:00 UTC)"] -->|1. 실시간 스크래핑| EXT["ALIO · 삼일PwC · 딜로이트 안진<br/>(+ 큐레이션 시드 14건 병합)"]
+        EXT -->|2. 비경력직 필터 & 정제| GHA
+        GHA -->|3. SERVICE_ROLE_KEY Upsert| SUPA[("Supabase PostgreSQL<br/>public.jobs 테이블")]
+        GHA -->|4. 정적 캐시 커밋| LOCAL_JSON["public/data/jobs.json"]
     end
 
-    subgraph Hosting_Edge ["2. 글로벌 엣지 호스팅 (CDN)"]
-        CF["Cloudflare Pages & Workers Static Assets<br/>(Next.js 14 SSG 빌드 아티팩트 서빙)"]
+    subgraph Hosting_Pages ["2. 정적 호스팅 (GitHub Pages 단일 배포)"]
+        DEPLOY["deploy-pages.yml<br/>(Next.js 14 Static Export + basePath 자동 주입)"] --> GHP["GitHub Pages<br/>https://489156.github.io/CareerRadarUniversal/"]
     end
 
-    subgraph Client_App ["3. 구직자 웹 클라이언트 (Frontend)"]
-        USER["구직자 웹 브라우저 (PC/Mobile)"]
-        USER -->|초고속 정적 로딩| CF
-        USER -->|실시간 공고 조회 + 4시간 TTL 로컬 캐싱| SUPA
+    subgraph Client_App ["3. 웹 클라이언트 (Frontend SPA)"]
+        USER["사용자 브라우저 (Desktop / Mobile)"]
+        USER -->|정적 자산 & JSON 로드| GHP
+        USER -->|선택: anon key 읽기 전용 조회 (4h 캐시)| SUPA
     end
-
-    style GHA fill:#24292e,stroke:#fff,color:#fff
-    style SUPA fill:#3ecf8e,stroke:#fff,color:#1c1c1c
-    style CF fill:#f38020,stroke:#fff,color:#fff
 ```
 
-🚀 **최신 아키텍처 업데이트**: 단일 파일(Monolithic) 뷰 구조에서 벗어나, **Zustand 전역 상태 관리**를 도입하고 모든 거대 팝업 모달을 독립 컴포넌트(`src/components/`)로 100% 분리하는 대규모 리팩토링을 완료했습니다. 데이터 패칭 로직 또한 하드코딩 Mock 데이터에서 **Supabase 실시간 연동**으로 전환되었습니다.
-
-### 아키텍처 3대 안정성 안전망
-1. **SSG + Client-side Hydration 하이브리드**: Cloudflare 엣지에서 초고속 정적(SSG) 파일로 즉시 열리고, 브라우저 마운트 직후 Supabase에서 실시간 채용 공고를 땡겨옵니다.
-2. **Supabase 무료 쿼터 방어 (4시간 TTL Caching)**: 매 접속마다 DB를 호출하지 않고 브라우저 `localStorage`에 4시간 단위로 캐싱하여 무료 티어 트래픽 한도를 원천 방어합니다.
-3. **2중 Fallback 안전망**: 사용자가 DB 키를 아직 넣지 않았거나 서버 장애 발생 시, 내장된 `MOCK_JOB_DATABASE`로 즉시 우회하여 사이트가 절대 뻗지 않습니다.
+### 3대 안정성 안전망
+1. **서브경로 자동 인식 (`NEXT_PUBLIC_BASE_PATH`)**: [deploy-pages.yml](.github/workflows/deploy-pages.yml)이 `actions/configure-pages@v5`의 `base_path`(`/CareerRadarUniversal`)를 [next.config.mjs](next.config.mjs)와 [supabase.ts](src/lib/supabase.ts)에 자동 주입해 정적 CSS/JS 및 `/data/jobs.json` 경로가 깨지지 않습니다.
+2. **Supabase 무료 쿼터 방어 (4시간 TTL 캐싱)**: 브라우저 `localStorage`에 4시간 단위로 조회 결과를 캐싱해 반복 DB 호출을 방지합니다.
+3. **3단계 데이터 Fallback**: `Supabase (선택)` → `public/data/jobs.json (크롤러 자동 커밋)` → 내장 `MOCK_JOB_DATABASE` 순으로 폴백되어 DB 키가 없어도 즉시 동작합니다.
 
 ---
 
-## 🎯 3. 핵심 혁신 엔진 (Technological Moats)
+## 3. 핵심 기능 (6-Tab Workspace & Quick Modals)
 
-### ① 다차원 코호트 시장가치 매트릭스 (Multi-dimensional Cohort Engine)
-단순 선형 연차 계산을 탈피하고, 신입 대졸 초임부터 극심하게 양극화되는 대한민국 노동시장 현실을 수학적으로 모델링했습니다.
-* **Tier 1 (빅테크/유니콘, 1.40x)**: 초봉 6,000만 원~, 가파른 성장률
-* **Tier 2 (주요 대기업, 1.25x)**: 초봉 5,000만 원~, 안정적 호봉 상승
-* **Tier 3 (금융/공공기관, 1.15x)**: ALIO 공시 기준 확정 초임
-* **Tier 4 (스타트업/중소, 1.00x)**: 고용노동부 사업체 임금통계 기준선
-
-### ② 강력한 스마트 절대 배제 필터 (Hard Filter)
-구직자가 원치 않는 공고를 사전에 완전히 걸러내는 엄격한 방어막입니다.
-* **6대 원클릭 프리셋**: 정규직만 허용(계약/파견 컷), 수도권만 허용(지방 컷), 통근 한도 초과 컷(예: 60분 초과), 고정OT 20시간 초과 컷(과도한 포괄임금), 현재 보상 미만 컷, 지방 이전 기관 컷
-* **사용자 직접 배제 키워드**: 교대근무, 현장직, 인턴 등 단어를 등록하면 해당 공고를 즉각 숨김 처리.
-
-### ③ ⚖️ 노동법·독소조항 안심 진단기 (Labor Risk Scanner)
-공고 원문이나 근로계약서 문구를 붙여넣으면 3초 만에 노동법 리스크를 감별합니다.
-* **포괄임금제 고정OT 시간 적발**, **퇴직금 분할 지급 약정**, **위법한 수습기간 감액(최저임금 미달 여부)**, **불공정 경업금지 조항** 자동 진단 및 경고.
-
-### ④ 💰 삶의 시간 반영 '실질 체감 시급' 계산기 (Life-Adjusted Value)
-겉으로 보이는 명목 연봉의 착시를 걷어냅니다.
-* 연간 길바닥에 버리는 **통근 시간(평균 400~500시간)**과 대중교통비, 주당 실근로시간, 재택근무 일수를 종합 감가상각하여 **내 통장에 꽂히는 진짜 시간당 가치**를 산출합니다.
+1. **`1. 조건 설정` (Career Passport & Hard Filter)**:
+   - 신입/경력 트랙, 5대 직군(IT·재무/회계·마케팅·경영기획/전략·인사/HR), 보유 스킬 칩 추가, 목표 기업 Tier, 현재 보상, 통근 허용 한도를 설정합니다.
+   - **이력서 파싱 (`ResumeModal`)**: 이력서 텍스트 붙여넣기 또는 `.txt`/`.md` 업로드를 통해 직무·경력(날짜 범위 병합/중복 제거, 연도 오인 방지)·스킬·현재 연봉을 자동 추출합니다.
+   - **6대 절대 배제 필터 + 커스텀 키워드**: 비정규직(신입 인턴 예외), 비수도권, 통근 한도 초과, 고정OT 20h 초과, 현재 보상 미만, 지방이전 기관을 즉시 제외합니다.
+2. **`2. 공고 레이더` (Opportunity Radar)**:
+   - 고밀도 **테이블 뷰**와 **카드 뷰** 전환 지원, 직군·기업유형·비포괄·고적합 필터링 제공.
+   - 공고 클릭 시 **우측 슬라이드오버 드로어(`JobDetailModal`)**에서 보상·통근·OT·4축 점수 분해(`직무 적합도 / 보상 경쟁력 / 통근 효율 / 워라밸`) 및 매칭/갭 사유를 확인하고 계약 진단 탭으로 원문을 즉시 전송할 수 있습니다.
+3. **`3. 계약 진단` (Labor Risk Scanner)**:
+   - 포괄임금 고정OT, 수습 감액, 퇴직금 월할/불법 정산, 부당 경업금지, 근로기준법 제20조 위약예정 문구를 탐지하며, `"비포괄임금"`·`"감액 없음"` 등 부정어 오탐을 차단합니다.
+4. **`4. 실질 시급` (Life-Adjusted Value Calculator)**:
+   - 명목 연봉에서 왕복 통근 시간, 교통비, 주당 실근로시간, 재택근무 일수를 반영해 **실질 체감 시급**과 연간 통근 소모 시간을 계산합니다.
+5. **`5. 오퍼 비교` (Offer Comparison Matrix)**:
+   - 현재 직장 vs Offer A vs Offer B의 기본급·수당·통근·재택·근로시간을 나란히 입력해 실질 시급 기준 최적 오퍼를 판정합니다.
+6. **`6. 연봉 원장` (Market Salary Ledger) & `⌘K` 커맨드 팔레트**:
+   - ALIO 공시·채용공고 기반 12대 주요 기관/기업 보수 테이블 검색, `Ctrl+K` / `⌘K` 빠른 명령창을 지원합니다.
 
 ---
 
-## 📱 4. 서비스 이용법 (User Journey)
+## 4. 완전 무인 환경 세팅 가이드 (Zero-CLI)
 
-구직자가 서비스를 활용하여 최종 이직 결정을 내리는 3단계 흐름입니다.
+GitHub 웹 대시보드에서 아래 순서만 설정하면 크롤러와 웹 호스팅이 모두 무인 자동화됩니다.
 
-```mermaid
-flowchart LR
-    A["Step 1. 내 프로필 설정<br/>(직무, 연차, 통근 한도, 배제 조건)"] --> B["Step 2. 맞춤 채용공고 탐색<br/>(AI 적합도 순 추천 & 3단 필터)"]
-    B --> C["Step 3. 안심 검증 & 결정<br/>(노동법 진단, 실질 시급, 오퍼 비교)"]
-    style A fill:#3b82f6,stroke:#fff,color:#fff
-    style B fill:#10b981,stroke:#fff,color:#fff
-    style C fill:#8b5cf6,stroke:#fff,color:#fff
-```
+### Step 1. GitHub Pages 배포 활성화 (필수)
+1. 본 GitHub 저장소의 **Settings ➔ Pages**로 이동합니다.
+2. **Build and deployment ➔ Source**를 **`GitHub Actions`**로 선택합니다.
+3. `main` 브랜치 푸시 시 [deploy-pages.yml](.github/workflows/deploy-pages.yml)이 자동 실행되어 `https://489156.github.io/CareerRadarUniversal/`에 게시됩니다.
 
-1. **`🪪 내 커리어 프로필`**:
-   - 신입/경력 트랙을 선택하고, 표준 직무(HR, 기획, 개발, 재무, 마케팅)와 현재 보상, 거주지를 입력합니다.
-   - 내가 절대 갈 수 없는 조건(지방 근무, 파견직 등)을 배제 조건으로 등록합니다.
-2. **`📡 맞춤 채용공고`**:
-   - 내 프로필과 실시간 매칭된 공고들이 **AI 적합도(FIT SCORE, %)** 순으로 정렬됩니다.
-   - [🏢 직군 / 🏛️ 기업유형 / ✨ 핵심조건] 필터로 원하는 공고만 추려내고, `지원 원문 ↗` 버튼으로 기업 자체 채용관으로 직행합니다.
-3. **`⚖️ 안심 진단` & `💰 실질 시급 계산기`**:
-   - 마음에 드는 공고의 노동법 리스크를 검증하고, 통근 시간을 감안했을 때 이직할 가치가 있는지 실질 시급을 계산합니다.
-   - 복수 합격 시 `📊 합격 오퍼 비교` 표에서 삶의 질을 비교하여 최종 입사를 결정합니다.
+### Step 2. Supabase 데이터베이스 생성 (선택 — 실시간 DB 연동 시)
+1. [Supabase](https://supabase.com/)에서 New Project를 생성합니다.
+2. 좌측 **SQL Editor**에 [`supabase_schema.sql`](./supabase_schema.sql) 전체를 붙여넣고 **Run**을 실행합니다.
+   - 보안 정책(RLS)상 `anon` 키는 **클라이언트 읽기(`SELECT`) 전용**이며, 쓰기(`UPSERT`)는 차단되어 있습니다.
+3. **Project Settings ➔ API**에서 아래 3개 값을 확인합니다.
+   - `Project URL` (`SUPABASE_URL`)
+   - `anon public key` (`SUPABASE_ANON_KEY` — 브라우저 읽기 전용)
+   - `service_role secret key` (`SUPABASE_SERVICE_ROLE_KEY` — 크롤러 DB 적재 필수)
 
----
+### Step 3. GitHub Repository Secrets 등록 (크롤러 및 DB 연동)
+저장소의 **Settings ➔ Secrets and variables ➔ Actions ➔ New repository secret**에서 등록합니다:
+- `SUPABASE_URL`: (Supabase Project URL)
+- `SUPABASE_SERVICE_ROLE_KEY`: (Supabase `service_role` 키 — [crawler-cron.yml](.github/workflows/crawler-cron.yml)의 DB Upsert에 **필수**)
+- `SUPABASE_ANON_KEY`: (Supabase `anon public` 키 — [deploy-pages.yml](.github/workflows/deploy-pages.yml) 빌드 시 프론트엔드 읽기 키로 주입됨. 선택적으로 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` 이름으로도 분리 가능)
 
-## 🛠️ 5. 완전 무인 환경 세팅 가이드 (Zero-CLI)
-
-복잡한 개발 도구 설치 없이, 웹 브라우저에서 3가지만 연동하면 서비스가 영구 자동 가동됩니다.
-
-### Step 1. 데이터베이스 생성 (Supabase)
-1. [Supabase](https://supabase.com/) 대시보드에서 New Project를 생성합니다.
-2. 좌측 메뉴 **SQL Editor**로 이동하여 본 저장소의 [`supabase_schema.sql`](./supabase_schema.sql) 파일 내용을 붙여넣고 **Run**을 누릅니다. (테이블 및 보안 세팅 1초 완성)
-3. **Project Settings ➔ API**에서 `Project URL`과 `anon public key`를 복사해 둡니다.
-
-### Step 2. 크롤러 연동 (GitHub Actions)
-1. 본 GitHub 저장소의 **Settings ➔ Secrets and variables ➔ Actions**로 이동합니다.
-2. **New repository secret**을 눌러 아래 2개를 등록합니다:
-   - `SUPABASE_URL`: (복사한 Supabase URL)
-   - `SUPABASE_ANON_KEY`: (복사한 anon public key)
-   - *➔ 매일 한국 시각 자정에 GitHub Actions가 무인으로 돌아가며 DB를 갱신합니다.*
-
-### Step 3. 프론트엔드 연동 (Cloudflare Pages)
-1. [Cloudflare](https://dash.cloudflare.com/) 대시보드 ➔ Workers & Pages ➔ CareerRadarUniversal 프로젝트로 들어갑니다.
-2. **Settings ➔ Builds ➔ Variables and secrets**에 아래 2개를 등록합니다:
-   - `NEXT_PUBLIC_SUPABASE_URL`: (Supabase URL)
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: (anon public key)
-3. 저장 후 **Deployments ➔ Retry build**를 누르면 끝납니다.
+> **자동 수집 스케줄**: [crawler-cron.yml](.github/workflows/crawler-cron.yml)은 **매일 한국 시각 자정 (`00:00 KST` / `15:00 UTC`, `cron: '0 15 * * *'`)** 에 실행되어 수집 결과를 Supabase에 적재하고 `public/data/jobs.json` 캐시를 자동 커밋·재배포합니다.  
+> Supabase Secrets를 등록하지 않아도 크롤러가 `public/data/jobs.json` 파일을 자동 갱신하므로 서비스는 문제없이 작동합니다.
 
 ---
 
-## 💻 6. 기술 스택 (Tech Stack)
+## 5. 기술 스택 (Tech Stack)
 
 | 계층 | 기술 스택 | 설명 |
 |---|---|---|
-| **Frontend Framework** | **Next.js 14 (App Router)** | TypeScript 기반의 모던 웹 아키텍처, `output: 'export'` SSG 모드 |
-| **State Management** | **Zustand** | 단일 전역 스토어(`useAppStore`) 기반의 초경량/고성능 상태 관리 및 UI 컴포넌트 모듈화 |
-| **Styling & Design** | **Tailwind CSS 3.4** | Vercel / Linear 감성의 모던 Slate 다크 테마 |
-| **Edge Hosting** | **Cloudflare Pages / Workers** | 글로벌 엣지 무비용 초고속 정적 배포 (`wrangler.toml` assets 규격) |
-| **Backend & BaaS** | **Supabase (PostgreSQL)** | REST API 통신, RLS 보안 정책, 브라우저 4시간 TTL 로컬 캐싱 |
-| **Automated Crawler** | **GitHub Actions Cron + Cheerio** | 매일 자정 18대 채널 무인 스크래핑 및 Supabase Upsert |
+| **Frontend Framework** | **Next.js 14 (App Router)** | TypeScript 기반, `output: 'export'` 정적 내보내기 및 `NEXT_PUBLIC_BASE_PATH` 서브경로 지원 |
+| **State Management** | **Zustand** | 단일 전역 스토어(`useAppStore`) 및 독립 모달/드로어 컴포넌트 모듈화 |
+| **Styling & Typography** | **Tailwind CSS 3.4** | `simple-modern-mono` 다크 모노크롬, Google Fonts(`Inter`, `JetBrains Mono`) + jsDelivr(`Pretendard v1.3.9` 다이나믹 서브셋) |
+| **Hosting & CI/CD** | **GitHub Pages + Actions** | `deploy-pages.yml` 단일 자동 빌드·게시 파이프라인 |
+| **Database & Cache** | **Supabase (PostgreSQL) + JSON Fallback** | RLS 기반 `SELECT` 조회 + 4시간 `localStorage` 캐시 + `public/data/jobs.json` 폴백 |
+| **Automated Crawler** | **GitHub Actions Cron + Cheerio** | 매일 자정(`00:00 KST`) ALIO·삼일PwC·딜로이트 안진 무인 수집 및 `SERVICE_ROLE_KEY` Upsert |
 
 ---
 
-## 📄 Documentation Directory
+## 6. 문서 디렉토리 & 라이선스
 
-* **시스템 아키텍처 구현 계획서**: [`Career_Radar_Universal_Prototype_Implementation_Plan.md`](./Career_Radar_Universal_Prototype_Implementation_Plan.md)
-* **제품 전략 및 정체성 분석**: [`Career_Radar_Universal_Identity_and_Strategy.md`](./Career_Radar_Universal_Identity_and_Strategy.md)
-* **상세 기획서 v2.0**: [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md)
-* **데이터베이스 스키마 DDL**: [`supabase_schema.sql`](./supabase_schema.sql)
+- **데이터베이스 스키마 DDL**: [`supabase_schema.sql`](./supabase_schema.sql)
+- **시스템 기획 및 리뷰 문서**: [`Career_Radar_Universal_Prototype_Implementation_Plan.md`](./Career_Radar_Universal_Prototype_Implementation_Plan.md), [`Career_Radar_Universal_Master_Plan_v2.0.md`](./Career_Radar_Universal_Master_Plan_v2.0.md), [`Career_Radar_Universal_Dual_Review_Report.md`](./Career_Radar_Universal_Dual_Review_Report.md)
 
----
-
-## ⚖️ License
-Copyright © 2026 [489156](https://github.com/489156). All rights reserved.  
-본 프로젝트의 비즈니스 로직, 온톨로지 구조 및 소프트웨어 설계 자산은 무단 복제 및 전재를 금합니다.
+Copyright © 2026 [489156](https://github.com/489156). All rights reserved.

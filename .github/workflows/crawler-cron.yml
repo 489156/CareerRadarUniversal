@@ -2,8 +2,8 @@ name: Daily Career Radar Crawler
 
 on:
   schedule:
-    # Runs at 00:00 UTC every day (09:00 KST)
-    - cron: '0 0 * * *'
+    # Runs at 15:00 UTC every day (00:00 KST, 한국 시각 매일 자정)
+    - cron: '0 15 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:

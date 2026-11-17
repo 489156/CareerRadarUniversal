@@ -21,8 +21,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
           rel="stylesheet"
+          crossOrigin="anonymous"
         />
       </head>
       <body className="min-h-screen bg-[#0A0A0B] text-[#FAFAFA] antialiased selection:bg-zinc-200 selection:text-zinc-950">
