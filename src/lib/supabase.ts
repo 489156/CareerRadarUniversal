@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 import { JobPosting } from './types';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const rawSupabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
+const supabaseUrl = rawSupabaseUrl.replace(/\/+$/, '').replace(/\/rest\/v1$/i, '');
+const supabaseAnonKey = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '').trim();
 
 const NON_CAREER_FILTER = /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|위촉|초빙|의료요원|진료의사|진료교수|간호|수련의|전공의|약무직|치과|위생사|보건직|수련생|무기계약|조무사|영양사|사회복지사/;
 
@@ -55,7 +56,7 @@ export async function fetchJobsWithCache(fallbackData: JobPosting[] = []): Promi
       .order('publishedAt', { ascending: false });
 
     if (error) {
-      console.error("Supabase fetch error:", error);
+      console.warn("Supabase fetch skipped (using JSON fallback):", error.message || error);
       return baseData;
     }
 

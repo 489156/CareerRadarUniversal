@@ -722,9 +722,9 @@ function generateDiverseVerifiedSeedJobs() {
 }
 
 async function syncToSupabase(jobs) {
-  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseUrl = (process.env.SUPABASE_URL || '').trim().replace(/\/+$/, '').replace(/\/rest\/v1$/i, '');
   // SUPABASE_SERVICE_ROLE_KEY를 우선 사용하여 RLS를 안전하게 통과하고, 미설정 시 SUPABASE_ANON_KEY로 폴백
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+  const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 
   if (!supabaseUrl || !supabaseKey) {
     console.log("No Supabase credentials found. Skipping DB sync. (Using local JSON only)");

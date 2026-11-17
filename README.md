@@ -93,7 +93,7 @@ GitHub 웹 대시보드에서 아래 순서만 설정하면 크롤러와 웹 호
 
 ### Step 3. GitHub Repository Secrets 등록 (크롤러 및 DB 연동)
 저장소의 **Settings ➔ Secrets and variables ➔ Actions ➔ New repository secret**에서 등록합니다:
-- `SUPABASE_URL`: (Supabase Project URL)
+- `SUPABASE_URL`: Supabase 루트 Project URL (예: `https://<project-ref>.supabase.co` — 뒤에 `/rest/v1` 경로를 붙이지 마세요)
 - `SUPABASE_SERVICE_ROLE_KEY`: (Supabase `service_role` 키 — [crawler-cron.yml](.github/workflows/crawler-cron.yml)의 DB Upsert에 **필수**)
 - `SUPABASE_ANON_KEY`: (Supabase `anon public` 키 — [deploy-pages.yml](.github/workflows/deploy-pages.yml) 빌드 시 프론트엔드 읽기 키로 주입됨. 선택적으로 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` 이름으로도 분리 가능)
 
