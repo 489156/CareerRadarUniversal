@@ -2,17 +2,24 @@ import { LaborRiskDiagnosis, LaborRiskWarning } from "./types";
 
 export function diagnoseJobRisks(text: string): LaborRiskDiagnosis {
   const warnings: LaborRiskWarning[] = [];
-  const normalizedText = text.replace(/\s+/g, " ");
+  const normalizedText = (text || "").replace(/\s+/g, " ");
+
+  // "비포괄임금", "포괄임금제 폐지/미적용/없음" 같은 정상 조건 문구를 먼저 제거한 뒤 고정OT 탐지
+  const otCheckText = normalizedText
+    .replace(/비\s*포괄\s*(?:임금(?:제)?|OT)?\S*/gi, " ")
+    .replace(/(?:포괄\s*임금(?:제)?|고정\s*(?:연장|OT))\S*\s*(?:폐지|미적용|없음|아니[며고]|제외|별도\s*지급)/gi, " ");
 
   // 1. 포괄임금제 / 고정OT 감지
-  const otMatch = normalizedText.match(/(포괄임금|고정연장|고정\s*OT|시간외수당\s*(\d+)시간|연장근로수당\s*포함)/i);
+  const otMatch = otCheckText.match(/(포괄임금|고정연장|고정\s*OT|시간외수당\s*\d+\s*시간|연장근로수당\s*포함)/i);
   let isFixedOT = false;
   let fixedOTHours = 0;
 
   if (otMatch) {
     isFixedOT = true;
-    const hoursMatch = normalizedText.match(/(\d+)\s*시간\s*(포괄|포함|인정|산입)/);
-    fixedOTHours = hoursMatch ? parseInt(hoursMatch[1], 10) : 32; // 기본 업계 평균 32시간
+    const hoursMatch =
+      otCheckText.match(/(\d+)\s*(?:시간|h)\s*(?:포괄|포함|인정|산입|고정)/i) ||
+      otCheckText.match(/(?:포괄|고정\s*OT|고정연장|시간외수당)\D{0,10}(\d+)\s*(?:시간|h)/i);
+    fixedOTHours = hoursMatch ? parseInt(hoursMatch[1], 10) : 32; // 시간 미명시 시 업계 평균 32시간 가정
     warnings.push({
       type: "danger",
       title: `🚨 포괄임금제 (월 고정 OT 약 ${fixedOTHours}시간 포함) 감지`,
@@ -30,8 +37,9 @@ export function diagnoseJobRisks(text: string): LaborRiskDiagnosis {
     });
   }
 
-  // 3. 수습기간 급여 삭감 감지
-  const probMatch = normalizedText.match(/수습.*(70%|80%|90%|차등지급|감액)/i);
+  // 3. 수습기간 급여 삭감 감지 ("감액 없음" 등은 제외)
+  const probCheckText = normalizedText.replace(/수습[^.!?\n]{0,20}(?:감액\s*없|차등\s*없|100%\s*지급)/gi, " ");
+  const probMatch = probCheckText.match(/수습.*(70%|80%|90%|차등지급|감액)/i);
   let probationReduction = false;
   if (probMatch) {
     probationReduction = true;
@@ -42,7 +50,16 @@ export function diagnoseJobRisks(text: string): LaborRiskDiagnosis {
     });
   }
 
-  // 4. 주말/야근 압박 문구
+  // 4. 위약 예정 금지 위반 소지 (근로기준법 제20조)
+  if (/위약금|의무\s*재직|교육비\s*반환|손해\s*배상/i.test(normalizedText)) {
+    warnings.push({
+      type: "warning",
+      title: "⚠️ 위약 예정·의무재직 조항 의심 (근로기준법 제20조)",
+      desc: "중도 퇴사 시 일정 금액 배상이나 교육비 일괄 반환을 강제하는 약정은 근로기준법 제20조(위약 예정 금지) 위반 소지가 높습니다.",
+    });
+  }
+
+  // 5. 주말/야근 압박 문구
   if (/주말\s*특근|야간\s*근무|성과\s*압박|야근\s*발생|탄력근무.*(불가|제외)/i.test(normalizedText)) {
     warnings.push({
       type: "warning",

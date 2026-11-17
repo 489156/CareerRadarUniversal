@@ -6,14 +6,16 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const NON_CAREER_KEYWORDS = /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|영덕2현대화|위촉|초빙|의료요원|진료의사|진료교수|간호|수련의|전공의|약무직|약사|의료기술|방사선사|임상병리|물리치료/;
+const NON_CAREER_KEYWORDS = /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|영덕2현대화|위촉|초빙|의료요원|진료의사|진료교수|별정직\s*의사|의사\(|간호|수련의|전공의|약무직|약사|의료기술|방사선사|임상병리|물리치료|치과|위생사|보건직|수련생|무기계약|조무사|영양사|사회복지사/;
 
 function detectOccupation(text) {
+  // '인재개발/사업개발' 등 복합어의 '개발'이 TECH로 새지 않도록 TECH 검사에만 마스킹 적용
   const s = (text || '').toLowerCase();
-  if (/재무|회계|자금|예산|세무|\btax\b|감사|finance|deals|\bm&a\b|\bcpa\b|금융|여신|자산|부동산|real assets|가치평가|value-up|xbrl|계리|\bais\b|advisory|자문|내부회계/.test(s)) {
+  const techSrc = s.replace(/(사업|인재|조직|신사업|상품|경영|제품)\s*개발/g, '$1@@');
+  if (/재무|회계|자금|예산|세무|\btax\b|감사|finance|deals|\bm&a\b|\bcpa\b|금융|여신|자산|부동산|real assets|가치평가|value-up|xbrl|계리|\bais\b|advisory|자문|내부회계|기금운용|투자운용|리스크관리/.test(s)) {
     return "FINANCE";
   }
-  if (/개발|전산|통신|\bict\b|\bsw\b|\boa\b|소프트웨어|데이터|\bdata\b|\bai\b|\bcloud\b|클라우드|보안|security|cyber|엔지니어|engineer|프론트|백엔드|\bsap\b|모듈|보훈전형\(it/.test(s)) {
+  if (/개발|전산|통신|\bict\b|\bsw\b|\boa\b|소프트웨어|데이터|\bdata\b|\bai\b|\bcloud\b|클라우드|보안|security|cyber|엔지니어|engineer|프론트|백엔드|\bsap\b|모듈|보훈전형\(it/.test(techSrc)) {
     return "TECH";
   }
   if (/마케팅|홍보|브랜딩|그로스|퍼포먼스|콘텐츠|미디어|\bpr\b|\bsns\b|캠페인|광고|소통/.test(s)) {
@@ -338,7 +340,7 @@ function generateDiverseVerifiedSeedJobs() {
       gaps: ["블라인드 직무수행능력평가 및 노무·법무 지식 검증"],
       rawText: "[ALIO 공공기관 정규직 채용]\n기관명: 신용보증기금\n공고명: 인사기획·노사협력 및 경영지원 정규직 채용\n고용형태: 정규직\n근무지: 서울/수도권",
       sourceName: "기획재정부 ALIO 공시망",
-      jobUrl: "https://kodit.recruiter.co.kr/",
+      jobUrl: "https://www.kodit.or.kr/",
       sourceCategory: "PUBLIC",
       isCompanyExclusive: true,
       sourceSystem: "ALIO 오픈 공시망",
@@ -760,12 +762,29 @@ async function main() {
   const alioJobs = await crawlALIO();
   const pwcJobs = await crawlPwC();
   const deloitteJobs = await crawlDeloitte();
-  const seedJobs = generateDiverseVerifiedSeedJobs();
+
+  // 큐레이션 샘플은 실시간 수집 공고가 아니므로 고정 날짜 + 명시 태그를 붙여 신선도 오인을 막는다.
+  const SEED_DATE = '2026-10-07';
+  const seedJobs = generateDiverseVerifiedSeedJobs().map((j) => ({
+    ...j,
+    publishedAt: SEED_DATE,
+    tags: Array.from(new Set([...j.tags, '큐레이션 샘플(실시간 공고 아님)'])),
+  }));
+
+  // 수집처 3곳이 모두 실패하면(점검·차단 등) 기존에 저장된 실수집 공고를 유지한다.
+  let carried = [];
+  if (alioJobs.length + pwcJobs.length + deloitteJobs.length === 0 && fs.existsSync(cachePath)) {
+    try {
+      const prev = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+      carried = prev.filter((j) => /^(alio|pwc|deloitte)-\d|^pwc-r/.test(j.id));
+      console.warn(`All live crawlers returned 0. Carrying over ${carried.length} previous live jobs.`);
+    } catch {}
+  }
 
   // Deduplicate by id
   const seen = new Set();
   const allJobs = [];
-  for (const job of [...alioJobs, ...pwcJobs, ...deloitteJobs, ...seedJobs]) {
+  for (const job of [...alioJobs, ...pwcJobs, ...deloitteJobs, ...carried, ...seedJobs]) {
     if (!seen.has(job.id)) {
       seen.add(job.id);
       allJobs.push(job);

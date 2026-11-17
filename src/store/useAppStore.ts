@@ -1,33 +1,63 @@
 import { create } from 'zustand';
 import { CareerPassport, JobPosting, DynamicMatchScore } from '@/lib/types';
 import { diagnoseJobRisks } from '@/lib/scanner';
+import { MOCK_JOB_DATABASE } from '@/lib/matcher';
+
+export type TabId = "passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger";
+export type RadarFilterId =
+  | "all" | "entry" | "tech" | "finance" | "marketing" | "hr" | "planning"
+  | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech"
+  | "tierA" | "highMatch" | "commuteFit" | "nonOT";
+
+export interface OfferScenario {
+  label: string;
+  baseManwon: number;
+  allowanceManwon: number;
+  commuteMinutesOneway: number;
+  weeklyRemoteDays: number;
+  weeklyWorkHours: number;
+  hasFixedOT: boolean;
+  fixedOTHours: number;
+}
+
+let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
 interface AppState {
-  // Global Data
   jobsDatabase: JobPosting[];
   setJobsDatabase: (jobs: JobPosting[]) => void;
 
-  // UI State
-  activeTab: "passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger";
-  setActiveTab: (tab: "passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger") => void;
+  activeTab: TabId;
+  setActiveTab: (tab: TabId) => void;
   toastMessage: string | null;
   setToastMessage: (msg: string | null) => void;
+  showToast: (msg: string) => void;
 
-  // Passport State
   passport: CareerPassport;
   setPassport: (passport: CareerPassport | ((prev: CareerPassport) => CareerPassport)) => void;
 
-  // Calculator State
-  calcInput: { cashManwon: number; commuteMinutesOneway: number; monthlyTransitCostManwon: number; weeklyRemoteDays: number; weeklyWorkHours: number; };
-  setCalcInput: (input: any) => void;
+  calcInput: {
+    cashManwon: number;
+    commuteMinutesOneway: number;
+    monthlyTransitCostManwon: number;
+    weeklyRemoteDays: number;
+    weeklyWorkHours: number;
+  };
+  setCalcInput: (
+    input:
+      | AppState['calcInput']
+      | ((prev: AppState['calcInput']) => AppState['calcInput'])
+  ) => void;
 
-  // Scanner State
+  offerA: OfferScenario;
+  offerB: OfferScenario;
+  setOfferA: (offer: Partial<OfferScenario>) => void;
+  setOfferB: (offer: Partial<OfferScenario>) => void;
+
   scannerText: string;
   setScannerText: (text: string) => void;
   scanResult: ReturnType<typeof diagnoseJobRisks> | null;
   setScanResult: (result: ReturnType<typeof diagnoseJobRisks> | null) => void;
 
-  // Modals
   isResumeModalOpen: boolean;
   setIsResumeModalOpen: (isOpen: boolean) => void;
   resumeText: string;
@@ -46,7 +76,6 @@ interface AppState {
   crawlerCategoryFilter: string;
   setCrawlerCategoryFilter: (category: string) => void;
 
-  // Job Detail Modal State
   selectedJob: JobPosting | null;
   setSelectedJob: (job: JobPosting | null) => void;
   selectedJobMatch: DynamicMatchScore | null;
@@ -54,21 +83,20 @@ interface AppState {
   selectedJobHf: { isExcluded: boolean; exclusionReasons: string[] } | null;
   setSelectedJobHf: (hf: { isExcluded: boolean; exclusionReasons: string[] } | null) => void;
 
-  // Filter & Search States
   customKeywordInput: string;
   setCustomKeywordInput: (input: string) => void;
   showExcludedJobs: boolean;
   setShowExcludedJobs: (show: boolean) => void;
   radarSearch: string;
   setRadarSearch: (search: string) => void;
-  radarFilter: "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT";
-  setRadarFilter: (filter: "all" | "entry" | "tech" | "finance" | "marketing" | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech" | "tierA" | "highMatch" | "commuteFit" | "nonOT") => void;
+  radarFilter: RadarFilterId;
+  setRadarFilter: (filter: RadarFilterId) => void;
   ledgerSearch: string;
   setLedgerSearch: (search: string) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  jobsDatabase: [],
+  jobsDatabase: MOCK_JOB_DATABASE,
   setJobsDatabase: (jobs) => set({ jobsDatabase: jobs }),
 
   activeTab: "passport",
@@ -76,19 +104,27 @@ export const useAppStore = create<AppState>((set) => ({
 
   toastMessage: null,
   setToastMessage: (msg) => set({ toastMessage: msg }),
+  showToast: (msg) => {
+    if (toastTimer) clearTimeout(toastTimer);
+    set({ toastMessage: msg });
+    toastTimer = setTimeout(() => {
+      set({ toastMessage: null });
+    }, 3500);
+  },
 
   passport: {
+    track: "EXPERIENCED",
     occupation: "HR",
-    canonicalRole: "인사기획",
+    canonicalRole: "인사기획 (HR Planning)",
     totalYears: 7,
     companyType: "중견기업",
     baseSalary: 5400,
     fixedAllowance: 400,
     variableBonus: 500,
-    hasFixedOT: false,
-    homeLocation: "경기도 군포시",
+    hasFixedOT: true,
+    homeLocation: "경기도 군포시 (산본동)",
     commuteToleranceMinutes: 60,
-    skills: ["조직문화", "핵심인재 관리", "평가보상 기획", "HR Analytics", "노무 리스크 대응"],
+    skills: ["인사기획", "평가보상체계설계", "노무관리", "임금피크제", "직무분석", "AX(AI Transformation)"],
     hardFilters: {
       onlyPermanent: true,
       onlyCapitalArea: true,
@@ -96,18 +132,51 @@ export const useAppStore = create<AppState>((set) => ({
       noHeavyFixedOT: false,
       noBelowCurrentSalary: false,
       noRelocationOrg: true,
-      customKeywords: ["교대근무", "파견직"]
+      customKeywords: ["교대근무", "파견직", "일용직"],
     },
     hardPreferences: { employmentType: "정규직", region: "수도권" },
-    softPreferences: { wfhPreferred: false, minSalary: 5000 },
-    updatedAt: new Date().toISOString()
+    softPreferences: { wfhPreferred: true, minSalary: 5500 },
+    updatedAt: "2026-10-07T00:00:00.000Z",
   },
-  setPassport: (updater) => set((state) => ({
-    passport: typeof updater === 'function' ? updater(state.passport) : updater
-  })),
+  setPassport: (updater) =>
+    set((state) => ({
+      passport: typeof updater === "function" ? updater(state.passport) : updater,
+    })),
 
-  calcInput: { cashManwon: 5800, commuteMinutesOneway: 50, monthlyTransitCostManwon: 15, weeklyRemoteDays: 0, weeklyWorkHours: 40 },
-  setCalcInput: (input) => set((state) => ({ calcInput: typeof input === 'function' ? input(state.calcInput) : input })),
+  calcInput: {
+    cashManwon: 5800,
+    commuteMinutesOneway: 50,
+    monthlyTransitCostManwon: 12,
+    weeklyRemoteDays: 1,
+    weeklyWorkHours: 48,
+  },
+  setCalcInput: (input) =>
+    set((state) => ({
+      calcInput: typeof input === "function" ? input(state.calcInput) : input,
+    })),
+
+  offerA: {
+    label: "Offer A (대기업)",
+    baseManwon: 6200,
+    allowanceManwon: 400,
+    commuteMinutesOneway: 75,
+    weeklyRemoteDays: 0,
+    weeklyWorkHours: 52,
+    hasFixedOT: true,
+    fixedOTHours: 32,
+  },
+  offerB: {
+    label: "Offer B (핀테크/테크)",
+    baseManwon: 5800,
+    allowanceManwon: 400,
+    commuteMinutesOneway: 40,
+    weeklyRemoteDays: 2,
+    weeklyWorkHours: 42,
+    hasFixedOT: false,
+    fixedOTHours: 0,
+  },
+  setOfferA: (offer) => set((state) => ({ offerA: { ...state.offerA, ...offer } })),
+  setOfferB: (offer) => set((state) => ({ offerB: { ...state.offerB, ...offer } })),
 
   scannerText: "",
   setScannerText: (text) => set({ scannerText: text }),
@@ -124,7 +193,7 @@ export const useAppStore = create<AppState>((set) => ({
 
   isSkillGapModalOpen: false,
   setIsSkillGapModalOpen: (isOpen) => set({ isSkillGapModalOpen: isOpen }),
-  activeSkillTrackId: "track-analytics",
+  activeSkillTrackId: "",
   setActiveSkillTrackId: (id) => set({ activeSkillTrackId: id }),
 
   isCrawlerModalOpen: false,

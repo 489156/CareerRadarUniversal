@@ -3,132 +3,327 @@ import rawJobsData from "../../public/data/jobs.json";
 
 export const MOCK_JOB_DATABASE: JobPosting[] = rawJobsData as JobPosting[];
 
-// 3 Tracks of Skill Gap Bridging totaling 28 Expanded Opportunities
-
-export function calculateSkillGapTracks(passport: import('./types').CareerPassport): import('./types').SkillGapTrack[] {
-  const currentTotal = passport.baseSalary + passport.fixedAllowance;
-  let baseline = currentTotal;
+// 3 Tracks of Skill Gap Bridging per occupation (real URLs, dynamic baseline salary)
+export function calculateSkillGapTracks(passport: CareerPassport): SkillGapTrack[] {
+  const currentTotal = (passport.baseSalary || 0) + (passport.fixedAllowance || 0);
   const isEntry = passport.track === 'ENTRY' || passport.totalYears === 0;
+  const est = calculateEstimatedMarketValue(
+    `${passport.canonicalRole || ''} ${passport.occupation || ''}`,
+    passport.totalYears,
+    passport.track,
+    mapCompanyTypeToTier(passport.companyType)
+  );
+  const baseline = !isEntry && currentTotal > 0 ? currentTotal : (est.p50 || 4500);
 
-  if (baseline === 0 || isEntry) {
-    const est = calculateEstimatedMarketValue(passport.canonicalRole || '일반', passport.totalYears, passport.track);
-    baseline = est.p50 || 4000;
+  const mkRange = (lowMult: number, highMult: number, label = '+15~25% 프리미엄') =>
+    `${Math.round(baseline * lowMult).toLocaleString()} ~ ${Math.round(baseline * highMult).toLocaleString()}만 원 (${label})`;
+
+  const occ = passport.occupation || (est.domainKey === 'GENERAL' ? 'PLANNING' : est.domainKey);
+
+  if (occ === 'TECH') {
+    return [
+      {
+        id: 'track-ai-llm',
+        name: 'AI/LLM Engineering & RAG 아키텍처',
+        skills: ['LLM API / Function Calling 파이프라인', 'RAG 벡터 검색(pgvector) 최적화', '프롬프트 평가·Eval 자동화', '비동기 스트리밍 서버 설계'],
+        actionItems: [
+          'Next.js/Python 기반 스트리밍 AI 에이전트 서비스 구축 및 지연시간 계측',
+          'RAG 검색 정확도/Hallucination 평가 데이터셋 50건 구축',
+          '토스/네이버/삼일PwC AX Node 등 AI-Native 포지션 타깃 지원'
+        ],
+        expandedCount: 12,
+        expectedSalaryRange: mkRange(1.18, 1.32, '+18~32% AI 프리미엄'),
+        jobs: [
+          { company: '네이버클라우드', title: 'Cloud & AI Platform Engineer', location: '경기 성남시 분당구', role: 'AI/Cloud Backend', salary: mkRange(1.15, 1.28, '스톡·인센 별도'), url: 'https://recruit.navercorp.com/' },
+          { company: '토스 (비바리퍼블리카)', title: 'ML/LLM Product Engineer', location: '서울 강남구 역삼', role: 'Product Tech', salary: mkRange(1.20, 1.35, '상위 Tier'), url: 'https://toss.im/career/jobs' },
+          { company: '삼일PwC AX Node', title: 'AI-Native Application Backend Engineer', location: '서울 용산구', role: 'AI Backend', salary: mkRange(1.15, 1.25, 'Big4 Tech'), url: 'https://www.pwc.com/kr/ko/career/experienced.html' },
+        ]
+      },
+      {
+        id: 'track-cloud-scale',
+        name: '대용량 분산트래픽 & Kubernetes MSA',
+        skills: ['Kafka/Redis 이벤트 기반 비동기 아키텍처', 'Kubernetes/Terraform IaC 자동화', '분산 트랜잭션(Saga/Outbox) 장애 복구', 'DB 샤딩 및 쿼리 튜닝'],
+        actionItems: [
+          'k6/JMeter 부하 테스트 기반 TPS 병목 개선 리포트 정리',
+          '주문/결제 정합성(Idempotency Key) 장애 대응 케이스 포트폴리오화'
+        ],
+        expandedCount: 10,
+        expectedSalaryRange: mkRange(1.15, 1.25),
+        jobs: [
+          { company: '우아한형제들 (배달의민족)', title: '커머스 코어 플랫폼 서버 개발자', location: '서울 송파구', role: 'Distributed Backend', salary: mkRange(1.15, 1.25, '주32/36h'), url: 'https://career.woowahan.com/' },
+          { company: '당근 (당근마켓)', title: 'Core Infrastructure & Backend Engineer', location: '서울 서초구', role: 'Platform Infra', salary: mkRange(1.18, 1.30, '유니콘'), url: 'https://careers.daangn.com/jobs/' },
+        ]
+      },
+      {
+        id: 'track-security',
+        name: 'Cloud/App Security & 핀테크 컴플라이언스',
+        skills: ['클라우드 취약점 진단(AWS Security/IAM)', 'OAuth2/OIDC 제로트러스트 인증 설계', 'ISMS-P 및 금융보안원 전자금융감독규정'],
+        actionItems: [
+          '웹/클라우드 모의해킹 및 OWASP Top 10 자동 점검 CI 구축',
+          '금융권/Big4 Trust 본부 보안 아키텍트 포지션 공략'
+        ],
+        expandedCount: 6,
+        expectedSalaryRange: mkRange(1.14, 1.24),
+        jobs: [
+          { company: '삼일PwC Trust팀', title: 'Cybersecurity (AI Security) Consultant', location: '서울 용산구', role: 'Security Advisory', salary: mkRange(1.15, 1.25, '컨설팅'), url: 'https://www.pwc.com/kr/ko/career/experienced.html' },
+          { company: '신한은행', title: '디지털·정보보호 ICT 전문인력', location: '서울 중구', role: 'FinTech Security', salary: mkRange(1.12, 1.22, '금융권'), url: 'https://shinhan.recruiter.co.kr/career/home' },
+        ]
+      }
+    ];
   }
 
-  // 15% ~ 25% premium
-  const minPremium = Math.round(baseline * 1.15);
-  const maxPremium = Math.round(baseline * 1.25);
-  const expectedSalaryRange = `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원 (+15~25% 프리미엄)`;
+  if (occ === 'FINANCE') {
+    return [
+      {
+        id: 'track-deals-valuation',
+        name: 'M&A Deal Advisory & 가치평가 모델링',
+        skills: ['3-Statement/DCF 재무모델링 고도화', 'FDD(재무실사) 및 PMI(인수후통합)', 'PEF/VC 바이아웃 Value-up 자문'],
+        actionItems: [
+          '상장사 1곳 선정 후 DCF/Multiple Valuation 보고서 작성',
+          'Big4 Deals 본부 및 PE 자문 경력 포지션 지원'
+        ],
+        expandedCount: 12,
+        expectedSalaryRange: mkRange(1.18, 1.32, '+18~32% Deals 프리미엄'),
+        jobs: [
+          { company: '삼일PwC Deals', title: 'Global Sector PE Advisory', location: '서울 용산구', role: 'M&A / PE Advisory', salary: mkRange(1.18, 1.30, '인센 별도'), url: 'https://www.pwc.com/kr/ko/career/experienced.html' },
+          { company: '삼정KPMG', title: 'Deal Advisory M&A Valuation', location: '서울 강남구', role: 'Corporate Finance', salary: mkRange(1.15, 1.28, 'Big4'), url: 'https://career.kr.kpmg.com/' },
+        ]
+      },
+      {
+        id: 'track-xbrl-digital',
+        name: 'IFRS/XBRL 공시 자동화 & 회계 AX',
+        skills: ['XBRL 전자공시 태깅 표준(IFRS Taxonomy)', 'Python/SQL 기반 대용량 회계원장 감사(CAAT)', '연결결산 시스템(SAP BPC 등) 구축'],
+        actionItems: [
+          '금융감독원 XBRL 주석 공시 구조 분석 및 자동화 스키마 스터디',
+          'Big4 AX Node 및 대기업 연결결산 시스템 PM 트랙 공략'
+        ],
+        expandedCount: 9,
+        expectedSalaryRange: mkRange(1.15, 1.25),
+        jobs: [
+          { company: '삼일PwC AX Node', title: 'XBRL 센터 재무·회계 전문가', location: '서울 용산구', role: 'Digital Audit/XBRL', salary: mkRange(1.15, 1.25, 'Big4'), url: 'https://www.pwc.com/kr/ko/career/experienced.html' },
+          { company: '딜로이트 안진', title: '세무자문 M&A Tax & 계리 자문', location: '서울 영등포구 여의도', role: 'Tax / AIS', salary: mkRange(1.15, 1.25, 'Big4'), url: 'https://join.deloitte.co.kr/WiseRecruit2/User/RecruitList.aspx' },
+        ]
+      },
+      {
+        id: 'track-fpa-public',
+        name: '전략 FP&A 및 정책금융·자산운용',
+        skills: ['관리회계 기반 유닛 이코노믹스/예실관리', '자금조달(채권/PF) 및 리스크 헤징', 'SQL/BI 기반 경영실적 대시보드'],
+        actionItems: [
+          '사업부별 공헌이익·LTV/CAC 재무 분석 대시보드 설계',
+          '대기업 FP&A, 시중은행·국책금융 재무 포지션 병행 지원'
+        ],
+        expandedCount: 7,
+        expectedSalaryRange: mkRange(1.12, 1.22),
+        jobs: [
+          { company: '한국수출입은행', title: '정책금융·여신·재무관리 전문직', location: '서울 영등포구 여의도', role: 'Policy Finance', salary: mkRange(1.10, 1.20, '국책은행'), url: 'https://koreaexim.applyin.co.kr/' },
+          { company: 'LG CNS', title: '사업기획·재무 FP&A 분석가', location: '서울 강서구 마곡', role: 'Corporate FP&A', salary: mkRange(1.12, 1.22, '대기업'), url: 'https://careers.lg.com/' },
+        ]
+      }
+    ];
+  }
 
+  if (occ === 'MARKETING') {
+    return [
+      {
+        id: 'track-growth-sql',
+        name: 'SQL 코호트 그로스 & 실험 설계(A/B Test)',
+        skills: ['SQL 기반 리텐션/퍼널 코호트 직접 추출', 'GA4/Amplitude 이벤트 택소노미 설계', '통계적 유의성 기반 A/B 테스트 실험 운영'],
+        actionItems: [
+          '유저 퍼널 전환율 개선 가설-실험-회고 포트폴리오 2건 정량화(ROAS/CAC)',
+          '네카라쿠배당토 그로스 마케터 포지션 지원'
+        ],
+        expandedCount: 11,
+        expectedSalaryRange: mkRange(1.18, 1.30, '+18~30% 그로스 프리미엄'),
+        jobs: [
+          { company: '당근 (당근마켓)', title: 'Local Ads Growth Marketer', location: '서울 서초구', role: 'Growth Marketing', salary: mkRange(1.18, 1.30, '유니콘'), url: 'https://careers.daangn.com/jobs/' },
+          { company: '토스 (비바리퍼블리카)', title: 'Growth / Product Marketer', location: '서울 강남구', role: 'Product Growth', salary: mkRange(1.20, 1.35, 'Tier 1'), url: 'https://toss.im/career/jobs' },
+        ]
+      },
+      {
+        id: 'track-crm-automation',
+        name: 'CRM 라이프사이클 자동화 & AI 콘텐츠 파이프라인',
+        skills: ['Braze/CRM 세그먼트 개인화 푸시·인앱 메시지', '생성형 AI 기반 크리에이티브 소재 대량 테스트', '매체 믹스 최적화(MMP/MMM)'],
+        actionItems: [
+          'Braze/Amplitude 기반 이탈 방지 리텐션 시나리오 설계 실습',
+          '미디어·커머스 대기업 디지털 마케팅 전담 포지션 공략'
+        ],
+        expandedCount: 9,
+        expectedSalaryRange: mkRange(1.14, 1.22),
+        jobs: [
+          { company: 'CJ ENM', title: 'OTT/미디어 퍼포먼스·CRM 마케팅', location: '서울 마포구 상암', role: 'Performance/CRM', salary: mkRange(1.12, 1.22, '대기업'), url: 'https://recruit.cj.net/' },
+          { company: '우아한형제들', title: '커머스 CRM & 그로스 매니저', location: '서울 송파구', role: 'CRM Marketing', salary: mkRange(1.15, 1.25, '플랫폼'), url: 'https://career.woowahan.com/' },
+        ]
+      },
+      {
+        id: 'track-b2b-brand',
+        name: '글로벌/B2B SaaS 수요창출 & PMM',
+        skills: ['B2B 리드 스코어링 및 세일즈 퍼널 연계(MQL→SQL)', '영문 제품 포지셔닝(Product Marketing) 및 GTM 전략', 'SEO/콘텐츠 오가닉 유입 최적화'],
+        actionItems: [
+          'B2B GTM 전략서 및 영문 랜딩페이지 카피라이팅 포트폴리오 제작',
+          '글로벌 테크 한국지사 PMM 포지션 지원'
+        ],
+        expandedCount: 6,
+        expectedSalaryRange: mkRange(1.15, 1.25),
+        jobs: [
+          { company: 'Google Korea', title: 'Product / Growth Marketing Specialist', location: '서울 강남구', role: 'Global PMM', salary: mkRange(1.20, 1.35, '글로벌'), url: 'https://careers.google.com/locations/seoul/' },
+          { company: 'AWS Korea', title: 'B2B Field & Demand Marketing', location: '서울 강남구', role: 'B2B Marketing', salary: mkRange(1.18, 1.30, '글로벌'), url: 'https://www.amazon.jobs/content/locations/south-korea/seoul' },
+        ]
+      }
+    ];
+  }
+
+  if (occ === 'PLANNING') {
+    return [
+      {
+        id: 'track-ax-pm',
+        name: 'AI/DX 신사업 전략 & 엔터프라이즈 PM',
+        skills: ['생성형 AI 도입 ROI/TCO 사업성 타당성 검토', '프로덕트 백로그/PRD 설계 및 기술팀 협업 리딩', '엔터프라이즈 B2B GTM 및 파트너십 구조화'],
+        actionItems: [
+          'AI 기반 사내/고객 서비스 기획안 및 손익(BEP) 시뮬레이션 작성',
+          '대기업 DX 계열사(LG CNS, 삼성SDS) 신사업 PM 포지션 지원'
+        ],
+        expandedCount: 12,
+        expectedSalaryRange: mkRange(1.16, 1.28, '+16~28% AX 전략 프리미엄'),
+        jobs: [
+          { company: 'LG CNS', title: '클라우드/AI 신사업 전략기획 & PM', location: '서울 강서구 마곡', role: 'AI Strategy/PM', salary: mkRange(1.15, 1.28, '대기업'), url: 'https://careers.lg.com/' },
+          { company: '현대자동차', title: '모빌리티 중장기 사업전략 및 기획', location: '서울 서초구 양재', role: 'Corporate Strategy', salary: mkRange(1.14, 1.24, '완성차'), url: 'https://talent.hyundai.com/' },
+        ]
+      },
+      {
+        id: 'track-biz-consulting',
+        name: '경영컨설팅 & 연결경영/PMI 실행',
+        skills: ['MECE 이슈트리 기반 경영진 의사결정 보고서 작성', 'M&A PMI/사업부 구조조정 및 KPI 체계 재설계', 'ERP/연결시스템 프로세스 혁신(PI)'],
+        actionItems: [
+          '산업 밸류체인 분석 및 재무 임팩트 기반 전략 케이스 리포트 완성',
+          'Big4 전략·PI 컨설팅 조직 경력직 공고 타깃 지원'
+        ],
+        expandedCount: 10,
+        expectedSalaryRange: mkRange(1.15, 1.26),
+        jobs: [
+          { company: '삼일PwC', title: '경영·연결시스템 구축 PI 컨설턴트', location: '서울 용산구', role: 'Management Advisory', salary: mkRange(1.15, 1.25, 'Big4'), url: 'https://www.pwc.com/kr/ko/career/experienced.html' },
+          { company: '딜로이트 안진', title: '전략·운영 자문 컨설턴트', location: '서울 영등포구 여의도', role: 'Strategy Consulting', salary: mkRange(1.15, 1.25, 'Big4'), url: 'https://join.deloitte.co.kr/WiseRecruit2/User/RecruitList.aspx' },
+        ]
+      },
+      {
+        id: 'track-data-po',
+        name: '데이터 기반 Product Owner (PO) & 지표 설계',
+        skills: ['SQL 직접 쿼리를 통한 유저 행동 지표(North Star Metric) 검증', '실험 기반 우선순위 의사결정(RICE/ICE)', '수익 모델(Monetization) 가격 탄력성 설계'],
+        actionItems: [
+          'SQL + BI(Looker/Tableau) 연계 서비스 KPI 모니터링 체계 구축 사례 정리',
+          '유니콘 플랫폼 PO/PM 포지션 공략'
+        ],
+        expandedCount: 6,
+        expectedSalaryRange: mkRange(1.18, 1.30),
+        jobs: [
+          { company: '우아한형제들', title: '프로덕트 기획(PM/PO)', location: '서울 송파구', role: 'Product Owner', salary: mkRange(1.16, 1.28, '플랫폼'), url: 'https://career.woowahan.com/' },
+          { company: '토스 (비바리퍼블리카)', title: 'Product Owner (Financial Service)', location: '서울 강남구', role: 'Fintech PO', salary: mkRange(1.22, 1.35, '유니콘'), url: 'https://toss.im/career/jobs' },
+        ]
+      }
+    ];
+  }
+
+  // HR Tracks (Entry vs Experienced)
   if (isEntry) {
     return [
       {
         id: 'track-analytics',
-        name: 'People Analytics (Junior Data Analyst)',
-        skills: ['SQL (기초)', 'Excel/Google Sheets (고급)', 'HR 데이터 기초'],
+        name: 'People Analytics (주니어 데이터·보상 기획)',
+        skills: ['SQL (기초 쿼리 및 인사 데이터 집계)', 'Excel/Google Sheets 피벗·통계', '채용/이탈률 핵심 KPI 산출'],
         actionItems: [
-          'SQL 기초 (SELECT, JOIN, GROUP BY) 학습',
-          '데이터 기반의 HR 지표(입퇴사율, 휴가사용율) 대시보드 토이 프로젝트',
-          '데이터 분석가(주니어) 포지션 지원 전략 수립'
+          'SQL 기초(SELECT, JOIN, GROUP BY) 학습 및 가명 인사 데이터 실습',
+          '입퇴사율·채용 리드타임 대시보드 토이 프로젝트 제작',
+          '대기업/핀테크 주니어 People Ops 포지션 지원'
         ],
         expandedCount: 14,
-        expectedSalaryRange,
+        expectedSalaryRange: mkRange(1.15, 1.25),
         jobs: [
-          { company: '토스', title: 'People Data Analyst (신입)', location: '서울 강남구', role: 'HR Data Analyst', salary: `${Math.round(minPremium * 1.1).toLocaleString()}만 원~`, url: '#' },
-          { company: '무신사', title: 'HR Data Assistant', location: '서울 성동구', role: 'HR Data', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
-          { company: '당근마켓', title: 'People Ops Data (Junior)', location: '서울 서초구', role: 'People Ops Data', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
+          { company: '토스 (비바리퍼블리카)', title: 'People Data Analyst (주니어/신입)', location: '서울 강남구', role: 'HR Data Analyst', salary: mkRange(1.18, 1.28), url: 'https://toss.im/career/jobs' },
+          { company: 'SK하이닉스', title: 'HR / People Operations 신입', location: '경기 성남시 분당구', role: 'HR Ops', salary: mkRange(1.15, 1.24), url: 'https://www.skcareers.com/' },
+          { company: '당근 (당근마켓)', title: 'People Operations (Junior)', location: '서울 서초구', role: 'People Ops', salary: mkRange(1.15, 1.25), url: 'https://careers.daangn.com/jobs/' }
         ]
       },
       {
         id: 'track-global',
-        name: 'Global HR & Bilingual (Junior)',
-        skills: ['비즈니스 영어 (작문/회화)', '글로벌 커뮤니케이션', '이문화 이해'],
+        name: 'Global HR & Bilingual (외국계 주니어)',
+        skills: ['비즈니스 영어 (영문 이메일·면접 커뮤니케이션)', '글로벌 채용 공고/온보딩 운영', '다국적 임직원 인사 행정(HRIS)'],
         actionItems: [
-          '비즈니스 영어 이메일/문서 작성 능력 확보',
-          '외국계 기업 주니어 HR / 어드민 포지션 탐색',
-          '영어 면접 대비 및 영문 이력서(Resume) 구축'
+          '영문 레주메(Resume) 및 LinkedIn 프로필 영문화 완성',
+          '외국계 테크 한국 오피스 Recruiting/HR Coordinator 포지션 지원'
         ],
         expandedCount: 8,
-        expectedSalaryRange,
+        expectedSalaryRange: mkRange(1.15, 1.25),
         jobs: [
-          { company: '구글코리아', title: 'HR Coordinator (Contract/Entry)', location: '서울 강남구', role: 'Global HR', salary: `${maxPremium.toLocaleString()}만 원~`, url: '#' },
-          { company: '아마존웹서비시즈', title: 'Recruiting Coordinator', location: '서울 강남구', role: 'Global TA', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
-          { company: '나이키코리아', title: 'HR Assistant', location: '서울 강남구', role: 'Global HR', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
+          { company: 'Google Korea', title: 'HR / Staffing Coordinator', location: '서울 강남구', role: 'Global HR', salary: mkRange(1.18, 1.30), url: 'https://careers.google.com/locations/seoul/' },
+          { company: 'AWS Korea', title: 'Recruiting Coordinator', location: '서울 강남구', role: 'Global TA', salary: mkRange(1.15, 1.26), url: 'https://www.amazon.jobs/content/locations/south-korea/seoul' }
         ]
       },
       {
         id: 'track-ax',
-        name: 'HR Automation (Junior)',
-        skills: ['Zapier / Make 활용', '노션(Notion) 고급 활용', '업무 자동화 툴 이해'],
+        name: 'HR Automation & No-Code (인사 행정 자동화)',
+        skills: ['Zapier/Make 기반 입퇴사 알림 자동화', 'Notion/Flex HRIS 운영', '생성형 AI 기반 면접 가이드/JD 템플릿'],
         actionItems: [
-          'Zapier를 활용한 온보딩 메일 자동화 실습',
-          '노션을 활용한 사내 위키/게시판 구축 토이 프로젝트',
-          '스타트업/IT기업의 People Ops (자동화 우대) 포지션 공략'
+          '신규 입사자 온보딩 체크리스트 자동 발송 워크플로우 토이 프로젝트',
+          '플랫폼/대기업 HR Ops 포지션 포트폴리오 제출'
         ],
         expandedCount: 6,
-        expectedSalaryRange,
+        expectedSalaryRange: mkRange(1.12, 1.22),
         jobs: [
-          { company: '우아한형제들', title: 'People Ops Assistant', location: '서울 송파구', role: 'HR Ops', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
-          { company: '야놀자', title: 'HR Admin & System Assistant', location: '서울 강남구', role: 'HR System', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' },
-          { company: '크래프톤', title: 'HR Assistant', location: '서울 강남구', role: 'HR System', salary: `${minPremium.toLocaleString()}만 원~`, url: '#' }
-        ]
-      }
-    ];
-  } else {
-    // Experienced Tracks
-    return [
-      {
-        id: 'track-analytics',
-        name: 'People Analytics & HR Data Science',
-        skills: ['SQL (인사 DB 쿼리 및 코호트 집계)', 'Tableau / PowerBI 대시보드 구축', '퇴사 예측 및 리텐션 모델링', 'eNPS / 조직 건강도 통계 분석'],
-        actionItems: [
-          'SQL 레벨 2 (GROUP BY, Window Function) 인사 데이터셋 실습',
-          'Tableau 기반 대시보드 시각화',
-          '피플 사이언스 통계 개념 이해'
-        ],
-        expandedCount: 14,
-        expectedSalaryRange,
-        jobs: [
-          { company: '쿠팡 (Coupang)', title: 'People Analytics Specialist', location: '서울 송파구 신천', role: 'HR Data Analytics', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.coupang.jobs/kr/' },
-          { company: '토스 (비바리퍼블리카)', title: 'People Data Partner', location: '서울 강남구 역삼', role: 'People Operations', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://toss.im/career/jobs' },
-          { company: 'SK하이닉스', title: '피플사이언스 데이터 분석가', location: '경기도 분당/이천', role: 'HR Analytics', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.skcareers.com' }
-        ]
-      },
-      {
-        id: 'track-global',
-        name: 'Global HRBP & Regional TA Lead',
-        skills: ['비즈니스 영어 능통 (원어민 수준 커뮤니케이션)', 'APAC / Global 리전 법인 설립 및 HR 세팅 경험', 'Cross-border 채용 및 글로벌 평가 보상 구조화', '다국적 조직문화(DE&I) 구축'],
-        actionItems: [
-          '영문 이력서 및 링크드인 프로필 최적화',
-          '글로벌 기업의 APAC 리전 HR 정책 리서치',
-          '외국계 헤드헌터 네트워킹 구축'
-        ],
-        expandedCount: 8,
-        expectedSalaryRange,
-        jobs: [
-          { company: 'Google Korea', title: 'HR Business Partner', location: '서울 강남구 역삼', role: 'Global HR', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://careers.google.com/locations/seoul/' },
-          { company: 'Amazon Web Services (AWS)', title: 'Senior Recruiter (Tech)', location: '서울 강남구 역삼', role: 'Global TA', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.amazon.jobs/content/locations/south-korea/seoul' }
-        ]
-      },
-      {
-        id: 'track-ax',
-        name: 'HR AX (AI Transformation) & No-Code Automation',
-        skills: ['생성형 AI(LLM) 기반 직무기술서(JD) 초안 파이프라인 기획', 'Flex / Zapier 기반 인사 행정 노코드 자동화', '차세대 HR 테크 시스템 마이그레이션 PM'],
-        actionItems: [
-          '사내 채용/평가 업무용 AI 프롬프트 템플릿 구축',
-          '노코드 도구를 활용한 신규 입사자 온보딩 자동화 설계',
-          '인사노무 질의응답 챗봇 도입 프로젝트 기획'
-        ],
-        expandedCount: 6,
-        expectedSalaryRange,
-        jobs: [
-          { company: '삼성전자 DX부문', title: 'People AX (AI Transformation) 혁신 PM', location: '경기도 수원 화성', role: 'HR Tech / AX', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://www.samsungcareers.com' },
-          { company: 'LG CNS', title: '생성형 AI 기반 HR 솔루션 기획자', location: '서울 강서구 마곡', role: 'HR DX Consultant', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://careers.lg.com' },
-          { company: 'CJ ENM', title: 'HR Digital Transformation & Systems', location: '서울 마포구 상암', role: 'HR Tech Lead', salary: `${minPremium.toLocaleString()} ~ ${maxPremium.toLocaleString()}만 원`, url: 'https://recruit.cj.net' }
+          { company: '우아한형제들', title: 'People Operations Specialist', location: '서울 송파구', role: 'HR Ops', salary: mkRange(1.14, 1.24), url: 'https://career.woowahan.com/' },
+          { company: 'CJ ENM', title: 'HR Digital & People Support', location: '서울 마포구 상암', role: 'HR System', salary: mkRange(1.10, 1.20), url: 'https://recruit.cj.net/' }
         ]
       }
     ];
   }
+
+  return [
+    {
+      id: 'track-analytics',
+      name: 'People Analytics & HR Data Science',
+      skills: ['SQL (인사 DB 쿼리 및 코호트 집계)', 'Tableau / PowerBI 대시보드 구축', '퇴사 예측 및 보상 시뮬레이션 모델링', 'eNPS / 조직 건강도 통계 분석'],
+      actionItems: [
+        'SQL 레벨 2(Window Function) 인사 데이터 코호트 분석 실습',
+        'Tableau 기반 인건비·리텐션 대시보드 포트폴리오 정리',
+        '대기업·테크 기업 People Analytics 전담 포지션 지원'
+      ],
+      expandedCount: 14,
+      expectedSalaryRange: mkRange(1.15, 1.28),
+      jobs: [
+        { company: '삼성전자 DX부문', title: '인사기획 & People Analytics Specialist', location: '경기 수원시 영통구', role: 'HR Data Analytics', salary: mkRange(1.20, 1.35), url: 'https://www.samsungcareers.com/' },
+        { company: '토스 (비바리퍼블리카)', title: 'People Data Partner', location: '서울 강남구 역삼', role: 'People Operations', salary: mkRange(1.18, 1.30), url: 'https://toss.im/career/jobs' },
+        { company: '쿠팡 (Coupang)', title: 'People Analytics & ER Specialist', location: '서울 송파구', role: 'HR Analytics', salary: mkRange(1.15, 1.26), url: 'https://www.coupang.jobs/kr/' }
+      ]
+    },
+    {
+      id: 'track-global',
+      name: 'Global HRBP & Regional TA Lead',
+      skills: ['비즈니스 영어 능통 (본사 보고 및 노무 협상)', 'Workday/SuccessFactors 글로벌 HRIS 운영', '해외 법인 평가보상·주재원 패키지 설계'],
+      actionItems: [
+        '영문 이력서 및 글로벌 성과 정량 지표(STAR) 업데이트',
+        '외국계 글로벌 테크 서울 오피스 HRBP 포지션 지원'
+      ],
+      expandedCount: 8,
+      expectedSalaryRange: mkRange(1.18, 1.30),
+      jobs: [
+        { company: 'Google Korea', title: 'HR Business Partner', location: '서울 강남구 역삼', role: 'Global HR', salary: mkRange(1.20, 1.35), url: 'https://careers.google.com/locations/seoul/' },
+        { company: 'Amazon Web Services (AWS)', title: 'Senior HR Partner / Recruiter', location: '서울 강남구 역삼', role: 'Global HRBP', salary: mkRange(1.18, 1.32), url: 'https://www.amazon.jobs/content/locations/south-korea/seoul' }
+      ]
+    },
+    {
+      id: 'track-ax',
+      name: 'HR AX (AI Transformation) & No-Code Automation',
+      skills: ['생성형 AI(LLM) 기반 평가·면접·JD 파이프라인 구축', 'Flex/Zapier 기반 인사 행정 자동화 설계', '차세대 HR 테크 도입 및 벤더 평가 PM'],
+      actionItems: [
+        '사내 인사규정·노동법 QA 봇 및 AI 평가 피드백 파이프라인 설계서 정리',
+        '대기업 그룹사 HR DX/AX 전담 조직 포지션 공략'
+      ],
+      expandedCount: 6,
+      expectedSalaryRange: mkRange(1.14, 1.24),
+      jobs: [
+        { company: 'LG CNS', title: '생성형 AI 기반 HR 솔루션/AX 기획', location: '서울 강서구 마곡', role: 'HR DX Consultant', salary: mkRange(1.15, 1.25), url: 'https://careers.lg.com/' },
+        { company: 'CJ ENM', title: 'HR Digital Transformation & Systems', location: '서울 마포구 상암', role: 'HR Tech Lead', salary: mkRange(1.12, 1.22), url: 'https://recruit.cj.net/' }
+      ]
+    }
+  ];
 }
 
 
@@ -158,10 +353,12 @@ export function detectDomainFromKeywords(input: string): {
   growthPerYear: number;
 } {
   const s = (input || '').toLowerCase();
+  // '사업개발/인재개발/조직개발' 등 복합어의 '개발'이 TECH로 오분류되지 않도록 마스킹
+  const techSrc = s.replace(/(사업|인재|조직|신사업|상품|경영|제품)\s*개발/g, '$1@@');
 
   // 1. TECH
   if (
-    /개발|엔지니어|프론트|백엔드|풀스택|소프트웨어|인공지능|머신러닝|테크|클라우드|보안|전산|\b(tech|dev|engineer|frontend|backend|fullstack|react|typescript|javascript|node|python|java|spring|data|ai|ml|cloud|security|devops|sw|ict|sql|aws)\b/.test(s) &&
+    /개발|엔지니어|프론트|백엔드|풀스택|소프트웨어|인공지능|머신러닝|테크|클라우드|보안|전산|\b(tech|dev|engineer|frontend|backend|fullstack|react|typescript|javascript|node|python|java|spring|data|ai|ml|cloud|security|devops|sw|ict|sql|aws)\b/.test(techSrc) &&
     !/people analytics|피플애널리틱스|인사기획|노무|마케팅|그로스|퍼포먼스|브랜딩|\b(marketing|growth)\b/.test(s)
   ) {
     return {
@@ -322,10 +519,9 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
     "정규직", "수시채용", "공개채용", "신입사원", "경력직", "planning"
   ]);
 
-  // User input tokens
+  // 직무 키워드 토큰 (원시 직군 enum 코드 자체로 자동 매칭이 부풀려지지 않도록 canonicalRole/skills/keywords 중심 추출)
   const userText = [
     passport.canonicalRole || '',
-    passport.occupation || '',
     (passport.skills || []).join(' '),
     (passport.keywords || []).join(' '),
   ].join(' ').toLowerCase();
@@ -445,12 +641,25 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
   }
 
   // Composite Total Score
-  const totalScore = Math.round(
+  const rawScore = Math.round(
     roleFit * 0.4 +
     seniorityFit * 0.25 +
     commuteFit * 0.20 +
     salaryFit * 0.15
   );
+
+  // 연차가 근본적으로 맞지 않는 공고는 다른 항목 점수가 높아도 상위 노출되지 않도록 상한을 둔다.
+  //  - 신입이 경력 3년+ 요구 공고에 지원 / 경력(4년+)자가 신입 전용 공고에 지원
+  const entryOnlyJob = job.maxYears <= 2 && (job.isEntryLevel || job.minYears === 0) && !(job.tags || []).some(t => t.includes('경력'));
+  const seniorityMismatch =
+    (isEntryUser && job.minYears >= 3) ||
+    (!isEntryUser && passport.totalYears >= 4 && entryOnlyJob) ||
+    (!isEntryUser && passport.totalYears < job.minYears - 2);
+  let totalScore = rawScore;
+  if (seniorityMismatch) {
+    totalScore = Math.min(rawScore, 59);
+    gapReasons.push("연차 요건이 크게 달라 우선 추천에서 제외됩니다");
+  }
 
   const verdict = totalScore >= 88 ? "HIGH" : totalScore >= 70 ? "MEDIUM" : "LOW";
 
@@ -493,7 +702,7 @@ export function evaluateHardFilters(
   // 2. Capital area only (Exclude non-capital)
   if (filters.onlyCapitalArea) {
     const loc = (job.location + " " + (job.rawText || "")).toLowerCase();
-    const isCapital = loc.includes("서울") || loc.includes("경기") || loc.includes("인천") || loc.includes("수도권") || loc.includes("강남") || loc.includes("판교") || loc.includes("분당");
+    const isCapital = /(서울|경기|인천|수도권|강남|판교|분당|수원|성남|용인|화성|이천|고양|부천|안양|군포|과천|하남|원격|remote)/.test(loc);
     if (!isCapital) {
       reasons.push("수도권 외 지역 배제 기준 위반");
     }

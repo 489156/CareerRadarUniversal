@@ -1,26 +1,34 @@
 import { createClient } from '@supabase/supabase-js';
+import { JobPosting } from './types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+const NON_CAREER_FILTER = /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|위촉|초빙|의료요원|진료의사|진료교수|간호|수련의|전공의|약무직|치과|위생사|보건직|수련생|무기계약|조무사|영양사|사회복지사/;
+
+function sanitizeJobs(items: JobPosting[]): JobPosting[] {
+  return (items || []).filter(
+    (j) => j && j.title && !NON_CAREER_FILTER.test(`${j.title} ${(j.tags || []).join(' ')}`)
+  );
+}
 
 export const supabase = supabaseUrl && supabaseAnonKey
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
 // Client-side fetching wrapper with localStorage caching to save Free Tier quota
-export async function fetchJobsWithCache(fallbackData: any[] = []) {
-  let baseData = fallbackData;
+export async function fetchJobsWithCache(fallbackData: JobPosting[] = []): Promise<JobPosting[]> {
+  let baseData = sanitizeJobs(fallbackData);
   try {
     const res = await fetch('/data/jobs.json');
     if (res.ok) {
-      baseData = await res.json();
+      baseData = sanitizeJobs(await res.json());
     }
   } catch (e) {
     console.warn('Could not fetch local jobs.json fallback', e);
   }
 
   if (!supabase) {
-    console.warn("Supabase not configured, using fallback local JSON data.");
     return baseData;
   }
 
@@ -32,11 +40,10 @@ export async function fetchJobsWithCache(fallbackData: any[] = []) {
     if (cachedStr) {
       const cached = JSON.parse(cachedStr);
       if (Date.now() - cached.timestamp < CACHE_EXPIRY) {
-        console.log("Using cached jobs from localStorage");
-        const sbData = cached.data || [];
+        const sbData = sanitizeJobs(cached.data || []);
         const merged = [...sbData];
-        const existingIds = new Set(sbData.map((j: any) => j.id));
-        baseData.forEach((j: any) => { if (!existingIds.has(j.id)) merged.push(j); });
+        const existingIds = new Set(sbData.map((j) => j.id));
+        baseData.forEach((j) => { if (!existingIds.has(j.id)) merged.push(j); });
         return merged;
       }
     }
@@ -52,13 +59,13 @@ export async function fetchJobsWithCache(fallbackData: any[] = []) {
     }
 
     if (data) {
+      const sanitizedSb = sanitizeJobs(data as JobPosting[]);
       if (typeof window !== 'undefined') {
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: sanitizedSb }));
       }
-      
-      const merged = [...data];
-      const existingIds = new Set(data.map((j: any) => j.id));
-      baseData.forEach((j: any) => { if (!existingIds.has(j.id)) merged.push(j); });
+      const merged = [...sanitizedSb];
+      const existingIds = new Set(sanitizedSb.map((j) => j.id));
+      baseData.forEach((j) => { if (!existingIds.has(j.id)) merged.push(j); });
       return merged;
     }
 
