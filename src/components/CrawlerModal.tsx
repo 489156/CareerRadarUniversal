@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { CRAWLER_SOURCES, getCrawlerNetworkStats } from '@/lib/crawler';
+import { IconClose, IconExternal } from './Icons';
 
 export function CrawlerModal() {
   const isCrawlerModalOpen = useAppStore((s) => s.isCrawlerModalOpen);
@@ -18,77 +19,64 @@ export function CrawlerModal() {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) setIsCrawlerModalOpen(false);
       }}
     >
-      <div className="bg-[#111726] border border-[#233252] rounded-2xl max-w-4xl w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-start pb-3 border-b border-[#1e273b]">
+      <div className="bg-[#111113] border border-white/[0.1] rounded-[12px] max-w-4xl w-full p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="flex justify-between items-start border-b border-white/[0.08] pb-3">
           <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold font-mono">
-                {stats.totalSources} TARGET CHANNELS
-              </span>
-              <span className="text-xs text-slate-400">일일 크롤링 3개 핵심망(ALIO·PwC·Deloitte) + 자사 채용관 인덱스</span>
+            <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-400">
+              <span>{stats.totalSources} CHANNELS</span>
+              <span>·</span>
+              <span>LIVE SCRAPER 3 + OFFICIAL ATS {stats.totalSources - 3}</span>
             </div>
-            <h3 className="text-lg font-bold text-white mt-1">
-              🌐 Universal Multi-Source Crawler Network (자체 ATS 수집·연동망)
+            <h3 className="text-base font-semibold text-zinc-100 mt-1 tracking-[-0.02em]">
+              자체 ATS 수집 및 공식 채용관 네트워크
             </h3>
           </div>
           <button
             type="button"
             onClick={() => setIsCrawlerModalOpen(false)}
-            className="text-slate-400 hover:text-white text-lg font-bold"
+            className="text-zinc-500 hover:text-zinc-200 p-1 rounded-md transition-colors duration-150"
           >
-            ✕
+            <IconClose />
           </button>
         </div>
 
-        <div className="p-4 bg-gradient-to-r from-indigo-950/40 to-slate-900/60 border border-indigo-500/30 rounded-xl space-y-2 text-xs leading-relaxed">
-          <div className="font-bold text-indigo-300 flex items-center space-x-1.5">
-            <span>🛡️ CareerRadar 수집 파이프라인 범위 안내:</span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 bg-[#18181B] border border-white/[0.08] rounded-[8px] divide-y sm:divide-y-0 sm:divide-x divide-white/[0.08] text-xs">
+          <div className="p-3">
+            <span className="text-[11px] text-zinc-400">전체 채널</span>
+            <div className="text-lg font-semibold font-mono tabular-nums text-zinc-100 mt-0.5">{stats.totalSources}개</div>
           </div>
-          <p className="text-slate-300">
-            GitHub Actions 일일 무인 크롤러는 <strong>ALIO 공공기관 공시망, 삼일PwC, 딜로이트 안진</strong>의 실제 채용 공고를 매일 스크래핑하며, 나머지 대기업·유니콘·외국계 채널({stats.totalSources - 3}곳)은 공식 채용관 링크를 연결한 큐레이션 데이터셋으로 통합 제공합니다.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
-            <span className="text-[11px] text-slate-400">연동 도메인 목록</span>
-            <div className="text-xl font-bold font-mono text-emerald-400 mt-1">{stats.totalSources}개 공식 채널</div>
-            <span className="text-[10px] text-slate-500">실시간 스크래핑 3 + 공식 ATS 디렉터리 {stats.totalSources - 3}</span>
+          <div className="p-3">
+            <span className="text-[11px] text-zinc-400">잡포털 미노출 단독 공고</span>
+            <div className="text-lg font-semibold font-mono tabular-nums text-zinc-100 mt-0.5">{stats.exclusiveCompanyRatio}%</div>
           </div>
-          <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
-            <span className="text-[11px] text-slate-400">자사 사이트 단독 공고 비율</span>
-            <div className="text-xl font-bold font-mono text-indigo-400 mt-1">{stats.exclusiveCompanyRatio}% 독점</div>
-            <span className="text-[10px] text-slate-500">대형 유료 잡포털 미노출 비중</span>
-          </div>
-          <div className="bg-[#0a0e17] p-3.5 rounded-xl border border-[#192235]">
-            <span className="text-[11px] text-slate-400">자동 수집 스케줄</span>
-            <div className="text-xl font-bold font-mono text-sky-400 mt-1">매일 09:00 KST</div>
-            <span className="text-[10px] text-slate-500">GitHub Actions + Supabase Upsert</span>
+          <div className="p-3">
+            <span className="text-[11px] text-zinc-400">일일 크롤링 주기</span>
+            <div className="text-lg font-semibold font-mono tabular-nums text-zinc-100 mt-0.5">09:00 KST</div>
           </div>
         </div>
 
-        <div className="flex space-x-2 border-b border-[#233252] pb-2 text-xs overflow-x-auto">
+        <div className="flex space-x-1.5 border-b border-white/[0.08] pb-2.5 text-xs overflow-x-auto">
           {[
-            { id: "ALL", label: `전체 (${countByCat("ALL")}곳)` },
-            { id: "CONSULTING", label: `💼 회계·컨설팅 (${countByCat("CONSULTING")}곳)` },
-            { id: "PUBLIC", label: `🏛️ 공공·국책금융 (${countByCat("PUBLIC")}곳)` },
-            { id: "CONGLOMERATE", label: `🏭 대기업 (${countByCat("CONGLOMERATE")}곳)` },
-            { id: "GLOBAL_TECH", label: `🌐 글로벌 테크 (${countByCat("GLOBAL_TECH")}곳)` },
-            { id: "AGGREGATOR", label: `🔗 어그리게이터 (${countByCat("AGGREGATOR")}곳)` },
+            { id: "ALL", label: `전체 (${countByCat("ALL")})` },
+            { id: "CONSULTING", label: `회계·컨설팅 (${countByCat("CONSULTING")})` },
+            { id: "PUBLIC", label: `공공·국책금융 (${countByCat("PUBLIC")})` },
+            { id: "CONGLOMERATE", label: `대기업 (${countByCat("CONGLOMERATE")})` },
+            { id: "GLOBAL_TECH", label: `글로벌 테크 (${countByCat("GLOBAL_TECH")})` },
+            { id: "AGGREGATOR", label: `어그리게이터 (${countByCat("AGGREGATOR")})` },
           ].map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setCrawlerCategoryFilter(tab.id)}
-              className={`px-3 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-[6px] font-medium transition-colors duration-150 whitespace-nowrap ${
                 crawlerCategoryFilter === tab.id
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "bg-[#152038] text-slate-300 hover:bg-[#1d2c4e]"
+                  ? "bg-[#FAFAFA] text-[#0A0A0B]"
+                  : "bg-[#18181B] text-zinc-300 hover:bg-[#222226] border border-white/[0.08]"
               }`}
             >
               {tab.label}
@@ -96,51 +84,51 @@ export function CrawlerModal() {
           ))}
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="border border-white/[0.08] rounded-[8px] overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-[#233252] text-slate-400">
-                <th className="py-2.5 px-3">수집원 / 채용 시스템명</th>
-                <th className="py-2.5 px-3">공식 타깃 도메인</th>
-                <th className="py-2.5 px-3">연동 방식</th>
-                <th className="py-2.5 px-3 text-right">수집 상태</th>
+            <thead className="bg-[#18181B] border-b border-white/[0.08] text-zinc-400">
+              <tr>
+                <th className="py-2 px-3 font-medium whitespace-nowrap">수집원</th>
+                <th className="py-2 px-3 font-medium whitespace-nowrap">타깃 도메인</th>
+                <th className="py-2 px-3 font-medium whitespace-nowrap">연동 방식</th>
+                <th className="py-2 px-3 text-right font-medium whitespace-nowrap">상태</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#18233a] font-mono">
+            <tbody className="divide-y divide-white/[0.06]">
               {CRAWLER_SOURCES.filter(
                 (s) => crawlerCategoryFilter === "ALL" || s.category === crawlerCategoryFilter
               ).map((s) => {
                 const isLiveScraper = s.id === "source-alio" || s.id === "source-pwc" || s.id === "source-deloitte";
                 return (
-                  <tr key={s.id} className="hover:bg-slate-900/40 transition">
-                    <td className="py-3 px-3 font-sans">
-                      <div className="font-bold text-white text-xs">{s.name}</div>
-                      <div className="text-[11px] text-slate-400 font-sans mt-0.5">{s.description}</div>
+                  <tr key={s.id} className="hover:bg-[#18181B]/60 transition-colors duration-150">
+                    <td className="py-2.5 px-3 min-w-[140px]">
+                      <div className="font-medium text-zinc-100">{s.name}</div>
+                      <div className="text-[11px] text-zinc-500 mt-0.5 line-clamp-1">{s.description}</div>
                     </td>
-                    <td className="py-3 px-3 text-sky-400">
+                    <td className="py-2.5 px-3 font-mono text-[11px] text-zinc-300 whitespace-nowrap">
                       <a
                         href={`https://${s.targetDomain}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline"
+                        className="inline-flex items-center space-x-1 hover:text-white underline decoration-zinc-700"
                       >
-                        {s.targetDomain} ↗
+                        <span className="truncate max-w-[200px]">{s.targetDomain}</span>
+                        <IconExternal className="w-3 h-3 shrink-0" />
                       </a>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 font-sans text-[11px]">
-                      <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                        {isLiveScraper ? "자동 일일 스크래퍼" : "공식 채용관 큐레이션"}
-                      </span>
+                    <td className="py-2.5 px-3 text-[11px] text-zinc-400 whitespace-nowrap">
+                      {isLiveScraper ? "자동 스크래퍼" : "공식 채용관"}
                     </td>
-                    <td className="py-3 px-3 text-right font-sans">
+                    <td className="py-2.5 px-3 text-right whitespace-nowrap">
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                        className={`inline-flex items-center space-x-1.5 px-2 py-0.5 rounded-[6px] text-[10px] font-medium border ${
                           isLiveScraper
-                            ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                            : "bg-sky-500/20 text-sky-400 border-sky-500/30"
+                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                            : "bg-zinc-800/80 text-zinc-300 border-white/[0.08]"
                         }`}
                       >
-                        {isLiveScraper ? "● LIVE 크롤링" : "◎ 공식 링크 연동"}
+                        <span className={`w-1.5 h-1.5 rounded-full ${isLiveScraper ? "bg-emerald-400" : "bg-zinc-400"}`} />
+                        <span>{isLiveScraper ? "LIVE" : "연동됨"}</span>
                       </span>
                     </td>
                   </tr>
@@ -150,13 +138,13 @@ export function CrawlerModal() {
           </table>
         </div>
 
-        <div className="flex justify-end pt-2 border-t border-[#1e273b]">
+        <div className="flex justify-end pt-2 border-t border-white/[0.08]">
           <button
             type="button"
             onClick={() => setIsCrawlerModalOpen(false)}
-            className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+            className="px-4 py-2 rounded-[6px] bg-[#FAFAFA] hover:bg-white text-xs font-semibold text-[#0A0A0B] transition-colors duration-150"
           >
-            확인 완료
+            닫기
           </button>
         </div>
       </div>

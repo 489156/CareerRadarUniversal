@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppStore, TabId, RadarFilterId } from "@/store/useAppStore";
 import { JobPosting, SalaryBenchmark, DynamicMatchScore, CareerPassport } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
@@ -16,6 +16,8 @@ import {
 import { CRAWLER_SOURCES } from "@/lib/crawler";
 import { fetchJobsWithCache } from "@/lib/supabase";
 
+import { IconSearch, IconCommand, IconExternal, IconChevronRight, IconClose } from "@/components/Icons";
+import { CommandPalette } from "@/components/CommandPalette";
 import { ResumeModal } from "@/components/ResumeModal";
 import { MarketValueModal } from "@/components/MarketValueModal";
 import { SkillGapModal } from "@/components/SkillGapModal";
@@ -70,6 +72,10 @@ export default function Home() {
     setIsMarketValueModalOpen,
     setIsSkillGapModalOpen,
     setIsCrawlerModalOpen,
+    isCommandOpen,
+    setIsCommandOpen,
+    radarViewMode,
+    setRadarViewMode,
     setSelectedJob,
     setSelectedJobMatch,
     setSelectedJobHf,
@@ -85,16 +91,24 @@ export default function Home() {
     setLedgerSearch,
   } = useAppStore();
 
+  const [newSkillInput, setNewSkillInput] = useState("");
+
   useEffect(() => {
     fetchJobsWithCache(MOCK_JOB_DATABASE).then((data) => {
       if (data && data.length > 0) setJobsDatabase(data);
     });
   }, [setJobsDatabase]);
 
-  // Global ESC key closes open modals
+  // Global Cmd+K / Ctrl+K & Escape handler
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandOpen(!isCommandOpen);
+        return;
+      }
       if (e.key === "Escape") {
+        setIsCommandOpen(false);
         setIsResumeModalOpen(false);
         setIsCrawlerModalOpen(false);
         setIsMarketValueModalOpen(false);
@@ -104,7 +118,15 @@ export default function Home() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [setIsResumeModalOpen, setIsCrawlerModalOpen, setIsMarketValueModalOpen, setIsSkillGapModalOpen, setSelectedJob]);
+  }, [
+    isCommandOpen,
+    setIsCommandOpen,
+    setIsResumeModalOpen,
+    setIsCrawlerModalOpen,
+    setIsMarketValueModalOpen,
+    setIsSkillGapModalOpen,
+    setSelectedJob,
+  ]);
 
   // Hydrate passport from localStorage on mount
   useEffect(() => {
@@ -132,9 +154,9 @@ export default function Home() {
       localStorage.setItem("career_passport_universal", JSON.stringify(passport));
       const totalCash = passport.baseSalary + passport.fixedAllowance;
       if (totalCash > 0) setCalcInput((prev) => ({ ...prev, cashManwon: totalCash }));
-      showToast("✅ 커리어 조건이 브라우저에 안전하게 저장되었습니다.");
+      showToast("커리어 조건이 저장되었습니다.");
     } catch {
-      showToast("✅ 커리어 조건 세션 반영 완료");
+      showToast("커리어 조건이 현재 세션에 반영되었습니다.");
     }
   };
 
@@ -154,7 +176,7 @@ export default function Home() {
         },
       }));
       setCalcInput((prev) => ({ ...prev, cashManwon: 4500 }));
-      showToast("🎓 신입/인턴(0년차) 지원 모드로 전환되었습니다.");
+      showToast("신입/인턴(0년차) 트랙으로 전환되었습니다.");
     } else {
       setPassport((prev) => ({
         ...prev,
@@ -164,7 +186,7 @@ export default function Home() {
         fixedAllowance: prev.fixedAllowance === 0 ? 400 : prev.fixedAllowance,
       }));
       setCalcInput((prev) => ({ ...prev, cashManwon: 5800 }));
-      showToast("💼 경력직 이직 모드로 전환되었습니다.");
+      showToast("경력직 이직 트랙으로 전환되었습니다.");
     }
   };
 
@@ -187,7 +209,16 @@ export default function Home() {
   const executePassportSearch = () => {
     handleSavePassport();
     setActiveTab("radar");
-    showToast("🎯 입력하신 직무·경력 조건으로 맞춤 공고 탐색을 실행했습니다.");
+    showToast("입력 조건 기준으로 맞춤 공고 탐색을 실행했습니다.");
+  };
+
+  const addSkillChip = () => {
+    const sk = newSkillInput.trim();
+    if (!sk) return;
+    if (!passport.skills.includes(sk)) {
+      setPassport((prev) => ({ ...prev, skills: [...prev.skills, sk] }));
+    }
+    setNewSkillInput("");
   };
 
   const addCustomHardFilter = () => {
@@ -205,7 +236,7 @@ export default function Home() {
       },
     }));
     setCustomKeywordInput("");
-    showToast(`🚫 배제 키워드 '${kw}' 추가되었습니다.`);
+    showToast(`배제 키워드 '${kw}' 추가됨`);
   };
 
   const removeCustomHardFilter = (kw: string) => {
@@ -231,7 +262,7 @@ export default function Home() {
         customKeywords: ["교대근무", "파견직", "일용직"],
       },
     }));
-    showToast("🔄 절대 배제 조건이 기본값으로 복원되었습니다.");
+    showToast("절대 배제 기준이 기본값으로 복원되었습니다.");
   };
 
   const openJobDetail = (
@@ -252,10 +283,10 @@ export default function Home() {
     setSelectedJob(null);
     setSelectedJobHf(null);
     setActiveTab("scanner");
-    showToast(`⚖️ ${job.company} 공고 원문이 근로계약 위험 진단으로 전송되었습니다.`);
+    showToast(`${job.company} 공고를 근로계약 진단으로 전송했습니다.`);
   };
 
-  // Market value & skill gap tracks (strictly pass explicit occupation + company tier)
+  // Market value & skill gap tracks
   const marketValue = calculateEstimatedMarketValue(
     `${passport.canonicalRole} ${passport.occupation}`,
     passport.totalYears,
@@ -265,7 +296,7 @@ export default function Home() {
   const skillGapTracks = calculateSkillGapTracks(passport);
   const totalSkillGapExpanded = skillGapTracks.reduce((sum, t) => sum + t.expandedCount, 0);
 
-  // Match & Hard Filter pipeline sorted descending by fit score
+  // Matching & Hard Filter Pipeline
   const jobsWithScores = jobsDatabase.map((job) => ({
     job,
     match: calculateDynamicJobMatch(passport, job),
@@ -339,26 +370,20 @@ export default function Home() {
       item.note.toLowerCase().includes(ledgerSearch.toLowerCase())
   );
 
-  // Life-Adjusted Calculator
   const calcResult = calculateLifeAdjustedHourlyWage(calcInput);
   const dropPct =
     calcResult.nominalHourlyWage > 0
-      ? (
-          ((calcResult.nominalHourlyWage - calcResult.realHourlyWage) /
-            calcResult.nominalHourlyWage) *
-          100
-        ).toFixed(1)
+      ? (((calcResult.nominalHourlyWage - calcResult.realHourlyWage) / calcResult.nominalHourlyWage) * 100).toFixed(1)
       : "0.0";
   const wageTierBadge =
     calcResult.realHourlyWage >= 32000
-      ? "최상위 효용 (시간 대비 고보상)"
+      ? "최상위 효용 구간"
       : calcResult.realHourlyWage >= 22000
-      ? "양호한 실질 효용 구간"
+      ? "양호한 실질 효용"
       : calcResult.realHourlyWage >= 14000
-      ? "통근·야근 시간 누수 주의"
-      : "고강도 시간 소모 구간";
+      ? "통근·야근 누수 주의"
+      : "시간 대비 저보상 구간";
 
-  // Interactive Offer Comparison Calculations
   const currentAnnualCash = passport.baseSalary + passport.fixedAllowance || calcInput.cashManwon;
   const currentCalc = calculateLifeAdjustedHourlyWage({
     cashManwon: currentAnnualCash,
@@ -392,617 +417,631 @@ export default function Home() {
 
   const copySafe = (text: string, okMsg: string) => {
     if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(text).then(() => showToast(okMsg)).catch(() => showToast("⚠️ 클립보드 접근이 제한되었습니다."));
+      navigator.clipboard
+        .writeText(text)
+        .then(() => showToast(okMsg))
+        .catch(() => showToast("클립보드 접근이 제한되었습니다."));
     } else {
-      showToast("⚠️ 이 브라우저 환경에서는 자동 복사가 제한됩니다.");
+      showToast("브라우저에서 자동 복사를 지원하지 않습니다.");
     }
   };
 
   const copyCalculatorText = () => {
-    const text = `[Career Radar Universal — 내 실질 체감 시급 진단 결과]
-• 확정 현금: ${calcInput.cashManwon.toLocaleString()}만 원 (명목시급: ${calcResult.nominalHourlyWage.toLocaleString()}원)
-• 편도 통근: ${calcInput.commuteMinutesOneway}분 | 주 ${calcInput.weeklyWorkHours}시간 근로 | 주 ${calcInput.weeklyRemoteDays}일 재택
-• 연간 통근 누적: ${calcResult.annualCommuteHours}시간 (약 ${(calcResult.annualCommuteHours / 24).toFixed(1)}일) 소모
-👉 실질 체감 시급: ${calcResult.realHourlyWage.toLocaleString()}원 (${dropPct}% 체감 하락)
-💡 ${calcResult.utilityVerdictText}`;
-    copySafe(text, "📋 실질 시급 요약이 클립보드에 복사되었습니다.");
+    const text = `[Career Radar — 실질 체감 시급]
+• 확정 현금: ${calcInput.cashManwon.toLocaleString()}만 원 (명목 ${calcResult.nominalHourlyWage.toLocaleString()}원)
+• 편도 통근: ${calcInput.commuteMinutesOneway}분 | 주 ${calcInput.weeklyWorkHours}h | 재택 주 ${calcInput.weeklyRemoteDays}일
+• 실질 시급: ${calcResult.realHourlyWage.toLocaleString()}원 (-${dropPct}%)`;
+    copySafe(text, "실질 시급 요약이 복사되었습니다.");
   };
 
   const copyOfferText = () => {
-    const fmtDiff = (val: number) => {
-      if (currentCalc.realHourlyWage <= 0) return "";
-      const pct = (((val - currentCalc.realHourlyWage) / currentCalc.realHourlyWage) * 100).toFixed(1);
-      return ` (${Number(pct) >= 0 ? "+" : ""}${pct}%)`;
-    };
-    const text = `[Career Radar Universal — 오퍼 다차원 비교 결과]
-• 현재 직장: ${currentAnnualCash.toLocaleString()}만 | 통근 ${calcInput.commuteMinutesOneway}분 | 실질 시급 ${currentCalc.realHourlyWage.toLocaleString()}원
-• ${offerA.label}: ${(offerA.baseManwon + offerA.allowanceManwon).toLocaleString()}만 | 통근 ${offerA.commuteMinutesOneway}분 | 실질 시급 ${offerACalc.realHourlyWage.toLocaleString()}원${fmtDiff(offerACalc.realHourlyWage)}
-• ${offerB.label}: ${(offerB.baseManwon + offerB.allowanceManwon).toLocaleString()}만 | 통근 ${offerB.commuteMinutesOneway}분 | 실질 시급 ${offerBCalc.realHourlyWage.toLocaleString()}원${fmtDiff(offerBCalc.realHourlyWage)}
-👉 삶의 시간·보상 종합 최적안: ${bestOfferName}`;
-    copySafe(text, "📋 오퍼 비교 요약이 클립보드에 복사되었습니다.");
+    const text = `[Career Radar — 오퍼 비교]
+• 현재 직장: ${currentAnnualCash.toLocaleString()}만 | ${currentCalc.realHourlyWage.toLocaleString()}원/h
+• ${offerA.label}: ${(offerA.baseManwon + offerA.allowanceManwon).toLocaleString()}만 | ${offerACalc.realHourlyWage.toLocaleString()}원/h
+• ${offerB.label}: ${(offerB.baseManwon + offerB.allowanceManwon).toLocaleString()}만 | ${offerBCalc.realHourlyWage.toLocaleString()}원/h
+→ 최적안: ${bestOfferName}`;
+    copySafe(text, "오퍼 비교 요약이 복사되었습니다.");
   };
 
   const handleScan = () => {
     if (!scannerText.trim()) {
-      showToast("⚠️ 검사할 채용 공고 또는 계약서 문구를 입력해 주세요.");
+      showToast("검사할 공고 본문이나 계약서 문구를 입력해 주세요.");
       return;
     }
     setScanResult(diagnoseJobRisks(scannerText));
-    showToast("⚖️ 근로계약 위험 조항 진단 완료");
+    showToast("근로계약 위험 진단이 완료되었습니다.");
   };
 
+  const navTabs: { id: TabId; label: string }[] = [
+    { id: "passport", label: "1. 조건 설정" },
+    { id: "radar", label: "2. 공고 레이더" },
+    { id: "scanner", label: "3. 계약 진단" },
+    { id: "calculator", label: "4. 실질 시급" },
+    { id: "matrix", label: "5. 오퍼 비교" },
+    { id: "ledger", label: "6. 연봉 원장" },
+  ];
+
+  const renderNavButtons = () =>
+    navTabs.map((tab) => (
+      <button
+        key={tab.id}
+        type="button"
+        onClick={() => setActiveTab(tab.id)}
+        className={`px-2.5 py-1 rounded-[6px] text-xs font-medium transition-colors duration-150 whitespace-nowrap shrink-0 ${
+          activeTab === tab.id
+            ? "bg-[#222226] text-[#FAFAFA] border border-white/[0.12]"
+            : "text-zinc-400 hover:text-zinc-100 hover:bg-[#18181B]"
+        }`}
+      >
+        {tab.label}
+      </button>
+    ));
+
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
-      {/* Toast Notification */}
+    <div className="min-h-screen bg-[#0A0A0B] text-[#FAFAFA] flex flex-col font-sans">
+      {/* Monochrome Toast */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#162035] border border-indigo-500/60 text-indigo-200 px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300">
-          <span className="text-sm font-medium">{toastMessage}</span>
-          <button type="button" onClick={() => setToastMessage(null)} className="text-slate-400 hover:text-white text-xs ml-2">
-            ✕
+        <div className="fixed bottom-5 right-5 z-50 bg-[#18181B] border border-white/[0.16] text-zinc-100 px-4 py-2.5 rounded-[8px] flex items-center space-x-3 text-xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+          <button
+            type="button"
+            onClick={() => setToastMessage(null)}
+            className="text-zinc-500 hover:text-zinc-200 transition-colors duration-150"
+          >
+            <IconClose className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0b0f19]/95 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
+      {/* Compact Header Shell (48px Desktop Single-Line + Mobile Sub-Bar) */}
+      <header className="sticky top-0 z-40 bg-[#0A0A0B]/90 backdrop-blur-md border-b border-white/[0.08]">
+        <div className="max-w-7xl mx-auto px-4 h-12 flex items-center justify-between gap-3">
+          <div className="flex items-center space-x-2.5 shrink-0">
+            <div className="w-6 h-6 rounded-[6px] bg-[#FAFAFA] text-[#0A0A0B] flex items-center justify-center font-mono font-bold text-[11px]">
               CR
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-extrabold text-lg text-white tracking-tight">Career Radar</span>
-                <span className="text-xs px-2 py-0.5 rounded-full font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  맞춤 채용 & 연봉 분석
-                </span>
-              </div>
-              <p className="text-xs text-slate-400">내 경력·연봉·통근 조건으로 딱 맞는 채용 공고를 찾고 실질 시급을 비교하세요</p>
-            </div>
+            <span className="font-semibold text-sm tracking-[-0.02em] text-zinc-100">Career Radar</span>
+            <span className="hidden sm:inline text-zinc-700">/</span>
+            <span className="hidden sm:inline font-mono text-[11px] text-zinc-500 tabular-nums">
+              {jobsDatabase.length} jobs
+            </span>
           </div>
 
-          <nav className="flex items-center space-x-1.5 overflow-x-auto pb-1 lg:pb-0">
-            {(
-              [
-                { id: "passport", label: "👤 1. 내 조건 설정", desc: "직무·연봉·배제 기준" },
-                { id: "radar", label: "🎯 2. 맞춤 공고 탐색", desc: "적합도순 추천 공고" },
-                { id: "scanner", label: "⚖️ 3. 근로계약 위험 진단", desc: "포괄임금·독소조항 검사" },
-                { id: "calculator", label: "⏱️ 4. 실질 체감 시급", desc: "통근·야근 반영 시급" },
-                { id: "matrix", label: "📊 5. 이직처 비교", desc: "현 직장 vs 오퍼 비교" },
-                { id: "ledger", label: "🏛️ 6. 기업별 연봉 실태", desc: "공시·통계 기반 연봉표" },
-              ] as { id: TabId; label: string; desc: string }[]
-            ).map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-3.5 py-2 rounded-xl text-left transition shrink-0 ${
-                  activeTab === tab.id
-                    ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/25 font-bold"
-                    : "bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800"
-                }`}
-              >
-                <div className="text-xs">{tab.label}</div>
-                <div className={`text-[10px] mt-0.5 ${activeTab === tab.id ? "text-indigo-200" : "text-slate-500"}`}>
-                  {tab.desc}
-                </div>
-              </button>
-            ))}
+          <nav className="hidden md:flex items-center space-x-1 overflow-x-auto">
+            {renderNavButtons()}
           </nav>
+
+          <div className="flex items-center space-x-1.5 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsResumeModalOpen(true)}
+              className="px-2.5 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs font-medium text-zinc-200 transition-colors duration-150 whitespace-nowrap"
+            >
+              이력서 파싱
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsCommandOpen(true)}
+              className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-[6px] bg-[#111113] hover:bg-[#18181B] border border-white/[0.08] text-xs text-zinc-400 hover:text-zinc-200 transition-colors duration-150"
+              title="빠른 명령 (Ctrl+K / ⌘K)"
+            >
+              <IconCommand className="w-3 h-3" />
+              <span className="font-mono text-[11px]">K</span>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Scrollable Tab Navigation */}
+        <nav className="md:hidden border-t border-white/[0.08] px-3 py-1.5 flex items-center space-x-1 overflow-x-auto">
+          {renderNavButtons()}
+        </nav>
       </header>
 
-      {/* Main */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
+      {/* Workspace Body */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-5 space-y-5">
+        {/* Top 4-Cell KPI Summary Strip (Mobbin / Linear Analytics Style) */}
+        <section
+          aria-label="핵심 커리어 요약 지표"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.08] border border-white/[0.08] rounded-[10px] overflow-hidden"
+        >
+          <button
+            type="button"
+            onClick={() => setIsMarketValueModalOpen(true)}
+            className="bg-[#111113] p-3.5 sm:p-4 text-left hover:bg-[#18181B] transition-colors duration-150 group min-w-0"
+          >
+            <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-400">
+              <span className="truncate">추정 시장가치 (P25–P75)</span>
+              <span className="font-mono text-zinc-500 group-hover:text-zinc-300 shrink-0">공식 ↗</span>
+            </div>
+            <div className="mt-1.5 text-[14px] sm:text-lg font-semibold font-mono tabular-nums tracking-[-0.02em] text-zinc-100 leading-snug break-keep">
+              {marketValue.rangeDisplay}
+            </div>
+            <div className="mt-0.5 text-[11px] text-zinc-500 truncate">
+              {marketValue.tierDesc} · {passport.totalYears === 0 ? "신입" : `${passport.totalYears}년차`}
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("radar")}
+            className="bg-[#111113] p-3.5 sm:p-4 text-left hover:bg-[#18181B] transition-colors duration-150 group min-w-0"
+          >
+            <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-400">
+              <span className="truncate">고적합 공고 (88%+)</span>
+              <span className="font-mono text-zinc-500 group-hover:text-zinc-300 shrink-0">레이더 →</span>
+            </div>
+            <div className="mt-1.5 text-base sm:text-lg font-semibold font-mono tabular-nums tracking-[-0.02em] text-zinc-100 flex items-center space-x-2">
+              <span>{highMatchCount}건</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            </div>
+            <div className="mt-0.5 text-[11px] text-zinc-500 font-mono tabular-nums truncate">
+              필터 통과 {filteredJobs.length} / 전체 {jobsDatabase.length}건
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsSkillGapModalOpen(true)}
+            className="bg-[#111113] p-3.5 sm:p-4 text-left hover:bg-[#18181B] transition-colors duration-150 group min-w-0"
+          >
+            <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-400">
+              <span className="truncate">스킬 갭 보완 시 확장</span>
+              <span className="font-mono text-zinc-500 group-hover:text-zinc-300 shrink-0">로드맵 ↗</span>
+            </div>
+            <div className="mt-1.5 text-base sm:text-lg font-semibold font-mono tabular-nums tracking-[-0.02em] text-zinc-100">
+              +{totalSkillGapExpanded}건
+            </div>
+            <div className="mt-0.5 text-[11px] text-zinc-500 truncate">
+              {skillGapTracks[0].name.split("&")[0].trim()} 외 {skillGapTracks.length - 1}트랙
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsCrawlerModalOpen(true)}
+            className="bg-[#111113] p-3.5 sm:p-4 text-left hover:bg-[#18181B] transition-colors duration-150 group min-w-0"
+          >
+            <div className="flex items-center justify-between gap-1 text-[11px] text-zinc-400">
+              <span className="truncate">ATS 수집 네트워크</span>
+              <span className="font-mono text-zinc-500 group-hover:text-zinc-300 shrink-0">채널 ↗</span>
+            </div>
+            <div className="mt-1.5 text-base sm:text-lg font-semibold font-mono tabular-nums tracking-[-0.02em] text-zinc-100">
+              {CRAWLER_SOURCES.length}채널
+            </div>
+            <div className="mt-0.5 text-[11px] text-zinc-500 truncate">
+              실시간 3 + 공식 채용관 {CRAWLER_SOURCES.length - 3}
+            </div>
+          </button>
+        </section>
+
+        {/* TAB 1: CAREER PASSPORT */}
         {activeTab === "passport" && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-indigo-950/60 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl mt-0.5">💡</span>
-                <div>
-                  <h3 className="text-sm font-bold text-white">처음 오셨나요? 1단계에서 내 희망 조건을 먼저 설정해보세요</h3>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    [📄 이력서 파싱]으로 이력서를 붙여넣거나 직무·연차·통근 조건을 입력한 뒤 우측 상단의{" "}
-                    <strong className="text-emerald-400">[맞춤 공고 탐색 실행 ➔]</strong> 버튼을 누르세요.
-                  </p>
-                </div>
+          <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] divide-y divide-white/[0.08]">
+            {/* Action Header */}
+            <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">
+                  1. 내 커리어 조건 설정
+                </h1>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  직무·경력·기업 Tier·배제 조건을 설정하면 모든 공고의 적합도와 시장 연봉이 즉시 재산출됩니다.
+                </p>
+              </div>
+              <div className="flex items-center space-x-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setIsResumeModalOpen(true)}
+                  className="px-3 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs font-medium text-zinc-200 transition-colors duration-150"
+                >
+                  이력서 파싱
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSavePassport}
+                  className="px-3 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs font-medium text-zinc-200 transition-colors duration-150"
+                >
+                  저장
+                </button>
+                <button
+                  type="button"
+                  onClick={executePassportSearch}
+                  className="px-3.5 py-1.5 rounded-[6px] bg-[#FAFAFA] hover:bg-white text-xs font-semibold text-[#0A0A0B] transition-colors duration-150 inline-flex items-center space-x-1"
+                >
+                  <span>맞춤 공고 탐색 실행</span>
+                  <IconChevronRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
 
-            <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+            {/* 3-Column Core Inputs */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
+              {/* Col 1: Role & Years */}
+              <div className="p-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-[11px] font-medium uppercase tracking-wider text-zinc-400">01 · 직무 및 경력</h2>
+                  <span className="font-mono text-[11px] text-zinc-500">
+                    {passport.track === "ENTRY" || passport.totalYears === 0 ? "ENTRY" : "EXPERIENCED"}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 p-0.5 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px]">
+                  <button
+                    type="button"
+                    onClick={() => setTrackPreset("ENTRY")}
+                    className={`py-1.5 rounded-[4px] text-xs font-medium transition-colors duration-150 ${
+                      passport.track === "ENTRY" || passport.totalYears === 0
+                        ? "bg-[#222226] text-zinc-100"
+                        : "text-zinc-400 hover:text-zinc-200"
+                    }`}
+                  >
+                    신입/인턴 (0년차)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTrackPreset("EXPERIENCED")}
+                    className={`py-1.5 rounded-[4px] text-xs font-medium transition-colors duration-150 ${
+                      passport.track !== "ENTRY" && passport.totalYears > 0
+                        ? "bg-[#222226] text-zinc-100"
+                        : "text-zinc-400 hover:text-zinc-200"
+                    }`}
+                  >
+                    경력직 이직
+                  </button>
+                </div>
+
                 <div>
-                  <h2 className="text-xl font-bold text-white flex items-center space-x-2">
-                    <span>👤 1단계: 내 커리어 조건 설정</span>
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                      자동 저장 지원
-                    </span>
-                  </h2>
-                  <p className="text-xs text-slate-400 mt-1">
-                    입력하신 직무·연차·기업 유형·통근 기준을 바탕으로 공고 적합도와 예상 시장 연봉을 자동 계산합니다.
-                  </p>
+                  <label className="text-xs text-zinc-300 font-medium block mb-1">직군 분야</label>
+                  <select
+                    value={passport.occupation}
+                    onChange={(e) => handleOccupationChange(e.target.value as CareerPassport["occupation"])}
+                    className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-white/[0.25]"
+                  >
+                    <option value="HR">인사 / HR / 피플앤컬처</option>
+                    <option value="PLANNING">전략 / 기획 / 컨설팅 / PM</option>
+                    <option value="TECH">IT / 소프트웨어 개발 / 데이터·AI</option>
+                    <option value="MARKETING">마케팅 / 그로스 / 브랜딩</option>
+                    <option value="FINANCE">재무 / 회계 / 투자 / 금융</option>
+                  </select>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsResumeModalOpen(true)}
-                    className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition"
-                  >
-                    📄 이력서 파싱
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleSavePassport}
-                    className="px-3 py-2 rounded-xl bg-[#18233c] hover:bg-[#202f50] text-xs font-semibold text-slate-300 border border-[#27385c] transition"
-                  >
-                    💾 저장
-                  </button>
-                  <button
-                    type="button"
-                    onClick={executePassportSearch}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-xs font-bold text-white shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5 cursor-pointer"
-                  >
-                    <span>맞춤 공고 탐색 실행 ➔</span>
-                  </button>
-                </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold uppercase text-indigo-400 tracking-wider">1. 직무 및 경력 계층</h3>
-                    <span className="text-[10px] text-slate-400 font-mono">
-                      {passport.track === "ENTRY" || passport.totalYears === 0 ? "🎓 신입/인턴 트랙" : "💼 경력 트랙"}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center space-x-1.5 p-1 bg-[#121a2d] rounded-xl border border-[#233252]">
-                    <button
-                      type="button"
-                      onClick={() => setTrackPreset("ENTRY")}
-                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 cursor-pointer ${
-                        passport.track === "ENTRY" || passport.totalYears === 0
-                          ? "bg-emerald-600 text-white shadow-md"
-                          : "text-slate-300 hover:text-white"
-                      }`}
-                    >
-                      <span>🎓 신입/인턴 (0년차)</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTrackPreset("EXPERIENCED")}
-                      className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-1 cursor-pointer ${
-                        passport.track !== "ENTRY" && passport.totalYears > 0
-                          ? "bg-indigo-600 text-white shadow-md"
-                          : "text-slate-300 hover:text-white"
-                      }`}
-                    >
-                      <span>💼 경력직 이직</span>
-                    </button>
-                  </div>
-
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">직군 분야 (Job Family)</label>
-                    <select
-                      value={passport.occupation}
-                      onChange={(e) => handleOccupationChange(e.target.value as CareerPassport["occupation"])}
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-indigo-500"
-                    >
-                      <option value="HR">인사 / HR / 피플앤컬처</option>
-                      <option value="PLANNING">전략 / 기획 / 컨설팅 / PM</option>
-                      <option value="TECH">IT / 소프트웨어 개발 / 데이터·AI</option>
-                      <option value="MARKETING">마케팅 / 그로스 / 브랜딩</option>
-                      <option value="FINANCE">재무 / 회계 / 투자 / 금융</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">자유 직무명 및 핵심 키워드</label>
-                    <input
-                      type="text"
-                      value={passport.canonicalRole}
-                      onChange={(e) => setPassport({ ...passport, canonicalRole: e.target.value })}
-                      placeholder="예: React 프론트엔드, KICPA 회계사, 그로스마케팅"
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-indigo-500"
-                    />
-                    {passport.skills.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {passport.skills.slice(0, 6).map((sk) => (
-                          <span
-                            key={sk}
-                            className="inline-flex items-center px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 text-[10px]"
-                          >
-                            {sk}
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setPassport((prev) => ({
-                                  ...prev,
-                                  skills: prev.skills.filter((s) => s !== sk),
-                                }))
-                              }
-                              className="ml-1 text-slate-400 hover:text-white"
-                            >
-                              ✕
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between items-center text-xs">
-                      <label className="text-slate-300 font-medium">경력 연차</label>
-                      <span className="font-bold text-indigo-400 font-mono">
-                        {passport.totalYears === 0 ? "0년차 (신입/인턴)" : `${passport.totalYears}년차`}
+                <div>
+                  <label className="text-xs text-zinc-300 font-medium block mb-1">세부 직무명 및 키워드</label>
+                  <input
+                    type="text"
+                    value={passport.canonicalRole}
+                    onChange={(e) => setPassport({ ...passport, canonicalRole: e.target.value })}
+                    placeholder="예: React 프론트엔드, KICPA 회계사, 그로스마케팅"
+                    className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
+                  />
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {passport.skills.map((sk) => (
+                      <span
+                        key={sk}
+                        className="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-[#18181B] border border-white/[0.08] text-zinc-300 text-[11px]"
+                      >
+                        <span>{sk}</span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPassport((prev) => ({
+                              ...prev,
+                              skills: prev.skills.filter((s) => s !== sk),
+                            }))
+                          }
+                          className="ml-1.5 text-zinc-500 hover:text-zinc-200"
+                        >
+                          ×
+                        </button>
                       </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="0"
-                      max="20"
-                      value={passport.totalYears}
-                      onChange={(e) => {
-                        const yrs = parseInt(e.target.value, 10) || 0;
-                        setPassport({
-                          ...passport,
-                          totalYears: yrs,
-                          track: yrs === 0 ? "ENTRY" : "EXPERIENCED",
-                        });
-                      }}
-                      className="w-full mt-2 accent-indigo-500"
-                    />
+                    ))}
                   </div>
-                </div>
-
-                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
-                  <h3 className="text-xs font-bold uppercase text-emerald-400 tracking-wider">
-                    2. 목표 기업군 및 현재 보상 (퇴직금 제외)
-                  </h3>
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">목표/현재 기업 유형 (시장가치 코호트)</label>
-                    <select
-                      value={passport.companyType}
-                      onChange={(e) => setPassport({ ...passport, companyType: e.target.value })}
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-emerald-500"
-                    >
-                      <option value="빅테크/유니콘">Tier 1: 빅테크 / 글로벌 테크 / 유니콘 (1.4x)</option>
-                      <option value="대기업">Tier 2: 주요 대기업 계열사 (1.25x)</option>
-                      <option value="금융/공공기관">Tier 3: 금융권 / 공공기관·공기업 (1.15x)</option>
-                      <option value="중견기업">표준: 일반 중견기업 / 전문법인 (1.0x)</option>
-                      <option value="스타트업/중소기업">Tier 4: 스타트업 / 강소·중소기업 (0.9x)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">기본급 (연간, 만 원)</label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={passport.baseSalary}
-                      onChange={(e) => setPassport({ ...passport, baseSalary: Math.max(0, parseInt(e.target.value, 10) || 0) })}
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs font-mono text-slate-200 mt-1 focus:outline-none focus:border-emerald-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">고정수당/식대 (연간, 만 원)</label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={passport.fixedAllowance}
-                      onChange={(e) => setPassport({ ...passport, fixedAllowance: Math.max(0, parseInt(e.target.value, 10) || 0) })}
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs font-mono text-slate-200 mt-1 focus:outline-none focus:border-emerald-500"
-                    />
-                    <p className="text-[11px] text-emerald-400 font-semibold mt-1.5">
-                      확정 현금: {(passport.baseSalary + passport.fixedAllowance).toLocaleString()}만 원
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 bg-slate-900/90 p-5 rounded-xl border border-slate-800">
-                  <h3 className="text-xs font-bold uppercase text-sky-400 tracking-wider">3. 지역 및 통근</h3>
-                  <div>
-                    <label className="text-xs text-slate-300 font-medium">거주지</label>
+                  <div className="flex space-x-1.5 mt-2">
                     <input
                       type="text"
-                      value={passport.homeLocation}
-                      onChange={(e) => setPassport({ ...passport, homeLocation: e.target.value })}
-                      className="w-full bg-[#111726] border border-[#1f293d] rounded-xl px-3 py-2 text-xs text-slate-200 mt-1 focus:outline-none focus:border-sky-500"
-                    />
-                  </div>
-                  <div>
-                    <div className="flex justify-between items-center text-xs">
-                      <label className="text-slate-300 font-medium">최대 허용 편도 통근</label>
-                      <span className="font-bold text-sky-400 font-mono">{passport.commuteToleranceMinutes}분</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="20"
-                      max="120"
-                      value={passport.commuteToleranceMinutes}
-                      onChange={(e) => setPassport({ ...passport, commuteToleranceMinutes: parseInt(e.target.value, 10) || 60 })}
-                      className="w-full mt-2 accent-sky-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Hard Filter Configuration Panel */}
-              <div className="bg-slate-900/90 p-5 rounded-xl border border-rose-500/20 space-y-4">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-[#1b253b] pb-3">
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <h3 className="text-sm font-bold text-white flex items-center space-x-1.5">
-                        <span>🛡️ 절대 배제 조건 (Hard Filter 수동 설정)</span>
-                      </h3>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold">
-                        STRICT CUTOFF
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-400 mt-1">
-                      체크된 절대 배제 기준에 단 하나라도 위배되는 공고는 [2. 맞춤 공고 탐색]에서 자동 제외됩니다.
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={resetHardFilters}
-                    className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
-                  >
-                    기본값 복원
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.onlyPermanent}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, onlyPermanent: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      🔒 <strong>정규직만 허용</strong> <span className="text-slate-400 text-[11px]">(계약·파견직 배제)</span>
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.onlyCapitalArea}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, onlyCapitalArea: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      📍 <strong>수도권만 허용</strong> <span className="text-slate-400 text-[11px]">(지방 근무지 배제)</span>
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.maxCommuteCutoff}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, maxCommuteCutoff: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      🚗 <strong>통근 한도 초과 컷</strong>{" "}
-                      <span className="text-slate-400 text-[11px]">({passport.commuteToleranceMinutes}분 초과 배제)</span>
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.noHeavyFixedOT}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, noHeavyFixedOT: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      ⏰ <strong>고정OT 20h 초과 배제</strong> <span className="text-slate-400 text-[11px]">(과도한 포괄임금)</span>
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.noBelowCurrentSalary}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, noBelowCurrentSalary: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      💰 <strong>현재 확정보상 미만 배제</strong>{" "}
-                      <span className="text-slate-400 text-[11px]">({(passport.baseSalary + passport.fixedAllowance).toLocaleString()}만원 미만)</span>
-                    </span>
-                  </label>
-
-                  <label className="flex items-center space-x-2.5 bg-[#0e1526] hover:bg-[#141e36] p-3 rounded-xl border border-[#233252] cursor-pointer transition select-none">
-                    <input
-                      type="checkbox"
-                      checked={passport.hardFilters.noRelocationOrg}
-                      onChange={(e) =>
-                        setPassport({ ...passport, hardFilters: { ...passport.hardFilters, noRelocationOrg: e.target.checked } })
-                      }
-                      className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 accent-indigo-500"
-                    />
-                    <span className="text-slate-200">
-                      🚫 <strong>지방 이전·순환 기관 배제</strong> <span className="text-slate-400 text-[11px]">(혁신도시 등)</span>
-                    </span>
-                  </label>
-                </div>
-
-                {/* Custom Exclusion Keywords */}
-                <div className="space-y-2 pt-2 border-t border-[#192235]">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-300 font-medium">사용자 직접 등록 배제 키워드 (포함 시 즉시 컷)</span>
-                    <span className="text-slate-500 text-[11px]">Enter 또는 [추가] 클릭</span>
-                  </div>
-                  <div className="flex space-x-2">
-                    <input
-                      type="text"
-                      value={customKeywordInput}
-                      onChange={(e) => setCustomKeywordInput(e.target.value)}
+                      value={newSkillInput}
+                      onChange={(e) => setNewSkillInput(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           e.preventDefault();
-                          addCustomHardFilter();
+                          addSkillChip();
                         }
                       }}
-                      placeholder="배제할 단어 입력 (예: 교대근무, 현장직, 일용직, 야간당직)..."
-                      className="flex-1 bg-[#111726] border border-[#1f293d] rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500"
+                      placeholder="보유 스킬 추가 후 Enter..."
+                      className="flex-1 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-[11px] text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
                     />
                     <button
                       type="button"
-                      onClick={addCustomHardFilter}
-                      className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition"
+                      onClick={addSkillChip}
+                      className="px-2.5 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-[11px] text-zinc-300"
                     >
                       추가
                     </button>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {passport.hardFilters.customKeywords.map((kw) => (
-                      <span
-                        key={kw}
-                        className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs"
-                      >
-                        <span>🚫 {kw}</span>
-                        <button
-                          type="button"
-                          onClick={() => removeCustomHardFilter(kw)}
-                          className="hover:text-white font-bold ml-1 text-slate-400"
-                        >
-                          ✕
-                        </button>
-                      </span>
-                    ))}
-                    {passport.hardFilters.customKeywords.length === 0 && (
-                      <span className="text-[11px] text-slate-500">등록된 직접 배제 키워드가 없습니다.</span>
-                    )}
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center text-xs mb-2">
+                    <label className="text-zinc-300 font-medium">경력 연차</label>
+                    <span className="font-mono tabular-nums font-semibold text-zinc-100">
+                      {passport.totalYears === 0 ? "0년 (신입)" : `${passport.totalYears}년차`}
+                    </span>
                   </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="20"
+                    value={passport.totalYears}
+                    onChange={(e) => {
+                      const yrs = parseInt(e.target.value, 10) || 0;
+                      setPassport({
+                        ...passport,
+                        totalYears: yrs,
+                        track: yrs === 0 ? "ENTRY" : "EXPERIENCED",
+                      });
+                    }}
+                    className="w-full mono-range"
+                  />
+                </div>
+              </div>
+
+              {/* Col 2: Tier & Compensation */}
+              <div className="p-5 space-y-4">
+                <h2 className="text-[11px] font-medium uppercase tracking-wider text-zinc-400">
+                  02 · 목표 기업군 및 현재 보상
+                </h2>
+
+                <div>
+                  <label className="text-xs text-zinc-300 font-medium block mb-1">목표/현재 기업 유형</label>
+                  <select
+                    value={passport.companyType}
+                    onChange={(e) => setPassport({ ...passport, companyType: e.target.value })}
+                    className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-white/[0.25]"
+                  >
+                    <option value="빅테크/유니콘">Tier 1 · 빅테크 / 유니콘 (1.40x)</option>
+                    <option value="대기업">Tier 2 · 주요 대기업 계열사 (1.25x)</option>
+                    <option value="금융/공공기관">Tier 3 · 금융권 / 공공기관 (1.15x)</option>
+                    <option value="중견기업">표준 · 일반 중견 / 전문법인 (1.00x)</option>
+                    <option value="스타트업/중소기업">Tier 4 · 스타트업 / 중소 (0.90x)</option>
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs text-zinc-300 font-medium block mb-1">기본급 (만 원/년)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={passport.baseSalary}
+                      onChange={(e) =>
+                        setPassport({ ...passport, baseSalary: Math.max(0, parseInt(e.target.value, 10) || 0) })
+                      }
+                      className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs font-mono tabular-nums text-zinc-100 focus:outline-none focus:border-white/[0.25]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-zinc-300 font-medium block mb-1">고정수당 (만 원/년)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={passport.fixedAllowance}
+                      onChange={(e) =>
+                        setPassport({ ...passport, fixedAllowance: Math.max(0, parseInt(e.target.value, 10) || 0) })
+                      }
+                      className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs font-mono tabular-nums text-zinc-100 focus:outline-none focus:border-white/[0.25]"
+                    />
+                  </div>
+                </div>
+
+                <div className="p-3 bg-[#18181B] border border-white/[0.08] rounded-[8px] flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">확정 연간 현금 합계</span>
+                  <span className="font-mono tabular-nums font-semibold text-zinc-100">
+                    {(passport.baseSalary + passport.fixedAllowance).toLocaleString()}만 원
+                  </span>
+                </div>
+              </div>
+
+              {/* Col 3: Location & Commute */}
+              <div className="p-5 space-y-4">
+                <h2 className="text-[11px] font-medium uppercase tracking-wider text-zinc-400">03 · 근무지 및 통근 한도</h2>
+
+                <div>
+                  <label className="text-xs text-zinc-300 font-medium block mb-1">거주지</label>
+                  <input
+                    type="text"
+                    value={passport.homeLocation}
+                    onChange={(e) => setPassport({ ...passport, homeLocation: e.target.value })}
+                    className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-white/[0.25]"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center text-xs mb-2">
+                    <label className="text-zinc-300 font-medium">최대 허용 편도 통근</label>
+                    <span className="font-mono tabular-nums font-semibold text-zinc-100">
+                      {passport.commuteToleranceMinutes}분 이내
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="20"
+                    max="120"
+                    value={passport.commuteToleranceMinutes}
+                    onChange={(e) =>
+                      setPassport({ ...passport, commuteToleranceMinutes: parseInt(e.target.value, 10) || 60 })
+                    }
+                    className="w-full mono-range"
+                  />
+                </div>
+
+                <div className="p-3 bg-[#18181B] border border-white/[0.08] rounded-[8px] flex items-center justify-between text-xs">
+                  <span className="text-zinc-400">필터 적용 후 추천 풀</span>
+                  <span className="font-mono tabular-nums font-semibold text-zinc-100">
+                    {filteredJobs.length} / {jobsDatabase.length}건
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* 3 Interactive Market Intelligence Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              <div
-                onClick={() => setIsMarketValueModalOpen(true)}
-                className="bg-[#0f172a] border border-slate-800 hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
-              >
-                <div className="text-xs text-slate-400 flex items-center justify-between gap-2">
-                  <span className="group-hover:text-indigo-300 transition font-medium whitespace-nowrap">내 시장 가치 추정 (P25~P75)</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30 whitespace-nowrap shrink-0">
-                    {marketValue.confidenceTier.split(" ").slice(0, 2).join(" ")} (n={marketValue.sampleSize})
+            {/* Hard Filter Panel */}
+            <div className="p-5 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center space-x-2.5">
+                  <h2 className="text-xs font-semibold text-zinc-200">절대 배제 조건 (Hard Filter)</h2>
+                  <span className="px-2 py-0.5 rounded-[4px] bg-[#18181B] border border-white/[0.08] font-mono tabular-nums text-[10px] text-zinc-400">
+                    {excludedCount}건 제외 중
                   </span>
                 </div>
-                <div className="mt-2 text-lg xl:text-xl font-bold font-mono text-white flex items-center justify-between gap-2">
-                  <span className="whitespace-nowrap">{marketValue.rangeDisplay}</span>
-                  <span className="text-xs text-indigo-400 opacity-80 group-hover:opacity-100 font-sans font-normal whitespace-nowrap shrink-0">
-                    산출 근거 🔍
-                  </span>
-                </div>
-                <p className="text-[11px] text-slate-400 mt-1">
-                  {marketValue.cohortDescription} (클릭 시 통계 공식 확인)
-                </p>
+                <button
+                  type="button"
+                  onClick={resetHardFilters}
+                  className="text-xs text-zinc-400 hover:text-zinc-100 underline decoration-zinc-700 transition-colors duration-150 self-start sm:self-auto"
+                >
+                  기본값 복원
+                </button>
               </div>
 
-              <div
-                onClick={() => setActiveTab("radar")}
-                className="bg-[#0f172a] border border-slate-800 hover:border-emerald-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
-              >
-                <div className="text-xs text-slate-400 flex items-center justify-between gap-2">
-                  <span className="group-hover:text-emerald-300 transition font-medium whitespace-nowrap">동적 매칭 고적합 공고</span>
-                  <span className="text-emerald-400 text-xs font-mono font-bold whitespace-nowrap shrink-0">HIGH MATCH</span>
-                </div>
-                <div className="mt-2 text-lg xl:text-xl font-bold font-mono text-emerald-400 flex items-center justify-between gap-2">
-                  <span className="whitespace-nowrap">{highMatchCount}건 탐색됨</span>
-                  <span className="text-xs text-emerald-400 font-sans font-normal whitespace-nowrap shrink-0">공고 보기 ➔</span>
-                </div>
-                <p className="text-[11px] text-slate-400 mt-1">내 패스포트 조건과 88% 이상 부합 (클릭 시 레이더 이동)</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
+                {[
+                  {
+                    key: "onlyPermanent" as const,
+                    title: "정규직만 허용",
+                    sub: "계약·파견·위촉직 배제",
+                    checked: passport.hardFilters.onlyPermanent,
+                  },
+                  {
+                    key: "onlyCapitalArea" as const,
+                    title: "수도권·원격만 허용",
+                    sub: "지방 근무지 배제",
+                    checked: passport.hardFilters.onlyCapitalArea,
+                  },
+                  {
+                    key: "maxCommuteCutoff" as const,
+                    title: "통근 한도 초과 컷",
+                    sub: `${passport.commuteToleranceMinutes}분 초과 배제`,
+                    checked: passport.hardFilters.maxCommuteCutoff,
+                  },
+                  {
+                    key: "noHeavyFixedOT" as const,
+                    title: "고정OT 20h 초과 배제",
+                    sub: "과도한 포괄임금 컷",
+                    checked: passport.hardFilters.noHeavyFixedOT,
+                  },
+                  {
+                    key: "noBelowCurrentSalary" as const,
+                    title: "현재 보상 미만 배제",
+                    sub: `${(passport.baseSalary + passport.fixedAllowance).toLocaleString()}만 미만 컷`,
+                    checked: passport.hardFilters.noBelowCurrentSalary,
+                  },
+                  {
+                    key: "noRelocationOrg" as const,
+                    title: "지방 이전·순환 기관 배제",
+                    sub: "혁신도시 순환근무 컷",
+                    checked: passport.hardFilters.noRelocationOrg,
+                  },
+                ].map((f) => (
+                  <label
+                    key={f.key}
+                    className={`flex items-start space-x-2.5 p-3 rounded-[8px] border cursor-pointer transition-colors duration-150 select-none ${
+                      f.checked
+                        ? "bg-[#18181B] border-white/[0.14]"
+                        : "bg-[#0A0A0B] border-white/[0.06] hover:border-white/[0.12]"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={f.checked}
+                      onChange={(e) =>
+                        setPassport({
+                          ...passport,
+                          hardFilters: { ...passport.hardFilters, [f.key]: e.target.checked },
+                        })
+                      }
+                      className="mt-0.5 w-3.5 h-3.5 rounded accent-zinc-100 bg-zinc-900 border-zinc-700"
+                    />
+                    <div className="min-w-0">
+                      <div className="font-medium text-zinc-200">{f.title}</div>
+                      <div className="text-[11px] text-zinc-500">{f.sub}</div>
+                    </div>
+                  </label>
+                ))}
               </div>
 
-              <div
-                onClick={() => setIsSkillGapModalOpen(true)}
-                className="bg-[#0f172a] border border-slate-800 hover:border-indigo-500/70 transition rounded-2xl p-5 cursor-pointer group shadow-lg"
-              >
-                <div className="text-xs text-slate-400 flex items-center justify-between gap-2">
-                  <span className="group-hover:text-indigo-300 transition font-medium whitespace-nowrap">스킬 갭 보완 시 확장 시장</span>
-                  <span className="text-indigo-400 text-xs font-mono font-bold bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/30 whitespace-nowrap shrink-0">
-                    +{totalSkillGapExpanded}건 확장
-                  </span>
+              <div className="pt-2 space-y-2">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    value={customKeywordInput}
+                    onChange={(e) => setCustomKeywordInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        addCustomHardFilter();
+                      }
+                    }}
+                    placeholder="직접 배제 키워드 입력 (예: 교대근무, 야간당직) 후 Enter..."
+                    className="flex-1 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
+                  />
+                  <button
+                    type="button"
+                    onClick={addCustomHardFilter}
+                    className="px-3.5 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs font-medium text-zinc-200 transition-colors duration-150"
+                  >
+                    키워드 추가
+                  </button>
                 </div>
-                <div className="mt-2 text-lg xl:text-xl font-bold font-mono text-indigo-400 flex items-center justify-between gap-2">
-                  <span className="truncate pr-2">{skillGapTracks[0].name.split("&")[0].trim()} 외 {skillGapTracks.length - 1}개</span>
-                  <span className="text-xs text-indigo-400 font-sans font-normal whitespace-nowrap shrink-0">상세 {totalSkillGapExpanded}건 ➔</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {passport.hardFilters.customKeywords.map((kw) => (
+                    <span
+                      key={kw}
+                      className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded-[4px] bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px]"
+                    >
+                      <span>{kw}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeCustomHardFilter(kw)}
+                        className="text-rose-400 hover:text-white font-mono"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
                 </div>
-                <p className="text-[11px] text-slate-400 mt-1">
-                  {passport.occupation} 직군 3대 전략 스킬 확보 시 열리는 타깃 포지션 보기
-                </p>
               </div>
             </div>
           </div>
         )}
 
+        {/* TAB 2: OPPORTUNITY RADAR */}
         {activeTab === "radar" && (
-          <div className="space-y-5">
-            <div className="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-9 h-9 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold text-lg">
-                  🎯
-                </div>
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <h3 className="font-bold text-white text-sm">2단계: AI 맞춤 추천 공고 탐색</h3>
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold flex items-center space-x-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <span>실시간 크롤링 + {CRAWLER_SOURCES.length}개 공식 채용관 연동</span>
-                    </span>
-                  </div>
-                  <p className="text-slate-400 text-xs mt-0.5">
-                    공공기관(ALIO)·Big4 자사 ATS 일일 수집 공고 및 주요 기업 채용 포지션을 내 프로필 적합도 순으로 추천합니다.
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsCrawlerModalOpen(true)}
-                className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition whitespace-nowrap shadow-sm"
-              >
-                연동 채널 {CRAWLER_SOURCES.length}곳 보기 🔍
-              </button>
-            </div>
-
-            <div className="bg-[#0f172a] p-5 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+          <div className="space-y-4">
+            {/* Search & Filter Controller */}
+            <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] p-4 space-y-3.5">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                 <div>
-                  <h2 className="text-base font-bold text-white flex items-center space-x-2">
-                    <span>📡 공고 조건 검색 및 필터</span>
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-normal">
-                      총 {filteredJobs.length}건 추천됨
+                  <div className="flex items-center space-x-2.5">
+                    <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">2. 맞춤 공고 탐색</h1>
+                    <span className="px-2 py-0.5 rounded-[4px] bg-[#18181B] border border-white/[0.08] font-mono tabular-nums text-[11px] text-zinc-300">
+                      {filteredJobs.length}건 추천됨
                     </span>
-                  </h2>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    내 희망 직군({passport.occupation}) · 통근({passport.commuteToleranceMinutes}분) · 경력(
-                    {passport.totalYears === 0 ? "신입" : `${passport.totalYears}년차`}) 기준 적합도 순 정렬
+                  </div>
+                  <p className="text-xs text-zinc-400 mt-0.5">
+                    {passport.occupation} · {passport.totalYears === 0 ? "신입" : `${passport.totalYears}년차`} · 통근{" "}
+                    {passport.commuteToleranceMinutes}분 이내 기준 적합도 내림차순
                   </p>
                 </div>
-                <div className="w-full md:w-80 flex space-x-2">
-                  <input
-                    type="text"
-                    placeholder="🔍 기업명, 공고명, 직무 키워드 검색..."
-                    value={radarSearch}
-                    onChange={(e) => setRadarSearch(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
-                  />
+
+                <div className="flex items-center space-x-2 w-full md:w-auto">
+                  <div className="relative flex-1 md:w-64">
+                    <IconSearch className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      placeholder="기업명, 공고, 직무 검색..."
+                      value={radarSearch}
+                      onChange={(e) => setRadarSearch(e.target.value)}
+                      className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
+                    />
+                  </div>
                   {(radarFilter !== "all" || radarSearch.trim()) && (
                     <button
                       type="button"
@@ -1010,35 +1049,55 @@ export default function Home() {
                         setRadarFilter("all");
                         setRadarSearch("");
                       }}
-                      className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 shrink-0"
+                      className="px-2.5 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs text-zinc-300 shrink-0"
                     >
                       초기화
                     </button>
                   )}
+                  <div className="flex p-0.5 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setRadarViewMode("table")}
+                      className={`px-2 py-1 rounded-[4px] text-[11px] font-medium transition-colors duration-150 ${
+                        radarViewMode === "table" ? "bg-[#222226] text-zinc-100" : "text-zinc-500 hover:text-zinc-200"
+                      }`}
+                    >
+                      테이블
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRadarViewMode("cards")}
+                      className={`px-2 py-1 rounded-[4px] text-[11px] font-medium transition-colors duration-150 ${
+                        radarViewMode === "cards" ? "bg-[#222226] text-zinc-100" : "text-zinc-500 hover:text-zinc-200"
+                      }`}
+                    >
+                      카드
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-3 pt-3 border-t border-slate-800/80 text-xs">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-slate-400 font-semibold text-[11px] w-16">직군 분야:</span>
+              <div className="space-y-2 pt-3 border-t border-white/[0.06] text-xs">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[11px] text-zinc-500 w-14">직군</span>
                   {(
                     [
-                      { id: "all", label: "전체 직군" },
-                      { id: "tech", label: "💻 IT·개발·데이터" },
-                      { id: "finance", label: "💰 금융·재무·회계" },
-                      { id: "marketing", label: "📢 마케팅·그로스" },
-                      { id: "hr", label: "👔 인사·HR" },
-                      { id: "planning", label: "📊 전략·기획·컨설팅" },
+                      { id: "all", label: "전체" },
+                      { id: "tech", label: "IT·개발" },
+                      { id: "finance", label: "금융·재무·회계" },
+                      { id: "marketing", label: "마케팅·그로스" },
+                      { id: "hr", label: "인사·HR" },
+                      { id: "planning", label: "전략·기획·PM" },
                     ] as { id: RadarFilterId; label: string }[]
                   ).map((f) => (
                     <button
                       key={f.id}
                       type="button"
                       onClick={() => setRadarFilter(f.id)}
-                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
+                      className={`px-2.5 py-1 rounded-[6px] text-xs transition-colors duration-150 ${
                         radarFilter === f.id
-                          ? "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30"
-                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                          ? "bg-[#FAFAFA] text-[#0A0A0B] font-semibold"
+                          : "bg-[#18181B] text-zinc-300 hover:bg-[#222226] border border-white/[0.06]"
                       }`}
                     >
                       {f.label}
@@ -1046,50 +1105,29 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-slate-400 font-semibold text-[11px] w-16">기업 유형:</span>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[11px] text-zinc-500 w-14">기업·조건</span>
                   {(
                     [
-                      { id: "exclusive", label: "🏢 자사사이트 단독" },
-                      { id: "conglomerate", label: "🏭 대기업 / 중견그룹" },
-                      { id: "public", label: "🏛️ 공공기관 / 국책금융 (ALIO)" },
-                      { id: "consulting", label: "💼 Big4·전략컨설팅" },
-                      { id: "globalTech", label: "🌐 글로벌 테크 / 유니콘" },
+                      { id: "exclusive", label: "자사 단독" },
+                      { id: "conglomerate", label: "대기업" },
+                      { id: "public", label: "공공기관(ALIO)" },
+                      { id: "consulting", label: "Big4·컨설팅" },
+                      { id: "globalTech", label: "글로벌·유니콘" },
+                      { id: "entry", label: "신입·인턴" },
+                      { id: "highMatch", label: "적합도 85%+" },
+                      { id: "commuteFit", label: `통근 ${passport.commuteToleranceMinutes}분↓` },
+                      { id: "nonOT", label: "비포괄" },
                     ] as { id: RadarFilterId; label: string }[]
                   ).map((f) => (
                     <button
                       key={f.id}
                       type="button"
                       onClick={() => setRadarFilter(f.id)}
-                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
+                      className={`px-2.5 py-1 rounded-[6px] text-xs transition-colors duration-150 ${
                         radarFilter === f.id
-                          ? "bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30"
-                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
-                      }`}
-                    >
-                      {f.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-slate-400 font-semibold text-[11px] w-16">핵심 조건:</span>
-                  {(
-                    [
-                      { id: "entry", label: "🎓 신입 / 인턴 우선" },
-                      { id: "highMatch", label: "🎯 적합도 85%+ 강력 추천" },
-                      { id: "commuteFit", label: `🚗 통근 ${passport.commuteToleranceMinutes}분 이내` },
-                      { id: "nonOT", label: "🌟 비포괄 임금제 (야근수당 별도)" },
-                    ] as { id: RadarFilterId; label: string }[]
-                  ).map((f) => (
-                    <button
-                      key={f.id}
-                      type="button"
-                      onClick={() => setRadarFilter(f.id)}
-                      className={`px-3 py-1.5 rounded-lg text-xs transition ${
-                        radarFilter === f.id
-                          ? "bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/30"
-                          : "bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800"
+                          ? "bg-[#FAFAFA] text-[#0A0A0B] font-semibold"
+                          : "bg-[#18181B] text-zinc-300 hover:bg-[#222226] border border-white/[0.06]"
                       }`}
                     >
                       {f.label}
@@ -1098,200 +1136,257 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-slate-800/80 text-xs">
-                <span className="text-slate-400">
-                  🛡️ 절대 배제 조건에 걸려 <strong className="text-rose-400 font-mono">{excludedCount}건</strong>이 자동 제외되었습니다.
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2.5 border-t border-white/[0.06] text-xs text-zinc-400">
+                <span>
+                  절대 배제 조건으로 <span className="font-mono tabular-nums text-zinc-200">{excludedCount}건</span>이 제외되었습니다.
                 </span>
-                <label className="flex items-center space-x-1.5 text-slate-300 hover:text-white cursor-pointer select-none">
+                <label className="flex items-center space-x-2 text-zinc-300 hover:text-white cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={showExcludedJobs}
                     onChange={(e) => setShowExcludedJobs(e.target.checked)}
-                    className="rounded text-indigo-500 bg-slate-900 border-slate-700 accent-indigo-500"
+                    className="w-3.5 h-3.5 rounded accent-zinc-100"
                   />
                   <span>배제된 공고도 함께 보기</span>
                 </label>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {filteredJobs.length === 0 ? (
-                <div className="col-span-2 text-center py-16 bg-[#0f172a] border border-slate-800 rounded-2xl text-slate-400 text-sm">
-                  검색 조건에 부합하는 포지션이 없습니다. 상단 [초기화] 버튼을 누르거나 배제 조건을 완화해 보세요.
-                </div>
-              ) : (
-                filteredJobs.map(({ job, match, hf }) => (
+            {/* Results: Table or Cards */}
+            {filteredJobs.length === 0 ? (
+              <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] py-16 text-center text-xs text-zinc-400">
+                조건에 일치하는 공고가 없습니다. 필터를 초기화하거나 배제 기준을 완화해 주세요.
+              </div>
+            ) : radarViewMode === "table" ? (
+              <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-[#18181B] border-b border-white/[0.08] text-zinc-400">
+                    <tr>
+                      <th className="py-2.5 px-3.5 font-medium">기업 / 포지션</th>
+                      <th className="py-2.5 px-3 font-medium">직군</th>
+                      <th className="py-2.5 px-3 font-medium">보상 기준</th>
+                      <th className="py-2.5 px-3 font-medium">통근</th>
+                      <th className="py-2.5 px-3 font-medium">임금형태</th>
+                      <th className="py-2.5 px-3 text-right font-medium">적합도</th>
+                      <th className="py-2.5 px-3.5 text-right font-medium">액션</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/[0.06]">
+                    {filteredJobs.map(({ job, match, hf }) => (
+                      <tr
+                        key={job.id}
+                        onClick={() => openJobDetail(job, match, hf)}
+                        className={`cursor-pointer transition-colors duration-150 ${
+                          hf.isExcluded ? "opacity-55 hover:bg-[#18181B]" : "hover:bg-[#18181B]"
+                        }`}
+                      >
+                        <td className="py-3 px-3.5 max-w-md">
+                          <div className="flex items-center space-x-2">
+                            <span className="font-semibold text-zinc-100 shrink-0">{job.company}</span>
+                            {job.isEntryLevel && (
+                              <span className="px-1.5 py-0.5 rounded-[4px] bg-[#18181B] border border-white/[0.08] text-[10px] text-zinc-300 shrink-0">
+                                신입
+                              </span>
+                            )}
+                            {hf.isExcluded && (
+                              <span className="px-1.5 py-0.5 rounded-[4px] bg-rose-500/10 border border-rose-500/20 text-[10px] text-rose-400 shrink-0">
+                                배제
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-zinc-300 mt-0.5 truncate">{job.title}</div>
+                          {hf.isExcluded && (
+                            <div className="text-[11px] text-rose-400 mt-0.5 truncate">{hf.exclusionReasons[0]}</div>
+                          )}
+                        </td>
+                        <td className="py-3 px-3 font-mono text-[11px] text-zinc-400 whitespace-nowrap">{job.occupation}</td>
+                        <td className="py-3 px-3 font-mono tabular-nums text-zinc-200 whitespace-nowrap">
+                          {job.salaryMinManwon.toLocaleString()}~{job.salaryMaxManwon.toLocaleString()}만
+                        </td>
+                        <td className="py-3 px-3 font-mono tabular-nums text-zinc-300 whitespace-nowrap">
+                          {job.commuteMinutes}분
+                        </td>
+                        <td className="py-3 px-3 text-[11px] text-zinc-400 whitespace-nowrap">
+                          {job.hasFixedOT ? `포괄 ${job.fixedOTHours}h` : "비포괄"}
+                        </td>
+                        <td className="py-3 px-3 text-right whitespace-nowrap">
+                          <span className="inline-flex items-center space-x-1.5 font-mono tabular-nums font-semibold">
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                match.totalScore >= 88
+                                  ? "bg-emerald-400"
+                                  : match.totalScore >= 70
+                                  ? "bg-zinc-300"
+                                  : "bg-zinc-600"
+                              }`}
+                            />
+                            <span className={match.totalScore >= 88 ? "text-emerald-400" : "text-zinc-100"}>
+                              {match.totalScore}%
+                            </span>
+                          </span>
+                        </td>
+                        <td
+                          className="py-3 px-3.5 text-right whitespace-nowrap"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="inline-flex items-center space-x-1.5">
+                            <button
+                              type="button"
+                              onClick={() => openJobDetail(job, match, hf)}
+                              className="px-2 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-[11px] text-zinc-200"
+                            >
+                              상세 분석
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => sendJobToScanner(job)}
+                              className="px-2 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-[11px] text-zinc-300"
+                            >
+                              진단
+                            </button>
+                            <a
+                              href={job.jobUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-2 py-1 rounded-[6px] bg-[#FAFAFA] hover:bg-white text-[#0A0A0B] text-[11px] font-semibold inline-flex items-center space-x-0.5"
+                            >
+                              <span>원문</span>
+                              <IconExternal className="w-3 h-3" />
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {filteredJobs.map(({ job, match, hf }) => (
                   <div
                     key={job.id}
-                    className={`group bg-[#0f172a] hover:bg-[#131d35] border ${
-                      hf.isExcluded
-                        ? "border-rose-900/60 opacity-60 hover:opacity-100"
-                        : "border-slate-800 hover:border-indigo-500/50"
-                    } rounded-2xl p-5 space-y-4 transition-all duration-200 flex flex-col justify-between shadow-lg shadow-black/20`}
+                    className={`bg-[#111113] border ${
+                      hf.isExcluded ? "border-rose-500/20 opacity-60" : "border-white/[0.08] hover:border-white/[0.16]"
+                    } rounded-[10px] p-4 space-y-3.5 flex flex-col justify-between transition-colors duration-150`}
                   >
                     <div>
                       {hf.isExcluded && (
-                        <div className="mb-3 p-3 bg-rose-950/40 border border-rose-500/40 rounded-xl text-rose-300 text-xs font-semibold flex items-start space-x-2">
-                          <span className="text-base leading-none">🚫</span>
-                          <div>
-                            <span className="font-bold text-rose-400">[내 절대 배제 조건 위반]</span>
-                            <span className="text-[11px] text-rose-200 ml-1.5">{hf.exclusionReasons.join(" • ")}</span>
-                          </div>
+                        <div className="mb-3 px-2.5 py-2 bg-rose-500/10 border border-rose-500/20 rounded-[6px] text-rose-300 text-[11px]">
+                          배제 사유: {hf.exclusionReasons.join(" · ")}
                         </div>
                       )}
 
                       <div className="flex justify-between items-start gap-3">
-                        <div className="space-y-1">
-                          <div className="flex flex-wrap items-center gap-1.5">
-                            <span className="text-sm font-bold text-slate-200">{job.company}</span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700 font-medium">
-                              {job.occupation}
-                            </span>
-                            {job.isCompanyExclusive && (
-                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold">
-                                🏢 자사 사이트 단독
-                              </span>
-                            )}
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-zinc-400">
+                            <span className="font-semibold text-zinc-200">{job.company}</span>
+                            <span>·</span>
+                            <span className="font-mono">{job.occupation}</span>
                             {job.isEntryLevel && (
-                              <span className="text-[10px] px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">
-                                🎓 신입·인턴
-                              </span>
+                              <>
+                                <span>·</span>
+                                <span className="text-zinc-300">신입/인턴</span>
+                              </>
                             )}
                           </div>
-                          <h3 className="text-base font-extrabold text-white group-hover:text-indigo-200 transition">
-                            {job.title}
-                          </h3>
-                          <p className="text-xs text-indigo-400 font-medium">직무 카테고리: {job.canonicalRole}</p>
+                          <h3 className="text-sm font-semibold text-zinc-100 mt-1">{job.title}</h3>
+                          <p className="text-xs text-zinc-400 mt-0.5">{job.canonicalRole}</p>
                         </div>
 
-                        <div className="flex-shrink-0 text-center bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-xl">
+                        <div className="text-right shrink-0 bg-[#18181B] border border-white/[0.08] px-2.5 py-1.5 rounded-[6px]">
                           <span
-                            className={`text-2xl font-mono font-black block leading-none ${
-                              match.totalScore >= 88
-                                ? "text-emerald-400"
-                                : match.totalScore >= 70
-                                ? "text-sky-400"
-                                : "text-amber-400"
+                            className={`text-lg font-mono tabular-nums font-bold block leading-none ${
+                              match.totalScore >= 88 ? "text-emerald-400" : "text-zinc-100"
                             }`}
                           >
                             {match.totalScore}%
                           </span>
-                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mt-1 block">
-                            적합도
-                          </span>
+                          <span className="text-[10px] text-zinc-500 font-mono mt-1 block">FIT</span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-4 gap-2 py-3 border-y border-slate-800/80 my-3 text-[11px]">
-                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
-                          <span className="text-slate-400 text-[10px] block">직무 일치</span>
-                          <span className="font-bold text-indigo-400 font-mono text-xs">{match.roleFit}%</span>
-                        </div>
-                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
-                          <span className="text-slate-400 text-[10px] block">연차 충족</span>
-                          <span className="font-bold text-sky-400 font-mono text-xs">{match.seniorityFit}%</span>
-                        </div>
-                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
-                          <span className="text-slate-400 text-[10px] block">통근 여건</span>
-                          <span className="font-bold text-emerald-400 font-mono text-xs">{match.commuteFit}%</span>
-                        </div>
-                        <div className="bg-slate-900/50 p-2 rounded-lg text-center">
-                          <span className="text-slate-400 text-[10px] block">보상 수준</span>
-                          <span className="font-bold text-purple-400 font-mono text-xs">{match.salaryFit}%</span>
-                        </div>
+                      <div className="grid grid-cols-4 gap-1.5 my-3 text-center">
+                        {[
+                          { label: "직무", v: match.roleFit },
+                          { label: "연차", v: match.seniorityFit },
+                          { label: "통근", v: match.commuteFit },
+                          { label: "보상", v: match.salaryFit },
+                        ].map((m) => (
+                          <div key={m.label} className="bg-[#0A0A0B] border border-white/[0.06] py-1.5 rounded-[6px]">
+                            <span className="text-[10px] text-zinc-500 block">{m.label}</span>
+                            <span className="font-mono tabular-nums text-xs text-zinc-200 font-medium">{m.v}%</span>
+                          </div>
+                        ))}
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-between gap-2 bg-slate-900/80 border border-slate-800/90 p-2.5 rounded-xl text-xs">
-                        <div className="flex items-center space-x-2">
-                          <span className="font-semibold text-slate-300">💰 예상 연봉:</span>
-                          <span className="font-mono text-slate-100 font-bold">{job.salaryDisplay}</span>
-                          <span
-                            className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold ${
-                              job.salaryTier === "A" ? "bg-emerald-500/20 text-emerald-400" : "bg-sky-500/20 text-sky-400"
-                            }`}
-                          >
-                            Tier {job.salaryTier}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-1.5 text-slate-300">
-                          <span>🚗 편도 {job.commuteMinutes}분</span>
-                          {job.commuteMinutes <= (passport.commuteToleranceMinutes || 60) ? (
-                            <span className="text-emerald-400 font-semibold text-[11px]">(통근 안심)</span>
-                          ) : (
-                            <span className="text-amber-400 font-semibold text-[11px]">(장거리 통근)</span>
-                          )}
-                        </div>
+                      <div className="flex justify-between items-center text-xs bg-[#18181B] border border-white/[0.06] px-3 py-2 rounded-[6px]">
+                        <span className="font-mono tabular-nums text-zinc-200">{job.salaryDisplay}</span>
+                        <span className="font-mono tabular-nums text-zinc-400 shrink-0 ml-2">{job.commuteMinutes}분</span>
                       </div>
 
-                      <div className="space-y-1 text-xs pt-3">
+                      <div className="space-y-1 text-[11px] pt-2.5">
                         {match.matchedReasons.slice(0, 2).map((reason, idx) => (
-                          <div key={idx} className="text-emerald-400 text-[11px] flex items-center space-x-1.5">
-                            <span className="font-bold">✓</span>
-                            <span>{reason}</span>
+                          <div key={idx} className="text-zinc-300 flex items-center space-x-1.5">
+                            <span className="text-emerald-400 font-mono">+</span>
+                            <span className="truncate">{reason}</span>
                           </div>
                         ))}
                         {match.gapReasons.slice(0, 1).map((gap, idx) => (
-                          <div key={idx} className="text-amber-400 text-[11px] flex items-center space-x-1.5">
-                            <span className="font-bold">▲</span>
-                            <span>{gap}</span>
+                          <div key={idx} className="text-zinc-500 flex items-center space-x-1.5">
+                            <span className="text-amber-400 font-mono">-</span>
+                            <span className="truncate">{gap}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
-                      <div className="flex items-center space-x-1.5 text-[11px] text-slate-400">
-                        <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 font-mono text-slate-300 text-[10px]">
-                          {job.sourceSystem || job.sourceName}
-                        </span>
-                        {!job.hasFixedOT && <span className="text-emerald-400 font-bold text-[10px]">★ 비포괄(수당별도)</span>}
-                      </div>
-                      <div className="flex items-center space-x-2">
+                    <div className="pt-3 border-t border-white/[0.06] flex flex-wrap justify-between items-center gap-2">
+                      <span className="text-[11px] font-mono text-zinc-500">
+                        {job.sourceSystem || job.sourceName} · {job.hasFixedOT ? `포괄 ${job.fixedOTHours}h` : "비포괄"}
+                      </span>
+                      <div className="flex items-center space-x-1.5">
                         <button
                           type="button"
                           onClick={() => openJobDetail(job, match, hf)}
-                          className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition"
+                          className="px-2.5 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs text-zinc-200"
                         >
-                          상세 분석 🔍
+                          상세 분석
                         </button>
                         <button
                           type="button"
                           onClick={() => sendJobToScanner(job)}
-                          className="px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-xs font-semibold transition"
+                          className="px-2.5 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs text-zinc-300"
                         >
-                          노동법 진단 ⚖️
+                          노동법 진단
                         </button>
                         <a
                           href={job.jobUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white text-xs font-bold transition shadow-sm"
+                          className="px-3 py-1 rounded-[6px] bg-[#FAFAFA] hover:bg-white text-[#0A0A0B] text-xs font-semibold inline-flex items-center space-x-1"
                         >
-                          지원 원문 ↗
+                          <span>지원 원문</span>
+                          <IconExternal className="w-3 h-3" />
                         </a>
                       </div>
                     </div>
                   </div>
-                ))
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
+        {/* TAB 3: LABOR RISK SCANNER */}
         {activeTab === "scanner" && (
-          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-6 shadow-xl">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-4">
+          <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] divide-y divide-white/[0.08]">
+            <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h2 className="text-xl font-bold text-white flex items-center space-x-2">
-                  <span>⚖️ 3단계: 근로계약 & 채용공고 독소조항 진단기</span>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                    근로기준법 위반 리스크 자동 감지
-                  </span>
-                </h2>
-                <p className="text-xs text-slate-300 mt-1.5">
-                  채용 공고 본문이나 근로계약서 문구를 붙여넣으면{" "}
-                  <strong className="text-rose-300">포괄임금제 악용, 퇴직금 분할 약정, 수습기간 감액, 위약 예정 금지</strong> 등
-                  독소조항을 감지합니다.
+                <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">
+                  3. 근로계약 · 공고 독소조항 진단
+                </h1>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  포괄임금 고정OT, 퇴직금 분할 지급, 수습 감액, 위약 예정 금지(근로기준법 제20조) 위반 소지를 검출합니다.
                 </p>
               </div>
               <div className="flex space-x-2 text-xs shrink-0">
@@ -1303,7 +1398,7 @@ export default function Home() {
                     setScannerText(ex);
                     setScanResult(diagnoseJobRisks(ex));
                   }}
-                  className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 border border-rose-500/30 transition"
+                  className="px-3 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-rose-300"
                 >
                   위험 계약 샘플 넣기
                 </button>
@@ -1315,62 +1410,62 @@ export default function Home() {
                     setScannerText(ex);
                     setScanResult(diagnoseJobRisks(ex));
                   }}
-                  className="px-3 py-1.5 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-500/30 transition"
+                  className="px-3 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-emerald-300"
                 >
                   정상 계약 샘플 넣기
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="space-y-4">
+            <div className="p-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
+              <div className="space-y-3">
                 <textarea
-                  rows={11}
+                  rows={12}
                   value={scannerText}
                   onChange={(e) => setScannerText(e.target.value)}
-                  placeholder="공고 텍스트를 붙여넣으세요 (예: 포괄임금 연봉 5,000만 원, 수습 80% 지급 등)..."
-                  className="w-full bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500"
+                  placeholder="채용 공고 본문이나 근로계약 조건을 붙여넣으세요..."
+                  className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[8px] p-3.5 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
                 />
                 <button
                   type="button"
                   onClick={handleScan}
-                  className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-bold text-xs text-white shadow-lg shadow-indigo-600/30 transition"
+                  className="w-full py-2.5 rounded-[6px] bg-[#FAFAFA] hover:bg-white font-semibold text-xs text-[#0A0A0B] transition-colors duration-150"
                 >
-                  실시간 계약 리스크 진단 실행
+                  계약 리스크 진단 실행
                 </button>
               </div>
 
-              <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5">
+              <div className="bg-[#0A0A0B] border border-white/[0.08] rounded-[8px] p-4">
                 {scanResult ? (
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                      <span className={`text-xs font-bold ${scanResult.isClean ? "text-emerald-400" : "text-rose-400"}`}>
+                    <div className="flex justify-between items-center border-b border-white/[0.08] pb-2.5">
+                      <span className={`text-xs font-semibold ${scanResult.isClean ? "text-emerald-400" : "text-rose-400"}`}>
                         진단 결과 ({scanResult.warnings.length}건 위험 감지)
                       </span>
-                      <span className="text-[11px] text-slate-400 font-mono">
-                        {scanResult.hasFixedOT ? `고정OT: ${scanResult.fixedOTHours}시간` : "고정OT 없음"}
+                      <span className="text-[11px] text-zinc-400 font-mono tabular-nums">
+                        {scanResult.hasFixedOT ? `고정OT ${scanResult.fixedOTHours}h` : "고정OT 없음"}
                       </span>
                     </div>
 
                     {scanResult.warnings.map((w, idx) => (
-                      <div key={idx} className="p-3 bg-rose-950/20 border border-rose-500/30 rounded-xl space-y-1">
-                        <div className="text-xs font-bold text-rose-400">{w.title}</div>
-                        <div className="text-[11px] text-slate-300">{w.desc}</div>
+                      <div key={idx} className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-[6px] space-y-1">
+                        <div className="text-xs font-semibold text-rose-400">{w.title}</div>
+                        <div className="text-[11px] text-zinc-300 leading-relaxed">{w.desc}</div>
                       </div>
                     ))}
 
                     {scanResult.isClean && (
-                      <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded-xl text-center">
-                        <div className="text-emerald-400 text-sm font-bold">✅ 깨끗하고 투명한 공고 조건입니다.</div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          포괄임금, 퇴직금 분할, 수습 감액 등 주요 독소조항이 감지되지 않았습니다.
+                      <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-[6px] text-center">
+                        <div className="text-emerald-400 text-xs font-semibold">깨끗하고 투명한 공고 조건입니다.</div>
+                        <p className="text-[11px] text-zinc-400 mt-1">
+                          포괄임금, 퇴직금 분할, 수습 감액 등 독소조항이 감지되지 않았습니다.
                         </p>
                       </div>
                     )}
                   </div>
                 ) : (
-                  <div className="text-center text-slate-400 py-16 text-xs">
-                    왼쪽에 공고 본문을 입력하거나 [2. 맞춤 공고 탐색]에서 [노동법 진단 ⚖️] 버튼을 눌러 전송하세요.
+                  <div className="text-center text-zinc-500 py-20 text-xs">
+                    왼쪽에 본문을 입력하거나 [2. 공고 레이더]에서 [진단] 버튼을 눌러 전송하세요.
                   </div>
                 )}
               </div>
@@ -1378,336 +1473,290 @@ export default function Home() {
           </div>
         )}
 
+        {/* TAB 4: LIFE-ADJUSTED CALCULATOR */}
         {activeTab === "calculator" && (
-          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-xl">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h2 className="text-lg font-bold text-white">⏱️ 4단계: 실질 체감 시급 계산기</h2>
+          <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08] grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-5 space-y-4">
+              <div className="flex justify-between items-center border-b border-white/[0.08] pb-3">
+                <div>
+                  <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">4. 실질 체감 시급 계산기</h1>
+                  <p className="text-xs text-zinc-400 mt-0.5">왕복 통근 시간과 교통비까지 차감한 진짜 시간당 가치</p>
+                </div>
                 <button
                   type="button"
                   onClick={copyCalculatorText}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-emerald-400 font-semibold border border-slate-700 transition"
+                  className="px-3 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs text-zinc-200 font-medium"
                 >
-                  📋 결과 텍스트 복사
+                  결과 복사
                 </button>
               </div>
-              <p className="text-xs text-slate-300">
-                연봉 숫자만 보고 결정하면 통근·야근 시간에 가성비가 무너질 수 있습니다. 왕복 통근 시간과 교통비까지 반영한{" "}
-                <strong className="text-emerald-400">진짜 내 시간당 가치</strong>를 계산합니다.
-              </p>
 
-              <div>
-                <div className="flex justify-between items-center text-xs">
-                  <label className="text-slate-300 font-medium">확정 연간 현금 (기본급+고정수당)</label>
-                  <span className="font-bold text-emerald-400 font-mono">{calcInput.cashManwon.toLocaleString()}만 원</span>
+              {[
+                { label: "확정 연간 현금", unit: "만 원", val: calcInput.cashManwon, min: 2000, max: 15000, step: 100, key: "cashManwon" as const },
+                { label: "편도 통근 시간", unit: "분", val: calcInput.commuteMinutesOneway, min: 10, max: 120, step: 5, key: "commuteMinutesOneway" as const },
+                { label: "월 교통비/유류비", unit: "만 원", val: calcInput.monthlyTransitCostManwon, min: 0, max: 50, step: 1, key: "monthlyTransitCostManwon" as const },
+                { label: "주당 실근로시간", unit: "시간", val: calcInput.weeklyWorkHours, min: 35, max: 68, step: 1, key: "weeklyWorkHours" as const },
+                { label: "주당 재택근무 일수", unit: "일", val: calcInput.weeklyRemoteDays, min: 0, max: 5, step: 1, key: "weeklyRemoteDays" as const },
+              ].map((s) => (
+                <div key={s.key}>
+                  <div className="flex justify-between items-center text-xs mb-1.5">
+                    <label className="text-zinc-300 font-medium">{s.label}</label>
+                    <span className="font-mono tabular-nums font-semibold text-zinc-100">
+                      {s.val.toLocaleString()}
+                      {s.unit}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={s.min}
+                    max={s.max}
+                    step={s.step}
+                    value={s.val}
+                    onChange={(e) => setCalcInput({ ...calcInput, [s.key]: parseInt(e.target.value, 10) || 0 })}
+                    className="w-full mono-range"
+                  />
                 </div>
-                <input
-                  type="range"
-                  min="2000"
-                  max="15000"
-                  step="100"
-                  value={calcInput.cashManwon}
-                  onChange={(e) => setCalcInput({ ...calcInput, cashManwon: parseInt(e.target.value, 10) || 0 })}
-                  className="w-full mt-2 accent-emerald-500"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center text-xs">
-                  <label className="text-slate-300 font-medium">편도 통근 시간</label>
-                  <span className="font-bold text-sky-400 font-mono">{calcInput.commuteMinutesOneway}분</span>
-                </div>
-                <input
-                  type="range"
-                  min="10"
-                  max="120"
-                  step="5"
-                  value={calcInput.commuteMinutesOneway}
-                  onChange={(e) => setCalcInput({ ...calcInput, commuteMinutesOneway: parseInt(e.target.value, 10) || 0 })}
-                  className="w-full mt-2 accent-sky-500"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center text-xs">
-                  <label className="text-slate-300 font-medium">월 교통비/유류비</label>
-                  <span className="font-bold text-amber-400 font-mono">{calcInput.monthlyTransitCostManwon}만 원</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="50"
-                  step="1"
-                  value={calcInput.monthlyTransitCostManwon}
-                  onChange={(e) => setCalcInput({ ...calcInput, monthlyTransitCostManwon: parseInt(e.target.value, 10) || 0 })}
-                  className="w-full mt-2 accent-amber-500"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center text-xs">
-                  <label className="text-slate-300 font-medium">주당 실근로시간 (야근 포함)</label>
-                  <span className="font-bold text-rose-400 font-mono">{calcInput.weeklyWorkHours}시간</span>
-                </div>
-                <input
-                  type="range"
-                  min="35"
-                  max="68"
-                  step="1"
-                  value={calcInput.weeklyWorkHours}
-                  onChange={(e) => setCalcInput({ ...calcInput, weeklyWorkHours: parseInt(e.target.value, 10) || 40 })}
-                  className="w-full mt-2 accent-rose-500"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center text-xs">
-                  <label className="text-slate-300 font-medium">주당 재택근무 일수</label>
-                  <span className="font-bold text-purple-400 font-mono">{calcInput.weeklyRemoteDays}일</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="5"
-                  step="1"
-                  value={calcInput.weeklyRemoteDays}
-                  onChange={(e) => setCalcInput({ ...calcInput, weeklyRemoteDays: parseInt(e.target.value, 10) || 0 })}
-                  className="w-full mt-2 accent-purple-500"
-                />
-              </div>
+              ))}
             </div>
 
-            <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-6 space-y-5 flex flex-col justify-center">
+            <div className="p-6 flex flex-col justify-center space-y-5 bg-[#0A0A0B]/40">
               <div>
-                <span className="text-xs font-semibold uppercase text-slate-400">
-                  실질 체감 시급 (Life-Adjusted Hourly Wage)
+                <span className="text-[11px] font-medium uppercase tracking-wider text-zinc-400">
+                  실질 체감 시급 (Life-Adjusted)
                 </span>
-                <div className="text-4xl font-mono font-extrabold text-emerald-400 mt-1">
+                <div className="text-4xl font-mono tabular-nums font-bold tracking-[-0.02em] text-zinc-50 mt-1">
                   {calcResult.realHourlyWage.toLocaleString()}원
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
-                  단순 명목 시급: <span className="font-mono">{calcResult.nominalHourlyWage.toLocaleString()}원</span> (
-                  {dropPct}% 체감 하락)
+                <p className="text-xs text-zinc-400 mt-1.5 font-mono tabular-nums">
+                  단순 명목 시급 {calcResult.nominalHourlyWage.toLocaleString()}원 · {dropPct}% 체감 하락
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs border-t border-b border-slate-800 py-3">
-                <div>
-                  <span className="text-slate-500">연간 소모 통근 시간</span>
-                  <div className="font-bold font-mono text-slate-200 mt-0.5">
-                    {calcResult.annualCommuteHours}시간 (약 {(calcResult.annualCommuteHours / 24).toFixed(1)}일)
-                  </div>
+              <div className="grid grid-cols-2 bg-[#18181B] border border-white/[0.08] rounded-[8px] divide-x divide-white/[0.08] text-xs">
+                <div className="p-3">
+                  <span className="text-[11px] text-zinc-500 block">연간 통근 소모</span>
+                  <span className="font-mono tabular-nums font-semibold text-zinc-100 mt-0.5 block">
+                    {calcResult.annualCommuteHours}h ({(calcResult.annualCommuteHours / 24).toFixed(1)}일)
+                  </span>
                 </div>
-                <div>
-                  <span className="text-slate-500">시간 대비 보상 효율</span>
-                  <div className="font-bold text-indigo-400 mt-0.5">{wageTierBadge}</div>
+                <div className="p-3">
+                  <span className="text-[11px] text-zinc-500 block">효용 등급</span>
+                  <span className="font-medium text-zinc-200 mt-0.5 block">{wageTierBadge}</span>
                 </div>
               </div>
 
-              <div className="p-3.5 bg-indigo-950/30 border border-indigo-500/30 rounded-xl text-xs text-indigo-300 leading-relaxed">
-                💡 {calcResult.utilityVerdictText}
+              <div className="p-3.5 bg-[#18181B] border border-white/[0.08] rounded-[8px] text-xs text-zinc-300 leading-relaxed">
+                {calcResult.utilityVerdictText}
               </div>
             </div>
           </div>
         )}
 
+        {/* TAB 5: OFFER MATRIX */}
         {activeTab === "matrix" && (
-          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-5 shadow-xl">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-3">
+          <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] divide-y divide-white/[0.08]">
+            <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h2 className="text-lg font-bold text-white">📊 5단계: 이직처(오퍼) 다차원 실시간 비교표</h2>
-                <p className="text-xs text-slate-300 mt-1">
-                  내 현재 조건({currentAnnualCash.toLocaleString()}만 원)과 두 이직 제안의 연봉·통근·재택·근로시간을 직접 입력해 실질 시급을 즉시 비교하세요.
+                <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">5. 이직처 다차원 비교표</h1>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  현재 조건({currentAnnualCash.toLocaleString()}만 원)과 두 제안을 직접 수정해 실질 시급을 비교하세요.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={copyOfferText}
-                className="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-sky-400 font-semibold border border-slate-700 transition"
+                className="px-3.5 py-1.5 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-xs text-zinc-200 font-medium"
               >
-                📋 오퍼 비교 요약 복사
+                비교 요약 복사
               </button>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="border-b border-slate-800 text-slate-400">
-                    <th className="py-3 px-3">평가 항목</th>
-                    <th className="py-3 px-3">현재 직장 (패스포트/시급 연동)</th>
-                    <th className="py-3 px-3 text-indigo-400">{offerA.label}</th>
-                    <th className="py-3 px-3 text-emerald-400">{offerB.label}</th>
+                <thead className="bg-[#18181B] border-b border-white/[0.08] text-zinc-400">
+                  <tr>
+                    <th className="py-2.5 px-4 font-medium">평가 항목</th>
+                    <th className="py-2.5 px-4 font-medium">현재 직장</th>
+                    <th className="py-2.5 px-4 font-medium text-zinc-200">{offerA.label}</th>
+                    <th className="py-2.5 px-4 font-medium text-zinc-200">{offerB.label}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/80 font-mono">
+                <tbody className="divide-y divide-white/[0.06] font-mono tabular-nums">
                   <tr>
-                    <td className="py-3 px-3 font-sans font-medium text-slate-300">확정 연봉 (만 원)</td>
-                    <td className="px-3 text-slate-200">{currentAnnualCash.toLocaleString()}만 원</td>
-                    <td className="px-3">
+                    <td className="py-3 px-4 font-sans font-medium text-zinc-300">확정 연봉 (만 원)</td>
+                    <td className="px-4 text-zinc-200">{currentAnnualCash.toLocaleString()}만</td>
+                    <td className="px-4">
                       <input
                         type="number"
                         value={offerA.baseManwon + offerA.allowanceManwon}
                         onChange={(e) => setOfferA({ baseManwon: Math.max(0, parseInt(e.target.value, 10) || 0), allowanceManwon: 0 })}
-                        className="w-28 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-indigo-300"
+                        className="w-28 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
-                    <td className="px-3">
+                    <td className="px-4">
                       <input
                         type="number"
                         value={offerB.baseManwon + offerB.allowanceManwon}
                         onChange={(e) => setOfferB({ baseManwon: Math.max(0, parseInt(e.target.value, 10) || 0), allowanceManwon: 0 })}
-                        className="w-28 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-emerald-300"
+                        className="w-28 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-3 font-sans font-medium text-slate-300">편도 통근 (분)</td>
-                    <td className="px-3 text-slate-200">{calcInput.commuteMinutesOneway}분</td>
-                    <td className="px-3">
+                    <td className="py-3 px-4 font-sans font-medium text-zinc-300">편도 통근 (분)</td>
+                    <td className="px-4 text-zinc-200">{calcInput.commuteMinutesOneway}분</td>
+                    <td className="px-4">
                       <input
                         type="number"
                         min="0"
                         max="180"
                         value={offerA.commuteMinutesOneway}
                         onChange={(e) => setOfferA({ commuteMinutesOneway: Math.max(0, parseInt(e.target.value, 10) || 0) })}
-                        className="w-24 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-indigo-300"
+                        className="w-24 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
-                    <td className="px-3">
+                    <td className="px-4">
                       <input
                         type="number"
                         min="0"
                         max="180"
                         value={offerB.commuteMinutesOneway}
                         onChange={(e) => setOfferB({ commuteMinutesOneway: Math.max(0, parseInt(e.target.value, 10) || 0) })}
-                        className="w-24 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-emerald-300"
+                        className="w-24 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-3 font-sans font-medium text-slate-300">주 재택근무 (일)</td>
-                    <td className="px-3 text-slate-200">주 {calcInput.weeklyRemoteDays}일</td>
-                    <td className="px-3">
+                    <td className="py-3 px-4 font-sans font-medium text-zinc-300">주 재택근무 (일)</td>
+                    <td className="px-4 text-zinc-200">주 {calcInput.weeklyRemoteDays}일</td>
+                    <td className="px-4">
                       <input
                         type="number"
                         min="0"
                         max="5"
                         value={offerA.weeklyRemoteDays}
                         onChange={(e) => setOfferA({ weeklyRemoteDays: Math.min(5, Math.max(0, parseInt(e.target.value, 10) || 0)) })}
-                        className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-indigo-300"
+                        className="w-20 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
-                    <td className="px-3">
+                    <td className="px-4">
                       <input
                         type="number"
                         min="0"
                         max="5"
                         value={offerB.weeklyRemoteDays}
                         onChange={(e) => setOfferB({ weeklyRemoteDays: Math.min(5, Math.max(0, parseInt(e.target.value, 10) || 0)) })}
-                        className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-emerald-300"
+                        className="w-20 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-3 font-sans font-medium text-slate-300">주 실근로시간 (시간)</td>
-                    <td className="px-3 text-slate-200">{calcInput.weeklyWorkHours}시간</td>
-                    <td className="px-3">
+                    <td className="py-3 px-4 font-sans font-medium text-zinc-300">주 실근로 (시간)</td>
+                    <td className="px-4 text-zinc-200">{calcInput.weeklyWorkHours}h</td>
+                    <td className="px-4">
                       <input
                         type="number"
                         min="30"
                         max="68"
                         value={offerA.weeklyWorkHours}
                         onChange={(e) => setOfferA({ weeklyWorkHours: Math.max(30, parseInt(e.target.value, 10) || 40) })}
-                        className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-indigo-300"
+                        className="w-20 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
-                    <td className="px-3">
+                    <td className="px-4">
                       <input
                         type="number"
                         min="30"
                         max="68"
                         value={offerB.weeklyWorkHours}
                         onChange={(e) => setOfferB({ weeklyWorkHours: Math.max(30, parseInt(e.target.value, 10) || 40) })}
-                        className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-emerald-300"
+                        className="w-20 bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] px-2.5 py-1 text-zinc-100"
                       />
                     </td>
                   </tr>
-                  <tr className="bg-slate-900/60">
-                    <td className="py-3.5 px-3 font-sans font-bold text-white">실질 체감 시급 (산출결과)</td>
-                    <td className="px-3 font-bold text-slate-200">
+                  <tr className="bg-[#18181B]/70">
+                    <td className="py-3.5 px-4 font-sans font-semibold text-zinc-100">실질 체감 시급</td>
+                    <td className="px-4 font-semibold text-zinc-200">
                       {currentCalc.realHourlyWage.toLocaleString()}원
-                      <span className="block text-[10px] text-slate-400">통근 연 {currentCalc.annualCommuteHours}h</span>
+                      <span className="block text-[10px] text-zinc-500">통근 연 {currentCalc.annualCommuteHours}h</span>
                     </td>
-                    <td className={`px-3 font-bold ${offerACalc.realHourlyWage >= currentCalc.realHourlyWage ? "text-indigo-400" : "text-rose-400"}`}>
+                    <td className={`px-4 font-semibold ${offerACalc.realHourlyWage >= currentCalc.realHourlyWage ? "text-emerald-400" : "text-rose-400"}`}>
                       {offerACalc.realHourlyWage.toLocaleString()}원
-                      <span className="block text-[10px]">통근 연 {offerACalc.annualCommuteHours}h</span>
+                      <span className="block text-[10px] text-zinc-500">통근 연 {offerACalc.annualCommuteHours}h</span>
                     </td>
-                    <td className={`px-3 font-bold ${offerBCalc.realHourlyWage >= currentCalc.realHourlyWage ? "text-emerald-400" : "text-rose-400"}`}>
+                    <td className={`px-4 font-semibold ${offerBCalc.realHourlyWage >= currentCalc.realHourlyWage ? "text-emerald-400" : "text-rose-400"}`}>
                       {offerBCalc.realHourlyWage.toLocaleString()}원
-                      <span className="block text-[10px]">통근 연 {offerBCalc.annualCommuteHours}h</span>
+                      <span className="block text-[10px] text-zinc-500">통근 연 {offerBCalc.annualCommuteHours}h</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div className="p-4 bg-slate-900/90 rounded-xl border border-slate-800 text-xs space-y-1">
-              <span className="font-bold text-sky-400">💡 동적 의사결정 판정: {bestOfferName} 우세</span>
-              <p className="text-slate-300">
-                현재 조건({currentCalc.realHourlyWage.toLocaleString()}원/h), {offerA.label}({offerACalc.realHourlyWage.toLocaleString()}원/h),{" "}
-                {offerB.label}({offerBCalc.realHourlyWage.toLocaleString()}원/h) 중 시간당 실질 가치가 가장 높은 대안은{" "}
-                <strong className="text-emerald-400">{bestOfferName}</strong>입니다.
-              </p>
+            <div className="p-4 bg-[#0A0A0B]/40 text-xs flex items-center justify-between">
+              <span className="text-zinc-300">
+                동적 비교 결과, 실질 시간 가치가 가장 높은 대안은{" "}
+                <strong className="text-zinc-100 font-semibold">{bestOfferName}</strong>입니다.
+              </span>
+              <span className="font-mono tabular-nums text-[11px] text-zinc-400">
+                현재 {currentCalc.realHourlyWage.toLocaleString()} vs A {offerACalc.realHourlyWage.toLocaleString()} vs B{" "}
+                {offerBCalc.realHourlyWage.toLocaleString()}원/h
+              </span>
             </div>
           </div>
         )}
 
+        {/* TAB 6: SALARY LEDGER */}
         {activeTab === "ledger" && (
-          <div className="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-3">
+          <div className="bg-[#111113] border border-white/[0.08] rounded-[10px] divide-y divide-white/[0.08]">
+            <div className="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h2 className="text-lg font-bold text-white">🏛️ 6단계: 기업별 검증 연봉 실태 원장</h2>
-                <p className="text-xs text-slate-300 mt-1">
-                  공공경영공시(ALIO)·사업보고서·전 직군 공고 벤치마크를 기반으로 직무별 확정 연봉 구간을 비교합니다.
+                <h1 className="text-base font-semibold text-zinc-100 tracking-[-0.02em]">6. 기업별 검증 연봉 실태</h1>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  ALIO 경영공시·사업보고서 및 전 직군 기준 연봉 벤치마크 원장
                 </p>
               </div>
-              <input
-                type="text"
-                placeholder="기업명, 직군([TECH]), 등급 검색..."
-                value={ledgerSearch}
-                onChange={(e) => setLedgerSearch(e.target.value)}
-                className="bg-slate-900/90 border border-slate-800 rounded-xl px-3.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 w-full sm:w-64"
-              />
+              <div className="relative w-full sm:w-64">
+                <IconSearch className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="기업명, 직군(TECH), 등급 검색..."
+                  value={ledgerSearch}
+                  onChange={(e) => setLedgerSearch(e.target.value)}
+                  className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
+                />
+              </div>
             </div>
+
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="border-b border-slate-800 text-slate-400">
-                    <th className="py-2.5 px-3">기관/기업</th>
-                    <th className="py-2.5 px-3">직군 / 직무</th>
-                    <th className="py-2.5 px-3">신뢰 등급</th>
-                    <th className="py-2.5 px-3">기준 연봉</th>
-                    <th className="py-2.5 px-3">산출 근거 & 출처</th>
+                <thead className="bg-[#18181B] border-b border-white/[0.08] text-zinc-400">
+                  <tr>
+                    <th className="py-2.5 px-4 font-medium">기관 / 기업</th>
+                    <th className="py-2.5 px-4 font-medium">직군 / 포지션</th>
+                    <th className="py-2.5 px-4 font-medium">등급</th>
+                    <th className="py-2.5 px-4 font-medium">기준 연봉</th>
+                    <th className="py-2.5 px-4 font-medium">근거 & 출처</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/80 font-mono">
+                <tbody className="divide-y divide-white/[0.06]">
                   {filteredLedger.map((row) => (
-                    <tr key={row.id}>
-                      <td className="py-3 px-3 font-sans font-bold text-white">{row.org}</td>
-                      <td className="py-3 px-3 font-sans text-slate-300">{row.role}</td>
-                      <td className="py-3 px-3">
+                    <tr key={row.id} className="hover:bg-[#18181B]/60 transition-colors duration-150">
+                      <td className="py-3 px-4 font-medium text-zinc-100">{row.org}</td>
+                      <td className="py-3 px-4 text-zinc-300">{row.role}</td>
+                      <td className="py-3 px-4">
                         <span
-                          className={`px-2 py-0.5 rounded font-bold font-mono text-[10px] ${
+                          className={`px-2 py-0.5 rounded-[4px] font-mono text-[10px] border ${
                             row.tier === "A"
-                              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                              : "bg-sky-500/20 text-sky-400 border border-sky-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                              : "bg-[#18181B] text-zinc-300 border-white/[0.08]"
                           }`}
                         >
                           Tier {row.tier}
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-slate-200 font-bold">{row.salary}</td>
-                      <td className="py-3 px-3 font-sans text-slate-400 text-[11px]">{row.note}</td>
+                      <td className="py-3 px-4 font-mono tabular-nums font-medium text-zinc-100">{row.salary}</td>
+                      <td className="py-3 px-4 text-zinc-400 text-[11px]">{row.note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1717,7 +1766,8 @@ export default function Home() {
         )}
       </main>
 
-      {/* Extracted Single-Source-of-Truth Modals */}
+      {/* Monolithic Command Palette + Modals + Slide-Over Detail Drawer */}
+      <CommandPalette />
       <ResumeModal />
       <MarketValueModal />
       <SkillGapModal />

@@ -76,6 +76,11 @@ interface AppState {
   crawlerCategoryFilter: string;
   setCrawlerCategoryFilter: (category: string) => void;
 
+  isCommandOpen: boolean;
+  setIsCommandOpen: (isOpen: boolean) => void;
+  radarViewMode: "table" | "cards";
+  setRadarViewMode: (mode: "table" | "cards") => void;
+
   selectedJob: JobPosting | null;
   setSelectedJob: (job: JobPosting | null) => void;
   selectedJobMatch: DynamicMatchScore | null;
@@ -200,6 +205,11 @@ export const useAppStore = create<AppState>((set) => ({
   setIsCrawlerModalOpen: (isOpen) => set({ isCrawlerModalOpen: isOpen }),
   crawlerCategoryFilter: "ALL",
   setCrawlerCategoryFilter: (category) => set({ crawlerCategoryFilter: category }),
+
+  isCommandOpen: false,
+  setIsCommandOpen: (isOpen) => set({ isCommandOpen: isOpen }),
+  radarViewMode: "table",
+  setRadarViewMode: (mode) => set({ radarViewMode: mode }),
 
   selectedJob: null,
   setSelectedJob: (job) => set({ selectedJob: job }),

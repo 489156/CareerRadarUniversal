@@ -5,36 +5,29 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./index.html",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Pretendard", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        sans: ["Inter", "Pretendard", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
-        brand: {
-          50: "#eef2ff",
-          100: "#e0e7ff",
-          500: "#6366f1",
-          600: "#4f46e5",
-          700: "#4338ca",
-        },
-        radar: {
-          dark: "#080b11",
-          surface: "#0d1322",
-          card: "#121a2d",
-          elevated: "#18233c",
-          border: "#233252",
-          accent: "#38bdf8",
-          emerald: "#10b981",
-          amber: "#f59e0b",
-          rose: "#f43f5e",
+        mono: {
+          canvas: "#0A0A0B",
+          surface: "#111113",
+          elevated: "#18181B",
+          hover: "#222226",
+          line: "rgba(255, 255, 255, 0.08)",
+          lineStrong: "rgba(255, 255, 255, 0.16)",
+          ink: "#FAFAFA",
+          muted: "#A1A1AA",
+          dim: "#71717A",
         },
       },
     },
   },
   plugins: [],
 };
+
 export default config;
