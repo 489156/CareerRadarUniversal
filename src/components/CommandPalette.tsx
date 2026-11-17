@@ -49,9 +49,20 @@ export function CommandPalette() {
   );
 
   const matchedJobs = (q
-    ? jobsDatabase.filter((j) => `${j.company} ${j.title} ${j.canonicalRole} ${j.occupation}`.toLowerCase().includes(q))
-    : jobsDatabase
-  ).slice(0, 5);
+    ? jobsDatabase.filter((j) =>
+        `${j.company} ${j.title} ${j.canonicalRole} ${j.occupation} ${(j.tags || []).join(' ')}`
+          .toLowerCase()
+          .includes(q)
+      )
+    : jobsDatabase.filter((j) => j.occupation === passport.occupation)
+  )
+    .map((job) => ({
+      job,
+      match: calculateDynamicJobMatch(passport, job),
+      hf: evaluateHardFilters(passport, job),
+    }))
+    .sort((a, b) => Number(a.hf.isExcluded) - Number(b.hf.isExcluded) || b.match.totalScore - a.match.totalScore)
+    .slice(0, 6);
 
   const exec = (fn: () => void) => {
     setIsCommandOpen(false);
@@ -108,10 +119,7 @@ export function CommandPalette() {
           {matchedJobs.length > 0 && (
             <div className="pt-1.5">
               <div className="px-2.5 py-1.5 text-[11px] font-medium text-zinc-500 uppercase tracking-wider">채용 공고 바로 열기</div>
-              {matchedJobs.map((job) => {
-                const match = calculateDynamicJobMatch(passport, job);
-                const hf = evaluateHardFilters(passport, job);
-                return (
+              {matchedJobs.map(({ job, match, hf }) => (
                   <button
                     key={job.id}
                     type="button"
@@ -131,8 +139,7 @@ export function CommandPalette() {
                     </div>
                     <span className="font-mono tabular-nums text-[11px] text-zinc-300 shrink-0">{match.totalScore}%</span>
                   </button>
-                );
-              })}
+              ))}
             </div>
           )}
 

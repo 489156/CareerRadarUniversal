@@ -516,65 +516,83 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
 
   const STOP_TOKENS = new Set([
     "신입", "경력", "인턴", "신입공채", "공채", "채용", "주니어", "시니어",
-    "정규직", "수시채용", "공개채용", "신입사원", "경력직", "planning"
+    "정규직", "수시채용", "공개채용", "신입사원", "경력직", "planning", "담당자", "매니저", "전문가"
   ]);
 
-  // 직무 키워드 토큰 (원시 직군 enum 코드 자체로 자동 매칭이 부풀려지지 않도록 canonicalRole/skills/keywords 중심 추출)
   const userText = [
     passport.canonicalRole || '',
     (passport.skills || []).join(' '),
     (passport.keywords || []).join(' '),
   ].join(' ').toLowerCase();
 
-  const userTokens = userText
-    .split(/[\s,/()&+[\]-]+/)
-    .map(t => t.trim())
-    .filter(t => t.length >= 2 && !STOP_TOKENS.has(t));
+  const userTokens = Array.from(
+    new Set(
+      userText
+        .split(/[\s,/()&+[\]·|-]+/)
+        .map((t) => t.trim())
+        .filter((t) => t.length >= 2 && !STOP_TOKENS.has(t))
+    )
+  );
 
-  // Job text
-  const jobText = [
+  const primaryJobText = [
     job.title || '',
     job.canonicalRole || '',
-    job.occupation || '',
     (job.tags || []).join(' '),
-    job.company || '',
-    
+    job.industry || '',
   ].join(' ').toLowerCase();
+
+  const fullJobText = `${primaryJobText} ${(job.rawText || '').toLowerCase()}`;
+
+  const tokenMatches = (haystack: string, token: string): boolean => {
+    if (!token) return false;
+    // 영문/숫자 단독 토큰은 단어 경계로 매칭하여 'ax'가 'tax'에, 'er'이 'engineer'에 오매칭되는 문제 차단
+    if (/^[a-z0-9._+-]+$/i.test(token)) {
+      const escaped = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, 'i').test(haystack);
+    }
+    return haystack.includes(token);
+  };
 
   // 1. Role / Keyword Token Matching (40% weight)
   const isSameOccupation = Boolean(passport.occupation && job.occupation === passport.occupation);
-  let roleFit = 45;
-  let matchingTokens: string[] = [];
+  let roleFit = 10;
+  const primaryMatches: string[] = [];
+  const secondaryMatches: string[] = [];
 
   for (const token of userTokens) {
-    if (jobText.includes(token)) {
-      matchingTokens.push(token);
+    if (tokenMatches(primaryJobText, token)) {
+      primaryMatches.push(token);
+    } else if (tokenMatches(fullJobText, token)) {
+      secondaryMatches.push(token);
     }
   }
 
-  // Unique matches
-  matchingTokens = Array.from(new Set(matchingTokens));
+  const allMatches = Array.from(new Set([...primaryMatches, ...secondaryMatches]));
 
-  if (isSameOccupation && matchingTokens.length >= 2) {
+  if (isSameOccupation && (primaryMatches.length >= 2 || allMatches.length >= 3)) {
     roleFit = 100;
-    matchedReasons.push(`직군 및 핵심 키워드 완벽 일치: '${matchingTokens.slice(0, 3).join(', ')}' 요건 부합`);
-  } else if (isSameOccupation && matchingTokens.length === 1) {
-    roleFit = 92;
-    matchedReasons.push(`동일 직군(${job.occupation}) 및 키워드('${matchingTokens[0]}') 부합`);
+    matchedReasons.push(`직군·핵심 키워드 정밀 일치: '${allMatches.slice(0, 3).join(', ')}' 요건 부합`);
+  } else if (isSameOccupation && allMatches.length === 2) {
+    roleFit = 95;
+    matchedReasons.push(`동일 직군(${job.occupation}) · 키워드 '${allMatches.join(', ')}' 부합`);
+  } else if (isSameOccupation && allMatches.length === 1) {
+    roleFit = 88;
+    matchedReasons.push(`동일 직군(${job.occupation}) 및 키워드('${allMatches[0]}') 부합`);
   } else if (isSameOccupation) {
-    roleFit = 82;
-    matchedReasons.push(`희망 직군(${job.occupation}) 내 유관 포지션: ${job.canonicalRole}`);
-  } else if (matchingTokens.length >= 2) {
     roleFit = 72;
-    matchedReasons.push(`인접 직군 내 유관 스킬('${matchingTokens.slice(0, 2).join(', ')}') 보유`);
-    gapReasons.push(`희망 직군(${passport.occupation})과 공고 직군(${job.occupation}) 간 차이 존재`);
-  } else if (matchingTokens.length === 1) {
-    roleFit = 60;
-    matchedReasons.push(`일부 연관 키워드('${matchingTokens[0]}') 포함`);
-    gapReasons.push(`희망 직군(${passport.occupation})과 공고 직군(${job.occupation}) 간 차이 존재`);
+    matchedReasons.push(`동일 직군(${job.occupation}) 내 인접 포지션: ${job.canonicalRole}`);
+    gapReasons.push(`등록한 세부 스킬과 직접 일치하는 제목 키워드는 적음`);
+  } else if (primaryMatches.length >= 2 || allMatches.length >= 3) {
+    roleFit = 58;
+    matchedReasons.push(`타 직군이나 유관 스킬('${allMatches.slice(0, 2).join(', ')}') 교차 부합`);
+    gapReasons.push(`희망 직군(${passport.occupation})과 공고 직군(${job.occupation}) 차이 존재`);
+  } else if (allMatches.length >= 1) {
+    roleFit = 28;
+    matchedReasons.push(`일부 키워드('${allMatches[0]}')만 연관`);
+    gapReasons.push(`직무 불일치: 희망(${passport.occupation}) vs 공고(${job.occupation})`);
   } else {
-    roleFit = 40;
-    gapReasons.push(`희망 직무 키워드와 공고 포지션 간 분야 차이 존재`);
+    roleFit = 10;
+    gapReasons.push(`직무 무관: 희망 직군(${passport.occupation}) 및 키워드와 일치 항목 없음`);
   }
 
   // 2. Seniority / Experience Match (25% weight)
@@ -648,16 +666,24 @@ export function calculateDynamicJobMatch(passport: CareerPassport, job: JobPosti
     salaryFit * 0.15
   );
 
-  // 연차가 근본적으로 맞지 않는 공고는 다른 항목 점수가 높아도 상위 노출되지 않도록 상한을 둔다.
-  //  - 신입이 경력 3년+ 요구 공고에 지원 / 경력(4년+)자가 신입 전용 공고에 지원
+  // 연차·직군 불일치 공고가 통근/연봉 점수만으로 상위 노출되지 않도록 엄격히 상한 제한
   const entryOnlyJob = job.maxYears <= 2 && (job.isEntryLevel || job.minYears === 0) && !(job.tags || []).some(t => t.includes('경력'));
   const seniorityMismatch =
     (isEntryUser && job.minYears >= 3) ||
     (!isEntryUser && passport.totalYears >= 4 && entryOnlyJob) ||
     (!isEntryUser && passport.totalYears < job.minYears - 2);
   let totalScore = rawScore;
+  if (!isSameOccupation) {
+    if (allMatches.length === 0) {
+      totalScore = Math.min(totalScore, 39);
+    } else if (primaryMatches.length < 2 && allMatches.length < 3) {
+      totalScore = Math.min(totalScore, 54);
+    } else {
+      totalScore = Math.min(totalScore, 74);
+    }
+  }
   if (seniorityMismatch) {
-    totalScore = Math.min(rawScore, 59);
+    totalScore = Math.min(totalScore, 59);
     gapReasons.push("연차 요건이 크게 달라 우선 추천에서 제외됩니다");
   }
 

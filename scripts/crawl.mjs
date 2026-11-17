@@ -6,36 +6,127 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const NON_CAREER_KEYWORDS = /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|영덕2현대화|위촉|초빙|의료요원|진료의사|진료교수|별정직\s*의사|의사\(|간호|수련의|전공의|약무직|약사|의료기술|방사선사|임상병리|물리치료|치과|위생사|보건직|수련생|무기계약|조무사|영양사|사회복지사/;
+const NON_CAREER_KEYWORDS =
+  /기간제|일용|시설경비|경비원|미화|청소|한시인력|환경관리|수익시설|조리원|운전원|아르바이트|알바|영덕2현대화|위촉|초빙|의료요원|진료의사|진료교수|별정직\s*의사|의사\(|간호|수련의|전공의|약무직|약사|의료기술|방사선사|임상병리|물리치료|치과|위생사|보건직|수련생|무기계약|조무사|영양사|사회복지사|어시스턴트|테크니션|사옥관리|임원\s*비서|executive assistant|인재풀\s*등록|보훈특별/i;
 
-function detectOccupation(text) {
+const NON_TARGET_FUNCTION_REGEX =
+  /현장영업|업주\s*영업|B2B\s*영업|제휴영업|Sales Manager|세일즈|일러스트레이터|비주얼\s*디자이너|Visual Designer|Product Designer|점포개발|변호사|법무담당|개인정보보호법|관세사|상담원/i;
+
+function stripHtml(raw = '') {
+  return String(raw)
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|li|div|h\d|tr)>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function extractYearsFromText(text = '', isInternOrEntry = false) {
+  if (isInternOrEntry && !/신입\/경력|경력\s*\d+\s*년/.test(text)) {
+    return { minYears: 0, maxYears: 2 };
+  }
+  const rangeMatch = text.match(/경력\s*(\d+)\s*[~-]\s*(\d+)\s*년/);
+  if (rangeMatch) {
+    return {
+      minYears: Math.min(20, parseInt(rangeMatch[1], 10)),
+      maxYears: Math.min(25, parseInt(rangeMatch[2], 10)),
+    };
+  }
+  const minMatch = text.match(/(?:경력|유관\s*경력|관련\s*경력|실무\s*경력)\s*(\d+)\s*년\s*(?:이상|↑|\+)/);
+  if (minMatch) {
+    const min = Math.min(20, parseInt(minMatch[1], 10));
+    return { minYears: min, maxYears: Math.max(min + 5, 10) };
+  }
+  const yrPlus = text.match(/(\d+)\s*년\s*이상/);
+  if (yrPlus && parseInt(yrPlus[1], 10) <= 15) {
+    const min = parseInt(yrPlus[1], 10);
+    return { minYears: min, maxYears: Math.max(min + 5, 10) };
+  }
+  if (/신입\s*가능|신입\/경력|주니어|연차\s*무관|경력\s*무관/i.test(text)) {
+    return { minYears: 0, maxYears: 5 };
+  }
+  return { minYears: 2, maxYears: 8 };
+}
+
+function detectOccupation(text, categoryHint = '') {
+  const s = `${text || ''} ${categoryHint || ''}`.toLowerCase();
   // '인재개발/사업개발' 등 복합어의 '개발'이 TECH로 새지 않도록 TECH 검사에만 마스킹 적용
-  const s = (text || '').toLowerCase();
-  const techSrc = s.replace(/(사업|인재|조직|신사업|상품|경영|제품)\s*개발/g, '$1@@');
-  if (/재무|회계|자금|예산|세무|\btax\b|감사|finance|deals|\bm&a\b|\bcpa\b|금융|여신|자산|부동산|real assets|가치평가|value-up|xbrl|계리|\bais\b|advisory|자문|내부회계|기금운용|투자운용|리스크관리/.test(s)) {
-    return "FINANCE";
+  const techSrc = s.replace(/(사업|인재|조직|신사업|상품|경영|제품|브랜드|채널)\s*개발/g, '$1@@');
+
+  if (NON_TARGET_FUNCTION_REGEX.test(s) || NON_CAREER_KEYWORDS.test(s)) {
+    return 'OTHER';
   }
-  if (/개발|전산|통신|\bict\b|\bsw\b|\boa\b|소프트웨어|데이터|\bdata\b|\bai\b|\bcloud\b|클라우드|보안|security|cyber|엔지니어|engineer|프론트|백엔드|\bsap\b|모듈|보훈전형\(it/.test(techSrc)) {
-    return "TECH";
+  // 1. HR (엄격: 일반 '채용' 공고 접미어가 아닌 실제 HR/노무/채용담당 직무만, CEO Staff는 PLANNING)
+  if (
+    /인사|노무|노사|평가보상|보상체계|피플\s*(파트너|애널리틱스|옵스)|조직문화|인재개발|채용담당|채용\s*(매니저|파트너|팀|운영|브랜딩|기획)|리크루터|\b(hr|er|hrbp|hrd|hrm|recruiter|recruiting|talent acquisition|compensation|people system)\b/.test(s) &&
+    !/엔지니어|개발자|engineer|ceo\s*staff/.test(techSrc)
+  ) {
+    return 'HR';
   }
-  if (/마케팅|홍보|브랜딩|그로스|퍼포먼스|콘텐츠|미디어|\bpr\b|\bsns\b|캠페인|광고|소통/.test(s)) {
-    return "MARKETING";
+  // 2. 명확한 소프트웨어·데이터·보안 엔지니어링 우선 분기 (제목의 Growth/Finance에 밀리지 않도록)
+  if (
+    /(software\s*engineer|frontend|backend|fullstack|devops|sre|data\s*engineer|ml\s*engineer|research\s*engineer|security\s*engineer|network\s*engineer|qa\s*engineer|product\s*design\s*engineer|데이터\s*분석가|데이터\s*엔지니어|서버\s*개발|프론트엔드\s*개발|백엔드\s*개발|데이터베이스\s*엔지니어|보안운영|it\s*ai\s*엔지니어|sap\s*모듈)/i.test(techSrc)
+  ) {
+    return 'TECH';
   }
-  if (/인사|노무|\bhr\b|\ber\b|\bhrbp\b|피플|people|조직문화|교육|인재개발|노사|복리후생|급여|보상|채용담당|리크루터|recruiter/.test(s)) {
-    return "HR";
+  // 3. FINANCE / ACCOUNTING / AUDIT / INVESTMENT
+  if (
+    /재무|회계|자금|예산|세무|\btax\b|감사|\baudit\b|finance|accounting|deals|\bm&a\b|\bcpa\b|가치평가|value-up|xbrl|계리|\bais\b|\bpe\b|준법감시|내부통제|내부회계|컴플라이언스|기금운용|투자운용|리스크|aml|fraud|\bir\b|수신상품|여신|계좌\s*도메인|이체\/출납|정산|신용보증/.test(s) &&
+    !/엔지니어|engineer|개발자|백엔드|프론트엔드|devops|sre/.test(techSrc)
+  ) {
+    return 'FINANCE';
   }
-  return "PLANNING";
+  // 4. MARKETING / GROWTH / PR / BRAND
+  if (
+    /마케팅|홍보|브랜딩|브랜드\s*매니저|그로스|퍼포먼스|콘텐츠|미디어|\b(marketing|growth|pr|sns|crm|contents|devrel)\b|캠페인|광고\s*운영|소통/.test(s) &&
+    !/백엔드|서버\s*개발|인프라|보안\s*엔지니어/.test(techSrc)
+  ) {
+    return 'MARKETING';
+  }
+  // 5. TECH (일반 IT/클라우드/보안/전산)
+  if (
+    /개발|엔지니어|프론트|백엔드|클라우드|보안|데이터\s*(사이언|분석)|전산|\b(tech|backend|frontend|fullstack|engineer|devops|infra|ml|ai|data|security|qa|ios|android|sap|ict|sw|sre)\b/.test(techSrc)
+  ) {
+    return 'TECH';
+  }
+  // 6. PLANNING / STRATEGY / PM / CONSULTING
+  if (
+    /전략|기획|컨설팅|컨설턴트|사업개발|신사업|\b(strategy|planning|pm|po|product\s*owner|product\s*operations|tpm|consultant|advisory|corp\.dev|ceo\s*staff)\b|상품전략|운영전략|프로덕트|esg|bx/.test(s)
+  ) {
+    return 'PLANNING';
+  }
+  return 'OTHER';
+}
+
+function sanitizePostings(jobs) {
+  return jobs.filter(
+    (j) =>
+      j &&
+      j.title &&
+      j.jobUrl &&
+      /^https:\/\//.test(j.jobUrl) &&
+      !NON_CAREER_KEYWORDS.test(j.title) &&
+      !NON_TARGET_FUNCTION_REGEX.test(j.title) &&
+      ['TECH', 'FINANCE', 'MARKETING', 'PLANNING', 'HR'].includes(j.occupation)
+  );
 }
 
 // 1. Crawl ALIO (기획재정부 공공기관 채용정보시스템)
 async function crawlALIO() {
-  console.log("Crawling ALIO (공공기관 채용정보)...");
+  console.log('Crawling ALIO (공공기관 채용정보)...');
   try {
     const url = 'https://job.alio.go.kr/recruit.do';
     const jobs = [];
     const seenIds = new Set();
 
-    for (let pageNo = 1; pageNo <= 5 && jobs.length < 6; pageNo++) {
+    for (let pageNo = 1; pageNo <= 8 && jobs.length < 15; pageNo++) {
       const formData = new URLSearchParams();
       formData.append('pageNo', String(pageNo));
 
@@ -43,10 +134,10 @@ async function crawlALIO() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) CareerRadarUniversal/2.0'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) CareerRadarUniversal/2.0',
         },
         body: formData.toString(),
-        signal: AbortSignal.timeout(10000)
+        signal: AbortSignal.timeout(10000),
       });
 
       if (!res.ok) break;
@@ -55,77 +146,81 @@ async function crawlALIO() {
 
       $('tr').each((i, el) => {
         const a = $(el).find('a[href*="recruitview.do"]');
-        if (!a.length || jobs.length >= 6) return;
+        if (!a.length || jobs.length >= 15) return;
 
         const title = a.text().replace(/\s+/g, ' ').trim();
         const href = a.attr('href');
-        const id = `alio-${href.match(/idx=(\d+)/)?.[1] || `${pageNo}-${i}`}`;
-        if (seenIds.has(id)) return;
+        const id = `alio-${href?.match(/idx=(\d+)/)?.[1] || `${pageNo}-${i}`}`;
+        if (!href || seenIds.has(id)) return;
 
         const tds = $(el).find('td');
-        const org = tds.eq(3).text().replace(/\s+/g, ' ').trim() || "공공기관";
-        const region = tds.eq(4).text().replace(/\s+/g, ' ').trim() || "수도권";
-        const empType = tds.eq(5).text().replace(/\s+/g, ' ').trim() || "정규직";
+        const org = tds.eq(3).text().replace(/\s+/g, ' ').trim() || '공공기관';
+        const region = tds.eq(4).text().replace(/\s+/g, ' ').trim() || '수도권';
+        const empType = tds.eq(5).text().replace(/\s+/g, ' ').trim() || '정규직';
 
-        // 단기 일용직, 시설경비, 기간제 등 비전문/단기 노무 공고 필터링
-        if (NON_CAREER_KEYWORDS.test(title) || NON_CAREER_KEYWORDS.test(empType)) {
-          return;
+        if (NON_CAREER_KEYWORDS.test(title) || NON_CAREER_KEYWORDS.test(empType)) return;
+        if (empType.includes('비정규직') && !empType.includes('인턴') && !title.includes('인턴')) return;
+
+        let occ = detectOccupation(`${title} ${org}`);
+        if (occ === 'OTHER' && /(청년인턴|체험형|일반직|행정|사무|공채|신입직원)/.test(title)) {
+          occ = 'PLANNING';
         }
-        if (empType.includes('비정규직') && !empType.includes('인턴') && !title.includes('인턴')) {
-          return;
-        }
+        if (occ === 'OTHER') return;
 
         seenIds.add(id);
         const isIntern = empType.includes('인턴') || title.includes('인턴');
         const isEntry = isIntern || empType.includes('신입') || title.includes('신입') || title.includes('공채');
         const isPermanent = !isIntern && !empType.includes('비정규직') && !empType.includes('계약');
-
-        const occ = detectOccupation(title);
-        const isCapital = region.includes('서울') || region.includes('경기') || region.includes('인천') || region.includes('수도권');
+        const isCapital = /(서울|경기|인천|수도권)/.test(region);
 
         jobs.push({
           id,
           company: org,
-          title: title,
-          canonicalRole: isIntern
-            ? "청년인턴/행정지원"
-            : occ === "TECH"
-            ? "공공 ICT/전산관리"
-            : occ === "FINANCE"
-            ? "공공 재무/예산관리"
-            : occ === "HR"
-            ? "공공 인사/노무행정"
-            : "공공행정·경영기획",
+          title,
+          canonicalRole:
+            isIntern
+              ? '청년인턴/행정지원'
+              : occ === 'TECH'
+              ? '공공 ICT/전산관리'
+              : occ === 'FINANCE'
+              ? '공공 재무/예산관리'
+              : occ === 'HR'
+              ? '공공 인사/노무행정'
+              : occ === 'MARKETING'
+              ? '공공 홍보/미디어'
+              : '공공행정·경영기획',
           occupation: occ,
-          industry: "공공기관 / 공기업",
+          industry: '공공기관 / 공기업',
           location: isCapital ? `${region} (수도권)` : `${region} (지방 본사/지사)`,
           commuteMinutes: region.includes('서울') ? 42 : isCapital ? 50 : 75,
           salaryMinManwon: isIntern ? 2500 : 4200,
           salaryMaxManwon: isIntern ? 2800 : 4800,
-          salaryDisplay: isIntern ? "월 206~230만 원 (청년인턴 공시 처우)" : "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-          salaryTier: "A",
+          salaryDisplay: isIntern ? '월 206~230만 원 (청년인턴 공시 처우)' : '4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)',
+          salaryTier: 'A',
           minYears: isEntry ? 0 : 2,
           maxYears: isEntry ? 2 : 6,
           hasFixedOT: false,
           fixedOTHours: 0,
-          tags: Array.from(new Set([
-            "공공기관",
-            "ALIO 경영공시",
-            ...(isPermanent ? ["정규직"] : []),
-            empType,
-            isEntry ? "신입/인턴" : "경력"
-          ])),
-          pros: ["기획재정부 ALIO 100% 실공시 데이터", "고용 안정성 및 정시퇴근 보장"],
-          gaps: ["공공기관 NCS 및 블라인드 채용 전형 준비 필요"],
-          rawText: `[ALIO 공공기관 채용정보]\n기관명: ${org}\n공고명: ${title}\n고용형태: ${isPermanent ? '정규직 (' + empType + ')' : empType}\n근무지: ${region}`,
-          sourceName: "기획재정부 ALIO 공시망",
-          jobUrl: `https://job.alio.go.kr${href}`,
-          sourceCategory: "PUBLIC",
+          tags: Array.from(
+            new Set([
+              '공공기관',
+              'ALIO 경영공시',
+              ...(isPermanent ? ['정규직'] : []),
+              empType,
+              isEntry ? '신입/인턴' : '경력',
+            ])
+          ),
+          pros: ['기획재정부 ALIO 100% 실공시 데이터', '고용 안정성 및 정시퇴근 보장'],
+          gaps: ['공공기관 NCS 및 블라인드 채용 전형 준비 필요'],
+          rawText: `[ALIO 공공기관 채용정보]\n기관명: ${org}\n공고명: ${title}\n고용형태: ${isPermanent ? `정규직 (${empType})` : empType}\n근무지: ${region}`,
+          sourceName: '기획재정부 ALIO 공시망',
+          jobUrl: href.startsWith('http') ? href : `https://job.alio.go.kr${href}`,
+          sourceCategory: 'PUBLIC',
           isCompanyExclusive: true,
-          sourceSystem: "ALIO 오픈 공시망",
+          sourceSystem: 'ALIO 오픈 공시망',
           isEntryLevel: isEntry,
           jobCategory: occ,
-          publishedAt: new Date().toISOString().split('T')[0]
+          publishedAt: new Date().toISOString().split('T')[0],
         });
       });
     }
@@ -133,14 +228,14 @@ async function crawlALIO() {
     console.log(`ALIO: Crawled ${jobs.length} sanitized public jobs`);
     return jobs;
   } catch (err) {
-    console.warn("ALIO crawler warning:", err.message);
+    console.warn('ALIO crawler warning:', err.message);
     return [];
   }
 }
 
 // 2. Crawl PwC (삼일회계법인)
 async function crawlPwC() {
-  console.log("Crawling PwC...");
+  console.log('Crawling PwC...');
   try {
     const url = 'https://www.pwc.com/kr/ko/career/experienced.html';
     const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
@@ -149,75 +244,89 @@ async function crawlPwC() {
     const $ = cheerio.load(html);
 
     const jobs = [];
+    const seen = new Set();
     $('a[href*="experienced/r"]').each((i, el) => {
       const title = $(el).text().replace(/\s+/g, ' ').trim();
       let href = $(el).attr('href');
-      if (!title || !href || jobs.length >= 6) return;
+      if (!title || !href || jobs.length >= 10) return;
       if (NON_CAREER_KEYWORDS.test(title)) return;
 
       if (!href.startsWith('http')) {
         href = `https://www.pwc.com${href.startsWith('/') ? href : '/' + href}`;
       }
+      const id = `pwc-${href.match(/r\d+(-\d+)?/)?.[0] || i}`;
+      if (seen.has(id)) return;
+
+      const occ = detectOccupation(title);
+      if (occ === 'OTHER') return;
+      seen.add(id);
 
       const isIntern = /인턴|intern|\bra\b|research assistant/i.test(title);
       const isContract = title.includes('계약직');
       const isEntry = isIntern || title.includes('신입');
-      const occ = detectOccupation(title);
-
-      const canonicalRole =
-        occ === "HR" ? "HR Strategy & People" :
-        occ === "TECH" ? "Data/Tech Consultant" :
-        occ === "FINANCE" ? "Corporate Finance & Deals" :
-        occ === "MARKETING" ? "Brand & Communications" :
-        "Management Consulting";
 
       jobs.push({
-        id: `pwc-${href.match(/r\d+(-\d+)?/)?.[0] || i}`,
-        company: "삼일PwC",
-        title: title,
-        canonicalRole: canonicalRole,
+        id,
+        company: '삼일PwC',
+        title,
+        canonicalRole:
+          occ === 'HR'
+            ? 'HR Strategy & People'
+            : occ === 'TECH'
+            ? 'Data/Tech Consultant'
+            : occ === 'FINANCE'
+            ? 'Corporate Finance & Deals'
+            : occ === 'MARKETING'
+            ? 'Brand & Communications'
+            : 'Management Consulting',
         occupation: occ,
-        industry: "전문서비스 / 회계컨설팅",
-        location: "서울 용산구 (삼일PwC 본사)",
+        industry: '전문서비스 / 회계컨설팅',
+        location: '서울 용산구 (삼일PwC 본사)',
         commuteMinutes: 45,
         salaryMinManwon: isIntern ? 2700 : isEntry ? 4600 : 6200,
         salaryMaxManwon: isIntern ? 3100 : isEntry ? 5400 : 8500,
-        salaryDisplay: isIntern ? "월 220~250만 원 (학부/RA 인턴십)" : isEntry ? "4,600 ~ 5,400만 원 (Big4 대졸 초임)" : "6,200 ~ 8,500만 원 (경력 처우)",
-        salaryTier: "B",
+        salaryDisplay: isIntern
+          ? '월 220~250만 원 (학부/RA 인턴십)'
+          : isEntry
+          ? '4,600 ~ 5,400만 원 (Big4 대졸 초임)'
+          : '6,200 ~ 8,500만 원 (경력 처우)',
+        salaryTier: 'B',
         minYears: isEntry ? 0 : 3,
         maxYears: isEntry ? 2 : 10,
         hasFixedOT: false,
         fixedOTHours: 0,
-        tags: Array.from(new Set([
-          "Big4 회계법인",
-          isIntern ? "인턴" : isContract ? "계약직" : "정규직",
-          ...(isEntry ? ["신입/인턴"] : ["경력"]),
-          "수시채용"
-        ])),
-        pros: ["국내 1위 회계법인 삼일PwC의 전문성과 네트워크", "다양한 글로벌 프로젝트 경험"],
-        gaps: [isEntry ? "기초 직무 지식 및 영어 커뮤니케이션" : "요구 스킬셋 부합 여부 확인 필요"],
-        rawText: `[삼일PwC ${isIntern ? '인턴십' : isContract ? '계약직 채용' : '정규직 수시채용'}]\n${title}\n상세 내용은 삼일PwC 공식 채용관을 통해 확인하세요.`,
-        sourceName: "삼일PwC 공식 채용관",
+        tags: Array.from(
+          new Set([
+            'Big4 회계법인',
+            isIntern ? '인턴' : isContract ? '계약직' : '정규직',
+            ...(isEntry ? ['신입/인턴'] : ['경력']),
+            '수시채용',
+          ])
+        ),
+        pros: ['국내 1위 회계법인 삼일PwC의 전문성과 네트워크', '다양한 글로벌 프로젝트 경험'],
+        gaps: [isEntry ? '기초 직무 지식 및 영어 커뮤니케이션' : '요구 스킬셋 부합 여부 확인 필요'],
+        rawText: `[삼일PwC ${isIntern ? '인턴십' : isContract ? '계약직 채용' : '정규직 수시채용'}]\n${title}\n상세 직무 및 지원은 삼일PwC 공식 채용관 원문 참조.`,
+        sourceName: '삼일PwC 공식 채용관',
         jobUrl: href,
-        sourceCategory: "CONSULTING",
+        sourceCategory: 'CONSULTING',
         isCompanyExclusive: true,
-        sourceSystem: "PwC Global ATS",
+        sourceSystem: 'PwC Global ATS',
         isEntryLevel: isEntry,
         jobCategory: occ,
-        publishedAt: new Date().toISOString().split('T')[0]
+        publishedAt: new Date().toISOString().split('T')[0],
       });
     });
     console.log(`PwC: Crawled ${jobs.length} sanitized jobs`);
     return jobs;
   } catch (err) {
-    console.warn("PwC crawler warning:", err.message);
+    console.warn('PwC crawler warning:', err.message);
     return [];
   }
 }
 
 // 3. Crawl Deloitte (딜로이트 안진/컨설팅)
 async function crawlDeloitte() {
-  console.log("Crawling Deloitte...");
+  console.log('Crawling Deloitte...');
   try {
     const url = 'https://join.deloitte.co.kr/WiseRecruit2/User/RecruitList.aspx';
     const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
@@ -226,508 +335,420 @@ async function crawlDeloitte() {
     const $ = cheerio.load(html);
 
     const jobs = [];
+    const seen = new Set();
     $('a.subject').each((i, el) => {
       const title = $(el).text().replace(/\s+/g, ' ').trim();
       const href = $(el).attr('href');
-      if (!title || !href || !href.includes('ridx=') || jobs.length >= 6) return;
-      // 아르바이트, 단기 서류검토 등 비경력 단기직 제외
+      if (!title || !href || !href.includes('ridx=') || jobs.length >= 10) return;
       if (NON_CAREER_KEYWORDS.test(title)) return;
+
+      const id = `deloitte-${href.match(/ridx=(\d+)/)?.[1] || i}`;
+      if (seen.has(id)) return;
+      const occ = detectOccupation(title);
+      if (occ === 'OTHER') return;
+      seen.add(id);
 
       const isIntern = /인턴|intern|\bra\b|research assistant/i.test(title);
       const isContract = title.includes('계약직');
       const isBothEntryAndExp = title.includes('신입') && title.includes('경력');
       const isEntry = isIntern || title.includes('신입');
-      const occ = detectOccupation(title);
 
       jobs.push({
-        id: `deloitte-${href.match(/ridx=(\d+)/)?.[1] || i}`,
-        company: "딜로이트 안진",
-        title: title,
-        canonicalRole: occ === "FINANCE" ? "Tax & Financial Advisory" : occ === "TECH" ? "Cloud & AI Advisory" : occ === "HR" ? "Human Capital Consulting" : "Management Consulting",
+        id,
+        company: '딜로이트 안진',
+        title,
+        canonicalRole:
+          occ === 'FINANCE'
+            ? 'Tax & Financial Advisory'
+            : occ === 'TECH'
+            ? 'Cloud & AI Advisory'
+            : occ === 'HR'
+            ? 'Human Capital Consulting'
+            : occ === 'MARKETING'
+            ? 'Brand & PR'
+            : 'Management Consulting',
         occupation: occ,
-        industry: "전문서비스 / 회계컨설팅",
-        location: "서울 영등포구 여의도동",
+        industry: '전문서비스 / 회계컨설팅',
+        location: '서울 영등포구 여의도동',
         commuteMinutes: 48,
         salaryMinManwon: isIntern ? 2700 : isEntry ? 4600 : 6500,
         salaryMaxManwon: isIntern ? 3100 : isBothEntryAndExp ? 7500 : isEntry ? 5300 : 8800,
-        salaryDisplay: isIntern ? "월 230~250만 원 (인턴 처우)" : isBothEntryAndExp ? "4,600 ~ 7,500만 원 (신입/경력 협의)" : isEntry ? "4,600 ~ 5,300만 원 (신입 대졸초임)" : "6,500 ~ 8,800만 원 (경력직)",
-        salaryTier: "B",
+        salaryDisplay: isIntern
+          ? '월 230~250만 원 (인턴 처우)'
+          : isBothEntryAndExp
+          ? '4,600 ~ 7,500만 원 (신입/경력 협의)'
+          : isEntry
+          ? '4,600 ~ 5,300만 원 (신입 대졸초임)'
+          : '6,500 ~ 8,800만 원 (경력직)',
+        salaryTier: 'B',
         minYears: isEntry ? 0 : 3,
         maxYears: isBothEntryAndExp ? 7 : isEntry ? 2 : 10,
         hasFixedOT: false,
         fixedOTHours: 0,
-        tags: Array.from(new Set([
-          "Big4 회계법인",
-          isIntern ? "인턴" : isContract ? "계약직(전환형)" : "정규직",
-          ...(isEntry && !isIntern ? ["신입"] : []),
-          "여의도"
-        ])),
-        pros: ["글로벌 빅4 회계법인 커리어", "체계적인 주니어/시니어 교육 프로그램"],
-        gaps: [isEntry ? "논리적 사고 및 프레젠테이션 역량" : "직무별 상세 요건 확인 필요"],
-        rawText: `[딜로이트 안진 ${isIntern ? '인턴' : isContract ? '전환형 계약직' : '정규직'} 채용]\n${title}\n상세 직무 내용 및 우대사항은 공고 참조.`,
-        sourceName: "딜로이트 공식 채용 (WiseRecruit2)",
+        tags: Array.from(
+          new Set([
+            'Big4 회계법인',
+            isIntern ? '인턴' : isContract ? '계약직(전환형)' : '정규직',
+            ...(isEntry && !isIntern ? ['신입'] : []),
+            '여의도',
+          ])
+        ),
+        pros: ['글로벌 빅4 회계법인 커리어', '체계적인 주니어/시니어 교육 프로그램'],
+        gaps: [isEntry ? '논리적 사고 및 프레젠테이션 역량' : '직무별 상세 요건 확인 필요'],
+        rawText: `[딜로이트 안진 ${isIntern ? '인턴' : isContract ? '전환형 계약직' : '정규직'} 채용]\n${title}\n상세 직무 내용 및 우대사항은 공고 원문 참조.`,
+        sourceName: '딜로이트 공식 채용 (WiseRecruit2)',
         jobUrl: `https://join.deloitte.co.kr/WiseRecruit2/User/${href}`,
-        sourceCategory: "CONSULTING",
+        sourceCategory: 'CONSULTING',
         isCompanyExclusive: true,
-        sourceSystem: "WiseRecruit2 ATS",
+        sourceSystem: 'WiseRecruit2 ATS',
         isEntryLevel: isEntry,
         jobCategory: occ,
-        publishedAt: new Date().toISOString().split('T')[0]
+        publishedAt: new Date().toISOString().split('T')[0],
       });
     });
     console.log(`Deloitte: Crawled ${jobs.length} sanitized jobs`);
     return jobs;
   } catch (err) {
-    console.warn("Deloitte crawler warning:", err.message);
+    console.warn('Deloitte crawler warning:', err.message);
     return [];
   }
 }
 
-// 4. Multi-Track Verified Seed Jobs (TECH, FINANCE, MARKETING, HR, PLANNING - 신입 & 경력 & 공공기관)
-function generateDiverseVerifiedSeedJobs() {
-  const today = new Date().toISOString().split('T')[0];
-  return [
-    // PUBLIC (ALIO) - Verified Regular & Intern Positions
-    {
-      id: "alio-koreaexim-entry",
-      company: "한국수출입은행",
-      title: "2026년도 상·하반기 신입행원(경영·경제·전산) 공개채용",
-      canonicalRole: "정책금융·경영기획 및 ICT",
-      occupation: "FINANCE",
-      industry: "공공기관 / 국책은행",
-      location: "서울 영등포구 여의도동 (수도권 본점)",
-      commuteMinutes: 45,
-      salaryMinManwon: 5200,
-      salaryMaxManwon: 5800,
-      salaryDisplay: "5,200 ~ 5,800만 원 (ALIO 금융공기업 신입 초임 공시)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 2,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["공공기관", "ALIO 경영공시", "정규직", "신입공채", "국책은행"],
-      pros: ["기획재정부 산하 최고 수준 국책금융기관 처우", "여의도 단일 본점 근무 비중 높음 및 정시퇴근"],
-      gaps: ["금융경제 전공 필기시험 및 NCS 직업기초능력평가 대비 필요"],
-      rawText: "[ALIO 공공기관 정규직 채용정보]\n기관명: 한국수출입은행\n공고명: 신입행원(경영·경제·전산) 공개채용\n고용형태: 정규직\n근무지: 서울 여의도",
-      sourceName: "기획재정부 ALIO 공시망",
-      jobUrl: "https://koreaexim.applyin.co.kr/",
-      sourceCategory: "PUBLIC",
-      isCompanyExclusive: true,
-      sourceSystem: "ALIO 오픈 공시망",
-      isEntryLevel: true,
-      jobCategory: "FINANCE",
-      publishedAt: today
-    },
-    {
-      id: "alio-kodit-hr",
-      company: "신용보증기금",
-      title: "인사기획·노사협력 및 경영지원 일반직(정규직/경력·신입) 채용",
-      canonicalRole: "인사기획 (HR Planning)",
-      occupation: "HR",
-      industry: "공공기관 / 금융공기업",
-      location: "서울 마포구 수도권 영업본부 / 대구 본점",
-      commuteMinutes: 50,
-      salaryMinManwon: 5000,
-      salaryMaxManwon: 6200,
-      salaryDisplay: "5,000 ~ 6,200만 원 (ALIO 공시 기준)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 7,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["공공기관", "ALIO 경영공시", "정규직", "신입/경력", "인사기획", "노무관리"],
-      pros: ["금융공기업 상위권 보수 및 안정적인 직무 환경", "체계적인 직무급·성과관리 시스템 경험"],
-      gaps: ["블라인드 직무수행능력평가 및 노무·법무 지식 검증"],
-      rawText: "[ALIO 공공기관 정규직 채용]\n기관명: 신용보증기금\n공고명: 인사기획·노사협력 및 경영지원 정규직 채용\n고용형태: 정규직\n근무지: 서울/수도권",
-      sourceName: "기획재정부 ALIO 공시망",
-      jobUrl: "https://www.kodit.or.kr/",
-      sourceCategory: "PUBLIC",
-      isCompanyExclusive: true,
-      sourceSystem: "ALIO 오픈 공시망",
-      isEntryLevel: true,
-      jobCategory: "HR",
-      publishedAt: today
-    },
+// 4. Crawl Toss & Affiliates (토스 · 토스뱅크 · 토스증권 · 토스페이먼츠)
+async function crawlToss() {
+  console.log('Crawling Toss Careers API...');
+  try {
+    const res = await fetch('https://api-public.toss.im/api/v3/ipd-eggnog/career/jobs', {
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const list = json?.success || [];
 
-    // TECH - Entry & Experienced
-    {
-      id: "tech-toss-frontend",
-      company: "비바리퍼블리카 (토스)",
-      title: "Frontend Platform Engineer (주니어/신입 환영)",
-      canonicalRole: "Frontend Engineering",
-      occupation: "TECH",
-      industry: "IT / 핀테크",
-      location: "서울 강남구 테헤란로",
-      commuteMinutes: 48,
-      salaryMinManwon: 5500,
-      salaryMaxManwon: 7000,
-      salaryDisplay: "5,500 ~ 7,000만 원 (업계 최고 수준 대졸초임/스톡옵션)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 3,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["유니콘", "정규직", "신입/주니어", "Frontend", "React", "TypeScript"],
-      pros: ["자율과 책임 문화, 압도적인 동료 수준", "금융 혁신 서비스 대규모 트래픽 경험"],
-      gaps: ["웹 성능 최적화 및 브라우저 렌더링 심층 이해"],
-      rawText: "토스 프론트엔드 플랫폼 엔지니어 정규직 채용. React, TypeScript, 모던 웹 표준 기반 개발.",
-      sourceName: "토스 커리어",
-      jobUrl: "https://toss.im/career",
-      sourceCategory: "GLOBAL_TECH",
-      isCompanyExclusive: true,
-      sourceSystem: "Toss Greenhouse ATS",
-      isEntryLevel: true,
-      jobCategory: "TECH",
-      publishedAt: today
-    },
-    {
-      id: "tech-naver-cloud",
-      company: "네이버클라우드",
-      title: "Cloud Software Engineer (신입 공채)",
-      canonicalRole: "Cloud Platform",
-      occupation: "TECH",
-      industry: "IT / 클라우드",
-      location: "경기도 성남시 분당구 정자동",
-      commuteMinutes: 38,
-      salaryMinManwon: 5000,
-      salaryMaxManwon: 6000,
-      salaryDisplay: "5,000 ~ 6,000만 원 (대졸 신입 기준)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 1,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "신입공채", "Cloud", "Java", "Linux"],
-      pros: ["국내 1위 클라우드 인프라 연구개발", "체계적인 신입 온보딩 프로그램"],
-      gaps: ["자료구조/알고리즘 및 분산 시스템 이해"],
-      rawText: "네이버클라우드 정규직 신입 공채. 대규모 분산 클라우드 플랫폼 서비스 개발.",
-      sourceName: "네이버 커리어스",
-      jobUrl: "https://recruit.navercorp.com/",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "Naver Careers",
-      isEntryLevel: true,
-      jobCategory: "TECH",
-      publishedAt: today
-    },
-    {
-      id: "tech-woowa-backend",
-      company: "우아한형제들 (배달의민족)",
-      title: "배민커머스 주문시스템 서버 개발자 (경력 3년 이상)",
-      canonicalRole: "Backend Engineering",
-      occupation: "TECH",
-      industry: "IT / 이커머스",
-      location: "서울 송파구 올림픽로",
-      commuteMinutes: 52,
-      salaryMinManwon: 6800,
-      salaryMaxManwon: 9200,
-      salaryDisplay: "6,800 ~ 9,200만 원 (경력 3~7년)",
-      salaryTier: "B",
-      minYears: 3,
-      maxYears: 8,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["플랫폼", "정규직", "Backend", "Spring", "Kafka"],
-      pros: ["주 32시간/주 36시간 유연근무", "초당 수천 건 주문 트래픽 처리"],
-      gaps: ["대규모 분산 트랜잭션 및 MSA 설계 역량"],
-      rawText: "배민 주문시스템 백엔드 정규직 개발. Java, Spring Boot, Kafka, MySQL 기반 고가용성 설계.",
-      sourceName: "우아한형제들 채용",
-      jobUrl: "https://career.woowahan.com/",
-      sourceCategory: "GLOBAL_TECH",
-      isCompanyExclusive: true,
-      sourceSystem: "배민 커리어",
-      isEntryLevel: false,
-      jobCategory: "TECH",
-      publishedAt: today
-    },
+    const CAT_MAP = {
+      TECH: new Set(['Backend', 'Frontend', 'App', 'ML', 'Data Engineering', 'Data Analysis', 'Infra', 'Information Security', 'Security Engineering', 'QA']),
+      FINANCE: new Set(['Finance', 'Accounting', 'Risk', 'AML', 'Compliance', 'Securities', 'Bank', 'Insurance']),
+      MARKETING: new Set(['Marketing', 'PR', 'Contents']),
+      PLANNING: new Set(['Product Ownership', 'Strategy', 'IT Planning', 'Product Operations', 'Corp.dev']),
+      HR: new Set(['HR', 'Recruiting', 'Compensation & Benefit', 'People System']),
+    };
 
-    // FINANCE - Entry & Experienced
-    {
-      id: "fin-kpmg-cpa",
-      company: "삼정KPMG",
-      title: "Deal Advisory본부 신입 공인회계사(KICPA) 및 재무자문 채용",
-      canonicalRole: "M&A Valuation",
-      occupation: "FINANCE",
-      industry: "전문서비스 / 회계컨설팅",
-      location: "서울 강남구 역삼동",
-      commuteMinutes: 46,
-      salaryMinManwon: 4800,
-      salaryMaxManwon: 5600,
-      salaryDisplay: "4,800 ~ 5,600만 원 (CPA/신입 초임)",
-      salaryTier: "B",
-      minYears: 0,
-      maxYears: 2,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["Big4 회계법인", "정규직", "KICPA", "신입/인턴", "재무자문"],
-      pros: ["국내 최고 수준의 M&A 기업가치평가(Valuation) 실무", "체계적 커리어패스"],
-      gaps: ["재무제표 분석 및 재무모델링(DCF) 역량"],
-      rawText: "삼정KPMG Deal Advisory본부 신입 공인회계사 및 재무자문 정규직 채용. 기업인수합병 및 실사 자문.",
-      sourceName: "삼정KPMG 공식 채용관",
-      jobUrl: "https://career.kr.kpmg.com",
-      sourceCategory: "CONSULTING",
-      isCompanyExclusive: true,
-      sourceSystem: "KPMG Careers",
-      isEntryLevel: true,
-      jobCategory: "FINANCE",
-      publishedAt: today
-    },
-    {
-      id: "fin-shinhan-bank",
-      company: "신한은행",
-      title: "디지털/ICT 및 기업금융 신입 일반직 채용",
-      canonicalRole: "Corporate Banking & ICT",
-      occupation: "FINANCE",
-      industry: "금융 / 은행",
-      location: "서울 중구 태평로 (본점)",
-      commuteMinutes: 44,
-      salaryMinManwon: 5400,
-      salaryMaxManwon: 6200,
-      salaryDisplay: "5,400 ~ 6,200만 원 (대졸 신입 초임 + 성과급)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 2,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["시중은행", "금융공채", "신입", "정규직"],
-      pros: ["국내 최고 수준의 대졸 신입 초임 및 복리후생", "금융 데이터 및 기업여신 심사"],
-      gaps: ["금융 상식 및 기업분석 리포트 이해"],
-      rawText: "신한은행 신입 행원 정규직 채용. 기업금융 및 디지털 뱅킹 플랫폼 운영.",
-      sourceName: "신한은행 채용포털",
-      jobUrl: "https://shinhan.recruiter.co.kr",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "Shinhan Recruiter ATS",
-      isEntryLevel: true,
-      jobCategory: "FINANCE",
-      publishedAt: today
-    },
+    const pickedByOcc = { TECH: [], FINANCE: [], MARKETING: [], PLANNING: [], HR: [] };
+    for (const item of list) {
+      if (!item?.id || !item?.title || NON_CAREER_KEYWORDS.test(item.title) || NON_TARGET_FUNCTION_REGEX.test(item.title)) continue;
+      const meta = {};
+      for (const m of item.metadata || []) meta[m.name] = m.value;
+      const empType = meta['Employment_Type'] || '정규직';
+      if (/계약직|비정규|단기/.test(empType)) continue;
+      const cat = meta['커리어 페이지 노출 Job Category 값을 선택해주세요'] || '';
+      if (cat === '병역특례' || cat === 'Sales' || cat === 'Sales Support' || cat === 'Customer Support' || cat === 'GA') continue;
 
-    // MARKETING - Entry & Experienced
-    {
-      id: "mkt-cj-enm",
-      company: "CJ ENM",
-      title: "미디어 퍼포먼스 마케팅 신입사원 / 채용형 인턴",
-      canonicalRole: "Performance Marketing",
-      occupation: "MARKETING",
-      industry: "미디어 / 엔터테인먼트",
-      location: "서울 마포구 상암동",
-      commuteMinutes: 52,
-      salaryMinManwon: 3800,
-      salaryMaxManwon: 4400,
-      salaryDisplay: "3,800 ~ 4,400만 원 (대졸 신입 기준)",
-      salaryTier: "B",
-      minYears: 0,
-      maxYears: 1,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "마케팅", "인턴/신입", "콘텐츠"],
-      pros: ["글로벌 K-콘텐츠 미디어 캠페인 주도", "데이터 기반 광고 최적화"],
-      gaps: ["GA4, 메타 광고 관리자 및 데이터 분석 기초"],
-      rawText: "CJ ENM 디지털 마케팅 신입 정규직 채용. OTT 및 콘텐츠 미디어 캠페인 그로스 기획.",
-      sourceName: "CJ 채용포털",
-      jobUrl: "https://recruit.cj.net",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "CJ Careers",
-      isEntryLevel: true,
-      jobCategory: "MARKETING",
-      publishedAt: today
-    },
-    {
-      id: "mkt-daangn-growth",
-      company: "당근 (당근마켓)",
-      title: "Local Ads Growth Marketer (경력 3년 이상)",
-      canonicalRole: "Growth & Product Marketing",
-      occupation: "MARKETING",
-      industry: "IT / 커뮤니티 플랫폼",
-      location: "서울 서초구 강남대로",
-      commuteMinutes: 44,
-      salaryMinManwon: 6000,
-      salaryMaxManwon: 8000,
-      salaryDisplay: "6,000 ~ 8,000만 원 (경력 3~6년)",
-      salaryTier: "B",
-      minYears: 3,
-      maxYears: 7,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["유니콘", "정규직", "그로스마케팅", "데이터분석", "SQL"],
-      pros: ["전 국민 3,500만 유저 플랫폼 마케팅", "식대 무제한 및 자율 휴가 제도"],
-      gaps: ["A/B 테스트 설계 및 코호트 리텐션 분석 역량"],
-      rawText: "당근 로컬 비즈니스 그로스 마케터 정규직 채용. 데이터 기반 사용자 전환율 최적화.",
-      sourceName: "당근 팀 채용",
-      jobUrl: "https://about.daangn.com/jobs",
-      sourceCategory: "GLOBAL_TECH",
-      isCompanyExclusive: true,
-      sourceSystem: "Greenhouse ATS",
-      isEntryLevel: false,
-      jobCategory: "MARKETING",
-      publishedAt: today
-    },
+      let occ = detectOccupation(item.title, cat);
+      if (occ === 'OTHER') {
+        for (const [k, set] of Object.entries(CAT_MAP)) {
+          if (set.has(cat)) { occ = k; break; }
+        }
+      }
+      if (occ === 'OTHER' || pickedByOcc[occ].length >= 5) continue;
 
-    // HR - Entry & Experienced
-    {
-      id: "hr-sk-hynix-entry",
-      company: "SK하이닉스",
-      title: "HR / People Operations 신입사원 (인사기획·평가보상·채용)",
-      canonicalRole: "인사기획 (HR Planning)",
-      occupation: "HR",
-      industry: "제조 / 반도체",
-      location: "경기도 성남시 분당구 (정자 캠퍼스)",
-      commuteMinutes: 38,
-      salaryMinManwon: 5300,
-      salaryMaxManwon: 6200,
-      salaryDisplay: "5,300 ~ 6,200만 원 (대졸 신입 초임 + PS 별도)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 2,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "신입공채", "인사기획", "평가보상", "채용"],
-      pros: ["글로벌 AI 반도체 1위 기업의 인사 제도 및 보상 체계 경험", "분당 오피스 근무 및 최고 수준 성과급"],
-      gaps: ["데이터 기반 HR 사고력 및 비즈니스 영어 역량"],
-      rawText: "SK하이닉스 HR 신입 정규직 채용. 인사기획, 평가보상체계 운영 및 글로벌 인재 채용.",
-      sourceName: "SK Careers",
-      jobUrl: "https://www.skcareers.com/",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "SK Careers ATS",
-      isEntryLevel: true,
-      jobCategory: "HR",
-      publishedAt: today
-    },
-    {
-      id: "hr-samsung-dx",
-      company: "삼성전자 DX부문",
-      title: "인사기획 & People Analytics Specialist (경력직)",
-      canonicalRole: "인사기획 (HR Planning)",
-      occupation: "HR",
-      industry: "제조 / IT",
-      location: "경기 수원시 영통구 (디지털시티)",
-      commuteMinutes: 35,
-      salaryMinManwon: 8500,
-      salaryMaxManwon: 11000,
-      salaryDisplay: "8,500 ~ 11,000만 원 (Tier A + OPI 성과급)",
-      salaryTier: "A",
-      minYears: 5,
-      maxYears: 12,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "수원사업장", "피플애널리틱스", "인사기획", "평가보상체계설계"],
-      pros: ["국내 최고 수준의 확정 연봉 및 성과급(최대 50%)", "대규모 글로벌 조직 데이터 분석"],
-      gaps: ["글로벌 HR 지표 설계 및 데이터 분석 역량"],
-      rawText: "삼성전자 DX부문 인사기획 및 People Analytics 정규직 전문인력 채용. 평가보상체계설계 및 인재 데이터 기반 AX 혁신.",
-      sourceName: "삼성 커리어스",
-      jobUrl: "https://www.samsungcareers.com/",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "삼성 채용시스템",
-      isEntryLevel: false,
-      jobCategory: "HR",
-      publishedAt: today
-    },
-    {
-      id: "hr-coupang-er",
-      company: "쿠팡 (Coupang)",
-      title: "Employee Relations (ER) & HR Planning Specialist (노무/인사기획)",
-      canonicalRole: "Labor Relations & HR Planning",
-      occupation: "HR",
-      industry: "IT / 이커머스",
-      location: "서울 송파구 송파대로 (쿠팡 본사)",
-      commuteMinutes: 52,
-      salaryMinManwon: 6500,
-      salaryMaxManwon: 8500,
-      salaryDisplay: "6,500 ~ 8,500만 원 + RSU 주식 보상",
-      salaryTier: "B",
-      minYears: 4,
-      maxYears: 9,
-      hasFixedOT: true,
-      fixedOTHours: 20,
-      tags: ["미국상장사", "정규직", "노무관리", "인사기획", "ER"],
-      pros: ["뉴욕증시 상장 글로벌 테크 기업의 인사 시스템", "RSU 주식 보상 패키지"],
-      gaps: ["근로기준법 및 복수노조 단체교섭 실무 경험"],
-      rawText: "쿠팡 ER 및 인사기획 정규직 Specialist 채용. 노무관리, 노사관계 협력 및 사내 인사규정 컴플라이언스 총괄.",
-      sourceName: "쿠팡 커리어스",
-      jobUrl: "https://www.coupang.jobs/kr",
-      sourceCategory: "GLOBAL_TECH",
-      isCompanyExclusive: true,
-      sourceSystem: "Coupang Workday ATS",
-      isEntryLevel: false,
-      jobCategory: "HR",
-      publishedAt: today
-    },
-
-    // PLANNING - Entry & Experienced
-    {
-      id: "plan-hyundai-talent",
-      company: "현대자동차",
-      title: "경영전략 및 사업기획 신입사원 채용",
-      canonicalRole: "Corporate Strategy",
-      occupation: "PLANNING",
-      industry: "제조 / 모빌리티",
-      location: "서울 서초구 양재동 (본사)",
-      commuteMinutes: 45,
-      salaryMinManwon: 4800,
-      salaryMaxManwon: 5500,
-      salaryDisplay: "4,800 ~ 5,500만 원 (대졸 신입 초임)",
-      salaryTier: "A",
-      minYears: 0,
-      maxYears: 2,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "신입공채", "경영기획", "양재본사"],
-      pros: ["글로벌 Top 3 완성차 기업의 글로벌 전략 참여", "안정적인 복리후생"],
-      gaps: ["재무제표 이해 및 경영분석 기초"],
-      rawText: "현대자동차 경영기획 신입 정규직 채용. 중장기 모빌리티 사업계획 및 투자 타당성 분석.",
-      sourceName: "현대자동차 채용관",
-      jobUrl: "https://talent.hyundai.com",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "Hyundai Talent Platform",
-      isEntryLevel: true,
-      jobCategory: "PLANNING",
-      publishedAt: today
-    },
-    {
-      id: "plan-lg-cns-strategy",
-      company: "LG CNS",
-      title: "클라우드/AI 신사업 전략기획 및 PM 경력직 채용",
-      canonicalRole: "Corporate Strategy & PM",
-      occupation: "PLANNING",
-      industry: "IT / 시스템통합(SI)",
-      location: "서울 강서구 마곡중앙8로 (본사)",
-      commuteMinutes: 55,
-      salaryMinManwon: 6200,
-      salaryMaxManwon: 8500,
-      salaryDisplay: "6,200 ~ 8,500만 원 (경력 4~8년차)",
-      salaryTier: "A",
-      minYears: 4,
-      maxYears: 9,
-      hasFixedOT: false,
-      fixedOTHours: 0,
-      tags: ["대기업", "정규직", "전략기획", "PM", "AX"],
-      pros: ["LG그룹 DX 및 생성형 AI 엔터프라이즈 사업 주도", "체계적인 직무급 및 기술 역량 보상"],
-      gaps: ["IT 서비스 기획 또는 엔터프라이즈 컨설팅 프로젝트 리딩 경험"],
-      rawText: "LG CNS 신사업 전략기획 및 PM 정규직 경력 채용. 생성형 AI 및 클라우드 전환 사업 전략 수립.",
-      sourceName: "LG 커리어스",
-      jobUrl: "https://careers.lg.com",
-      sourceCategory: "CONGLOMERATE",
-      isCompanyExclusive: true,
-      sourceSystem: "LG Careers ATS",
-      isEntryLevel: false,
-      jobCategory: "PLANNING",
-      publishedAt: today
+      // 우선 한국어 공고 + 다양한 자회사/포지션 포함
+      const subsidiary = meta['포지션의 소속 자회사를 선택해 주세요.'] || item.company_name || '토스 (비바리퍼블리카)';
+      pickedByOcc[occ].push({ item, empType, cat, subsidiary, occ });
     }
-  ];
+
+    const candidates = Object.values(pickedByOcc).flat();
+    const results = await Promise.allSettled(
+      candidates.map(async ({ item, empType, cat, subsidiary, occ }) => {
+        let plainText = `[${subsidiary}] ${item.title} (${cat || occ})`;
+        try {
+          const detRes = await fetch(`https://api-public.toss.im/api/v3/ipd-eggnog/career/jobs/${item.id}`, {
+            signal: AbortSignal.timeout(8000),
+          });
+          if (detRes.ok) {
+            const detJson = await detRes.json();
+            const parsed = stripHtml(detJson?.success?.content || '');
+            if (parsed.length > 40) plainText = parsed.slice(0, 1200);
+          }
+        } catch {}
+
+        const isIntern = /인턴|intern|어시스턴트/i.test(`${item.title} ${empType}`);
+        const isEntry = isIntern || /신입|주니어|경력\s*무관|연차\s*무관/i.test(`${item.title} ${plainText}`);
+        const yrs = extractYearsFromText(`${item.title}\n${plainText}`, isEntry);
+
+        return {
+          id: `toss-${item.id}`,
+          company: subsidiary,
+          title: item.title,
+          canonicalRole: cat || occ,
+          occupation: occ,
+          industry: 'IT / 핀테크·금융',
+          location: '서울 강남구 테헤란로 (역삼)',
+          commuteMinutes: 48,
+          salaryMinManwon: isIntern ? 3000 : isEntry ? 5200 : 7000,
+          salaryMaxManwon: isIntern ? 3600 : isEntry ? 7000 : 11000,
+          salaryDisplay: isIntern
+            ? '월 250~300만 원 (토스 커뮤니티 인턴십)'
+            : isEntry
+            ? '5,200 ~ 7,000만 원 (주니어/신입 협의)'
+            : '7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)',
+          salaryTier: 'A',
+          minYears: yrs.minYears,
+          maxYears: yrs.maxYears,
+          hasFixedOT: false,
+          fixedOTHours: 0,
+          tags: Array.from(
+            new Set([
+              '핀테크/유니콘',
+              empType,
+              cat || occ,
+              ...(isEntry ? ['신입/주니어'] : ['경력']),
+            ])
+          ),
+          pros: ['토스 커뮤니티 수평 문화와 빠른 제품 의사결정', '비포괄임금 및 경쟁력 있는 총보상'],
+          gaps: ['직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요'],
+          rawText: plainText,
+          sourceName: '토스 공식 채용관',
+          jobUrl: `https://toss.im/career/job-detail?job_id=${item.id}`,
+          sourceCategory: 'GLOBAL_TECH',
+          isCompanyExclusive: true,
+          sourceSystem: 'Toss Greenhouse ATS',
+          isEntryLevel: isEntry,
+          jobCategory: occ,
+          publishedAt: (item.updated_at || new Date().toISOString()).split('T')[0],
+        };
+      })
+    );
+
+    const jobs = results.filter((r) => r.status === 'fulfilled').map((r) => r.value);
+    console.log(`Toss: Crawled ${jobs.length} sanitized real jobs`);
+    return jobs;
+  } catch (err) {
+    console.warn('Toss crawler warning:', err.message);
+    return [];
+  }
+}
+
+// 5. Crawl Daangn (당근 Greenhouse API)
+async function crawlDaangn() {
+  console.log('Crawling Daangn Greenhouse API...');
+  try {
+    const res = await fetch('https://boards-api.greenhouse.io/v1/boards/daangn/jobs?content=true', {
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const list = json?.jobs || [];
+
+    const jobs = [];
+    const byOcc = { TECH: 0, FINANCE: 0, MARKETING: 0, PLANNING: 0, HR: 0 };
+
+    for (const item of list) {
+      if (!item?.id || !item?.title) continue;
+      if (NON_CAREER_KEYWORDS.test(item.title) || NON_TARGET_FUNCTION_REGEX.test(item.title)) continue;
+      if (/계약직|단기/.test(item.title)) continue;
+
+      const occ = detectOccupation(item.title);
+      if (occ === 'OTHER' || byOcc[occ] >= 4) continue;
+      byOcc[occ]++;
+
+      const plainText = stripHtml(item.content || '').slice(0, 1200);
+      const isIntern = /인턴|intern/i.test(item.title);
+      const isEntry = isIntern || /신입|주니어|경력\s*무관/i.test(`${item.title} ${plainText}`);
+      const yrs = extractYearsFromText(`${item.title}\n${plainText}`, isEntry);
+
+      jobs.push({
+        id: `daangn-${item.id}`,
+        company: '당근 (당근마켓)',
+        title: item.title,
+        canonicalRole: item.title.split(' - ')[0].trim(),
+        occupation: occ,
+        industry: 'IT / 커뮤니티 플랫폼',
+        location: '서울 서초구 강남대로 (강남역)',
+        commuteMinutes: 44,
+        salaryMinManwon: isIntern ? 2800 : isEntry ? 5000 : 6500,
+        salaryMaxManwon: isIntern ? 3200 : isEntry ? 6500 : 9500,
+        salaryDisplay: isIntern ? '월 230~260만 원 (당근 인턴)' : '6,000 ~ 9,500만 원 (유니콘 오퍼 협의)',
+        salaryTier: 'B',
+        minYears: yrs.minYears,
+        maxYears: yrs.maxYears,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: Array.from(new Set(['유니콘', '정규직', isIntern ? '인턴' : isEntry ? '신입/주니어' : '경력'])),
+        pros: ['3,500만+ MAU 로컬 커뮤니티 프로덕트 경험', '높은 업무 자율성과 비포괄임금 운영'],
+        gaps: ['실무 중심 직무 인터뷰 및 프로덕트 데이터 감각 요구'],
+        rawText: plainText || `[당근 채용]\n${item.title}`,
+        sourceName: '당근 공식 채용관',
+        jobUrl: `https://careers.daangn.com/jobs/role/${item.id}/`,
+        sourceCategory: 'GLOBAL_TECH',
+        isCompanyExclusive: true,
+        sourceSystem: 'Greenhouse ATS',
+        isEntryLevel: isEntry,
+        jobCategory: occ,
+        publishedAt: (item.updated_at || new Date().toISOString()).split('T')[0],
+      });
+    }
+    console.log(`Daangn: Crawled ${jobs.length} sanitized real jobs`);
+    return jobs;
+  } catch (err) {
+    console.warn('Daangn crawler warning:', err.message);
+    return [];
+  }
+}
+
+// 6. Crawl Woowahan (우아한형제들 공식 API)
+async function crawlWoowahan() {
+  console.log('Crawling Woowahan (배민) API...');
+  try {
+    const res = await fetch('https://career.woowahan.com/w1/recruits?size=60', {
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    const list = json?.data?.list || [];
+
+    const jobs = [];
+    const byOcc = { TECH: 0, FINANCE: 0, MARKETING: 0, PLANNING: 0, HR: 0 };
+
+    for (const item of list) {
+      if (!item?.recruitNumber || !item?.recruitName) continue;
+      // BA002001 = 정규직 확정 포지션
+      if (item.employmentType?.recruitItemCode !== 'BA002001') continue;
+      if (NON_CAREER_KEYWORDS.test(item.recruitName) || NON_TARGET_FUNCTION_REGEX.test(item.recruitName)) continue;
+
+      const occ = detectOccupation(item.recruitName);
+      if (occ === 'OTHER' || byOcc[occ] >= 4) continue;
+      byOcc[occ]++;
+
+      const minY = typeof item.careerRestrictionMinYears === 'number' && item.careerRestrictionMinYears >= 0 ? item.careerRestrictionMinYears : 2;
+      const maxY = typeof item.careerRestrictionMaxYears === 'number' && item.careerRestrictionMaxYears >= minY ? Math.min(20, item.careerRestrictionMaxYears) : Math.max(minY + 5, 10);
+      const isEntry = minY === 0 || /신입|주니어/i.test(item.recruitName);
+      const plainText = stripHtml(item.recruitContents || '').slice(0, 1200);
+
+      jobs.push({
+        id: `woowahan-${item.recruitNumber}`,
+        company: '우아한형제들 (배달의민족)',
+        title: item.recruitName,
+        canonicalRole: item.recruitName,
+        occupation: occ,
+        industry: 'IT / 이커머스 플랫폼',
+        location: '서울 송파구 올림픽로 (잠실)',
+        commuteMinutes: 52,
+        salaryMinManwon: isEntry ? 4800 : 6500,
+        salaryMaxManwon: isEntry ? 6500 : 9500,
+        salaryDisplay: `${isEntry ? '4,800 ~ 6,500' : '6,500 ~ 9,500'}만 원 (주 35h/비포괄 기준 협의)`,
+        salaryTier: 'B',
+        minYears: minY,
+        maxYears: maxY,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: Array.from(new Set(['플랫폼', '정규직', isEntry ? '신입/주니어' : `경력 ${minY}년+`])),
+        pros: ['주 35시간 유연근무제 및 비포괄임금', '대규모 커머스·배달 트래픽/운영 환경'],
+        gaps: ['서류 및 1~2차 실무 심층 인터뷰 대비 필요'],
+        rawText: plainText || `[우아한형제들 정규직 채용]\n${item.recruitName}`,
+        sourceName: '우아한형제들 채용관',
+        jobUrl: `https://career.woowahan.com/recruitment/${item.recruitNumber}/detail`,
+        sourceCategory: 'GLOBAL_TECH',
+        isCompanyExclusive: true,
+        sourceSystem: 'Woowahan ATS',
+        isEntryLevel: isEntry,
+        jobCategory: occ,
+        publishedAt: (item.updateDate || new Date().toISOString()).split('T')[0],
+      });
+    }
+    console.log(`Woowahan: Crawled ${jobs.length} sanitized real jobs`);
+    return jobs;
+  } catch (err) {
+    console.warn('Woowahan crawler warning:', err.message);
+    return [];
+  }
+}
+
+// 7. Crawl Kakao & Affiliates (카카오 공동체 공식 API)
+async function crawlKakao() {
+  console.log('Crawling Kakao Careers API...');
+  try {
+    const endpoints = [
+      'https://careers.kakao.com/public/api/job-list?part=STAFF&company=ALL&page=1',
+      'https://careers.kakao.com/public/api/job-list?part=TECHNOLOGY&company=ALL&page=1',
+      'https://careers.kakao.com/public/api/job-list?part=TECHNOLOGY&company=ALL&page=2',
+    ];
+    const responses = await Promise.all(
+      endpoints.map((u) => fetch(u, { signal: AbortSignal.timeout(10000) }).then((r) => (r.ok ? r.json() : { jobList: [] })).catch(() => ({ jobList: [] })))
+    );
+    const list = responses.flatMap((r) => r?.jobList || []);
+
+    const jobs = [];
+    const seen = new Set();
+    const byOcc = { TECH: 0, FINANCE: 0, MARKETING: 0, PLANNING: 0, HR: 0 };
+
+    for (const item of list) {
+      if (!item?.realId || !item?.jobOfferTitle || seen.has(item.realId)) continue;
+      if (NON_CAREER_KEYWORDS.test(item.jobOfferTitle) || NON_TARGET_FUNCTION_REGEX.test(item.jobOfferTitle)) continue;
+      if (/계약직/.test(item.employeeTypeName || '') || /계약직/.test(item.jobOfferTitle)) continue;
+
+      const occ = detectOccupation(item.jobOfferTitle, item.jobTypeName);
+      if (occ === 'OTHER' || byOcc[occ] >= 4) continue;
+      seen.add(item.realId);
+      byOcc[occ]++;
+
+      const loc = item.locationName || '경기 성남시 분당구 (판교)';
+      const isIntern = (item.employeeTypeName || '').includes('인턴') || item.jobOfferTitle.includes('인턴');
+      const isEntry = isIntern || /신입/.test(item.jobOfferTitle);
+      const rawDesc = stripHtml(`${item.workContentDesc || ''}\n${item.qualification || ''}`).slice(0, 1200);
+      const yrs = extractYearsFromText(`${item.jobOfferTitle}\n${rawDesc}`, isEntry);
+
+      jobs.push({
+        id: `kakao-${item.realId}`,
+        company: item.companyName || '카카오',
+        title: item.jobOfferTitle,
+        canonicalRole: item.jobTypeName || occ,
+        occupation: occ,
+        industry: 'IT / 플랫폼·핀테크',
+        location: loc,
+        commuteMinutes: /판교|성남|분당/.test(loc) ? 38 : 48,
+        salaryMinManwon: isIntern ? 2700 : isEntry ? 5000 : 6500,
+        salaryMaxManwon: isIntern ? 3100 : isEntry ? 6500 : 10000,
+        salaryDisplay: isIntern ? '월 220~260만 원 (인턴십)' : isEntry ? '5,000 ~ 6,500만 원 (신입/주니어)' : '6,500 ~ 10,000만 원 (경력직 협의)',
+        salaryTier: 'A',
+        minYears: yrs.minYears,
+        maxYears: yrs.maxYears,
+        hasFixedOT: false,
+        fixedOTHours: 0,
+        tags: Array.from(
+          new Set([
+            '대기업/빅테크',
+            item.employeeTypeName || '정규직',
+            ...(isEntry ? ['신입/인턴'] : ['경력']),
+            ...(item.skillSetList || []).map((s) => s.skillName).filter(Boolean).slice(0, 3),
+          ])
+        ),
+        pros: [`${item.companyName || '카카오'} 공동체 대규모 서비스 및 복리후생`, '유연근무 및 명확한 직무 전문성'],
+        gaps: ['공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요'],
+        rawText: rawDesc || `[${item.companyName || '카카오'} 채용]\n${item.jobOfferTitle}`,
+        sourceName: '카카오 영입 공식 포털',
+        jobUrl: `https://careers.kakao.com/jobs/${item.realId}`,
+        sourceCategory: 'CONGLOMERATE',
+        isCompanyExclusive: true,
+        sourceSystem: 'Kakao Careers API',
+        isEntryLevel: isEntry,
+        jobCategory: occ,
+        publishedAt: (item.regDate || item.uptDate || new Date().toISOString()).split('T')[0].replace(/T.*/, ''),
+      });
+    }
+    console.log(`Kakao: Crawled ${jobs.length} sanitized real jobs`);
+    return jobs;
+  } catch (err) {
+    console.warn('Kakao crawler warning:', err.message);
+    return [];
+  }
 }
 
 async function syncToSupabase(jobs) {
   const supabaseUrl = (process.env.SUPABASE_URL || '').trim().replace(/\/+$/, '').replace(/\/rest\/v1$/i, '');
-  // SUPABASE_SERVICE_ROLE_KEY를 우선 사용하여 RLS를 안전하게 통과하고, 미설정 시 SUPABASE_ANON_KEY로 폴백
   const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 
   if (!supabaseUrl || !supabaseKey) {
-    console.log("No Supabase credentials found. Skipping DB sync. (Using local JSON only)");
+    console.log('No Supabase credentials found. Skipping DB sync. (Using local JSON only)');
     return;
   }
 
@@ -737,19 +758,19 @@ async function syncToSupabase(jobs) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-        'Prefer': 'resolution=merge-duplicates'
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        Prefer: 'resolution=merge-duplicates',
       },
-      body: JSON.stringify(jobs)
+      body: JSON.stringify(jobs),
     });
 
     if (!res.ok) {
       throw new Error(`Supabase Sync Failed: ${res.status} ${await res.text()}`);
     }
-    console.log("Successfully synced all jobs to Supabase!");
+    console.log('Successfully synced all jobs to Supabase!');
   } catch (err) {
-    console.error("Supabase sync error:", err.message);
+    console.error('Supabase sync error:', err.message);
   }
 }
 
@@ -759,32 +780,32 @@ async function main() {
   const mobileDataPath = path.join(__dirname, '..', 'mobile', 'assets', 'data');
   const mobileCachePath = path.join(mobileDataPath, 'jobs.json');
 
-  const alioJobs = await crawlALIO();
-  const pwcJobs = await crawlPwC();
-  const deloitteJobs = await crawlDeloitte();
+  const batches = await Promise.all([
+    crawlALIO(),
+    crawlPwC(),
+    crawlDeloitte(),
+    crawlToss(),
+    crawlDaangn(),
+    crawlWoowahan(),
+    crawlKakao(),
+  ]);
 
-  // 큐레이션 샘플은 실시간 수집 공고가 아니므로 고정 날짜 + 명시 태그를 붙여 신선도 오인을 막는다.
-  const SEED_DATE = '2026-10-07';
-  const seedJobs = generateDiverseVerifiedSeedJobs().map((j) => ({
-    ...j,
-    publishedAt: SEED_DATE,
-    tags: Array.from(new Set([...j.tags, '큐레이션 샘플(실시간 공고 아님)'])),
-  }));
+  let liveJobs = sanitizePostings(batches.flat());
 
-  // 수집처 3곳이 모두 실패하면(점검·차단 등) 기존에 저장된 실수집 공고를 유지한다.
-  let carried = [];
-  if (alioJobs.length + pwcJobs.length + deloitteJobs.length === 0 && fs.existsSync(cachePath)) {
+  // 전체 라이브 수집이 네트워크 장애 등으로 0건인 경우에만 기존 실수집 캐시 보존 (가상 시드 생성 금지)
+  if (liveJobs.length === 0 && fs.existsSync(cachePath)) {
     try {
       const prev = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
-      carried = prev.filter((j) => /^(alio|pwc|deloitte)-\d|^pwc-r/.test(j.id));
-      console.warn(`All live crawlers returned 0. Carrying over ${carried.length} previous live jobs.`);
+      liveJobs = sanitizePostings(
+        prev.filter((j) => !j.tags?.includes('큐레이션 샘플(실시간 공고 아님)'))
+      );
+      console.warn(`All live crawlers returned 0. Preserved ${liveJobs.length} previous live jobs.`);
     } catch {}
   }
 
-  // Deduplicate by id
   const seen = new Set();
   const allJobs = [];
-  for (const job of [...alioJobs, ...pwcJobs, ...deloitteJobs, ...carried, ...seedJobs]) {
+  for (const job of liveJobs) {
     if (!seen.has(job.id)) {
       seen.add(job.id);
       allJobs.push(job);
@@ -795,7 +816,7 @@ async function main() {
     fs.mkdirSync(dataPath, { recursive: true });
   }
   fs.writeFileSync(cachePath, JSON.stringify(allJobs, null, 2), 'utf-8');
-  console.log(`Saved total ${allJobs.length} sanitized jobs to public/data/jobs.json`);
+  console.log(`Saved total ${allJobs.length} sanitized LIVE jobs to public/data/jobs.json`);
 
   if (fs.existsSync(mobileDataPath)) {
     fs.writeFileSync(mobileCachePath, JSON.stringify(allJobs, null, 2), 'utf-8');

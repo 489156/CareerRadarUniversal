@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useAppStore, TabId, RadarFilterId } from "@/store/useAppStore";
+import { useAppStore, TabId, RadarFilterId, RadarDomainFilterId } from "@/store/useAppStore";
 import { JobPosting, SalaryBenchmark, DynamicMatchScore, CareerPassport } from "@/lib/types";
 import { calculateLifeAdjustedHourlyWage } from "@/lib/calculator";
 import { diagnoseJobRisks } from "@/lib/scanner";
@@ -85,6 +85,8 @@ export default function Home() {
     setShowExcludedJobs,
     radarSearch,
     setRadarSearch,
+    radarDomainFilter,
+    setRadarDomainFilter,
     radarFilter,
     setRadarFilter,
     ledgerSearch,
@@ -204,12 +206,15 @@ export default function Home() {
           : {}),
       };
     });
+    setRadarDomainFilter("MINE");
   };
 
   const executePassportSearch = () => {
     handleSavePassport();
+    setRadarDomainFilter("MINE");
+    setRadarFilter("all");
     setActiveTab("radar");
-    showToast("입력 조건 기준으로 맞춤 공고 탐색을 실행했습니다.");
+    showToast(`${passport.occupation} 직군 및 입력 조건으로 맞춤 공고를 탐색했습니다.`);
   };
 
   const addSkillChip = () => {
@@ -309,6 +314,14 @@ export default function Home() {
     .filter(({ job, match, hf }) => {
       if (!showExcludedJobs && hf.isExcluded) return false;
 
+      // 1. 직군 스코프 필터 (기본값 MINE = 내 희망 직군만 표시하여 직무 무관 공고 혼입 차단)
+      if (radarDomainFilter === "MINE") {
+        if (job.occupation !== passport.occupation) return false;
+      } else if (radarDomainFilter !== "ALL") {
+        if (job.occupation !== radarDomainFilter) return false;
+      }
+
+      // 2. 검색어 필터
       if (radarSearch.trim()) {
         const q = radarSearch.toLowerCase();
         const matchText =
@@ -316,6 +329,7 @@ export default function Home() {
         if (!matchText.includes(q)) return false;
       }
 
+      // 3. 기업유형·근무조건 필터 (직군 필터와 AND 결합)
       if (radarFilter === "entry") {
         return (
           job.minYears === 0 ||
@@ -325,11 +339,6 @@ export default function Home() {
           job.title.includes("신입")
         );
       }
-      if (radarFilter === "tech") return job.occupation === "TECH";
-      if (radarFilter === "finance") return job.occupation === "FINANCE";
-      if (radarFilter === "marketing") return job.occupation === "MARKETING";
-      if (radarFilter === "hr") return job.occupation === "HR";
-      if (radarFilter === "planning") return job.occupation === "PLANNING";
       if (radarFilter === "exclusive") return job.isCompanyExclusive === true;
       if (radarFilter === "consulting") return job.sourceCategory === "CONSULTING";
       if (radarFilter === "public") return job.sourceCategory === "PUBLIC";
@@ -343,8 +352,15 @@ export default function Home() {
     })
     .sort((a, b) => b.match.totalScore - a.match.totalScore || a.job.commuteMinutes - b.job.commuteMinutes);
 
+  const minePoolCount = jobsWithScores.filter(
+    ({ job, hf }) => job.occupation === passport.occupation && (!hf.isExcluded || showExcludedJobs)
+  ).length;
+
   const highMatchCount = jobsWithScores.filter(
-    ({ match, hf }) => match.totalScore >= 88 && (!hf.isExcluded || showExcludedJobs)
+    ({ job, match, hf }) =>
+      job.occupation === passport.occupation &&
+      match.totalScore >= 88 &&
+      (!hf.isExcluded || showExcludedJobs)
   ).length;
 
   const ledgerData: SalaryBenchmark[] = [
@@ -576,7 +592,7 @@ export default function Home() {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
             </div>
             <div className="mt-0.5 text-[11px] text-zinc-500 font-mono tabular-nums truncate">
-              필터 통과 {filteredJobs.length} / 전체 {jobsDatabase.length}건
+              {passport.occupation} 통과 {minePoolCount} / 전체 {jobsDatabase.length}건
             </div>
           </button>
 
@@ -610,7 +626,7 @@ export default function Home() {
               {CRAWLER_SOURCES.length}채널
             </div>
             <div className="mt-0.5 text-[11px] text-zinc-500 truncate">
-              실시간 3 + 공식 채용관 {CRAWLER_SOURCES.length - 3}
+              실시간 7 + 공식 채용관 {CRAWLER_SOURCES.length - 7}
             </div>
           </button>
         </section>
@@ -1026,8 +1042,13 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="text-xs text-zinc-400 mt-0.5">
-                    {passport.occupation} · {passport.totalYears === 0 ? "신입" : `${passport.totalYears}년차`} · 통근{" "}
-                    {passport.commuteToleranceMinutes}분 이내 기준 적합도 내림차순
+                    {radarDomainFilter === "MINE"
+                      ? `내 직군(${passport.occupation}) 전용`
+                      : radarDomainFilter === "ALL"
+                      ? "전체 직군"
+                      : `${radarDomainFilter} 직군`}{" "}
+                    · {passport.totalYears === 0 ? "신입" : `${passport.totalYears}년차`} · 통근{" "}
+                    {passport.commuteToleranceMinutes}분 이내 적합도순
                   </p>
                 </div>
 
@@ -1042,10 +1063,11 @@ export default function Home() {
                       className="w-full bg-[#0A0A0B] border border-white/[0.08] rounded-[6px] pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/[0.25]"
                     />
                   </div>
-                  {(radarFilter !== "all" || radarSearch.trim()) && (
+                  {(radarDomainFilter !== "MINE" || radarFilter !== "all" || radarSearch.trim()) && (
                     <button
                       type="button"
                       onClick={() => {
+                        setRadarDomainFilter("MINE");
                         setRadarFilter("all");
                         setRadarSearch("");
                       }}
@@ -1082,20 +1104,21 @@ export default function Home() {
                   <span className="text-[11px] text-zinc-500 w-14">직군</span>
                   {(
                     [
-                      { id: "all", label: "전체" },
-                      { id: "tech", label: "IT·개발" },
-                      { id: "finance", label: "금융·재무·회계" },
-                      { id: "marketing", label: "마케팅·그로스" },
-                      { id: "hr", label: "인사·HR" },
-                      { id: "planning", label: "전략·기획·PM" },
-                    ] as { id: RadarFilterId; label: string }[]
+                      { id: "MINE", label: `내 직군 (${passport.occupation})` },
+                      { id: "TECH", label: "IT·개발" },
+                      { id: "FINANCE", label: "금융·재무·회계" },
+                      { id: "MARKETING", label: "마케팅·그로스" },
+                      { id: "HR", label: "인사·HR" },
+                      { id: "PLANNING", label: "전략·기획·PM" },
+                      { id: "ALL", label: "전체 직군" },
+                    ] as { id: RadarDomainFilterId; label: string }[]
                   ).map((f) => (
                     <button
                       key={f.id}
                       type="button"
-                      onClick={() => setRadarFilter(f.id)}
+                      onClick={() => setRadarDomainFilter(f.id)}
                       className={`px-2.5 py-1 rounded-[6px] text-xs transition-colors duration-150 ${
-                        radarFilter === f.id
+                        radarDomainFilter === f.id
                           ? "bg-[#FAFAFA] text-[#0A0A0B] font-semibold"
                           : "bg-[#18181B] text-zinc-300 hover:bg-[#222226] border border-white/[0.06]"
                       }`}
@@ -1109,6 +1132,7 @@ export default function Home() {
                   <span className="text-[11px] text-zinc-500 w-14">기업·조건</span>
                   {(
                     [
+                      { id: "all", label: "조건 전체" },
                       { id: "exclusive", label: "자사 단독" },
                       { id: "conglomerate", label: "대기업" },
                       { id: "public", label: "공공기관(ALIO)" },
@@ -1123,7 +1147,9 @@ export default function Home() {
                     <button
                       key={f.id}
                       type="button"
-                      onClick={() => setRadarFilter(f.id)}
+                      onClick={() =>
+                        setRadarFilter(f.id !== "all" && radarFilter === f.id ? "all" : f.id)
+                      }
                       className={`px-2.5 py-1 rounded-[6px] text-xs transition-colors duration-150 ${
                         radarFilter === f.id
                           ? "bg-[#FAFAFA] text-[#0A0A0B] font-semibold"

@@ -30,7 +30,7 @@ export function CrawlerModal() {
             <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-400">
               <span>{stats.totalSources} CHANNELS</span>
               <span>·</span>
-              <span>LIVE SCRAPER 3 + OFFICIAL ATS {stats.totalSources - 3}</span>
+              <span>LIVE SCRAPER 7 + OFFICIAL ATS {stats.totalSources - 7}</span>
             </div>
             <h3 className="text-base font-semibold text-zinc-100 mt-1 tracking-[-0.02em]">
               자체 ATS 수집 및 공식 채용관 네트워크
@@ -56,7 +56,7 @@ export function CrawlerModal() {
           </div>
           <div className="p-3">
             <span className="text-[11px] text-zinc-400">일일 크롤링 주기</span>
-            <div className="text-lg font-semibold font-mono tabular-nums text-zinc-100 mt-0.5">09:00 KST</div>
+            <div className="text-lg font-semibold font-mono tabular-nums text-zinc-100 mt-0.5">00:00 KST</div>
           </div>
         </div>
 
@@ -98,7 +98,15 @@ export function CrawlerModal() {
               {CRAWLER_SOURCES.filter(
                 (s) => crawlerCategoryFilter === "ALL" || s.category === crawlerCategoryFilter
               ).map((s) => {
-                const isLiveScraper = s.id === "source-alio" || s.id === "source-pwc" || s.id === "source-deloitte";
+                const isLiveScraper = new Set([
+                  "source-alio",
+                  "source-pwc",
+                  "source-deloitte",
+                  "source-toss",
+                  "source-daangn",
+                  "source-woowahan",
+                  "source-kakao",
+                ]).has(s.id);
                 return (
                   <tr key={s.id} className="hover:bg-[#18181B]/60 transition-colors duration-150">
                     <td className="py-2.5 px-3 min-w-[140px]">

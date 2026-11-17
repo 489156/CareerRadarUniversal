@@ -18,7 +18,7 @@
 - **공공기관 및 국책금융기관**: 기획재정부 ALIO 경영공시 시스템에만 정규직 채용이 우선 게재됩니다.
 - **주요 대기업(삼성·현대차·SK·LG)** 및 **회계·컨설팅(Big4/MBB)**, **빅테크**: 자사 채용 홈페이지(Closed ATS)를 통해 수시 채용을 진행합니다.
 
-**Career Radar Universal**은 사용자의 경력·직무·연봉·거주지 기준을 담은 **Career Passport**를 바탕으로, **21개 공식 채널(실시간 자동 크롤러 3곳 + 공식 채용관 링크 18곳)**의 채용 데이터에 대해 **다차원 적합도 점수화 ➔ 6종 절대 배제 필터링 ➔ 기업 Tier별 시장 연봉(P10~P90) 산출 ➔ 노동법 독소조항 진단 ➔ 통근·OT 반영 실질 시급 계산**까지 단일 워크스페이스에서 제공합니다.
+**Career Radar Universal**은 사용자의 경력·직무·연봉·거주지 기준을 담은 **Career Passport**를 바탕으로, **21개 공식 채널(실시간 자동 크롤러 7곳 + 공식 채용관 링크 14곳)**의 실공고 원문 데이터에 대해 **다차원 적합도 점수화 ➔ 6종 절대 배제 필터링 ➔ 기업 Tier별 시장 연봉(P10~P90) 산출 ➔ 노동법 독소조항 진단 ➔ 통근·OT 반영 실질 시급 계산**까지 단일 워크스페이스에서 제공합니다.
 
 ---
 
@@ -29,8 +29,8 @@
 ```mermaid
 flowchart TD
     subgraph Data_Pipeline ["1. 무인 데이터 수집 & 적재 (GitHub Actions Cron)"]
-        GHA["GitHub Actions Cron<br/>(매일 한국 시각 자정 00:00 KST / 15:00 UTC)"] -->|1. 실시간 스크래핑| EXT["ALIO · 삼일PwC · 딜로이트 안진<br/>(+ 큐레이션 시드 14건 병합)"]
-        EXT -->|2. 비경력직 필터 & 정제| GHA
+        GHA["GitHub Actions Cron<br/>(매일 한국 시각 자정 00:00 KST / 15:00 UTC)"] -->|1. 실시간 API/HTML 수집| EXT["ALIO · 삼일PwC · 딜로이트 · 토스<br/>당근 · 우아한형제들 · 카카오 (100% 직통 원문 URL)"]
+        EXT -->|2. 비경력직 필터 & 직군 정제| GHA
         GHA -->|3. SERVICE_ROLE_KEY Upsert| SUPA[("Supabase PostgreSQL<br/>public.jobs 테이블")]
         GHA -->|4. 정적 캐시 커밋| LOCAL_JSON["public/data/jobs.json"]
     end

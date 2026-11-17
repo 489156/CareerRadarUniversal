@@ -48,7 +48,8 @@ export function SkillGapModal() {
         <div className="p-3 bg-[#18181B] border border-white/[0.08] rounded-[8px] text-xs text-zinc-300 leading-relaxed">
           현재 커리어(<span className="text-zinc-100 font-medium">{passport.canonicalRole}</span>,{" "}
           {passport.track === "ENTRY" || passport.totalYears === 0 ? "신입 트랙" : `${passport.totalYears}년차`})에 아래
-          3개 역량 트랙 중 하나를 보강하면 지원 가능 포지션이 <span className="font-mono text-zinc-100">+{totalExpanded}건</span> 확장됩니다.
+          3개 역량 트랙 중 하나를 보강하면 진입 가능한 타깃 포지션이{" "}
+          <span className="font-mono text-zinc-100">+{totalExpanded}건</span> 확장됩니다. 아래 기업 목록은 참고용 대표 채용관입니다.
         </div>
 
         <div className="flex space-x-1.5 border-b border-white/[0.08] pb-2.5 text-xs overflow-x-auto">
@@ -125,7 +126,7 @@ export function SkillGapModal() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-[6px] bg-[#18181B] hover:bg-[#222226] border border-white/[0.08] text-[11px] font-medium text-zinc-200 transition-colors duration-150"
                       >
-                        <span>원문</span>
+                        <span>채용관</span>
                         <IconExternal className="w-3 h-3" />
                       </a>
                     </td>

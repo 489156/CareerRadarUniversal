@@ -9,6 +9,7 @@ export function ResumeModal() {
   const resumeText = useAppStore((s) => s.resumeText);
   const setResumeText = useAppStore((s) => s.setResumeText);
   const setPassport = useAppStore((s) => s.setPassport);
+  const setRadarDomainFilter = useAppStore((s) => s.setRadarDomainFilter);
   const showToast = useAppStore((s) => s.showToast);
 
   if (!isResumeModalOpen) return null;
@@ -27,6 +28,7 @@ export function ResumeModal() {
       skills: r.skills.length > 0 ? r.skills : prev.skills,
       ...(missingYears ? {} : { totalYears: r.totalYears, track: r.track }),
     }));
+    setRadarDomainFilter("MINE");
     setIsResumeModalOpen(false);
 
     const warnings = [

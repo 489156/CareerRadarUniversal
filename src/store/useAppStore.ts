@@ -4,8 +4,9 @@ import { diagnoseJobRisks } from '@/lib/scanner';
 import { MOCK_JOB_DATABASE } from '@/lib/matcher';
 
 export type TabId = "passport" | "radar" | "scanner" | "calculator" | "matrix" | "ledger";
+export type RadarDomainFilterId = "MINE" | "ALL" | "TECH" | "FINANCE" | "MARKETING" | "HR" | "PLANNING";
 export type RadarFilterId =
-  | "all" | "entry" | "tech" | "finance" | "marketing" | "hr" | "planning"
+  | "all" | "entry"
   | "exclusive" | "consulting" | "public" | "conglomerate" | "globalTech"
   | "tierA" | "highMatch" | "commuteFit" | "nonOT";
 
@@ -94,6 +95,8 @@ interface AppState {
   setShowExcludedJobs: (show: boolean) => void;
   radarSearch: string;
   setRadarSearch: (search: string) => void;
+  radarDomainFilter: RadarDomainFilterId;
+  setRadarDomainFilter: (domain: RadarDomainFilterId) => void;
   radarFilter: RadarFilterId;
   setRadarFilter: (filter: RadarFilterId) => void;
   ledgerSearch: string;
@@ -224,6 +227,8 @@ export const useAppStore = create<AppState>((set) => ({
   setShowExcludedJobs: (show) => set({ showExcludedJobs: show }),
   radarSearch: "",
   setRadarSearch: (search) => set({ radarSearch: search }),
+  radarDomainFilter: "MINE",
+  setRadarDomainFilter: (domain) => set({ radarDomainFilter: domain }),
   radarFilter: "all",
   setRadarFilter: (filter) => set({ radarFilter: filter }),
   ledgerSearch: "",
