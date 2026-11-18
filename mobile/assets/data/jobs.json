@@ -1,45 +1,5 @@
 [
   {
-    "id": "alio-306943",
-    "company": "기초과학연구원",
-    "title": "2026-12회 생명과학 연구클러스터 별정직(체험형 청년인턴) 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대전 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 기초과학연구원\n공고명: 2026-12회 생명과학 연구클러스터 별정직(체험형 청년인턴) 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대전",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306943",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
-  },
-  {
     "id": "alio-306970",
     "company": "한국농업기술진흥원",
     "title": "2027년 한국농업기술진흥원 상반기 체험형 청년인턴 채용 공고",
@@ -77,230 +37,30 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
-    "id": "alio-307099",
-    "company": "에너지경제연구원",
-    "title": "[에너지경제연구원] 공공기관 청년인턴 채용공고(인재개발팀)",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "HR",
-    "industry": "공공기관 / 공기업",
-    "location": "울산 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 에너지경제연구원\n공고명: [에너지경제연구원] 공공기관 청년인턴 채용공고(인재개발팀)\n고용형태: 청년인턴(체험형)\n근무지: 울산",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307099",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "HR",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-306988",
-    "company": "국민연금공단",
-    "title": "2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고",
-    "canonicalRole": "공공 재무/예산관리",
-    "occupation": "FINANCE",
-    "industry": "공공기관 / 공기업",
-    "location": "전북 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국민연금공단\n공고명: 2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고\n고용형태: 정규직 (정규직)\n근무지: 전북",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=306988",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-307162",
-    "company": "(재)우체국물류지원단",
-    "title": "2027년도 우체국물류지원단 1분기 정기채용(체험형 청년인턴) 공고",
+    "id": "alio-307217",
+    "company": "한국보건사회연구원",
+    "title": "한국보건사회연구원 청년인턴 채용 공고(학술정보분야_장애인제한경쟁)",
     "canonicalRole": "청년인턴/행정지원",
     "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 외 2 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (재)우체국물류지원단\n공고명: 2027년도 우체국물류지원단 1분기 정기채용(체험형 청년인턴) 공고\n고용형태: 청년인턴(체험형)\n근무지: 서울 외 2",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307162",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-307161",
-    "company": "(재)우체국물류지원단",
-    "title": "2027년도 우체국물류지원단 1분기 정기채용(채용형 청년인턴) 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(채용형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: (재)우체국물류지원단\n공고명: 2027년도 우체국물류지원단 1분기 정기채용(채용형 청년인턴) 공고\n고용형태: 청년인턴(채용형)\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307161",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-307149",
-    "company": "한국동서발전(주)",
-    "title": "한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "울산 외 6 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국동서발전(주)\n공고명: 한국동서발전(주) 2027년 상반기 신입직원(대졸수준(일반/보훈) 및 고졸) 선발\n고용형태: 정규직 (정규직)\n근무지: 울산 외 6",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307149",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "alio-307141",
-    "company": "한국개발연구원",
-    "title": "2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)",
-    "canonicalRole": "공공 ICT/전산관리",
-    "occupation": "TECH",
     "industry": "공공기관 / 공기업",
     "location": "세종 (지방 본사/지사)",
     "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
     "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
+    "minYears": 0,
+    "maxYears": 2,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
       "공공기관",
       "ALIO 경영공시",
-      "정규직",
-      "경력"
+      "청년인턴(체험형)",
+      "신입/인턴"
     ],
     "pros": [
       "기획재정부 ALIO 100% 실공시 데이터",
@@ -309,15 +69,135 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국개발연구원\n공고명: 2026년 4분기 2차 한국개발연구원(KDI) 직원 채용 공고(연구직)\n고용형태: 정규직 (정규직)\n근무지: 세종",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국보건사회연구원\n공고명: 한국보건사회연구원 청년인턴 채용 공고(학술정보분야_장애인제한경쟁)\n고용형태: 청년인턴(체험형)\n근무지: 세종",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307141",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307217",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
+  },
+  {
+    "id": "alio-307202",
+    "company": "영화진흥위원회",
+    "title": "2027년 상반기 청년 체험형 인턴(장애인제한경쟁/단시간근로제) 공개채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "부산 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 영화진흥위원회\n공고명: 2027년 상반기 청년 체험형 인턴(장애인제한경쟁/단시간근로제) 공개채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 부산",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307202",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
+  },
+  {
+    "id": "alio-307201",
+    "company": "영화진흥위원회",
+    "title": "2027년 상반기 청년 체험형 인턴(일반) 공개채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "부산 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 영화진흥위원회\n공고명: 2027년 상반기 청년 체험형 인턴(일반) 공개채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 부산",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307201",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
+  },
+  {
+    "id": "alio-307191",
+    "company": "근로복지공단",
+    "title": "[경기요양병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [경기요양병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307191",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5244",
@@ -356,7 +236,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5241",
@@ -395,7 +275,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5240",
@@ -434,7 +314,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5239",
@@ -473,7 +353,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5238",
@@ -512,7 +392,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5237",
@@ -552,7 +432,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5234",
@@ -591,7 +471,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5233",
@@ -630,7 +510,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5231",
@@ -669,7 +549,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "deloitte-5227",
@@ -708,7 +588,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-18"
   },
   {
     "id": "toss-4154060003",
@@ -1271,8 +1151,8 @@
     "publishedAt": "2026-11-15"
   },
   {
-    "id": "toss-7701589003",
-    "company": "토스뱅크",
+    "id": "toss-7507332003",
+    "company": "토스인슈어런스",
     "title": "커뮤니케이션 담당자 (Communications Manager)",
     "canonicalRole": "PR",
     "occupation": "MARKETING",
@@ -1283,8 +1163,8 @@
     "salaryMaxManwon": 11000,
     "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
     "salaryTier": "A",
-    "minYears": 7,
-    "maxYears": 12,
+    "minYears": 3,
+    "maxYears": 10,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -1300,9 +1180,9 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "합류하게 될 팀에 대해 알려드려요\n\n \n 토스뱅크의 Communications Manager는 미디어를 비롯한 대외 주요 기관 및 이해관계자와의 커뮤니케이션 전략을 수립하고 실행하는 Communications팀에 속해 있어요.\n\n 토스뱅크의 다양한 팀과 협업하며 대응 체계를 구축하고 있어요.\n\n 제품을 만드는 Squad는 물론, 대외 정책을 담당하는 Public Affairs팀, 토스뱅크의 전략을 고민하는 Strategy Division 등 여러 부서와 수시로 소통하며, 각종 이슈에 유기적으로 대응하고 있어요.\n\n 10년차 이상의 경력을 가진 분들로 구성되어 있고, 금융권·언론사 등 다양한 배경의 커뮤니케이션 및 PR 전문가들이 함께하고 있어요.\n\n \n 합류하면 함께할 업무예요\n\n \n 금융 정책·규제 환경과 여론 흐름을 분석해 토스뱅크에 유리한 내러티브를 설계하고, 대내외 커뮤니케이션 전략 및 메시지 가이드라인을 수립해요.\n\n 보도자료, 경영진 메시지, 위기 대응 입장문, 발표 덱 등 다양한 형식의 대외 콘텐츠를 직접 기획하고 완성해요.\n\n 경쟁사와 차별화되는 포맷과 메시지로 기자간담회 등 프레스행사를 기획하고 실행해요.\n\n 주요 매체 및 기자들과 신뢰 기반의 미디어 릴레이션을 주도하고, 위기 상황 발생 시 커뮤니케이션 전략 수립과 실행을 리드해요.\n\n \n 이런 분과 함께하고 싶어요\n\n \n 언론 또는 커뮤니케이션/PR 분야 7년 이상 경력자로, 금융·핀테크에 대한 이해도와 주요 매체 기자들과의 실질적인 네트워크를 보유한 분이 필요해요.\n\n 보도자료부터 발표 덱까지 형식을 가리지 않고 단독으로 완성하고, 차별화된 포맷의 프레스행사를 기획·실행한 경험이 있는 분이 필요해요.\n\n 정책·여론 환경을 읽고 선제적으로 의제를 설계하는 전략적 커뮤니케이션 역량을 갖춘 분이 필요해요.\n\n AI를 업무에 실질적으로 통합하고, 팀의 일하는 방식을 혁신할 의지와 실행력이 있는 분이 필요해요.\n\n 높은 실무 역량을 바탕으로 팀의 리더로 성장하겠다는 열정과 포텐셜을 가진 분이 필요해요.\n\n 팀을 이끌어본 경험이 있는 분이라면 더욱 환영해요.\n\n \n 이력서는 이렇게 작성하시는 걸 추천해요\n\n \n PR 및 리스크 관리 경험에 대한 구체적이고 사실적인 경험을 적어주세요. 실제 미디어에 노출됐던 사례와 이를 해결하기 위해 본인이 주도적으로 했던 노력을 보여주시면 좋아요.\n\n 자신이 하는 일에 대한 열의와 전문성을 보여주세요. 다른 사람들이 ",
+    "rawText": "합류하게 될 팀에 대해 알려드려요 \n\n \n 토스인슈어런스는 2018년 설립된 법인보험대리점(GA)으로 토스(비바리퍼블리카)의 첫 번째 계열사에요. 여러 보험사의 상품을 고객 중심으로 비교·제안하며 기술과 데이터를 통해 보험의 새로운 기준을 만들어가고 있어요.‘보험을 파는 일’이 아니라, 고객이 스스로 합리적인 선택을 할 수 있도록 돕는 것이 토스인슈어런스가 지향하는 방향이에요.\n\n 토스인슈어런스의 Communications Manager는 회사의 Corp Building Tribe 내 Communications Team에 속해 있어요.\n\n Communications Team은 미디어와 이해관계자를 대상으로 회사의 메시지를 명확하게 전달하고, 신뢰 기반의 커뮤니케이션을 통해 브랜드 평판을 관리하고 있어요.\n\n \n 합류하면 함께 할 업무예요 \n\n \n 토스인슈어런스의 대외 커뮤니케이션 전략을 수립하고 실행해요.\n\n 회사의 핵심 메시지가 명확하고 신뢰감 있게 전달되도록 관리하며, 변화와 혁신, 고객 중심 보험 서비스에 대한 이야기를 미디어를 통해 효과적으로 알려요.\n\n 미디어 대응, 보도자료, 기획자료, 인터뷰, 브랜드 캠페인 등 주요 홍보 활동을 기획·운영하고, 현장의 목소리와 고객 경험을 콘텐츠로 발굴해 확산해요.\n\n \n 이런 분과 함께하고 싶어요 \n\n \n 3년 이상 금융(특히 보험) 인하우스 또는 언론사에서 홍보 업무를 수행해본 분을 찾고 있어요.\n\n 보험사, GA, 핀테크 등 보험 산업 전반에 대한 이해가 높고, SNS를 활용한 주도적인 대내외 커뮤니케이션 및 사회 공헌 활동 경험이 있으면 좋아요.\n\n 주요 종합지·경제지·전문지·온라인 매체와 밀접하게 소통이 가능한 분이면 좋아요.\n\n \n 이력서는 이렇게 작성하시면 좋아요 \n\n \n 주도적으로 이니셔티브를 발굴하여 대중의 이해와 신뢰 제고로 이어졌던 경험이 있으면 작성해주세요.\n\n 당면한 PR 이슈를 기존에 시도하지 않았던 새로운 방식으로 접근하여 유의미한 성과를 만들어본 경험이 있으면 작성해주세요.\n\n \n 토스인슈어런스로의 합류여정\n\n \n 서류접수 &gt; 직무인터뷰 &gt; 문화적합성 인터뷰 &gt; 레퍼런스 체크 &gt; 처우협의 &gt; 최종합격 및 입사\n\n \n 꼭 확인해 주세요 \n\n \n 근무지는 서울특별시 구로구 경인로 662 (신도림동, 디큐브시티 타워동) 37층이에요.(온보딩 기간에는 역삼역 인근 오피스에서 근무해요.)\n\n 이력서 및 제출 서류에 허위",
     "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=7701589003",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=7507332003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
@@ -1393,7 +1273,7 @@
   {
     "id": "toss-8011144003",
     "company": "토스",
-    "title": "Commerce Fulfillment Planning Lead",
+    "title": "Commerce Fulfillment Planning Team Leader",
     "canonicalRole": "Strategy",
     "occupation": "PLANNING",
     "industry": "IT / 핀테크·금융",
@@ -1420,7 +1300,7 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "[토스] Commerce Fulfillment Planning Lead (Strategy)",
+    "rawText": "[토스] Commerce Fulfillment Planning Team Leader (Strategy)",
     "sourceName": "토스 공식 채용관",
     "jobUrl": "https://toss.im/career/job-detail?job_id=8011144003",
     "sourceCategory": "GLOBAL_TECH",
@@ -1428,12 +1308,12 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-17"
   },
   {
     "id": "toss-8192145003",
     "company": "토스",
-    "title": "Commerce Operations Excellence Team Lead",
+    "title": "Commerce Operations Excellence Team Leader",
     "canonicalRole": "Strategy",
     "occupation": "PLANNING",
     "industry": "IT / 핀테크·금융",
@@ -1460,7 +1340,7 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "[토스] Commerce Operations Excellence Team Lead (Strategy)",
+    "rawText": "[토스] Commerce Operations Excellence Team Leader (Strategy)",
     "sourceName": "토스 공식 채용관",
     "jobUrl": "https://toss.im/career/job-detail?job_id=8192145003",
     "sourceCategory": "GLOBAL_TECH",
@@ -1468,7 +1348,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-17"
   },
   {
     "id": "toss-8011151003",
@@ -1551,46 +1431,6 @@
     "publishedAt": "2026-11-15"
   },
   {
-    "id": "toss-5548248003",
-    "company": "토스뱅크",
-    "title": "HRBP",
-    "canonicalRole": "HR",
-    "occupation": "HR",
-    "industry": "IT / 핀테크·금융",
-    "location": "서울 강남구 테헤란로 (역삼)",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 7000,
-    "salaryMaxManwon": 11000,
-    "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
-    "salaryTier": "A",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "핀테크/유니콘",
-      "정규직",
-      "HR",
-      "경력"
-    ],
-    "pros": [
-      "토스 커뮤니티 수평 문화와 빠른 제품 의사결정",
-      "비포괄임금 및 경쟁력 있는 총보상"
-    ],
-    "gaps": [
-      "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
-    ],
-    "rawText": "토스뱅크의 HRBP는 이렇게 일해요\n\n \n 토스뱅크 HRBP는 담당 조직의 CHRO로서 큰 역할과 책임을 갖고 있어요.\n\n CEO, Head를 포함한 리더십 그룹과 긴밀하게 커뮤니케이션하며, 수평적 구조 안에서 굉장히 유연하게 일하고 있어요.\n\n 전략적 비즈니스 파트너로서 입사부터 퇴직까지 HR 전체 Cycle의 모든 DRI를 가지고 담당 조직, 나아가 토스 커뮤니티 전체의 성장과 성공을 견인해요.\n\n \n 합류하게 될 팀에 대해 알려드려요\n\n \n 토스뱅크의 HRBP 포지션은 People &amp; Culture Division에 속해있어요.\n\n 주로 본인이 담당하는 조직의 리더십, 소속 팀의 동료 HRBP, RBP 들과 협업하며 HR 전문성을 바탕으로 Business Partnering을 해요.\n\n 5~17년 차 경력의 멤버들로 구성되어 있으며 외국계, 대기업, 스타트업 등 다양한 백그라운드를 갖고 있어요.\n\n \n 합류하면 함께 할 업무예요\n\n \n HRBP로서 토스뱅크의 지속가능한 혁신을 뒷받침할 수 있는 HR 전략을 수립하고, 관련 제도를 지속적으로 기획/개발/운영/개선해요.\n\n 사업과 현업에 대한 깊이 있는 이해를 바탕으로 동료 HRBP 들과 함께 전사 차원의 제도적 변화와 임팩트를 만들어 내기 위해 끊임없이 아이데이션하고 전략을 제안해요.\n\n Business Partner로서 조직의 성공을 견인하기 위해 리더십 그룹과 주기적인 Discussion을 통해 최적의 솔루션을 도출해요.\n\n 담당 조직의 인력계획/조직 및 직무설계/경력개발/보상/리더십 코칭 등 HR Cycle 전반에 대한 DRI를 가지고 주도적으로 실행해요.\n\n 시장에서 가장 경쟁력 있는 토스뱅크의 제품/상품을 만들 수 있는 에자일한 조직과 일하는 방식을 설계하고 개발해요.\n\n 토스뱅크의 신사업 기획 및 인큐베이팅 단계부터 함께 참여해서 조직과 필요 인력을 정의하고 셋업해요.\n\n \n 이런 분과 함께하고 싶어요\n\n \n HRM(인사, 진단, 평가, 노무 등)에 최소 3년 이상의 경력이 있으시거나, 그에 준하는 경험을 보유하셔야 해요.\n\n 조직의 다양한 상황적 맥락에 대한 이해와 데이터를 기반으로 한 논리적 설득 및 유연한 커뮤니케이션 스킬 탁월하신 분을 찾아요.\n\n 빠르게 변화하는 환경에 적응력과 추진력을 갖추신 분이어야 해요.\n\n 대기업과 스타트업 HRM을 모두 경험하셨거나, 금융업 경험이 있다면 좋아요.\n\n 성장하는 조직에 맞춤형 전략을 제안하고 ",
-    "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=5548248003",
-    "sourceCategory": "GLOBAL_TECH",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Toss Greenhouse ATS",
-    "isEntryLevel": false,
-    "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
-  },
-  {
     "id": "toss-7967885003",
     "company": "토스플레이스",
     "title": "HRBP",
@@ -1623,6 +1463,46 @@
     "rawText": "토스플레이스의 HRBP는 이렇게 일해요 \n\n \n 토스플레이스 HRBP는 담당 조직의 CHRO로서 큰 역할과 책임을 갖고 있어요.\n\n CEO, Head를 포함한 리더십 그룹과 긴밀하게 커뮤니케이션하며, 수평적 구조 안에서 유연하게 일해요.\n\n 전략적 비즈니스 파트너로서 입사부터 퇴직까지 HR 전체 Cycle의 모든 DRI를 가지고 담당 조직, 나아가 토스 커뮤니티 전체의 성장과 성공을 견인해요.\n\n 제도를 운영하는 데서 멈추지 않고, 조직의 방향성과 주요 의사결정에 직접 참여해요.\n\n \n \n\n 합류하게 될 팀에 대해 알려드려요 \n\n \n 토스플레이스 HRBP는 Recruiting Business Partner, HR Coordinator, Culture Business Partner와 함께 토스플레이스 People &amp; Culture Team에 속해 있어요.\n\n CEO, Head를 포함한 리더십 그룹과 긴밀하게 커뮤니케이션하며, 수평적 구조 안에서 담당 조직의 구성원, 동료 HRBP, Recruiting Business Partner, Culture Business Partner들과 협업해요.\n\n 토스플레이스는 지금도 빠르게 성장하고 있어요. 이미 만들어진 제도를 운영하는 단계가 아니라, 성장 속도에 맞춰 조직과 제도를 계속 다시 설계하는 단계예요.\n\n \n \n\n 합류하면 함께 할 업무예요 \n\n \n 담당 조직의 성장 단계에 맞춘 조직 설계 및 개편\n\n \n 조직의 성장 단계에 맞춰 조직 구조를 설계하고, 필요한 시점에 개편을 주도해요.\n\n 조직이 커지면서 새롭게 생기는 이슈를 먼저 발견하고, 일회성 대응이 아닌 구조로 풀어내요.\n\n \n\n 리더십·현업과의 Business Partnering\n\n \n Business Partner로서 조직의 성공을 견인하기 위해 리더십 그룹과 주기적인 Discussion을 통해 최적의 솔루션을 도출해요.\n\n 담당 조직의 팀원들과도 가까이에서 일하며, 조직의 문제를 HR 관점을 넘어 사업 맥락까지 읽고 해결해 나가요.\n\n \n\n HR Cycle 전반의 DRI\n\n \n 담당 조직의 인력 계획과 배치, 조직 및 직무설계, 경력개발, 평가·보상, 리더십 코칭 등 HR Cycle 전반에 대한 DRI를 가지고 주도적으로 실행해요.\n\n \n\n 전사 차원의 HR 전략·제도 기획\n\n \n 사업과 현업에 대한 깊이 있는 이해를 바탕으로, 토스플레이스의 지속가능한 혁신을 뒷받침할 HR 전략을 수립하고 제도를 기",
     "sourceName": "토스 공식 채용관",
     "jobUrl": "https://toss.im/career/job-detail?job_id=7967885003",
+    "sourceCategory": "GLOBAL_TECH",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Toss Greenhouse ATS",
+    "isEntryLevel": false,
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-15"
+  },
+  {
+    "id": "toss-5548248003",
+    "company": "토스뱅크",
+    "title": "HRBP",
+    "canonicalRole": "HR",
+    "occupation": "HR",
+    "industry": "IT / 핀테크·금융",
+    "location": "서울 강남구 테헤란로 (역삼)",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 7000,
+    "salaryMaxManwon": 11000,
+    "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
+    "salaryTier": "A",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "핀테크/유니콘",
+      "정규직",
+      "HR",
+      "경력"
+    ],
+    "pros": [
+      "토스 커뮤니티 수평 문화와 빠른 제품 의사결정",
+      "비포괄임금 및 경쟁력 있는 총보상"
+    ],
+    "gaps": [
+      "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
+    ],
+    "rawText": "토스뱅크의 HRBP는 이렇게 일해요\n\n \n 토스뱅크 HRBP는 담당 조직의 CHRO로서 큰 역할과 책임을 갖고 있어요.\n\n CEO, Head를 포함한 리더십 그룹과 긴밀하게 커뮤니케이션하며, 수평적 구조 안에서 굉장히 유연하게 일하고 있어요.\n\n 전략적 비즈니스 파트너로서 입사부터 퇴직까지 HR 전체 Cycle의 모든 DRI를 가지고 담당 조직, 나아가 토스 커뮤니티 전체의 성장과 성공을 견인해요.\n\n \n 합류하게 될 팀에 대해 알려드려요\n\n \n 토스뱅크의 HRBP 포지션은 People &amp; Culture Division에 속해있어요.\n\n 주로 본인이 담당하는 조직의 리더십, 소속 팀의 동료 HRBP, RBP 들과 협업하며 HR 전문성을 바탕으로 Business Partnering을 해요.\n\n 5~17년 차 경력의 멤버들로 구성되어 있으며 외국계, 대기업, 스타트업 등 다양한 백그라운드를 갖고 있어요.\n\n \n 합류하면 함께 할 업무예요\n\n \n HRBP로서 토스뱅크의 지속가능한 혁신을 뒷받침할 수 있는 HR 전략을 수립하고, 관련 제도를 지속적으로 기획/개발/운영/개선해요.\n\n 사업과 현업에 대한 깊이 있는 이해를 바탕으로 동료 HRBP 들과 함께 전사 차원의 제도적 변화와 임팩트를 만들어 내기 위해 끊임없이 아이데이션하고 전략을 제안해요.\n\n Business Partner로서 조직의 성공을 견인하기 위해 리더십 그룹과 주기적인 Discussion을 통해 최적의 솔루션을 도출해요.\n\n 담당 조직의 인력계획/조직 및 직무설계/경력개발/보상/리더십 코칭 등 HR Cycle 전반에 대한 DRI를 가지고 주도적으로 실행해요.\n\n 시장에서 가장 경쟁력 있는 토스뱅크의 제품/상품을 만들 수 있는 에자일한 조직과 일하는 방식을 설계하고 개발해요.\n\n 토스뱅크의 신사업 기획 및 인큐베이팅 단계부터 함께 참여해서 조직과 필요 인력을 정의하고 셋업해요.\n\n \n 이런 분과 함께하고 싶어요\n\n \n HRM(인사, 진단, 평가, 노무 등)에 최소 3년 이상의 경력이 있으시거나, 그에 준하는 경험을 보유하셔야 해요.\n\n 조직의 다양한 상황적 맥락에 대한 이해와 데이터를 기반으로 한 논리적 설득 및 유연한 커뮤니케이션 스킬 탁월하신 분을 찾아요.\n\n 빠르게 변화하는 환경에 적응력과 추진력을 갖추신 분이어야 해요.\n\n 대기업과 스타트업 HRM을 모두 경험하셨거나, 금융업 경험이 있다면 좋아요.\n\n 성장하는 조직에 맞춤형 전략을 제안하고 ",
+    "sourceName": "토스 공식 채용관",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=5548248003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
@@ -2530,6 +2410,45 @@
     "publishedAt": "2026-11-06 11:45:08"
   },
   {
+    "id": "kakao-S-4793",
+    "company": "카카오스타일",
+    "title": "[공동체] 카카오스타일 CEO Staff",
+    "canonicalRole": "스태프",
+    "occupation": "PLANNING",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "경기 성남시 분당구 (판교)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 10000,
+    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "카카오스타일 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "-\n-",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/S-4793",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
+  },
+  {
     "id": "kakao-S-4779",
     "company": "카카오페이",
     "title": "[공동체] 카카오페이 컴플라이언스 담당자 - 준법지원/내부통제",
@@ -2725,6 +2644,123 @@
     "publishedAt": "2026-07-20"
   },
   {
+    "id": "kakao-S-4789",
+    "company": "카카오스타일",
+    "title": "[공동체] 카카오스타일 Product Owner (배송&물류)",
+    "canonicalRole": "테크",
+    "occupation": "PLANNING",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "경기 성남시 분당구 (판교)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 10000,
+    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "카카오스타일 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "-\n-",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/S-4789",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-18"
+  },
+  {
+    "id": "kakao-S-4788",
+    "company": "카카오스타일",
+    "title": "[공동체] 카카오스타일 MLOps 엔지니어",
+    "canonicalRole": "테크",
+    "occupation": "TECH",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "경기 성남시 분당구 (판교)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 10000,
+    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "카카오스타일 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "-\n-",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/S-4788",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": false,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-18"
+  },
+  {
+    "id": "kakao-S-4786",
+    "company": "카카오스타일",
+    "title": "[공동체] 카카오스타일 백엔드 개발자 (글로벌뷰티) ",
+    "canonicalRole": "테크",
+    "occupation": "TECH",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "경기 성남시 분당구 (판교)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 10000,
+    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "카카오스타일 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "-\n-",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/S-4786",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": false,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-18"
+  },
+  {
     "id": "kakao-S-4785",
     "company": "카카오스타일",
     "title": "[공동체] 카카오스타일 백엔드 개발자 (지그재그 서비스)",
@@ -2803,45 +2839,6 @@
     "publishedAt": "2026-11-17"
   },
   {
-    "id": "kakao-S-4781",
-    "company": "카카오페이",
-    "title": "[공동체] 카카오페이 DevOps 엔지니어 - 클러스터 구축/운영 및 CICD 파이프라인 개발/운영",
-    "canonicalRole": "테크",
-    "occupation": "TECH",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 10000,
-    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "카카오페이 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4781",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-06"
-  },
-  {
     "id": "kakao-S-4777",
     "company": "카카오페이",
     "title": "[공동체] 카카오페이 TPM (Technical Project Manager)",
@@ -2879,83 +2876,5 @@
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
     "publishedAt": "2026-11-06"
-  },
-  {
-    "id": "kakao-S-4775",
-    "company": "카카오모빌리티",
-    "title": "[공동체] 카카오모빌리티 보안운영 시니어 엔지니어",
-    "canonicalRole": "테크",
-    "occupation": "TECH",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 10000,
-    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "카카오모빌리티 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4775",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-05"
-  },
-  {
-    "id": "kakao-S-4748",
-    "company": "카카오페이",
-    "title": "[공동체] 카카오페이 데이터 기획자 - 데이터 거버넌스 정책/시스템",
-    "canonicalRole": "테크",
-    "occupation": "PLANNING",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 10000,
-    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "카카오페이 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4748",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-09-03"
   }
 ]
