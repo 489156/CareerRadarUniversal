@@ -1,5 +1,362 @@
 [
   {
+    "id": "alio-307297",
+    "company": "세종학당재단",
+    "title": "2027년 세종학당재단 상반기 체험형 청년인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "서울 (수도권)",
+    "commuteMinutes": 42,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 세종학당재단\n공고명: 2027년 세종학당재단 상반기 체험형 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 서울",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307297",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "alio-307296",
+    "company": "근로복지공단",
+    "title": "[대구병원] 2026년도 하반기 청년(체험형)인턴 장애전형 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대구 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [대구병원] 2026년도 하반기 청년(체험형)인턴 장애전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대구",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307296",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "alio-307295",
+    "company": "근로복지공단",
+    "title": "[대구병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "대구 외 1 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [대구병원] 2026년도 하반기 청년(체험형)인턴 일반전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 대구 외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307295",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "alio-307285",
+    "company": "한국수자원공사",
+    "title": "[한국수자원공사] 2026년 하반기 AI 체험형 인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "TECH",
+    "industry": "공공기관 / 공기업",
+    "location": "인천 외 12 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국수자원공사\n공고명: [한국수자원공사] 2026년 하반기 AI 체험형 인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 인천 외 12",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307285",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "alio-307291",
+    "company": "공간정보산업진흥원",
+    "title": "공간정보산업진흥원 청년인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 공간정보산업진흥원\n공고명: 공간정보산업진흥원 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307291",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "alio-307292",
+    "company": "대한법률구조공단",
+    "title": "대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "전남광주 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 대한법률구조공단\n공고명: 대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고\n고용형태: 청년인턴(체험형)\n근무지: 전남광주",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307292",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "deloitte-5254",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 ASSURANCE DELIVERY CENTER 그룹 인턴",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 230~250만 원 (인턴 처우)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "인턴",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
+    ],
+    "gaps": [
+      "논리적 사고 및 프레젠테이션 역량"
+    ],
+    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 ASSURANCE DELIVERY CENTER 그룹 인턴\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5254",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "isEntryLevel": true,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "deloitte-5253",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 비금융감사본부 경력직 회계사",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 8800,
+    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
+    "salaryTier": "B",
+    "minYears": 3,
+    "maxYears": 10,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
+    ],
+    "gaps": [
+      "직무별 상세 요건 확인 필요"
+    ],
+    "rawText": "[딜로이트 안진 정규직 채용]\n회계감사부문 비금융감사본부 경력직 회계사\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5253",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "isEntryLevel": false,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-20"
+  },
+  {
+    "id": "deloitte-5252",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 행정지원인턴",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 230~250만 원 (인턴 처우)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "인턴",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
+    ],
+    "gaps": [
+      "논리적 사고 및 프레젠테이션 역량"
+    ],
+    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 행정지원인턴\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5252",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "isEntryLevel": true,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-20"
+  },
+  {
     "id": "deloitte-5244",
     "company": "딜로이트 안진",
     "title": "세무자문부문 M&A Tax 경력직 회계사",
@@ -36,7 +393,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5239",
@@ -75,7 +432,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5238",
@@ -114,7 +471,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5237",
@@ -154,7 +511,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5234",
@@ -193,7 +550,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5227",
@@ -232,7 +589,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "deloitte-5224",
@@ -271,125 +628,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
-  },
-  {
-    "id": "deloitte-5223",
-    "company": "딜로이트 안진",
-    "title": "경영자문부문 탄소중립(Net Zero)·기후공시 컨설팅 Manager",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 정규직 채용]\n경영자문부문 탄소중립(Net Zero)·기후공시 컨설팅 Manager\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5223",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-19"
-  },
-  {
-    "id": "deloitte-5215",
-    "company": "딜로이트 안진",
-    "title": "회계감사부문 기업 전략기획 및 경영관리(성과관리, 원가/수익성분석(관리회계))신입 컨설턴트",
-    "canonicalRole": "Tax & Financial Advisory",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 4600,
-    "salaryMaxManwon": 5300,
-    "salaryDisplay": "4,600 ~ 5,300만 원 (신입 대졸초임)",
-    "salaryTier": "B",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "신입",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "논리적 사고 및 프레젠테이션 역량"
-    ],
-    "rawText": "[딜로이트 안진 정규직 채용]\n회계감사부문 기업 전략기획 및 경영관리(성과관리, 원가/수익성분석(관리회계))신입 컨설턴트\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5215",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": true,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-19"
-  },
-  {
-    "id": "deloitte-5214",
-    "company": "딜로이트 안진",
-    "title": "딜로이트컨설팅 전략, Operation PI/ISP 전문가",
-    "canonicalRole": "Management Consulting",
-    "occupation": "PLANNING",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 8800,
-    "salaryDisplay": "6,500 ~ 8,800만 원 (경력직)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "정규직",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "직무별 상세 요건 확인 필요"
-    ],
-    "rawText": "[딜로이트 안진 정규직 채용]\n딜로이트컨설팅 전략, Operation PI/ISP 전문가\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5214",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-20"
   },
   {
     "id": "toss-4154060003",
@@ -429,7 +668,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7810517003",
@@ -469,7 +708,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8171199003",
@@ -509,7 +748,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7805637003",
@@ -549,7 +788,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8047064003",
@@ -589,7 +828,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7583944003",
@@ -629,7 +868,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7884532003",
@@ -669,7 +908,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-5586214003",
@@ -709,7 +948,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-5417612003",
@@ -749,7 +988,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8152756003",
@@ -789,7 +1028,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7971642003",
@@ -829,7 +1068,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-6508297003",
@@ -869,7 +1108,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7893682003",
@@ -909,7 +1148,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-16"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7818770003",
@@ -949,7 +1188,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7701589003",
@@ -989,7 +1228,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7203827003",
@@ -1029,7 +1268,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8011145003",
@@ -1069,7 +1308,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8011144003",
@@ -1109,7 +1348,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8192145003",
@@ -1149,7 +1388,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-17"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-8011151003",
@@ -1189,7 +1428,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7675023003",
@@ -1229,7 +1468,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-5548248003",
@@ -1269,7 +1508,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7967885003",
@@ -1309,7 +1548,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-5126846003",
@@ -1349,7 +1588,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-16"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "toss-7981484003",
@@ -1389,7 +1628,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-19"
   },
   {
     "id": "daangn-7507320003",
