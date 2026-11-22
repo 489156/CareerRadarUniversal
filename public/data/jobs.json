@@ -37,7 +37,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "alio-307296",
@@ -77,7 +77,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "alio-307295",
@@ -117,87 +117,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
-  },
-  {
-    "id": "alio-307292",
-    "company": "대한법률구조공단",
-    "title": "대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "전남광주 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 대한법률구조공단\n공고명: 대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고\n고용형태: 청년인턴(체험형)\n근무지: 전남광주",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307292",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
-  },
-  {
-    "id": "alio-307291",
-    "company": "공간정보산업진흥원",
-    "title": "공간정보산업진흥원 청년인턴 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "경기 (수도권)",
-    "commuteMinutes": 50,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 공간정보산업진흥원\n공고명: 공간정보산업진흥원 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307291",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "alio-307285",
@@ -237,7 +157,87 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
+  },
+  {
+    "id": "alio-307291",
+    "company": "공간정보산업진흥원",
+    "title": "공간정보산업진흥원 청년인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 공간정보산업진흥원\n공고명: 공간정보산업진흥원 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307291",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-22"
+  },
+  {
+    "id": "alio-307292",
+    "company": "대한법률구조공단",
+    "title": "대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "전남광주 (지방 본사/지사)",
+    "commuteMinutes": 75,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 대한법률구조공단\n공고명: 대한법률구조공단 순천출장소 청년인턴 공개경쟁 채용시험 공고\n고용형태: 청년인턴(체험형)\n근무지: 전남광주",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307292",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5254",
@@ -276,7 +276,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5253",
@@ -315,7 +315,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5252",
@@ -354,7 +354,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5244",
@@ -393,7 +393,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5239",
@@ -432,7 +432,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5238",
@@ -471,7 +471,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5237",
@@ -511,7 +511,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5234",
@@ -550,7 +550,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5227",
@@ -589,7 +589,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "deloitte-5224",
@@ -628,7 +628,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-21"
+    "publishedAt": "2026-11-22"
   },
   {
     "id": "toss-4154060003",
@@ -2528,45 +2528,6 @@
     "publishedAt": "2026-11-06"
   },
   {
-    "id": "kakao-S-4774",
-    "company": "카카오벤처스",
-    "title": "[공동체] 카카오벤처스 기획관리팀 체험형 인턴 채용",
-    "canonicalRole": "스태프",
-    "occupation": "PLANNING",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 2700,
-    "salaryMaxManwon": 3100,
-    "salaryDisplay": "월 220~260만 원 (인턴십)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "인턴",
-      "신입/인턴"
-    ],
-    "pros": [
-      "카카오벤처스 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4774",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-02"
-  },
-  {
     "id": "kakao-S-4769",
     "company": "카카오페이",
     "title": "[공동체] 카카오페이 컴플라이언스 담당자 - 개인(신용)정보 내부통제",
@@ -2916,5 +2877,44 @@
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
     "publishedAt": "2026-11-06"
+  },
+  {
+    "id": "kakao-S-4748",
+    "company": "카카오페이",
+    "title": "[공동체] 카카오페이 데이터 기획자 - 데이터 거버넌스 정책/시스템",
+    "canonicalRole": "테크",
+    "occupation": "PLANNING",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "경기 성남시 분당구 (판교)",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 10000,
+    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "정규직",
+      "경력"
+    ],
+    "pros": [
+      "카카오페이 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "-\n-",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/S-4748",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-09-03"
   }
 ]
