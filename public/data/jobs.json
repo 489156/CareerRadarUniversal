@@ -80,86 +80,6 @@
     "publishedAt": "2026-11-24"
   },
   {
-    "id": "alio-307341",
-    "company": "국악방송",
-    "title": "국악방송 체험형 인턴(장애인) 채용 공고",
-    "canonicalRole": "청년인턴/행정지원",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "서울 (수도권)",
-    "commuteMinutes": 42,
-    "salaryMinManwon": 2500,
-    "salaryMaxManwon": 2800,
-    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
-    "salaryTier": "A",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "청년인턴(체험형)",
-      "신입/인턴"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 국악방송\n공고명: 국악방송 체험형 인턴(장애인) 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 서울",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307341",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": true,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-24"
-  },
-  {
-    "id": "alio-307354",
-    "company": "대한적십자사",
-    "title": "(수정) [대한적십자사 대전세종지사] 2027년도 사무직(재난심리직무/대전) 채용 공고",
-    "canonicalRole": "공공행정·경영기획",
-    "occupation": "PLANNING",
-    "industry": "공공기관 / 공기업",
-    "location": "대전 외 1 (지방 본사/지사)",
-    "commuteMinutes": 75,
-    "salaryMinManwon": 4200,
-    "salaryMaxManwon": 4800,
-    "salaryDisplay": "4,200 ~ 4,800만 원 (ALIO 신입 초임 공시)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 6,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "공공기관",
-      "ALIO 경영공시",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "기획재정부 ALIO 100% 실공시 데이터",
-      "고용 안정성 및 정시퇴근 보장"
-    ],
-    "gaps": [
-      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
-    ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 대한적십자사\n공고명: (수정) [대한적십자사 대전세종지사] 2027년도 사무직(재난심리직무/대전) 채용 공고\n고용형태: 정규직 (정규직)\n근무지: 대전 외 1",
-    "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307354",
-    "sourceCategory": "PUBLIC",
-    "isCompanyExclusive": true,
-    "sourceSystem": "ALIO 오픈 공시망",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-24"
-  },
-  {
     "id": "deloitte-5254",
     "company": "딜로이트 안진",
     "title": "회계감사부문 ASSURANCE DELIVERY CENTER 그룹 인턴",
@@ -1626,7 +1546,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-23"
   },
   {
     "id": "daangn-5004587003",
@@ -1704,7 +1624,46 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-15"
+    "publishedAt": "2026-11-23"
+  },
+  {
+    "id": "daangn-4519954003",
+    "company": "당근 (당근마켓)",
+    "title": "Recruiting Manager (채용전환형 인턴) - 경영지원 (피플)",
+    "canonicalRole": "Recruiting Manager (채용전환형 인턴)",
+    "occupation": "HR",
+    "industry": "IT / 커뮤니티 플랫폼",
+    "location": "서울 서초구 강남대로 (강남역)",
+    "commuteMinutes": 44,
+    "salaryMinManwon": 2800,
+    "salaryMaxManwon": 3200,
+    "salaryDisplay": "월 230~260만 원 (당근 인턴)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "유니콘",
+      "정규직",
+      "인턴"
+    ],
+    "pros": [
+      "3,500만+ MAU 로컬 커뮤니티 프로덕트 경험",
+      "높은 업무 자율성과 비포괄임금 운영"
+    ],
+    "gaps": [
+      "실무 중심 직무 인터뷰 및 프로덕트 데이터 감각 요구"
+    ],
+    "rawText": "당근 팀 합류 여정에 오르신 것을 진심으로 환영해요\n\n 당근은 회사의 성장에 맞춰 개인이 함께 성장할 수 있는 환경을 만들기 위해 노력을 하고 있어요. \n\n 멋진 동료들과 행복한 고민을 하는 그 순간이 올 수 있도록 당근 채용팀이 도와드릴게요.\n\n \n \n\n 피플팀을 소개해요\n\n 피플팀은 당근이 소수정예로 큰 문제를 풀 수 있도록, 함께 일할 사람과 일하는 방식을 만드는 팀이에요. 당근의 사업 방향과 조직의 변화를 이해하고, 하이어링 매니저와 어떤 사람이 왜 필요한지부터 정의해요. 필요한 역량과 함께 일하는 방식에 대한 기준을 지키며, 좋은 동료를 찾고 함께할 기회를 만들어가요.\n\n 당근의 각 조직은 채용을 중요한 업무 중 하나로 생각하고 적극적으로 채용에 관여하고 있어요. 피플팀은 각 조직의 채용을 직접적으로 서포트하는 역할도 하지만, 보다 더 나은 채용 의사결정 방식을 고민하고 시스템적인 관점에서 프로세스 상의 문제점을 개선하는 것을 더 중요하게 생각하고 있어요. 이를 통해 당근의 비전 달성에 기여하는 채용 환경을 구축하여 수준 높은 채용이 지속 가능하도록 만들고자 해요.\n\n 당근은 현장에서 직접 문제를 푸는 빌더들이 일하는 곳이에요. 채용 운영의 불편함을 누군가 고쳐주길 기다리기보다, 필요한 도구를 직접 만들고 바꿔가며 문제를 풀어가기를 기대해요.\n\n 피플팀은 이렇게 일해요\n\n 의견은 솔직하게 나누고, 함께 결정해요 \n\n 더 좋은 답을 찾기 위해 서로의 생각을 적극적으로 나눠요. 의견이 다를 때는 상대의 의도와 제약을 먼저 이해하고, 근거를 바탕으로 논의해요. 결정한 내용과 각자의 역할을 분명히 하고 실행해요\n\n 반복되는 일은 더 나은 방식으로 바꿔요 \n\n 익숙한 절차도 다시 살펴보고, 데이터와 AI·자동화 도구를 활용해 불필요한 작업과 오류를 줄여요. 바꾼 방식이 실제로 도움이 되는지 확인하고 보완해요\n\n 이런 일을 해요\n\n “나보다 뛰어난 동료를 채용”하기 위한 채용 프로세스 상의 모든 운영을 책임져요 \n\n \n TO 관리, 채용 채널 모색, 공고 게시, 인터뷰 조율, 전형 및 결과 안내, 파이프라인 관리 등 지원자를 위한 당근 만의 특별한 채용 여정을 효과적으로 관리해요\n\n 채용 하나에도 지원자, 인터뷰어, 하이어링 매니저, 채용팀 등 여러 사람이 얽혀 있어요. 각자의 입장과 맥락을 이해하고 그 사이에서 흐름이 끊기지 않도록 소통하며, 채용 과정에서 생기는 문제를 스스로 해결해요\n\n \n 채용 프로세스의 ",
+    "sourceName": "당근 공식 채용관",
+    "jobUrl": "https://careers.daangn.com/jobs/role/4519954003/",
+    "sourceCategory": "GLOBAL_TECH",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Greenhouse ATS",
+    "isEntryLevel": true,
+    "jobCategory": "HR",
+    "publishedAt": "2026-11-24"
   },
   {
     "id": "daangn-6043519003",
