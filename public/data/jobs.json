@@ -1,12 +1,52 @@
 [
   {
-    "id": "alio-307456",
-    "company": "정보통신정책연구원",
-    "title": "2026년 청년인턴 공개채용 재공고",
+    "id": "alio-307325",
+    "company": "한국국제협력단",
+    "title": "제30기 KOICA 청년인턴(홍보분야) 모집 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "MARKETING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국국제협력단\n공고명: 제30기 KOICA 청년인턴(홍보분야) 모집 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307325",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "MARKETING",
+    "publishedAt": "2026-11-26"
+  },
+  {
+    "id": "alio-307491",
+    "company": "근로복지공단",
+    "title": "[태백병원] 청년(체험형)인턴 일반전형 채용 공고",
     "canonicalRole": "청년인턴/행정지원",
     "occupation": "PLANNING",
     "industry": "공공기관 / 공기업",
-    "location": "충북 (지방 본사/지사)",
+    "location": "강원 (지방 본사/지사)",
     "commuteMinutes": 75,
     "salaryMinManwon": 2500,
     "salaryMaxManwon": 2800,
@@ -29,15 +69,15 @@
     "gaps": [
       "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
     ],
-    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 정보통신정책연구원\n공고명: 2026년 청년인턴 공개채용 재공고\n고용형태: 청년인턴(체험형)\n근무지: 충북",
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 근로복지공단\n공고명: [태백병원] 청년(체험형)인턴 일반전형 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 강원",
     "sourceName": "기획재정부 ALIO 공시망",
-    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307456",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307491",
     "sourceCategory": "PUBLIC",
     "isCompanyExclusive": true,
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5254",
@@ -76,7 +116,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5253",
@@ -115,7 +155,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5252",
@@ -154,7 +194,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5244",
@@ -193,7 +233,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5239",
@@ -232,7 +272,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5238",
@@ -271,7 +311,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5237",
@@ -311,7 +351,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5234",
@@ -350,7 +390,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5227",
@@ -389,7 +429,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "deloitte-5224",
@@ -428,7 +468,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "toss-4154060003",
@@ -591,9 +631,9 @@
     "publishedAt": "2026-11-19"
   },
   {
-    "id": "toss-8047064003",
-    "company": "토스",
-    "title": "서버 개발자 (토스 자회사/3년 이하) (Server Developer)",
+    "id": "toss-5028079003",
+    "company": "토스페이먼츠",
+    "title": "서버 개발자 (3년 이상) (Server Developer)",
     "canonicalRole": "Backend",
     "occupation": "TECH",
     "industry": "IT / 핀테크·금융",
@@ -603,8 +643,8 @@
     "salaryMaxManwon": 11000,
     "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
     "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
+    "minYears": 3,
+    "maxYears": 10,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -620,54 +660,14 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "[토스] 서버 개발자 (토스 자회사/3년 이하) (Server Developer) (Backend)",
+    "rawText": "토스페이먼츠를 소개해드려요 \n\n \n 토스페이먼츠는 사업의 어려움과 비효율을 이해하고, 기술부터 운영까지 사업에 필요한 모든 솔루션을 제공하는 것을 목표로 합니다. 소비자들에게 쉽고 편한 서비스 경험을 제공하고, 가맹점들에게는 오직 사업에만 집중할 수 있는 환경이 보장되는 제품을 만들고 있어요.\n\n \n '전자결제 시장 혁신'을 핵심 목표로 자율과 책임의 원칙 아래, 강력한 상호 신뢰의 문화 속에서 일하고 있어요. 결제 산업의 미래를 함께 만들어 갈 동료를 기다리고 있습니다!\n\n \n 합류하게 될 팀에 대해 알려드려요 \n\n \n 토스페이먼츠의 Server Developer로 합류한다면, 해결해야 하는 문제의 규모 또는 특성에 따라 제품 중심으로 문제를 해결하는 Silo(사일로) 또는 Team(팀) 으로 업무를 수행해요.\n\n 사일로는 제품 단위 조직으로, 각 사일로에는 제품을 만들기 위한 최소 인원(Product Owner, Product Designer, 개발자, 데이터 분석가 등) 6~8명으로 구성되어 있어요. 사일로는 자율성을 가지고 제품에 대해 독립적으로 의사결정 하기 때문에 마치 작은 스타트업에 합류한 느낌일 거예요!\n\n Team 은 동일한 직무의 개발자분들이 하나의 조직으로 모여 기능 중심의 제품을 만드는 형태의 조직이에요.\n\n 두 영역 모두 공통 플랫폼/DevOps/SRE 와 함께 협업하여, 업무 효율을 지속적으로 높이는 방식으로 업무를 수행해요.\n\n \n \n PG Village \n \n 결제 운영부터 고도화까지 PG의 모든 영역을 담당해요.\n\n 통합 결제 시스템부터, 브랜드페이, 결제 위젯 등의 제품과 이를 안정적으로 서비스하기 위한 기술 기반을 만들어요.\n\n 계약 시스템 및 결제창, 결제 백엔드 시스템, 정산 시스템 등을 설계하고 개발해요.\n\n 또, 이러한 기반 시스템을 함께하는 가맹점들이 쉽게 활용할 수 있도록 Open API를 설계, 개발하여 개발자 생태계를 조성해요.\n\n \n\n \n 합류하면 함께할 업무예요 \n\n \n \n 합류하게 될 Silo 및 팀은 인터뷰 과정을 거치며 본인의 강점과 백그라운드를 고려해 조율돼요.\n\n Server Developer\n \n 토스페이먼츠의 OpenAPI 생태계, 편리한 연동 경험, 다양한 비즈니스 요구사항에도 흔들림 없는 결제시스템을 설계하고 개발해요.\n\n 지속적으로 증가하는 결제 트래픽을 안정적으로 처리하고, 다양한 비즈니스 요구사항을 충족하기 위해 시스템을 개선하여 scal",
     "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=8047064003",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=5028079003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-19"
-  },
-  {
-    "id": "toss-7583944003",
-    "company": "토스증권",
-    "title": "계좌 도메인 운영 매니저",
-    "canonicalRole": "Securities",
-    "occupation": "FINANCE",
-    "industry": "IT / 핀테크·금융",
-    "location": "서울 강남구 테헤란로 (역삼)",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 7000,
-    "salaryMaxManwon": 11000,
-    "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
-    "salaryTier": "A",
-    "minYears": 3,
-    "maxYears": 10,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "핀테크/유니콘",
-      "정규직",
-      "Securities",
-      "경력"
-    ],
-    "pros": [
-      "토스 커뮤니티 수평 문화와 빠른 제품 의사결정",
-      "비포괄임금 및 경쟁력 있는 총보상"
-    ],
-    "gaps": [
-      "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
-    ],
-    "rawText": "합류하게 될 팀에 대해 알려드려요 \n\n \n 토스증권의 계좌 도메인 운영 Manager 는 계좌팀 소속이에요.\n\n 계좌팀은 토스증권이 투자산업을 혁신할 수 있도록, 주요 상품/서비스 기획단에서 계좌 모듈과 관련된 원장 개발, 운영에 이르기까지 업무전문가로서 모든 의사결정에 참여하고, 함께 만들어가는 조직이에요.\n\n 여러 팀과 긴밀하게 협업하며 제품을 함께 운영하고, 독립적인 의사결정 구조 속에서 빠르게 실행하는 문화를 가지고 있어요.\n\n \n \n\n 합류하면 함께 할 업무에요 \n\n \n \n Domain Product Owner 와 함께 서비스를 개선하고 운영해요.\n\n \n 토스증권 서비스의 기본이 되는 계좌와 관련하여, 여러가지 서비스를 출시/운영/관리하기 위해 필요한 업무들을 수행해요.\n\n \n 서비스를 만들어 내기 위한 세부 정책을 설계 및 가이드를 작성하고 QA/TC를 관리해요.\n\n \n 서비스 개발에 필요한 프로세스를 위해 티켓을 발행해 태스크를 관리하고, 필요한 운영 프로세스를 수립해요.\n\n \n 서비스 개발에 필요한 상세 요건들을 개발자들과 커뮤니케이션 해요.\n\n \n 새롭게 신설되거나 개정되는 제도들을 대응하기 위해 감독 당국 및 유관 부서들과 밀접하게 커뮤니케이션하고 필요한 운영성 업무를 진행해요.\n\n \n \n\n 이런 분과 함께하고 싶어요 \n\n \n 증권사/은행 업무 개발팀 및 리테일 고객 관리 등 유관 부서에서 계좌 도메인과 관련된 업무를 기획하고 운영하고 경험이 있으신 분이 필요해요.\n\n 증권업의 고객/계좌 관련 제반 업무에 대한 이해도를 갖추고 계신 분이 필요해요.\n\n 서비스 출시 및 운영의 전 과정에서 실행 관리자로서의 오너십을 가지고 업무를 주도한 경험이 있는 분이 필요해요.\n\n 최소 2~3년 이상의 관련 업무 경험이 필요해요.\n\n 위 업무 외에 다른 증권 원장의 다른 업무도메인에 대한 경험이나 IT와의 협업 경험이 있으시다면 더 좋아요.\n\n 새로운 방법을 도입해 증권 신규 서비스 출시를 이끌어본 경험이 있으시다면 더 좋아요.\n\n \n \n\n 이력서는 이렇게 작성하시는 걸 추천해요 \n\n \n 담당하신 서비스에 대한 개선 기획 업무에 있어서 직접 이바지한 부분을 상세히 작성해 주세요.\n\n 비즈니스 임팩트를 확장한 경험이 잘 드러나도록 작성해주세요.\n\n 프로젝트별 나열이 아닌, 제품 운영의 문제점을 발견하고, 이를 해결하기 위한 프로세스를 구축하고 실행한 경험을 구체적으로 작성해 주세요.\n\n \n \n\n 토스증권으로의 ",
-    "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=7583944003",
-    "sourceCategory": "GLOBAL_TECH",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Toss Greenhouse ATS",
-    "isEntryLevel": false,
-    "jobCategory": "FINANCE",
     "publishedAt": "2026-11-19"
   },
   {
@@ -831,6 +831,46 @@
     "publishedAt": "2026-11-19"
   },
   {
+    "id": "toss-4078740003",
+    "company": "토스뱅크",
+    "title": "여신상품 기획 담당자 (개인대출)",
+    "canonicalRole": "Bank",
+    "occupation": "FINANCE",
+    "industry": "IT / 핀테크·금융",
+    "location": "서울 강남구 테헤란로 (역삼)",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 7000,
+    "salaryMaxManwon": 11000,
+    "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
+    "salaryTier": "A",
+    "minYears": 2,
+    "maxYears": 8,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "핀테크/유니콘",
+      "정규직",
+      "Bank",
+      "경력"
+    ],
+    "pros": [
+      "토스 커뮤니티 수평 문화와 빠른 제품 의사결정",
+      "비포괄임금 및 경쟁력 있는 총보상"
+    ],
+    "gaps": [
+      "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
+    ],
+    "rawText": "합류하게 될 팀에 대해 알려드려요 \n\n \n 토스뱅크 여신 상품 Manager(개인대출)는 Credit Loan Tribe 내의 신용여신 대출상품 팀에서 상품의 기획부터 출시, 그리고 운영까지를 책임지고 있어요.\n\n 개인 대출상품 스쿼드는 토스뱅크의 신용대출, 보증대출과 공동대출등 다양한 상품을 담당하고 있으며, 수많은 개인 고객 특성에 맞는 대출 상품을 기획하는 것을 넘어 끊임없는 시도와 실험을 이어가고 있어요.\n\n 프로덕트오너, 데이터분석가, 프론트엔드 개발, 서버 개발, 디자이너 등 다양한 업무 담당자들의 One team으로 구성된 팀은 상품의 기획, 개발, 운영 전 과정에 대해 독립적인 의사결정 구조를 가지고 있어 그 어떤 조직보다도 신속하고 효율적인 의사결정이 가능해요.\n\n \n 합류하면 함께할 업무예요 \n\n \n 토스뱅크의 여러 개인 여신 상품에 대한 기획과 운영의 전반을 담당하며, 개별 상품이 안정적으로 운영 &amp; 확장할 수 있도록 필요한 제품 전략에 대해 고민하고 실행해요.\n\n 개인 여신 상품의 변경사항, 정책을 반영하며, 이 과정에서 유관 부서 및 감독 당국, 제휴사 또는 유관부서 등과의 커뮤니케이션을 담당해요.\n\n 토스뱅크 개인 여신 상품에 대한 규정과 지침을 관리해요.\n\n \n 이런 분과 함께하고 싶어요 \n\n \n 여신 상품에 대한 전반적인 이해와 기본적인 정책, 규정에 대한 이해가 있으신 분이 필요해요.\n\n 금융권에서 여신 상품의 운영/관리를 위한 실무를 경험해 보신 분이 필요해요.\n\n 꼭 신규 상품 기획 경험이 있지 않더라도 여신 업무 전반에 대한 이해도와 전문성, 나아가 상품 전략의 성공을 위한 전략과 실행 방안을 가지고 계신 분과 함께하고 싶어요.\n\n 상품을 기획하고 직접 요건을 정의하고, 정책을 수립해본 경험이 있으면 좋아요.\n\n 모바일 서비스 혹은 코어뱅킹 기획 등 IT와의 협업 경험이 있으면 좋아요.\n\n 새로운 금융 상품을 만들어내는 도전을 해보고 싶은 분과 함께하고 싶어요.\n\n \n 이력서는 이렇게 작성하시는 걸 추천해요 \n\n \n 주도하여 출시 또는 운영하셨던 여신 상품과 담당 업무 내용을 구체적으로 기술해 주세요.\n\n 상품에 대해 직접 기획하고 요건을 정의하고 정책을 수립한 사례가 있다면 상세한 내용을 기술해 주세요.\n\n 단순한 이력 나열 보다는 상품 기획, 운영, 출시 과정에서 기여했던 부분은 무엇인지 / 성과는 어떠했는지를 구체적으로 공유해 주세요.\n\n 모바일 서비스 혹은 코어",
+    "sourceName": "토스 공식 채용관",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=4078740003",
+    "sourceCategory": "GLOBAL_TECH",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Toss Greenhouse ATS",
+    "isEntryLevel": false,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-19"
+  },
+  {
     "id": "toss-7971642003",
     "company": "토스플레이스",
     "title": "B2B 마케팅 매니저 (Enterprise Marketing Manager)",
@@ -868,7 +908,7 @@
     "sourceSystem": "Toss Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-19"
+    "publishedAt": "2026-11-25"
   },
   {
     "id": "toss-6508297003",
@@ -991,8 +1031,8 @@
     "publishedAt": "2026-11-19"
   },
   {
-    "id": "toss-7701589003",
-    "company": "토스뱅크",
+    "id": "toss-5595380003",
+    "company": "토스",
     "title": "커뮤니케이션 담당자 (Communications Manager)",
     "canonicalRole": "PR",
     "occupation": "MARKETING",
@@ -1003,8 +1043,8 @@
     "salaryMaxManwon": 11000,
     "salaryDisplay": "7,000 ~ 11,000만 원 (직전 보상 + 사이닝/스톡 협의)",
     "salaryTier": "A",
-    "minYears": 7,
-    "maxYears": 12,
+    "minYears": 2,
+    "maxYears": 8,
     "hasFixedOT": false,
     "fixedOTHours": 0,
     "tags": [
@@ -1020,9 +1060,9 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "합류하게 될 팀에 대해 알려드려요\n\n \n 토스뱅크의 Communications Manager는 미디어를 비롯한 대외 주요 기관 및 이해관계자와의 커뮤니케이션 전략을 수립하고 실행하는 Communications팀에 속해 있어요.\n\n 토스뱅크의 다양한 팀과 협업하며 대응 체계를 구축하고 있어요.\n\n 제품을 만드는 Squad는 물론, 대외 정책을 담당하는 Public Affairs팀, 토스뱅크의 전략을 고민하는 Strategy Division 등 여러 부서와 수시로 소통하며, 각종 이슈에 유기적으로 대응하고 있어요.\n\n 10년차 이상의 경력을 가진 분들로 구성되어 있고, 금융권·언론사 등 다양한 배경의 커뮤니케이션 및 PR 전문가들이 함께하고 있어요.\n\n \n 합류하면 함께할 업무예요\n\n \n 금융 정책·규제 환경과 여론 흐름을 분석해 토스뱅크에 유리한 내러티브를 설계하고, 대내외 커뮤니케이션 전략 및 메시지 가이드라인을 수립해요.\n\n 보도자료, 경영진 메시지, 위기 대응 입장문, 발표 덱 등 다양한 형식의 대외 콘텐츠를 직접 기획하고 완성해요.\n\n 경쟁사와 차별화되는 포맷과 메시지로 기자간담회 등 프레스행사를 기획하고 실행해요.\n\n 주요 매체 및 기자들과 신뢰 기반의 미디어 릴레이션을 주도하고, 위기 상황 발생 시 커뮤니케이션 전략 수립과 실행을 리드해요.\n\n \n 이런 분과 함께하고 싶어요\n\n \n 언론 또는 커뮤니케이션/PR 분야 7년 이상 경력자로, 금융·핀테크에 대한 이해도와 주요 매체 기자들과의 실질적인 네트워크를 보유한 분이 필요해요.\n\n 보도자료부터 발표 덱까지 형식을 가리지 않고 단독으로 완성하고, 차별화된 포맷의 프레스행사를 기획·실행한 경험이 있는 분이 필요해요.\n\n 정책·여론 환경을 읽고 선제적으로 의제를 설계하는 전략적 커뮤니케이션 역량을 갖춘 분이 필요해요.\n\n AI를 업무에 실질적으로 통합하고, 팀의 일하는 방식을 혁신할 의지와 실행력이 있는 분이 필요해요.\n\n 높은 실무 역량을 바탕으로 팀의 리더로 성장하겠다는 열정과 포텐셜을 가진 분이 필요해요.\n\n 팀을 이끌어본 경험이 있는 분이라면 더욱 환영해요.\n\n \n 이력서는 이렇게 작성하시는 걸 추천해요\n\n \n PR 및 리스크 관리 경험에 대한 구체적이고 사실적인 경험을 적어주세요. 실제 미디어에 노출됐던 사례와 이를 해결하기 위해 본인이 주도적으로 했던 노력을 보여주시면 좋아요.\n\n 자신이 하는 일에 대한 열의와 전문성을 보여주세요. 다른 사람들이 ",
+    "rawText": "합류하게 될 팀에 대해 알려드려요 \n\n \n 토스의 Communications Manager는 기업 커뮤니케이션을 담당하는 Corporate Communications Team에 속해 있어요.\n\n 미디어 및 여러 이해 관계자와 커뮤니케이션을 담당하며, 토스팀의 신뢰 제고를 목표로 해요.\n\n 제품팀(사일로)을 비롯해 토스 내 여러 팀과의 협업이 활발하게 이루어지고 있어요. 또한, 토스뱅크, 토스증권 등 계열사 커뮤니케이션팀과 유기적으로 소통하고 있어요.\n\n 팀은 총 8명으로 이루어진 Corporate Communications Tribe에 속해 있고, 금융 및 금융투자업, IT스타트업, PR 에이전시 등 다양한 조직에서 5~20년간 기업 커뮤니케이션을 담당한 분들로 구성되어 있어요.\n\n \n 합류하면 함께 할 업무예요 \n\n \n 토스가 만들어가는 변화를 전파할 수 있는 커뮤니케이션 이니셔티브를 적극적으로 발굴하고 실행해요. \n\n 토스의 제품 및 기업 문화에 대한 대중의 이해를 높이기 위해, 금융/테크 분야에 걸쳐 광범위한 미디어와 지속적으로 소통해요. \n\n 대내외 이슈를 모니터링하고, 선제 대응을 포함한 이슈 전반의 커뮤니케이션 전략을 수립하고 실행을 주도해요. \n\n 토스 커뮤니티 내 계열사의 대외 커뮤니케이션을 함께 고민하고 지원해요. \n\n \n \n\n 이런 분과 함께하고 싶어요 \n\n \n 충분한 커뮤니케이션 실무 경력을 보유하고, 다양한 이해관계자와의 네트워킹 경험을 바탕으로 언론사와 밀접한 소통이 가능한 분이 필요해요.\n\n 높은 완성도의 보도자료/ 기획자료를 작성할 수 있는 분이 필요해요.\n\n IT 제품/ 사업의 다이내믹스를 잘 이해하고, 여러 대외환경에 대한 깊은 이해를 바탕으로 메시지를 잘 정돈할 수 있는 분이 필요해요.\n\n 자율적으로 이슈를 센싱하고 대응하실 수 있는 분이 필요해요.\n\n 미디어 릴레이션스, 네트워킹이 풍부하고 위기 관리 역량이 뛰어난 분이라면 더욱 좋아요.\n\n 금융업 및 핀테크에 대한 이해도가 높고, 주요 매체의 데스크와 미팅 진행이 가능한 분이라면 더욱 좋아요.\n\n 다양한 금융정책과 현안을 파악하고 타깃 독자별 메시지를 명확하게 수립할 수 있는 분이면 더욱 좋아요.\n\n \n \n\n 이력서는 이렇게 작성하시는 걸 추천해요 \n\n \n 주도적으로 이니셔티브를 발굴하여 대중의 이해와 신뢰 제고로 이어졌던 경험이 있으면 작성해 주세요. \n\n 당면한 PR 이슈를 기존에 시도하지 않았던 새로운 방식으로 접근해 유",
     "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=7701589003",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=5595380003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
@@ -1191,9 +1231,9 @@
     "publishedAt": "2026-11-19"
   },
   {
-    "id": "toss-8011151003",
+    "id": "toss-8007757003",
     "company": "토스",
-    "title": "Commerce Partner SLA Manager",
+    "title": "커머스 기획 매니저 (Commerce Planning Manager)",
     "canonicalRole": "Strategy",
     "occupation": "PLANNING",
     "industry": "IT / 핀테크·금융",
@@ -1220,9 +1260,9 @@
     "gaps": [
       "직무별 실무 과제 및 문화적합성(Culture Fit) 인터뷰 준비 필요"
     ],
-    "rawText": "[토스] Commerce Partner SLA Manager (Strategy)",
+    "rawText": "[토스] 커머스 기획 매니저 (Commerce Planning Manager) (Strategy)",
     "sourceName": "토스 공식 채용관",
-    "jobUrl": "https://toss.im/career/job-detail?job_id=8011151003",
+    "jobUrl": "https://toss.im/career/job-detail?job_id=8007757003",
     "sourceCategory": "GLOBAL_TECH",
     "isCompanyExclusive": true,
     "sourceSystem": "Toss Greenhouse ATS",
@@ -1467,7 +1507,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-6645636003",
@@ -1506,7 +1546,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-5004587003",
@@ -1545,7 +1585,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-6682245003",
@@ -1584,7 +1624,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-4519954003",
@@ -1623,7 +1663,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": true,
     "jobCategory": "HR",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-6043519003",
@@ -1662,7 +1702,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "daangn-5811688003",
@@ -1701,7 +1741,7 @@
     "sourceSystem": "Greenhouse ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-25"
+    "publishedAt": "2026-11-26"
   },
   {
     "id": "woowahan-R2610006",
@@ -2445,6 +2485,84 @@
     "publishedAt": "2026-10-12"
   },
   {
+    "id": "kakao-P-14593",
+    "company": "카카오",
+    "title": "Foundation Model Research Engineer_인턴",
+    "canonicalRole": "테크",
+    "occupation": "TECH",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "판교",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 220~260만 원 (인턴십)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "인턴",
+      "신입/인턴"
+    ],
+    "pros": [
+      "카카오 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "카카오의 자체 Foundation Model인 Kanana 시리즈의 핵심 연구개발에 참여합니다.\n지원자의 관심 분야와 역량에 따라 다음 영역 중 하나 이상의 업무를 수행하며, 실제 모델 학습과 성능 개선, 새로운 기술의 연구 및 구현 과정에 직접 참여할 수 있습니다.\n##\n1. Large Language Model (LLM) 연구개발\n- Kanana LLM의 Pre-training, Post-training(SFT, RL, KD) 연구 및 개발\n- 모델의 추론(Reasoning), 지시 이행(Instruction Following), Agentic 능력 향상을 위한 학습 및 평가\n- 학습 데이터 구축, 학습 알고리즘 개선 및 모델 성능 분석\n##\n2. Multimodal LLM 연구개발\n- 이미지, 음성, 영상 등 다양한 모달리티를 이해하고 생성하는 Kanana-v/a/o 모델 연구개발\n- Multimodal alignment, SFT, RL, KD 등 멀티모달 모델 학습 및 성능 고도화\n- Vision/Audio Encoder 및 Speech Decoder 등 멀티모달 핵심 기술 연구\n- 실시간 음성 대화(Kanana-live), 멀티모달 이해 및 생성 능력 향상을 위한 학습, 평가\n##\n3. 모델 및 서빙 최적화 연구개발\n- Quantization, Speculative Decoding, Kernel Optimization 등 모델 경량화 및 추론 속도 최적화\n- GPU 및 on-device 환경에서의 모델 추론 속도, 메모리 효율 개선\n- 대규모 AI 서비스 환경에서의 고성능, 저비용 모델 서빙 기술 연구개발\n- 컴퓨터공학, 인공지능 또는 관련 분야 전공자\n- Python 및 PyTorch 등 딥러닝 프레임워크를 활용한 개발 경험이 있으신 분\n- Machine Learning, Deep Learning 및 Transformer 아키텍처에 대한 기본적인 이해가 있으신 분\n- 새로운 AI 기술을 빠르게 학습하고, 문제를 주도적으로 해결하는 데 흥미가 있으신 분\n- 동료와 적극적으로 소통하고 협업하며 함께 성장하고자 하시는 분\n\n◆ 우대사항\n- LLM 또는 Multimodal LLM 관련 연구, 개발 프로젝트 경험이 있으신 분\n- Pre-training, SFT, RL, KD 등 모델 학습 및 성능 개선 경험이 있으신 분\n- 주요 AI 학회 논문 발표 또는 관련 연구 경험이 있으신 분\n- CUDA, Triton",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/P-14593",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": true,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-25"
+  },
+  {
+    "id": "kakao-P-14595",
+    "company": "카카오",
+    "title": "Multimodal LLM Application Research Engineer_인턴",
+    "canonicalRole": "테크",
+    "occupation": "TECH",
+    "industry": "IT / 플랫폼·핀테크",
+    "location": "판교",
+    "commuteMinutes": 38,
+    "salaryMinManwon": 2700,
+    "salaryMaxManwon": 3100,
+    "salaryDisplay": "월 220~260만 원 (인턴십)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "대기업/빅테크",
+      "인턴",
+      "신입/인턴"
+    ],
+    "pros": [
+      "카카오 공동체 대규모 서비스 및 복리후생",
+      "유연근무 및 명확한 직무 전문성"
+    ],
+    "gaps": [
+      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
+    ],
+    "rawText": "- Decision Model 및 RLCD 관련 최신 연구 조사와 주요 방법론 재현\n- 학습·평가 데이터 구축 및 데이터 품질 개선\n- 모델 학습·평가 코드와 실험 파이프라인 개발\n- 다양한 학습 방법 및 모델 구조 실험\n- 모델 성능 평가, 실험 결과 분석 및 개선 방향 도출\n- 대규모 언어 모델(LLM) 및 비전-언어모델(VLM)의 구조와 학습 과정에 대한 이해가 있으신 분\n- Hugging Face Transformers, ms-swift, verl 등을 활용한 LLM/VLM 학습 또는 Fine-tuning 경험이 있으신 분\n- Reinforcement Learning, Preference Learning, Reward Model 관련 연구 또는 개발 경험이 있으신 분\n- 컴퓨터비전 또는 머신러닝 관련 전공 석사 이상 혹은 이에 준하는 관련 프로젝트 경험을 보유하신 분\n\n◆ 우대사항\n- CVPR, ICCV, ECCV, NeurIPS, ICLR, ICML 등 주요 국제 학회에 논문을 게재한 경험이 있으신 분",
+    "sourceName": "카카오 영입 공식 포털",
+    "jobUrl": "https://careers.kakao.com/jobs/P-14595",
+    "sourceCategory": "CONGLOMERATE",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Kakao Careers API",
+    "isEntryLevel": true,
+    "jobCategory": "TECH",
+    "publishedAt": "2026-11-26"
+  },
+  {
     "id": "kakao-S-4789",
     "company": "카카오스타일",
     "title": "[공동체] 카카오스타일 Product Owner (배송&물류)",
@@ -2560,84 +2678,6 @@
     "isEntryLevel": false,
     "jobCategory": "TECH",
     "publishedAt": "2026-11-18"
-  },
-  {
-    "id": "kakao-S-4785",
-    "company": "카카오스타일",
-    "title": "[공동체] 카카오스타일 백엔드 개발자 (지그재그 서비스)",
-    "canonicalRole": "테크",
-    "occupation": "TECH",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 10000,
-    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "카카오스타일 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4785",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
-  },
-  {
-    "id": "kakao-S-4784",
-    "company": "카카오스타일",
-    "title": "[공동체] 카카오스타일 백엔드 개발자 (물류 시스템)",
-    "canonicalRole": "테크",
-    "occupation": "TECH",
-    "industry": "IT / 플랫폼·핀테크",
-    "location": "경기 성남시 분당구 (판교)",
-    "commuteMinutes": 38,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 10000,
-    "salaryDisplay": "6,500 ~ 10,000만 원 (경력직 협의)",
-    "salaryTier": "A",
-    "minYears": 2,
-    "maxYears": 8,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "대기업/빅테크",
-      "정규직",
-      "경력"
-    ],
-    "pros": [
-      "카카오스타일 공동체 대규모 서비스 및 복리후생",
-      "유연근무 및 명확한 직무 전문성"
-    ],
-    "gaps": [
-      "공고 내 지원자격 및 우대기술(Stack) 부합 여부 확인 필요"
-    ],
-    "rawText": "-\n-",
-    "sourceName": "카카오 영입 공식 포털",
-    "jobUrl": "https://careers.kakao.com/jobs/S-4784",
-    "sourceCategory": "CONGLOMERATE",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Kakao Careers API",
-    "isEntryLevel": false,
-    "jobCategory": "TECH",
-    "publishedAt": "2026-11-17"
   },
   {
     "id": "kakao-S-4777",
