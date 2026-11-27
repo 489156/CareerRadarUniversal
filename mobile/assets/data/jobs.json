@@ -1,5 +1,45 @@
 [
   {
+    "id": "alio-307538",
+    "company": "한국학중앙연구원",
+    "title": "2027년도 한국학중앙연구원 한국학도서관 문헌정보팀 청년인턴 채용 공고",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "경기 (수도권)",
+    "commuteMinutes": 50,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 한국학중앙연구원\n공고명: 2027년도 한국학중앙연구원 한국학도서관 문헌정보팀 청년인턴 채용 공고\n고용형태: 청년인턴(체험형)\n근무지: 경기",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307538",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-27"
+  },
+  {
     "id": "alio-307325",
     "company": "한국국제협력단",
     "title": "제30기 KOICA 청년인턴(홍보분야) 모집 공고",
@@ -37,7 +77,47 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "MARKETING",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
+  },
+  {
+    "id": "alio-307547",
+    "company": "자동차손해배상진흥원",
+    "title": "자동차손해배상진흥원 청년인턴(체험형) 채용",
+    "canonicalRole": "청년인턴/행정지원",
+    "occupation": "PLANNING",
+    "industry": "공공기관 / 공기업",
+    "location": "서울 외 1 (수도권)",
+    "commuteMinutes": 42,
+    "salaryMinManwon": 2500,
+    "salaryMaxManwon": 2800,
+    "salaryDisplay": "월 206~230만 원 (청년인턴 공시 처우)",
+    "salaryTier": "A",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "공공기관",
+      "ALIO 경영공시",
+      "청년인턴(체험형)",
+      "신입/인턴"
+    ],
+    "pros": [
+      "기획재정부 ALIO 100% 실공시 데이터",
+      "고용 안정성 및 정시퇴근 보장"
+    ],
+    "gaps": [
+      "공공기관 NCS 및 블라인드 채용 전형 준비 필요"
+    ],
+    "rawText": "[ALIO 공공기관 채용정보]\n기관명: 자동차손해배상진흥원\n공고명: 자동차손해배상진흥원 청년인턴(체험형) 채용\n고용형태: 청년인턴(체험형)\n근무지: 서울 외 1",
+    "sourceName": "기획재정부 ALIO 공시망",
+    "jobUrl": "https://job.alio.go.kr/recruitview.do?idx=307547",
+    "sourceCategory": "PUBLIC",
+    "isCompanyExclusive": true,
+    "sourceSystem": "ALIO 오픈 공시망",
+    "isEntryLevel": true,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "alio-307491",
@@ -77,7 +157,7 @@
     "sourceSystem": "ALIO 오픈 공시망",
     "isEntryLevel": true,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5254",
@@ -116,7 +196,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5253",
@@ -155,7 +235,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5252",
@@ -194,7 +274,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5244",
@@ -233,7 +313,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5239",
@@ -272,46 +352,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "TECH",
-    "publishedAt": "2026-11-26"
-  },
-  {
-    "id": "deloitte-5238",
-    "company": "딜로이트 안진",
-    "title": "회계감사부문 AIS(계리 전문 조직) 인턴 채용",
-    "canonicalRole": "Tax & Financial Advisory",
-    "occupation": "FINANCE",
-    "industry": "전문서비스 / 회계컨설팅",
-    "location": "서울 영등포구 여의도동",
-    "commuteMinutes": 48,
-    "salaryMinManwon": 2700,
-    "salaryMaxManwon": 3100,
-    "salaryDisplay": "월 230~250만 원 (인턴 처우)",
-    "salaryTier": "B",
-    "minYears": 0,
-    "maxYears": 2,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "Big4 회계법인",
-      "인턴",
-      "여의도"
-    ],
-    "pros": [
-      "글로벌 빅4 회계법인 커리어",
-      "체계적인 주니어/시니어 교육 프로그램"
-    ],
-    "gaps": [
-      "논리적 사고 및 프레젠테이션 역량"
-    ],
-    "rawText": "[딜로이트 안진 인턴 채용]\n회계감사부문 AIS(계리 전문 조직) 인턴 채용\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
-    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
-    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5238",
-    "sourceCategory": "CONSULTING",
-    "isCompanyExclusive": true,
-    "sourceSystem": "WiseRecruit2 ATS",
-    "isEntryLevel": true,
-    "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5237",
@@ -351,7 +392,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": true,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5234",
@@ -390,7 +431,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5227",
@@ -429,7 +470,7 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "deloitte-5224",
@@ -468,7 +509,47 @@
     "sourceSystem": "WiseRecruit2 ATS",
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
-    "publishedAt": "2026-11-26"
+    "publishedAt": "2026-11-27"
+  },
+  {
+    "id": "deloitte-5215",
+    "company": "딜로이트 안진",
+    "title": "회계감사부문 기업 전략기획 및 경영관리(성과관리, 원가/수익성분석(관리회계))신입 컨설턴트",
+    "canonicalRole": "Tax & Financial Advisory",
+    "occupation": "FINANCE",
+    "industry": "전문서비스 / 회계컨설팅",
+    "location": "서울 영등포구 여의도동",
+    "commuteMinutes": 48,
+    "salaryMinManwon": 4600,
+    "salaryMaxManwon": 5300,
+    "salaryDisplay": "4,600 ~ 5,300만 원 (신입 대졸초임)",
+    "salaryTier": "B",
+    "minYears": 0,
+    "maxYears": 2,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "Big4 회계법인",
+      "정규직",
+      "신입",
+      "여의도"
+    ],
+    "pros": [
+      "글로벌 빅4 회계법인 커리어",
+      "체계적인 주니어/시니어 교육 프로그램"
+    ],
+    "gaps": [
+      "논리적 사고 및 프레젠테이션 역량"
+    ],
+    "rawText": "[딜로이트 안진 정규직 채용]\n회계감사부문 기업 전략기획 및 경영관리(성과관리, 원가/수익성분석(관리회계))신입 컨설턴트\n상세 직무 내용 및 우대사항은 공고 원문 참조.",
+    "sourceName": "딜로이트 공식 채용 (WiseRecruit2)",
+    "jobUrl": "https://join.deloitte.co.kr/WiseRecruit2/User/RecruitView.aspx?ridx=5215",
+    "sourceCategory": "CONSULTING",
+    "isCompanyExclusive": true,
+    "sourceSystem": "WiseRecruit2 ATS",
+    "isEntryLevel": true,
+    "jobCategory": "FINANCE",
+    "publishedAt": "2026-11-27"
   },
   {
     "id": "toss-4154060003",
@@ -1744,6 +1825,45 @@
     "publishedAt": "2026-11-26"
   },
   {
+    "id": "woowahan-R2611006",
+    "company": "우아한형제들 (배달의민족)",
+    "title": "사업운영/기획(배민스토어)",
+    "canonicalRole": "사업운영/기획(배민스토어)",
+    "occupation": "PLANNING",
+    "industry": "IT / 이커머스 플랫폼",
+    "location": "서울 송파구 올림픽로 (잠실)",
+    "commuteMinutes": 52,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 9500,
+    "salaryDisplay": "6,500 ~ 9,500만 원 (주 35h/비포괄 기준 협의)",
+    "salaryTier": "B",
+    "minYears": 8,
+    "maxYears": 20,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "플랫폼",
+      "정규직",
+      "경력 8년+"
+    ],
+    "pros": [
+      "주 35시간 유연근무제 및 비포괄임금",
+      "대규모 커머스·배달 트래픽/운영 환경"
+    ],
+    "gaps": [
+      "서류 및 1~2차 실무 심층 인터뷰 대비 필요"
+    ],
+    "rawText": "[우아한형제들 정규직 채용]\n사업운영/기획(배민스토어)",
+    "sourceName": "우아한형제들 채용관",
+    "jobUrl": "https://career.woowahan.com/recruitment/R2611006/detail",
+    "sourceCategory": "GLOBAL_TECH",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Woowahan ATS",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-27 16:41:49"
+  },
+  {
     "id": "woowahan-R2610006",
     "company": "우아한형제들 (배달의민족)",
     "title": "Corporate Strategy & Operations",
@@ -1898,45 +2018,6 @@
     "isEntryLevel": false,
     "jobCategory": "TECH",
     "publishedAt": "2026-11-12 18:00:24"
-  },
-  {
-    "id": "woowahan-R2608007",
-    "company": "우아한형제들 (배달의민족)",
-    "title": "사업기획(배민스토어)",
-    "canonicalRole": "사업기획(배민스토어)",
-    "occupation": "PLANNING",
-    "industry": "IT / 이커머스 플랫폼",
-    "location": "서울 송파구 올림픽로 (잠실)",
-    "commuteMinutes": 52,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 9500,
-    "salaryDisplay": "6,500 ~ 9,500만 원 (주 35h/비포괄 기준 협의)",
-    "salaryTier": "B",
-    "minYears": 3,
-    "maxYears": 20,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "플랫폼",
-      "정규직",
-      "경력 3년+"
-    ],
-    "pros": [
-      "주 35시간 유연근무제 및 비포괄임금",
-      "대규모 커머스·배달 트래픽/운영 환경"
-    ],
-    "gaps": [
-      "서류 및 1~2차 실무 심층 인터뷰 대비 필요"
-    ],
-    "rawText": "[우아한형제들 정규직 채용]\n사업기획(배민스토어)",
-    "sourceName": "우아한형제들 채용관",
-    "jobUrl": "https://career.woowahan.com/recruitment/R2608007/detail",
-    "sourceCategory": "GLOBAL_TECH",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Woowahan ATS",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-12 17:53:23"
   },
   {
     "id": "woowahan-R2610012",
@@ -2173,45 +2254,6 @@
     "publishedAt": "2026-11-06 12:00:46"
   },
   {
-    "id": "woowahan-R2611006",
-    "company": "우아한형제들 (배달의민족)",
-    "title": "사업운영/기획(배민스토어)",
-    "canonicalRole": "사업운영/기획(배민스토어)",
-    "occupation": "PLANNING",
-    "industry": "IT / 이커머스 플랫폼",
-    "location": "서울 송파구 올림픽로 (잠실)",
-    "commuteMinutes": 52,
-    "salaryMinManwon": 6500,
-    "salaryMaxManwon": 9500,
-    "salaryDisplay": "6,500 ~ 9,500만 원 (주 35h/비포괄 기준 협의)",
-    "salaryTier": "B",
-    "minYears": 8,
-    "maxYears": 20,
-    "hasFixedOT": false,
-    "fixedOTHours": 0,
-    "tags": [
-      "플랫폼",
-      "정규직",
-      "경력 8년+"
-    ],
-    "pros": [
-      "주 35시간 유연근무제 및 비포괄임금",
-      "대규모 커머스·배달 트래픽/운영 환경"
-    ],
-    "gaps": [
-      "서류 및 1~2차 실무 심층 인터뷰 대비 필요"
-    ],
-    "rawText": "[우아한형제들 정규직 채용]\n사업운영/기획(배민스토어)",
-    "sourceName": "우아한형제들 채용관",
-    "jobUrl": "https://career.woowahan.com/recruitment/R2611006/detail",
-    "sourceCategory": "GLOBAL_TECH",
-    "isCompanyExclusive": true,
-    "sourceSystem": "Woowahan ATS",
-    "isEntryLevel": false,
-    "jobCategory": "PLANNING",
-    "publishedAt": "2026-11-06 11:56:09"
-  },
-  {
     "id": "woowahan-R2606014",
     "company": "우아한형제들 (배달의민족)",
     "title": "사업기획(로봇사업 전략)",
@@ -2327,6 +2369,45 @@
     "isEntryLevel": false,
     "jobCategory": "FINANCE",
     "publishedAt": "2026-11-06 11:45:08"
+  },
+  {
+    "id": "woowahan-R2608016",
+    "company": "우아한형제들 (배달의민족)",
+    "title": "광고상품기획",
+    "canonicalRole": "광고상품기획",
+    "occupation": "PLANNING",
+    "industry": "IT / 이커머스 플랫폼",
+    "location": "서울 송파구 올림픽로 (잠실)",
+    "commuteMinutes": 52,
+    "salaryMinManwon": 6500,
+    "salaryMaxManwon": 9500,
+    "salaryDisplay": "6,500 ~ 9,500만 원 (주 35h/비포괄 기준 협의)",
+    "salaryTier": "B",
+    "minYears": 7,
+    "maxYears": 20,
+    "hasFixedOT": false,
+    "fixedOTHours": 0,
+    "tags": [
+      "플랫폼",
+      "정규직",
+      "경력 7년+"
+    ],
+    "pros": [
+      "주 35시간 유연근무제 및 비포괄임금",
+      "대규모 커머스·배달 트래픽/운영 환경"
+    ],
+    "gaps": [
+      "서류 및 1~2차 실무 심층 인터뷰 대비 필요"
+    ],
+    "rawText": "[우아한형제들 정규직 채용]\n광고상품기획",
+    "sourceName": "우아한형제들 채용관",
+    "jobUrl": "https://career.woowahan.com/recruitment/R2608016/detail",
+    "sourceCategory": "GLOBAL_TECH",
+    "isCompanyExclusive": true,
+    "sourceSystem": "Woowahan ATS",
+    "isEntryLevel": false,
+    "jobCategory": "PLANNING",
+    "publishedAt": "2026-11-06 11:41:03"
   },
   {
     "id": "kakao-S-4793",
